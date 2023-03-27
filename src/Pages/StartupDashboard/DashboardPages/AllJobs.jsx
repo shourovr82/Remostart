@@ -111,7 +111,7 @@ const AllJobs = () => {
                     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-8 flex-1">
                         {items?.map((item) => (
                             <div
-                                key={item.id}
+                                key={Math.random()}
                                 className="flex flex-col border px-2 jobPostCardShaddow py-6 justify-center space-y-2 space-x-5 rounded-lg"
                             >
                                 <div className="flex justify-between">
