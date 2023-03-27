@@ -27,7 +27,7 @@ const GigsJobs = () => {
 
     // perks state
     const [deliverables, setDeliverables] = useState('');
-    const [deliverablesItems, setDeliverablesItems] = useState(storedData?.deliverablesItems || []);
+    const [deliverablesItems, setDeliverablesItems] = useState(storedData?.joiningPerks || []);
 
     const categoryName = jobName.replace(/-/g, ' ').replace(/\b[a-z]/g, (c) => c.toUpperCase());
 
@@ -62,16 +62,16 @@ const GigsJobs = () => {
     };
 
     const onSubmit = (data) => {
-        const internshipData = {
+        const gigsData = {
             ...data,
             email: user?.user.email,
             categoryName,
             skills,
             apiPath: jobName,
-            deliverablesItems,
+            joiningPerks: deliverablesItems,
         };
 
-        setJob(jobName, internshipData);
+        setJob(jobName, gigsData);
         navigate('/dashboard/post-job/gigs/review');
     };
     return (
@@ -411,7 +411,7 @@ const GigsJobs = () => {
                     type="submit"
                     className="px-6 py-3 mt-10 lg:px-10 lg:py-5 bg-[#0B132A] text-white text-xs font-semibold rounded-md"
                 >
-                    Post Internship Job
+                    Review Gigs
                 </button>
             </form>
         </div>
