@@ -71,11 +71,21 @@ const SettingsProfile = () => {
     // ?Domain Function start
 
     const [selectedValues, setSelectedValues] = useState([]);
-
+    const [domainError, setDomainError] = useState('');
     const handleChange = (e) => {
+        setDomainError('');
         const selectedOptions = e.target.selectedOptions[0].innerHTML;
-        setSelectedValues([...selectedValues, selectedOptions]);
-        // console.log(e.target.selectedOptions[0].innerHTML);
+        console.log(selectedOptions);
+        const arr = selectedValues.filter((ar) => selectedOptions === ar);
+
+        if (arr.length) {
+            console.log(selectedOptions);
+            setDomainError(`Already added ${selectedOptions} !!`);
+            // toast.error('Already added');
+        } else if (!arr.length) {
+            setDomainError('');
+            setSelectedValues([...selectedValues, selectedOptions]);
+        }
     };
     //! Domain function is ended
 
@@ -93,6 +103,7 @@ const SettingsProfile = () => {
 
     const handleLink = (e) => {
         setSelectUrl(Array.from(e.target.selectedOptions).map((option) => option.value));
+
         setSocialMedia(e.target.selectedOptions[0].innerHTML);
     };
     //! Link Function End.
@@ -113,15 +124,19 @@ const SettingsProfile = () => {
     const {
         register,
         handleSubmit,
-
         formState: { errors },
     } = useForm({
         mode: 'onChange',
     });
+
     const uploadHandler = () => {
         const allData = { name: selectUrl?.[0], url };
-        setDisplayUrl([...displayUrl, allData]);
-        setSocialLinks({ ...socialLinks, [socialMedia]: url });
+        if (allData) {
+            setSocialLinks({ ...socialLinks, [socialMedia]: url });
+            setDisplayUrl([...displayUrl, allData]);
+            setSelectUrl('');
+            setUrl('');
+        }
         document.getElementById('upload').value = '';
     };
 
@@ -237,7 +252,6 @@ const SettingsProfile = () => {
                                             <span>{errors?.startupName?.message}</span>
                                         )}
                                     </span>
-                                    {console.log(errors.startupName)}
                                 </p>
                             </div>
                             <div className="col-span-full sm:col-span-5 space-y-1">
@@ -329,56 +343,61 @@ const SettingsProfile = () => {
 
                         {/* Select Domains */}
                         <div className="flex flex-col mt-12">
-                            <div className="lg:flex justify-center ">
-                                <div className="group w-full inline-block mt-6  lg:pr-10">
-                                    <label htmlFor="bio" className="text-sm block font-medium">
-                                        Select Domains
-                                    </label>
-                                    <select
-                                        onChange={handleChange}
-                                        className="select lg:w-[120px]  mt-1 w-full font-semibold border 
-                     border-gray-400 rounded-md "
-                                    >
-                                        <option value="Domains" hidden>
-                                            Domains
-                                        </option>
-                                        {domainData.map((D, i) => (
-                                            <option
-                                                onClick={handleClick}
-                                                disabled={disableOption}
-                                                value={D.label}
-                                                key={i}
-                                            >
-                                                {D.label}
+                            <div>
+                                <div className="lg:flex justify-center ">
+                                    <div className="group w-full inline-block mt-6  lg:pr-10">
+                                        <label htmlFor="bio" className="text-sm block font-medium">
+                                            Select Domains
+                                        </label>
+                                        <select
+                                            onChange={handleChange}
+                                            className="select lg:w-[140px]  mt-1 w-full font-semibold border 
+                                             border-gray-400 rounded-md "
+                                        >
+                                            <option value="Domains" hidden>
+                                                Domains
                                             </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                {selectedValues.length ? (
-                                    <div className="grid grid-cols-2 px-2 py-4 gap-3 mt-8 lg:w-[630px] w-full border h-auto bg-[#F0F9FF]">
-                                        {selectedValues.map((value, index) => (
-                                            <div key={index}>
-                                                <div className="bg-[#19A5FF] py-1 px-2 text-white  text-sm text-center rounded-2xl flex gap-2 items-center justify-center  ">
-                                                    <p>{value}</p>
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => {
-                                                            setSelectedValues(
-                                                                selectedValues.filter(
-                                                                    (val) => val !== value
-                                                                )
-                                                            );
-                                                            buttonHandle();
-                                                        }}
-                                                    >
-                                                        <RxCross2 className="font-bold text-sm" />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            {domainData.map((D, i) => (
+                                                <option
+                                                    onClick={handleClick}
+                                                    disabled={disableOption}
+                                                    value={D.label}
+                                                    key={i}
+                                                >
+                                                    {D.label}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
-                                ) : (
-                                    ''
+                                    {selectedValues.length ? (
+                                        <div className="grid grid-cols-2 px-2 py-4 gap-3 mt-8 lg:w-[630px] w-full border h-auto bg-[#F0F9FF]">
+                                            {selectedValues.map((value, index) => (
+                                                <div key={index}>
+                                                    <div className="bg-[#19A5FF] py-1 px-2 text-white  text-sm text-center rounded-2xl flex gap-2 items-center justify-center  ">
+                                                        <p>{value}</p>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setSelectedValues(
+                                                                    selectedValues.filter(
+                                                                        (val) => val !== value
+                                                                    )
+                                                                );
+                                                                buttonHandle();
+                                                            }}
+                                                        >
+                                                            <RxCross2 className="font-bold text-sm" />
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        ''
+                                    )}
+                                </div>
+                                {domainError && (
+                                    <p className="text-red-700 font-semibold ">{domainError}</p>
                                 )}
                             </div>
 
@@ -387,7 +406,7 @@ const SettingsProfile = () => {
                                     <select
                                         onChange={handleLink}
                                         className="select lg:w-[120px]  mt-1 w-full font-semibold border 
-                     border-gray-400 rounded-md "
+                                          border-gray-400 rounded-md "
                                     >
                                         <option value="Link" hidden>
                                             Link
@@ -400,13 +419,13 @@ const SettingsProfile = () => {
                                     </select>
                                 </div>
                                 <div className="mt-2 lg:mt-0">
-                                    <div className="flex gap-4">
+                                    <div className="flex mt-1 gap-4">
                                         <input
                                             onChange={(e) => setUrl(e.target.value)}
                                             type="text"
                                             id="upload"
                                             placeholder="https://"
-                                            className="focus:input border-gray-700 border py-1 px-4 rounded-md !w-[320px] input-bordered  focus:outline-gray-600 focus:border-sky-700 focus:ring-1 focus:ring-sky-500   focus:input-sm"
+                                            className=" border-gray-200 border py-2.5 px-4 rounded-md !w-[320px]   "
                                         />
 
                                         <button
@@ -419,7 +438,7 @@ const SettingsProfile = () => {
                                         </button>
                                     </div>
                                     {displayUrl.length ? (
-                                        <div className="w-1/2 border  mt-4 p-4 rounded flex gap-2 ">
+                                        <div className="w-auto border  mt-4 p-4 rounded flex gap-2 ">
                                             {displayUrl.map((d, i) => (
                                                 <div key={i} className="flex items-start gap-1">
                                                     <img
