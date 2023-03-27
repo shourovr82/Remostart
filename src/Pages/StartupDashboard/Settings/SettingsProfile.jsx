@@ -91,7 +91,7 @@ const SettingsProfile = () => {
 
     // input Link State
     const [url, setUrl] = useState('');
-    const [selectUrl, setSelectUrl] = useState();
+    const [selectUrl, setSelectUrl] = useState(['Github']);
     const [displayUrl, setDisplayUrl] = useState([]);
 
     const [socialMedia, setSocialMedia] = useState();
@@ -103,7 +103,6 @@ const SettingsProfile = () => {
 
     const handleLink = (e) => {
         setSelectUrl(Array.from(e.target.selectedOptions).map((option) => option.value));
-
         setSocialMedia(e.target.selectedOptions[0].innerHTML);
     };
     //! Link Function End.
@@ -131,23 +130,27 @@ const SettingsProfile = () => {
 
     const uploadHandler = () => {
         const allData = { name: selectUrl?.[0], url };
-        if (allData) {
-            setSocialLinks({ ...socialLinks, [socialMedia]: url });
-            setDisplayUrl([...displayUrl, allData]);
-            setSelectUrl('');
-            setUrl('');
+        const checkUrl = displayUrl.find((disUrl) => disUrl.name === selectUrl?.[0]);
+        if (checkUrl) {
+            toast.error('Url is already added');
+        } else {
+            const srv = url.includes(selectUrl?.[0].toLowerCase());
+            if (srv) {
+                setSocialLinks({ ...socialLinks, [socialMedia]: url });
+                setDisplayUrl([...displayUrl, allData]);
+                setUrl('');
+                document.getElementById('upload').value = '';
+            } else {
+                toast.error(`Url is not valid for ${selectUrl?.[0]}`);
+            }
         }
-        document.getElementById('upload').value = '';
     };
 
     // Form submit handler
 
     const onSubmit = async (data) => {
         setLoading(true);
-        console.log(data, selectedValues, socialLinks);
-
         const image = data.startupIcon[0] || (file && file[0]);
-
         if (!image) {
             toast.error('select a startup icon first');
             setLoading(false);
@@ -406,11 +409,8 @@ const SettingsProfile = () => {
                                     <select
                                         onChange={handleLink}
                                         className="select lg:w-[120px]  mt-1 w-full font-semibold border 
-                                          border-gray-400 rounded-md "
+                                          border-gray-200 rounded-md "
                                     >
-                                        <option value="Link" hidden>
-                                            Link
-                                        </option>
                                         {link.map((D, i) => (
                                             <option onClick={handleClick} value={D.name} key={i}>
                                                 {D.name}

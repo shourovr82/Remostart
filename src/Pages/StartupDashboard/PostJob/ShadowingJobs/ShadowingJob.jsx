@@ -11,12 +11,16 @@ import { setJob } from '../../../../Hooks/useLocalStorage';
 
 const ShadowingJob = () => {
     // handle skill input
+    const getStoredItem = (key) => JSON.parse(localStorage.getItem('shadowing')) || {};
+    const storedJob = getStoredItem();
     const [tag, setTag] = useState('');
-    const [skills, setSkills] = useState([]);
+    const [skills, setSkills] = useState((storedJob?.skills.length && storedJob?.skills) || []);
 
     // State Of Disable Domains
     const [disableOption, setDisable] = useState(false);
-    const [selectedValues, setSelectedValues] = useState([]);
+    const [selectedValues, setSelectedValues] = useState(
+        (storedJob?.domains?.length && storedJob?.domains) || []
+    );
     // get values
 
     const { user } = useSelector((state) => state.auth);
@@ -59,8 +63,8 @@ const ShadowingJob = () => {
     const buttonHandle = () => {
         setDisable(false);
     };
-    const getStoredItem = (key) => JSON.parse(localStorage.getItem('shadowing')) || {};
-    const storedJob = getStoredItem();
+
+    console.table(storedJob);
     // domains function end
     const {
         register,
@@ -73,7 +77,7 @@ const ShadowingJob = () => {
         const shadowingJobData = {
             ...data,
             skills,
-            selectedValues,
+            domains: selectedValues,
             categoryName,
             apiPath: jobName,
             email: user?.user.email,
