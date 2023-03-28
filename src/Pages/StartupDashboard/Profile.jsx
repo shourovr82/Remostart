@@ -3,11 +3,8 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext } from 'react';
-import { BsGearWideConnected, BsGithub, BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs';
-import { DiGoogleAnalytics } from 'react-icons/di';
-import { HiColorSwatch } from 'react-icons/hi';
+import { BsGithub, BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { RiShareForwardLine } from 'react-icons/ri';
-import { SiBlockchaindotcom, SiCivicrm, SiUikit } from 'react-icons/si';
 import { useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
 
@@ -18,62 +15,6 @@ import AuthContext from '../../Context/AuthContext';
 const Profile = () => {
     const { serviceUser } = useContext(AuthContext);
 
-    const items = [
-        {
-            id: 1,
-            icon: <SiBlockchaindotcom />,
-            name: 'Blockchain',
-        },
-        {
-            id: 2,
-            icon: <HiColorSwatch />,
-            name: 'Front-End',
-        },
-        {
-            id: 3,
-            icon: <BsGearWideConnected />,
-            name: 'Back-End',
-        },
-        {
-            id: 4,
-            icon: <SiUikit />,
-            name: 'UI Desing',
-        },
-        {
-            id: 5,
-            icon: <DiGoogleAnalytics />,
-            name: 'Analytics',
-        },
-        {
-            id: 6,
-            icon: <SiCivicrm />,
-            name: 'CRM',
-        },
-    ];
-
-    // const employeReview = [
-    //     {
-    //         id: 1,
-    //         userName: 'Amit Sharma',
-    //         date: '10 May 2022',
-    //         heading: 'Great Team to work with',
-    //         pTag: 'MotionElements - это лучший онлайн-сайт, где можно бесплатно скачать шаблоны для AE. Выбирайте бесплатные шаблоны для After Effects, бесплатное видео и бесплатную музыку. Наши элементы не подвергаюются комиссии, вы можете использовать их в различных проектах, в любых типах медиа по всему миру. Получи Бесплатные элементы букмарклет.',
-    //     },
-    //     {
-    //         id: 2,
-    //         userName: 'Ankit Sharma',
-    //         date: '10 april 2022',
-    //         heading: 'Great Team to work with',
-    //         pTag: 'MotionElements - это лучший онлайн-сайт, где можно бесплатно скачать шаблоны для AE. Выбирайте бесплатные шаблоны для After Effects, бесплатное видео и бесплатную музыку. Наши элементы не подвергаюются комиссии, вы можете использовать их в различных проектах, в любых типах медиа по всему миру. Получи Бесплатные элементы букмарклет.',
-    //     },
-    //     {
-    //         id: 3,
-    //         userName: 'Ashish Gupta',
-    //         date: '15 april 2022',
-    //         heading: 'Great Team to work with',
-    //         pTag: 'MotionElements - это лучший онлайн-сайт, где можно бесплатно скачать шаблоны для AE. Выбирайте бесплатные шаблоны для After Effects, бесплатное видео и бесплатную музыку. Наши элементы не подвергаюются комиссии, вы можете использовать их в различных проектах, в любых типах медиа по всему миру. Получи Бесплатные элементы букмарклет.',
-    //     },
-    // ];
     const { user } = useSelector((state) => state.auth);
     const { data: startupData } = useQuery(['startupData'], () =>
         axios
@@ -85,17 +26,7 @@ const Profile = () => {
             .then((res) => res.data)
     );
 
-    console.log(startupData);
-
     return (
-        // <div className="flex justify-center items-center text-center lg:h-[100vh]">
-        //     <div>
-        //         <img src={comingsoonBg} className="w-full" alt="" />
-        //         <div className="mt-5">
-        //             <p className="text-xl md:text-2xl ">Profile settings will be updated soon.</p>
-        //         </div>
-        //     </div>
-        // </div>
         <section className="flex flex-col">
             <div className="flex flex-col lg:flex-row">
                 <div className="flex flex-col w-full lg:w-1/2 pr-0 lg:pr-4 justify-center items-center md:justify-start md:items-start">
