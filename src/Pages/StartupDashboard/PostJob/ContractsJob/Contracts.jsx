@@ -1,3 +1,5 @@
+
+import axios from 'axios';
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
@@ -5,13 +7,16 @@ import { BiChevronLeft, BiPlus } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import currencyIcon from '../../../../Assets/Dashboard/currency.png';
-import { getStoredJob, setJob } from '../../../../Hooks/useLocalStorage';
+import { getStoredJob } from '../../../../Hooks/useLocalStorage';
 
 const Contracts = () => {
     // const [storedJob, setStoredJob] = useState({});
-
     const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
+
     const location = useLocation();
     const path = location.pathname.split('/');
     const jobName = path[path.length - 1];
@@ -104,20 +109,74 @@ const Contracts = () => {
     // }, [jobName]);
 
     // data posting to ls
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        setLoading(true)
         const jobData = {
             ...data,
             email: user?.user.email,
             categoryName,
             skills,
             domains: selectedValues,
-            deliverablesItems,
+            joiningPerks: deliverablesItems,
             apiPath: jobName,
-            contractsPaper: file,
+            // contractsPaper: _.cloneDeep(file),
         };
-        setJob(jobName, jobData);
-        navigate('/dashboard/post-job/contracts/review');
+        // const fileDeep = _.cloneDeep(file);
+        // console.log(fileDeep);
+
+        const formData = new FormData();
+
+        formData.append('obj', JSON.stringify(jobData));
+        const contractsFile = file[0];
+
+        formData.append('contractsPaper', contractsFile);
+
+        console.log(...formData);
+        await axios
+            .put(
+                `${process.env.REACT_APP_URL_STARTUP}/api/job/contracts`,
+                formData
+            )
+            .then((res) => {
+                if (res.data.modifiedCount || res.data.upsertedCount) {
+                    toast.success('profile data updated successfully');
+                    setLoading(false);
+                    navigate('/remoforce-dashboard/skill-preference');
+                }
+
+                console.log(res);
+            })
+            .catch((err) => {
+                setLoading(false);
+                console.log(err);
+            });
+
+        // setJob(jobName, jobData);
+        // navigate('/dashboard/post-job/contracts/review');
+        const jobDataString = JSON.stringify(jobData);
+
+        // Store the jobData in localStorage
+        localStorage.setItem('jobData', jobDataString);
+        // const reader = new FileReader();
+        // reader.onload = () => {
+        //   const fileData = {
+        //     name: file[0].name,
+        //     type: file[0].type,
+        //     size: file[0].size,
+        //     dataUrl: reader.result,
+        //   };
+        //   localStorage.setItem('fileData', JSON.stringify(fileData));
+        // };
+        // reader.readAsDataURL(file[0]);
     };
+    //     const fileDataString = localStorage.getItem('fileData');
+    //    if (fileDataString) {
+    //     const fileData = JSON.parse(fileDataString);
+    //     const { name, type, size, dataUrl } = fileData;
+    //     const files = new File([dataUrl], name, { type, lastModified: Date.now() });
+
+    //  console.log(files);
+    //    }
 
     return (
         <div>
