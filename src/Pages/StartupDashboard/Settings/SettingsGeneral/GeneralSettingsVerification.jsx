@@ -9,52 +9,6 @@ import { toast } from 'react-toastify';
 const GeneralSettingsVerification = () => {
     const { user } = useSelector((state) => state.auth);
     const navigate = useNavigate();
-    const registeredDetails = {
-        verification: 'registered',
-        startupName: 'Remostart',
-        registeredName: 'Remostart',
-        companyCinNumber: 'IN9348208239',
-        registrationDate: '12-10-2022',
-        registeredRegion: 'India',
-        registeredAddress: 'Digdho Hill, Hingna Maharashtra, India 440016',
-        IncubatedAt: 'GHRTBIF',
-        startDate: '12-10-2022',
-    };
-
-    const uploadedFile = [
-        {
-            file: 'terapanuploadhogayaha.png',
-        },
-        {
-            file: 'meraid.png',
-        },
-        {
-            file: 'preline-ui.html',
-        },
-    ];
-
-    const founderDetails = [
-        {
-            name: 'John Brown',
-            url: 'https://www.linkedin.com/',
-            address: 'New York No. 1 Lake Park',
-        },
-        {
-            name: 'Jim Green',
-            url: 'https://www.linkedin.com/',
-            address: 'London No. 1 Lake Park',
-        },
-        {
-            name: 'Joe Black',
-            url: 'https://www.linkedin.com/',
-            address: 'Sidney No. 1 Lake Park',
-        },
-        {
-            name: 'Edward King',
-            url: 'https://www.linkedin.com/',
-            address: 'LA No. 1 Lake Park',
-        },
-    ];
 
     const { data: startupData } = useQuery(['startupData'], () =>
         axios
@@ -64,8 +18,6 @@ const GeneralSettingsVerification = () => {
             .then((res) => res.data)
     );
     const handleSubmit = async () => {
-        console.log('hello');
-
         const bodyData = {
             verificationRequest: true,
             verificationStatus: false,
@@ -77,8 +29,7 @@ const GeneralSettingsVerification = () => {
                 `${process.env.REACT_APP_URL_STARTUP}/api/startup/verification-request`,
                 bodyData
             );
-            console.log(response);
-
+  
             if (response.status === 200) {
                 toast.success('Your request for verification is submitted successfully');
                 navigate('/dashboard/profile');
@@ -89,11 +40,9 @@ const GeneralSettingsVerification = () => {
     };
     const handleView = (singleFile) => {
         const url = Object.values(singleFile);
-
         window.open(url[0]);
     };
 
-    console.log(startupData);
     return (
         <div>
             {/* heading */}
@@ -255,27 +204,6 @@ const GeneralSettingsVerification = () => {
                                 </thead>
 
                                 <tbody>
-                                    {/* {startupData.foundersDetail
- &&
-                                        founderDetails.map((founder) => (
-                                            <tr key={Math.random()} className="border-b">
-                                                <td className="text-[#1F2937] py-3 text-start px-2 lg:px-4 font-medium text-sm">
-                                                    {founder?.name}
-                                                </td>
-                                                <td className="text-[#19A5FF] py-3 text-start px-2 lg:px-4 font-medium text-sm">
-                                                    <a
-                                                        className="hover:underline underline-offset-2 cursor-pointer uppercase "
-                                                        href={founder?.url}
-                                                        title={founder?.url}
-                                                    >
-                                                        URL
-                                                    </a>
-                                                </td>
-                                                <td className="text-[#1F2937] py-3 text-start px-2 lg:px-4 font-medium text-sm">
-                                                    {founder?.address}
-                                                </td>
-                                            </tr>
-                                        ))} */}
                                     <tr key={Math.random()} className="border-b">
                                         <td className="text-[#1F2937] py-3 text-start px-2 lg:px-4 font-medium text-sm">
                                             {startupData.foundersDetail?.fullName}
@@ -311,7 +239,7 @@ const GeneralSettingsVerification = () => {
                 >
                     Submit For Verification
                 </button>
-                <Link to="/dashboard/settings/profile">
+                <Link to="/dashboard/settings/general">
                     <button
                         type="button"
                         className="border py-5 px-11 rounded-md border-black text-black hover:bg-black hover:text-white font-semibold duration-300 ease-in-out"

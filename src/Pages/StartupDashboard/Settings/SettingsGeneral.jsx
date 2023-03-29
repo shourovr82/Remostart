@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
@@ -14,28 +15,35 @@ import { toast } from 'react-toastify';
 import image from '../../../Assets/Verification/Image.png';
 
 import SettingsItems from '../../../Routes/Roots/SettingsItems';
+import { getFileSize } from '../../../Utilities/FileSize';
 import GeneralSettingsForNonRegistered from './GeneralSettingsForNonRegistered';
 import GeneralSettingsPersonal from './SettingsGeneral/GeneralSettingsPersonal';
 import Password from './SettingsGeneral/Password';
 
 const SettingsGeneral = () => {
     const { user } = useSelector((state) => state.auth);
-
     const [error, setError] = useState();
     const [domain, setDomain] = useState(null);
     const [files, setFile] = useState();
-    const [allFiles, setAllFiles] = useState(null);
-    const [file, setFiles] = useState([]);
     const [loading, setLoading] = useState(false);
-
     const [toggle, setToggle] = useState();
     const navigate = useNavigate();
 
+    // get storedValues for startup
+    const { data: startupData } = useQuery(['startupData'], () =>
+        axios
+            .get(
+                `${process.env.REACT_APP_URL_STARTUP}/api/startup/startup-preview/${user?.user.email}`
+            )
+            .then((res) => res.data)
+    );
+    const [allFiles, setAllFiles] = useState(
+        (startupData?.companyDocs?.length && startupData?.companyDocs) || null
+    );
     // Initialize use form form react hook form
     const {
         register,
         handleSubmit,
-
         formState: { errors },
     } = useForm({
         mode: 'onChange',
@@ -63,66 +71,84 @@ const SettingsGeneral = () => {
         await setAllFilesArray(newObj);
     };
 
-    // function to display progressBar
-    const progressBar = () => {
-        const document = { name: domain, file: files };
-        setFiles([...file, document]);
-        setDomain(null);
+    // handle drop
+    const handleDropFile = async (acceptedFiles) => {
+        setError('');
+        const fileSizeBytes = acceptedFiles[0]?.size;
+        const checkFileSize = getFileSize(fileSizeBytes);
+        if (checkFileSize > 1024) {
+            toast.error('Maximum file upload size is 1Mb / 1024 Kb');
+        } else {
+            setFile(acceptedFiles);
+            if (allFiles?.length) {
+                const fileNameArr = allFiles.map((card) => Object.keys(card)[0]);
+                const isFileExist = fileNameArr.find((card) => card === domain);
+                if (isFileExist) {
+                    toast.error(`Already added ${isFileExist}`);
+                } else {
+                    await createFileArray(acceptedFiles);
+                }
+            } else {
+                await createFileArray(acceptedFiles);
+            }
+        }
     };
 
     const onSubmit = async (data) => {
-        setLoading(true);
-        const bodyData = {
-            companyAddress: {
-                place: data.RegisteredAddress,
-                city: data.City,
-                state: data.State,
-                country: data.Country,
-                PIN: data.pinCode,
-            },
-            registered: true,
-            email: user?.user.email,
-            startupName: data.startupName,
-            registeredName: data.RegisteredName,
-            startupCIN: data.ComanyCINNumber,
-            registrationDate: data.registrationDate,
-            region: data.regions,
+        if (!allFiles?.length) {
+            toast.error('Must upload Documents ');
+        } else {
+            setLoading(true);
+            const bodyData = {
+                companyAddress: {
+                    place: data.RegisteredAddress,
+                    city: data.City,
+                    state: data.State,
+                    country: data.Country,
+                    PIN: data.pinCode,
+                    registrationDate: data.SelectDate,
+                    registeredName: data.RegisteredName,
+                },
+                registered: true,
+                email: user?.user.email,
+                startupName: data.startupName,
+                registeredName: data.RegisteredName,
+                startupCIN: data.ComanyCINNumber,
+                region: data.regions,
+                gstinNumber: data.GSTINNumber,
+                foundersDetail: {
+                    fullName: data.FounderFullName,
+                    linkedin: data.LinkedInURL,
+                    address: data.Address,
+                },
+            };
+            const formData = new FormData();
 
-            gstinNumber: data.GSTINNumber,
-            foundersDetail: {
-                fullName: data.FounderFullName,
-                linkedin: data.LinkedInURL,
-                address: data.Address,
-            },
-        };
-        const formData = new FormData();
+            // Append file fields to the form data
+            formData.append('data', JSON.stringify(bodyData));
+            allFiles.forEach((doc) => {
+                Object.entries(doc).forEach(([key, value]) => {
+                    const newKey = key.replace(/\s/g, '').replace(/^./, key[0].toLowerCase());
 
-        // Append file fields to the form data
-        formData.append('data', JSON.stringify(bodyData));
-        allFiles.forEach((doc) => {
-            Object.entries(doc).forEach(([key, value]) => {
-                const newKey = key.replace(/\s/g, '').replace(/^./, key[0].toLowerCase());
-                console.log(newKey);
-
-                formData.append(newKey, value);
+                    formData.append(newKey, value);
+                });
             });
-        });
 
-        try {
-            const response = await axios.put(
-                `${process.env.REACT_APP_URL_STARTUP}/api/startup/settings-general-verification`,
-                formData
-            );
-            if (response.data.modifiedCount) {
+            try {
+                const response = await axios.put(
+                    `${process.env.REACT_APP_URL_STARTUP}/api/startup/settings-general-verification`,
+                    formData
+                );
+                if (response.data.modifiedCount) {
+                    setLoading(false);
+                    toast.success('Your personal data is updated successfully');
+                    navigate('/dashboard/settings/verification');
+                }
+            } catch (e) {
                 setLoading(false);
-                toast.success('Your personal data is updated successfully');
-                navigate('/dashboard/settings/verification');
+                console.error(e);
             }
-        } catch (e) {
-            setLoading(false);
-            console.error(e);
         }
-        console.log({ data, allFiles });
     };
     // Array of Documents ID types
     const domains = ['GSTIN', 'Address Proof', 'CIN Document', 'Company PAN', 'Others'];
@@ -134,7 +160,6 @@ const SettingsGeneral = () => {
 
     // on Change event of select options value and set to selected values state
     const handleDelete = (f) => {
-        console.log(f);
         const updatedFiles = allFiles.filter((item) => item !== f);
         setAllFiles(updatedFiles);
     };
@@ -239,9 +264,10 @@ const SettingsGeneral = () => {
                                                     message: 'Max 70 characters allowed',
                                                 },
                                             })}
+                                            defaultValue={startupData?.startupName}
                                             id="startupName"
                                             placeholder="Enter Startup Name"
-                                            className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+                                            className="lg:w-[520px] w-full px-4 py-3 rounded-md border  border-[#E5E7EB]  text-gray-900 "
                                         />
                                         {/* START-UP Name ERRORS STARTs */}
 
@@ -271,9 +297,12 @@ const SettingsGeneral = () => {
                                                     message: 'Max 70 characters allowed',
                                                 },
                                             })}
+                                            defaultValue={
+                                                startupData?.companyAddress?.registeredName
+                                            }
                                             id="RegisteredName"
                                             placeholder="Enter Registered Name"
-                                            className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+                                            className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#E5E7EB] text-gray-900 "
                                         />
                                         {/* Registered Name Error STARTs */}
                                         <p className="pt-2">
@@ -296,9 +325,10 @@ const SettingsGeneral = () => {
                                             {...register('CompanyCINNumber', {
                                                 required: 'Company CIN number is Required',
                                             })}
+                                            defaultValue={startupData?.startupCIN}
                                             id="CompanyCINNumber"
                                             placeholder="Enter Company CIN Number"
-                                            className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+                                            className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#E5E7EB] text-gray-900 "
                                         />
                                         {/* Company CIN Number ERRORS STARTs */}
 
@@ -316,7 +346,7 @@ const SettingsGeneral = () => {
                                         <label className="block font-semibold text-gray-900">
                                             Registration Date
                                         </label>
-                                        <div className="lg:w-[362px] w-full px-4 py-3 rounded-md border border-[#BCBCBC] flex items-center text-gray-900">
+                                        <div className="lg:w-[362px] w-full px-4 py-3 rounded-md border  border-[#E5E7EB] flex items-center text-gray-900">
                                             <div>
                                                 <BsCalendarRange />
                                             </div>
@@ -326,6 +356,10 @@ const SettingsGeneral = () => {
                                                 {...register('SelectDate', {
                                                     required: true,
                                                 })}
+                                                defaultValue={startupData?.companyAddress?.registrationDate?.substring(
+                                                    0,
+                                                    10
+                                                )}
                                                 id="SelectDate"
                                                 placeholder="Select date"
                                                 className=" w-full outline-none border-0 focus:border-0 px-4 rounded-md selection:outline-none   !focus:outline-none  text-gray-900 "
@@ -345,19 +379,19 @@ const SettingsGeneral = () => {
                                 </div>
                                 {/* Registered Region STARTs */}
                                 <div className="text-center">
-                                    <p className="mt-2">Registered Region</p>
+                                    {/* <p className="mt-2">Registered Region</p> */}
 
-                                    <select
+                                    {/* <select
                                         {...register('regions', {
                                             required: true,
                                         })}
-                                        className="select lg:w-[116px] w-full mt-2 max-w-xs font-semibold border border-gray-400 rounded-md "
+                                        className="select lg:w-[116px] w-full mt-2 max-w-xs font-semibold border  border-[#E5E7EB] rounded-md "
                                     >
                                         <option hidden>Country</option>
                                         {Regions.map((country, i) => (
                                             <option key={i}>{country} </option>
                                         ))}
-                                    </select>
+                                    </select> */}
                                     {/* Registered Region Errors STARTs */}
 
                                     <p className="pt-2">
@@ -390,9 +424,10 @@ const SettingsGeneral = () => {
                                             message: 'Max 40 characters allowed',
                                         },
                                     })}
+                                    defaultValue={startupData?.companyAddress?.place}
                                     id="RegisteredAddress"
                                     placeholder="Plot./ Flat. / Area./ etc..."
-                                    className=" w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+                                    className=" w-full px-4 py-3 rounded-md border  border-[#E5E7EB] text-gray-900 "
                                 />
                                 {/* Registered Address Errors STARTs */}
 
@@ -407,7 +442,7 @@ const SettingsGeneral = () => {
                         </div>
                         {/* Country Input STARTs */}
 
-                        <div className="lg:flex justify-between items-center">
+                        <div className="lg:flex justify-between items-start">
                             <div>
                                 <label className="block font-semibold text-sm text-gray-900">
                                     Country
@@ -416,7 +451,8 @@ const SettingsGeneral = () => {
                                     {...register('Country', {
                                         required: true,
                                     })}
-                                    className="select lg:w-[116px] w-full mt-1 max-w-xs font-semibold border border-gray-400 rounded-md "
+                                    defaultValue={startupData?.companyAddress?.country}
+                                    className="select lg:w-[116px] w-full mt-1 max-w-xs font-semibold border border-[#E5E7EB] rounded-md "
                                 >
                                     <option hidden>Country</option>
                                     {Countries.map((country, i) => (
@@ -441,22 +477,24 @@ const SettingsGeneral = () => {
                                 </label>
                                 <select
                                     {...register('State', {
-                                        required: true,
+                                        required: 'State is required',
                                     })}
-                                    className="select lg:w-[116px] w-full mt-1 max-w-xs font-semibold border border-gray-400 rounded-md "
+                                    defaultValue={startupData?.companyAddress?.state}
+                                    className="select lg:w-[125px] w-full mt-1 max-w-xs font-semibold border border-[#E5E7EB] rounded-md "
                                 >
-                                    <option hidden>State</option>
+                                    <option hidden value="">
+                                        State
+                                    </option>
                                     {States.map((state, i) => (
                                         <option key={i}>{state} </option>
                                     ))}
                                 </select>
                                 {/* State Errors STARTs */}
 
-                                <p className="pt-2">
-                                    {errors.SelectDate && (
+                                <p className="">
+                                    {errors.State && (
                                         <span className="text-red-400 ">
-                                            {errors.State?.type === 'required' &&
-                                                'Select state please'}
+                                            {errors?.State?.message}
                                         </span>
                                     )}
                                 </p>
@@ -469,9 +507,11 @@ const SettingsGeneral = () => {
                                 </label>
                                 <select
                                     {...register('City', {
-                                        required: true,
+                                        required: 'city is required',
+                                        valueAsDate: 'date value is required',
                                     })}
-                                    className="select lg:w-[116px] w-full mt-1 max-w-xs font-semibold border border-gray-400 rounded-md "
+                                    defaultValue={startupData?.companyAddress?.city}
+                                    className="select lg:w-[125px] w-full mt-1 max-w-xs font-semibold border border-[#E5E7EB] rounded-md "
                                 >
                                     <option hidden>City</option>
                                     {Cites.map((city, i) => (
@@ -483,8 +523,7 @@ const SettingsGeneral = () => {
                                 <p className="pt-2">
                                     {errors.City && (
                                         <span className="text-red-400 ">
-                                            {errors.City?.type === 'required' &&
-                                                'Select date please'}
+                                            {errors.City?.message}
                                         </span>
                                     )}
                                 </p>
@@ -509,9 +548,10 @@ const SettingsGeneral = () => {
                                             message: '*Max 30 PIN code allowed',
                                         },
                                     })}
+                                    defaultValue={startupData?.companyAddress?.PIN}
                                     id="RegisteredPinNumber"
                                     placeholder="Enter Your PIN number"
-                                    className="w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+                                    className="w-full px-4 py-3 rounded-md border border-[#E5E7EB]  text-gray-900 "
                                 />
                                 {/* PIN CODE Errors STARTs */}
 
@@ -524,21 +564,7 @@ const SettingsGeneral = () => {
                                 </p>
                             </div>
                         </div>
-                        {/* GSTIN NUMBER INPUT STARTs */}
 
-                        {/* <div className="space-y-1 text-sm mt-2">
-                            <label className="block font-semibold text-gray-900">
-                                GSTIN Number (If Applicable)
-                            </label>
-                            <input
-                                type="Text"
-                                name="Registerd Address"
-                                {...register('GSTINNumber')}
-                                id="Registerd Address"
-                                placeholder="Eg. GSTIN 19482938298"
-                                className=" lg:w-[514px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
-                            />
-                        </div> */}
                         {/* SUPPORTED DOCUMENTS SECTION STARTS */}
 
                         <div className="lg:flex justify-start mt-10 ">
@@ -547,14 +573,15 @@ const SettingsGeneral = () => {
                                     Upload Supported Documents
                                 </label>
                                 <select
-                                    // on Click event set value to domain state
                                     onClick={(e) => {
                                         setDomain(e.target.value);
                                     }}
                                     className="select  mt-1 max-w-xs font-semibold border 
-                     border-gray-400 rounded-md "
+                   border-[#E5E7EB] rounded-md "
                                 >
-                                    <option>Document Type</option>
+                                    <option hidden value="">
+                                        Document Type
+                                    </option>
                                     {domains.map((D, i) => (
                                         <option key={i}>{D}</option>
                                     ))}
@@ -564,17 +591,15 @@ const SettingsGeneral = () => {
                             <div>
                                 <Dropzone
                                     className="lg:w-[335px] lg:mt-0 h-[213px] mt-10 mx-auto"
-                                    onDrop={async (acceptedFiles) => {
-                                        setError('');
-                                        setFile(acceptedFiles);
-                                        // OnDrop on select file run function to get domain and set as property to file value
-                                        await createFileArray(acceptedFiles);
-                                        // render progressBar
-                                        progressBar();
-                                    }}
+                                    onDrop={handleDropFile}
                                 >
+                                    {/* onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
+                                    ref={(node) => { dropzoneRef = node; }}
+                                    accept="image/jpeg, image/png"
+                                    maxSize={5242880} */}
+
                                     {({ getRootProps, getInputProps }) => (
-                                        <section className="container">
+                                        <section className="container lg:w-[335px]">
                                             <div {...getRootProps({ className: 'dropzone' })}>
                                                 <input {...getInputProps()} />
                                                 <section
@@ -592,7 +617,7 @@ const SettingsGeneral = () => {
                                                                 </span>
                                                             </h2>
                                                             <span className="text-xs font-medium">
-                                                                Maximum size: 50MB
+                                                                Maximum size: 1MB
                                                             </span>
                                                         </>
                                                     ) : (
@@ -606,7 +631,7 @@ const SettingsGeneral = () => {
                                                                 </span>
                                                             </h2>
                                                             <span className="text-xs font-medium">
-                                                                Maximum size: 50MB
+                                                                Maximum size: 1MB
                                                             </span>
                                                         </>
                                                     )}
@@ -615,43 +640,12 @@ const SettingsGeneral = () => {
                                         </section>
                                     )}
                                 </Dropzone>
+
                                 {/* Dropzone Section Error starts */}
 
                                 {error && <span className="text-red-400 ">{error}</span>}
                                 {/* Progress Bar Section UI starts */}
 
-                                {/* {file.length ? (
-                                    <div className="mt-6">
-                                        {file.map((f, i) => (
-                                            <div key={i} className="border rounded-md w-full mt-3">
-                                                <div className="p-5">
-                                                    <div className="flex justify-between items-center">
-                                                        <div className="flex  gap-4 items-center">
-                                                            <FiUpload className="text-sm" />
-                                                            <p className="text-sm lg:w-[627px]">
-                                                                {f?.name}
-                                                            </p>
-                                                        </div>
-                                                        <div className="flex items-center gap-2">
-                                                            <button
-                                                                type="button"
-                                                                className="bg-teal-500 text-white rounded-full"
-                                                            >
-                                                                <TiTick className="text-md " />
-                                                            </button>
-                                                            <button type="button">
-                                                                <MdDeleteOutline className="text-lg " />
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <p className="w-full mt-2 h-[6px] bg-[#3B82F6]" />
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    ''
-                                )} */}
                                 {allFiles?.length ? (
                                     <div className="mt-6">
                                         {allFiles?.map((f, i) => (
@@ -695,7 +689,7 @@ const SettingsGeneral = () => {
                         <h1 className="text-3xl font-semibold mt-10">
                             Founder <span className="text-[#65DC7F]"> Details</span>
                         </h1>
-                        <p className="border-[#BCBCBC] bg-[#BCBCBC] border w-5/6 mt-2" />
+                        <p className=" border-[#E5E7EB] bg-[#BCBCBC] border w-5/6 mt-2" />
 
                         <div className="lg:w-[520px]  mt-10">
                             <div className="mt-2">
@@ -714,10 +708,11 @@ const SettingsGeneral = () => {
                                             message: '*Maximum 40 characters Required',
                                         },
                                     })}
+                                    defaultValue={startupData?.foundersDetail?.fullName}
                                     id="FounderFullName"
                                     type="text"
                                     placeholder="Enter Founder Full Name"
-                                    className="block w-full px-4 py-4 mt-1 text-gray-700 bg-white border  rounded-md   border-gray-200  focus:ring-blue-300 focus:ring-opacity-40 focus:border-blue-300 focus:outline-none focus:ring"
+                                    className="block w-full px-4 py-4 mt-1 text-gray-700 bg-white border  rounded-md border-[#E5E7EB]  focus:ring-blue-300 focus:ring-opacity-40 focus:border-blue-300 focus:outline-none focus:ring"
                                 />
                                 <p className="pt-2 ">
                                     <span className="text-red-400 ">
@@ -728,7 +723,7 @@ const SettingsGeneral = () => {
                                 </p>
                             </div>
                             <div className="mt-2">
-                                <label className="text-sm font-medium " htmlFor="MyName">
+                                <label className="text-sm font-medium " htmlFor="LinkedInURL">
                                     LinkedIn URL
                                 </label>
                                 <input
@@ -739,10 +734,11 @@ const SettingsGeneral = () => {
                                             message: '*Linkedin  url is not valid',
                                         },
                                     })}
-                                    id="MyName"
+                                    defaultValue={startupData?.foundersDetail?.linkedin}
+                                    id="LinkedInURL"
                                     type="text"
                                     placeholder="https://www.linkedin.com/company/remo-start/"
-                                    className="block w-full px-4 py-4 mt-1 text-gray-700 bg-white border  rounded-md   border-gray-200  focus:ring-blue-300 focus:ring-opacity-40 focus:border-blue-300 focus:outline-none focus:ring"
+                                    className="block w-full px-4 py-4 mt-1 text-gray-700 bg-white border  rounded-md   border-[#E5E7EB]  focus:ring-blue-300 focus:ring-opacity-40 focus:border-blue-300 focus:outline-none focus:ring"
                                 />
                                 <p className="py-2 ">
                                     <span className="text-red-400 ">
@@ -768,10 +764,11 @@ const SettingsGeneral = () => {
                                             message: 'Maximum 40 characters required',
                                         },
                                     })}
+                                    defaultValue={startupData?.foundersDetail?.address}
                                     id="Address"
                                     type="text"
                                     placeholder="Founder Address"
-                                    className="block w-full px-4 py-4 mt-1 text-gray-700 bg-white border  rounded-md   border-gray-200  focus:ring-blue-300 focus:ring-opacity-40 focus:border-blue-300 focus:outline-none focus:ring"
+                                    className="block w-full px-4 py-4 mt-1 text-gray-700 bg-white border  rounded-md   border-[#E5E7EB]  focus:ring-blue-300 focus:ring-opacity-40 focus:border-blue-300 focus:outline-none focus:ring"
                                 />
                                 <p className="pt-2 ">
                                     <span className="text-red-400 ">

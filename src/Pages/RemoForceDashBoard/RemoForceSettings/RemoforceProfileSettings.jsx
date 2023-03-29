@@ -413,7 +413,6 @@ function RemoforceProfileSettings() {
                                     id="gender"
                                     // defaultValue="Select a gender"
                                     className="py-3 rounded-md border-gray-200"
-                                   
                                     value={selectedGender}
                                     onChange={handleChange}
                                 >
@@ -620,7 +619,7 @@ function RemoforceProfileSettings() {
                     <div className=" bg-[#f4fbff] lg:flex items-center mt-10 ">
                         <div className="group  inline-block lg:space-y-2 pr-0 lg:pr-10">
                             <select
-                            defaultValue='Link'
+                                defaultValue="Link"
                                 onChange={handleLink}
                                 className="select  mt-1 w-full  font-semibold border 
                      border-gray-200 rounded-md "
@@ -629,7 +628,11 @@ function RemoforceProfileSettings() {
                                     Link
                                 </option>
                                 {link.map((D) => (
-                                    <option onClick={handleClick} value={D.name} key={Math.random()}>
+                                    <option
+                                        onClick={handleClick}
+                                        value={D.name}
+                                        key={Math.random()}
+                                    >
                                         {D.name}
                                     </option>
                                 ))}

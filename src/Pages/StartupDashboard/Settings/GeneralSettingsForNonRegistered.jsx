@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
@@ -12,6 +13,10 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import image from '../../../Assets/Verification/Image.png';
+import { getFileSize } from '../../../Utilities/FileSize';
+
+// date picker
+import 'react-datepicker/dist/react-datepicker.css';
 
 const GeneralSettingsForNonRegistered = () => {
     const { user } = useSelector((state) => state.auth);
@@ -19,7 +24,7 @@ const GeneralSettingsForNonRegistered = () => {
     const [error, setError] = useState();
     const [domain, setDomain] = useState(null);
     const [files, setFile] = useState();
-    const [allFiles, setAllFiles] = useState(null);
+
     const [file, setFiles] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -36,11 +41,16 @@ const GeneralSettingsForNonRegistered = () => {
     // list of allowed ID types
     const domains = ['GSTIN', 'Address Proof', 'CIN Document', 'Company PAN', 'Others'];
 
-    // on change event on documents ID
-    // dynamically map value of event and assign to new state
-
-    // State for File and Array name
-
+    const { data: startupData } = useQuery(['startupData'], () =>
+        axios
+            .get(
+                `${process.env.REACT_APP_URL_STARTUP}/api/startup/startup-preview/${user?.user.email}`
+            )
+            .then((res) => res.data)
+    );
+    const [allFiles, setAllFiles] = useState(
+        (startupData?.companyDocs?.length && startupData?.companyDocs) || null
+    );
     // Upload Button Function
     async function setAllFilesArray(data) {
         if (allFiles === null) {
@@ -64,73 +74,84 @@ const GeneralSettingsForNonRegistered = () => {
         await setAllFilesArray(newObj);
     };
 
-    // function to display progressBar
-    // const progressBar = () => {
-    //     const document = { name: domain, file: files };
-    //     setFiles([...file, document]);
-    //     setDomain(null);
-    // };
-    console.log(allFiles);
+    // handle drop
+    const handleDropFile = async (acceptedFiles) => {
+        setError('');
+        const fileSizeBytes = acceptedFiles[0]?.size;
+        const checkFileSize = getFileSize(fileSizeBytes);
+        if (checkFileSize > 1024) {
+            toast.error('Maximum file upload size is 1Mb / 1024 Kb');
+        } else {
+            setFile(acceptedFiles);
+            if (allFiles?.length) {
+                const fileNameArr = allFiles.map((card) => Object.keys(card)[0]);
+                const isFileExist = fileNameArr.find((card) => card === domain);
+                if (isFileExist) {
+                    toast.error(`Already added ${isFileExist}`);
+                } else {
+                    await createFileArray(acceptedFiles);
+                }
+            } else {
+                await createFileArray(acceptedFiles);
+            }
+        }
+    };
 
     // On form submit and make Http request
     const onSubmit = async (data) => {
-        setLoading(true);
-        console.log({ data, document });
+        if (!allFiles?.length) {
+            toast.error('Supported Docs cannot be empty');
+        } else {
+            setLoading(true);
+            const bodyData = {
+                companyAddress: {
+                    place: data.RegisteredAddress,
+                    city: data.City,
+                    state: data.State,
+                    country: data.aboutCountry,
+                    PIN: data.pinCode,
+                    incubatedAt: data.Incubated,
+                    registrationDate: data.registrationDate,
+                    gstinNumber: data.GSTINNumber,
+                    registeredName: data.RegisteredName,
+                    registered: false,
+                },
+                email: user?.user.email,
+                startupName: data.startupName,
+                startupCIN: data.ComanyCINNumber,
+                foundersDetail: {
+                    fullName: data.FounderFullName,
+                    linkedin: data.LinkedInURL,
+                    address: data.Address,
+                },
+            };
 
-        const bodyData = {
-            companyAddress: {
-                place: data.RegisteredAddress,
-                city: data.City,
-                state: data.State,
-                country: data.aboutCountry,
-                PIN: data.pinCode,
-                incubatedAt: data.Incubated,
-                registrationDate: data.registrationDate,
-                gstinNumber: data.GSTINNumber,
-                registeredName: data.RegisteredName,
-                registered: false,
-            },
+            const formData = new FormData();
 
-            email: user?.user.email,
-            startupName: data.startupName,
+            // Append file fields to the form data
+            formData.append('data', JSON.stringify(bodyData));
+            allFiles?.forEach((doc) => {
+                Object.entries(doc).forEach(([key, value]) => {
+                    const newKey = key.replace(/\s/g, '').replace(/^./, key[0].toLowerCase());
 
-            startupCIN: data.ComanyCINNumber,
-
-            foundersDetail: {
-                fullName: data.FounderFullName,
-                linkedin: data.LinkedInURL,
-                address: data.Address,
-            },
-        };
-
-        const formData = new FormData();
-
-        console.log(allFiles);
-
-        // Append file fields to the form data
-        formData.append('data', JSON.stringify(bodyData));
-        allFiles.forEach((doc) => {
-            Object.entries(doc).forEach(([key, value]) => {
-                const newKey = key.replace(/\s/g, '').replace(/^./, key[0].toLowerCase());
-                console.log(newKey);
-
-                formData.append(newKey, value);
+                    formData.append(newKey, value);
+                });
             });
-        });
 
-        try {
-            const response = await axios.put(
-                `${process.env.REACT_APP_URL_STARTUP}/api/startup/settings-general-verification`,
-                formData
-            );
-            if (response.data.modifiedCount) {
+            try {
+                const response = await axios.put(
+                    `${process.env.REACT_APP_URL_STARTUP}/api/startup/settings-general-verification`,
+                    formData
+                );
+                if (response.data.modifiedCount) {
+                    setLoading(false);
+                    toast.success('Your personal data is updated successfully');
+                    navigate('/dashboard/settings/verification');
+                }
+            } catch (e) {
                 setLoading(false);
-                toast.success('Your personal data is updated successfully');
-                navigate('/dashboard/settings/verification');
+                console.error(e);
             }
-        } catch (e) {
-            setLoading(false);
-            console.error(e);
         }
     };
     // array of Country, State, Cities
@@ -138,12 +159,12 @@ const GeneralSettingsForNonRegistered = () => {
     const States = ['Jharkhand', 'Delhi', 'Dhaka'];
     const cities = ['Jharkhand', 'Delhi', 'Dhaka'];
 
-    // console.log(file);
     const handleDelete = (f) => {
-        console.log(f);
         const updatedFiles = allFiles.filter((item) => item !== f);
         setAllFiles(updatedFiles);
     };
+
+    const [selectedDate, setSelectedDate] = useState(null);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -173,6 +194,7 @@ const GeneralSettingsForNonRegistered = () => {
                                         message: 'max 70 characters allowed',
                                     },
                                 })}
+                                defaultValue={startupData?.startupName}
                                 id="startupName"
                                 placeholder="Eg. remostarts"
                                 className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
@@ -189,62 +211,6 @@ const GeneralSettingsForNonRegistered = () => {
                         </div>
                         {/* Registered Name input Starts */}
 
-                        {/* <div className="space-y-1 text-sm">
-                            <label className="block font-semibold text-gray-900">
-                                Registered Name
-                            </label>
-                            <input
-                                type="Text"
-                                name="startupName"
-                                {...register('RegisteredName', {
-                                    required: true,
-                                    minLength: 3,
-                                    maxLength: 30,
-                                })}
-                                id="startupName"
-                                placeholder="Eg. remostarts"
-                                className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
-                            />
-                            Registered Name input ERRORS Starts
-
-                            <p className="pt-2">
-                                {errors.RegisteredName && (
-                                    <span className="text-red-400 ">
-                                        {errors.startupName?.type === 'required' &&
-                                            'Please provide your name'}
-                                    </span>
-                                )}
-                            </p>
-                        </div> */}
-                        {/*  Company CIN Number input Starts */}
-
-                        {/* <div className="space-y-1 text-sm">
-                            <label className="block font-semibold text-gray-900">
-                                Company CIN Number
-                            </label>
-                            <input
-                                type="Text"
-                                name="ComanyCINNumber"
-                                {...register('ComanyCINNumber', {
-                                    required: true,
-                                    minLength: 3,
-                                    maxLength: 30,
-                                })}
-                                id="ComanyCINNumber"
-                                placeholder="Eg. remostarts"
-                                className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
-                            />
-                             Company CIN Number input ERRORS Starts
-
-                            <p className="pt-2">
-                                {errors.ComanyCINNumber && (
-                                    <span className="text-red-400 ">
-                                        {errors.ComanyCINNumber?.type === 'required' &&
-                                            'Please provide your name'}
-                                    </span>
-                                )}
-                            </p>
-                        </div> */}
                         {/* Registration Date input Starts */}
 
                         <div className="space-y-1 text-sm">
@@ -253,17 +219,30 @@ const GeneralSettingsForNonRegistered = () => {
                                 <div>
                                     <BsCalendarRange />
                                 </div>
-                                <input
+                                {/* <input
                                     type="date"
                                     name="SelectDate"
                                     {...register('registrationDate', {
                                         required: true,
                                     })}
+                                    defaultValue={startupData?.companyAddress?.registrationDate?.substring(
+                                        0,
+                                        10
+                                    )}
                                     id="SelectDate"
                                     placeholder="Select date"
                                     className=" w-full outline-none  border-0 px-4 rounded-md focus:border-opacity-0  text-gray-900 "
-                                />
+                                /> */}
                             </div>
+                            {/* <div>
+                                shafin
+                                <DatePicker
+                                    selected={selectedDate}
+                                    onChange={(date) => setSelectedDate(date)}
+                                    dateFormat="MM/dd/yyyy"
+                                    maxDate={new Date()}
+                                />
+                            </div> */}
                             {/* Registration Date input ERROR Starts */}
 
                             <p className="py-2">
@@ -295,6 +274,7 @@ const GeneralSettingsForNonRegistered = () => {
                                 message: 'Max 30 characters allowed',
                             },
                         })}
+                        defaultValue={startupData?.companyAddress?.incubatedAt}
                         id="Register Address"
                         placeholder="Your startup incubated at"
                         className=" w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
@@ -325,6 +305,7 @@ const GeneralSettingsForNonRegistered = () => {
                                 message: '*Max 30 characters Allowed',
                             },
                         })}
+                        defaultValue={startupData?.companyAddress?.place}
                         id="RegisteredAddress"
                         placeholder="Plot./ Flat. / Area./ etc..."
                         className=" w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
@@ -350,6 +331,7 @@ const GeneralSettingsForNonRegistered = () => {
                         {...register('aboutCountry', {
                             required: 'Country is Required',
                         })}
+                        defaultValue={startupData?.companyAddress?.country}
                         className="select lg:w-[135px] mt-1 lg:max-w-xs w-full font-semibold border border-gray-400 rounded-md "
                     >
                         <option hidden>Country</option>
@@ -372,6 +354,7 @@ const GeneralSettingsForNonRegistered = () => {
                         {...register('State', {
                             required: ' State is Required',
                         })}
+                        defaultValue={startupData?.companyAddress?.state}
                         className="select lg:w-[130px] mt-1 lg:max-w-xs w-full font-semibold border border-gray-400 rounded-md "
                     >
                         <option hidden>State</option>
@@ -394,6 +377,7 @@ const GeneralSettingsForNonRegistered = () => {
                         {...register('City', {
                             required: ' City is Required',
                         })}
+                        defaultValue={startupData?.companyAddress?.city}
                         className="select lg:w-[126px] mt-1 lg:max-w-xs w-full font-semibold border border-gray-400 rounded-md "
                     >
                         <option hidden>City</option>
@@ -426,6 +410,7 @@ const GeneralSettingsForNonRegistered = () => {
                                 message: 'Maximum 30 Pin required',
                             },
                         })}
+                        defaultValue={startupData?.companyAddress?.PIN}
                         id="RegisteredPin"
                         placeholder="Eg. 834003"
                         className=" w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
@@ -437,22 +422,6 @@ const GeneralSettingsForNonRegistered = () => {
                     </p>
                 </div>
             </div>
-
-            {/* GSTIN NUMBER Input Starts */}
-
-            {/* <div className="space-y-1 text-sm mt-2">
-                <label className="block font-semibold text-gray-900">
-                    GSTIN Number (If Applicable)
-                </label>
-                <input
-                    type="Text"
-                    name="Registerd Address"
-                    {...register('GSTINNumber')}
-                    id="Registerd Address"
-                    placeholder="Eg. GSTIN 19482938298"
-                    className=" lg:w-[514px] px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
-                />
-            </div> */}
 
             {/* Upload supported documents Section Starts */}
 
@@ -468,7 +437,9 @@ const GeneralSettingsForNonRegistered = () => {
                         className="select lg:w-[150px] mt-1 max-w-xs font-semibold border 
                      border-gray-400 rounded-md "
                     >
-                        <option>Id Type</option>
+                        <option hidden value="">
+                            Id Type
+                        </option>
                         {domains.map((D, i) => (
                             <option key={i}>{D}</option>
                         ))}
@@ -477,23 +448,16 @@ const GeneralSettingsForNonRegistered = () => {
                 {/* Dropzone Section starts */}
                 <div>
                     <Dropzone
-                        className="lg:w-[335px] lg:mt-0 h-[213px] mt-10 mx-auto"
-                        onDrop={async (acceptedFiles) => {
-                            setError('');
-                            setFile(acceptedFiles);
-                            // OnDrop on select file run function to get domain and set as property to file value
-                            await createFileArray(acceptedFiles);
-                            // render progressBar
-                            // progressBar();
-                        }}
+                        className="lg:w-[335px]  lg:mt-0 h-[213px] mt-10 mx-auto"
+                        onDrop={handleDropFile}
                     >
                         {({ getRootProps, getInputProps }) => (
-                            <section className="container">
+                            <section className="container  ">
                                 <div {...getRootProps({ className: 'dropzone' })}>
                                     <input {...getInputProps()} />
                                     <section
                                         htmlFor="dropzone-file"
-                                        className=" justify-center cursor-pointer lg:mt-0 mt-10  flex lg:w-[335px] h-[213px]  flex-col items-center rounded-xl  border-2 border-dashed border-blue-400 bg-[#eff6ff] text-center"
+                                        className=" justify-center cursor-pointer lg:mt-0 mt-10  flex lg:w-[335px]  h-[213px]  flex-col items-center rounded-xl  border-2 border-dashed border-blue-400 bg-[#eff6ff] text-center"
                                     >
                                         {!files?.[0]?.size ? (
                                             <>
@@ -506,7 +470,7 @@ const GeneralSettingsForNonRegistered = () => {
                                                     </span>
                                                 </h2>
                                                 <span className="text-xs font-medium">
-                                                    Maximum size: 50MB
+                                                    Maximum size: 1MB
                                                 </span>
                                             </>
                                         ) : (
@@ -520,7 +484,7 @@ const GeneralSettingsForNonRegistered = () => {
                                                     </span>
                                                 </h2>
                                                 <span className="text-xs font-medium">
-                                                    Maximum size: 50MB
+                                                    Maximum size: 1MB
                                                 </span>
                                             </>
                                         )}
@@ -588,6 +552,7 @@ const GeneralSettingsForNonRegistered = () => {
                         {...register('FounderFullName', {
                             required: 'Founder FullName is Required',
                         })}
+                        defaultValue={startupData?.foundersDetail?.fullName}
                         id="MyName"
                         type="text"
                         placeholder=" Founder Full Name"
@@ -613,6 +578,7 @@ const GeneralSettingsForNonRegistered = () => {
                                 message: '*Founder Linkedin Profile url is not valid',
                             },
                         })}
+                        defaultValue={startupData?.foundersDetail?.linkedin}
                         id="MyName"
                         type="text"
                         placeholder="https://www.linkedin.com/company/remo-start/"
@@ -636,6 +602,7 @@ const GeneralSettingsForNonRegistered = () => {
                                 message: 'Min 3 characters required',
                             },
                         })}
+                        defaultValue={startupData?.foundersDetail?.address}
                         id="Address"
                         type="text"
                         placeholder="Address"
@@ -653,6 +620,7 @@ const GeneralSettingsForNonRegistered = () => {
                 <button
                     className="px-11 py-5 bg-[#65DC7F] rounded-lg text-white flex items-center gap-2"
                     type="submit"
+                    disabled={loading}
                 >
                     Submit For Verification{' '}
                     {loading && (
