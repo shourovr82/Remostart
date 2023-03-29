@@ -15,9 +15,6 @@ import { toast } from 'react-toastify';
 import image from '../../../Assets/Verification/Image.png';
 import { getFileSize } from '../../../Utilities/FileSize';
 
-// date picker
-import 'react-datepicker/dist/react-datepicker.css';
-
 const GeneralSettingsForNonRegistered = () => {
     const { user } = useSelector((state) => state.auth);
 
