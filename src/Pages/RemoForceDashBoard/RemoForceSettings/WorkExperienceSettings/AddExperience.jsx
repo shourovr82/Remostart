@@ -21,33 +21,6 @@ function AddExperience() {
     const [editMode, setEditMode] = useState(false);
     const [editData, setEditData] = useState({});
 
-    // const workExperienceLists = [
-    //     {
-    //         _id: '1',
-    //         companyName: 'Jack Stones Industry Ltd',
-    //         position: 'Web Developer Intern',
-    //         type: 'Fulltime',
-    //         startingDate: 'Oct 2021',
-    //         endDate: 'Dec 2022',
-    //     },
-    //     {
-    //         _id: '2',
-    //         companyName: 'Hero lorem ipsume',
-    //         position: 'Full Java Spring Framework',
-    //         type: 'Internship',
-    //         startingDate: 'Oct 2019',
-    //         endDate: 'Dec 2022',
-    //     },
-    //     {
-    //         _id: '3',
-    //         companyName: 'RemoStart',
-    //         position: 'Web Developer Intern',
-    //         type: 'Contract',
-    //         startingDate: 'Oct 2021',
-    //         endDate: 'Dec 2022',
-    //     },
-    // ];
-
     const editExperience = (experience) => {
         setEditMode(true);
         setEditData(experience);
@@ -63,7 +36,7 @@ function AddExperience() {
         }
 
         const bodyData = {
-            experienceDetails:workExperienceLists,
+            experienceDetails: workExperienceLists,
             email: user.user.email,
         };
 
@@ -204,8 +177,8 @@ function AddExperience() {
                     >
                         Submit Details
                         {loading && (
-                                <span className="w-7 h-7 font-bold border-4 border-dashed rounded-full animate-spin border-white" />
-                            )}
+                            <span className="w-7 h-7 font-bold border-4 border-dashed rounded-full animate-spin border-white" />
+                        )}
                     </button>
                 </div>
             </section>

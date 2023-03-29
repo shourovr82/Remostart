@@ -36,7 +36,7 @@ function AccountSettings() {
     const httpAccountSettings = async (data) => {
         console.log(data);
         setLoading(true);
-        if (data.alternativeEmail=== remoProfile.personalDetails.alternativeEmail) {
+        if (data.alternativeEmail === remoProfile.personalDetails.alternativeEmail) {
             toast.error('Its already updated')
             return
         }
@@ -57,7 +57,7 @@ function AccountSettings() {
                     setLoading(false);
                     // navigate('/remoforce-dashboard/profile');
                 }
-                
+
 
                 console.log(res);
             })
@@ -68,7 +68,7 @@ function AccountSettings() {
     };
 
     const accountPass = 'password';
-console.log(remoProfile);
+    console.log(remoProfile);
 
     return (
         <RemoForceSettingsItems>

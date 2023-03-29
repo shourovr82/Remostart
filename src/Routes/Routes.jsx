@@ -65,6 +65,7 @@ import RemoForceRoute from './RemoforceRoute';
 import DashboardHome from './Roots/DashboardHome';
 import RemoForceDashboardRoot from './Roots/RemoForceDashBoardRoot';
 import StartupRoute from './StartupRoute';
+import AddProject from '../Pages/RemoForceDashBoard/RemoForceSettings/ProjectsSettings/AddProject';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -182,6 +183,7 @@ const router = createBrowserRouter(
                     element={<AddExperience />}
                 />
                 <Route path="/remoforce-dashboard/account-settings" element={<AccountSettings />} />
+                <Route path="/remoforce-dashboard/add-project" element={<AddProject />} />
             </Route>
 
             {/* blog routes */}
