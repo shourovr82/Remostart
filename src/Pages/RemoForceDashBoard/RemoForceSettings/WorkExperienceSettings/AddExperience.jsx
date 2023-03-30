@@ -49,7 +49,7 @@ function AddExperience() {
                 if (res.data.modifiedCount || res.data.upsertedCount) {
                     toast.success('Experience data updated successfully');
                     setLoading(false);
-                    navigate('/remoforce-dashboard/account-settings');
+                    navigate('/remoforce-dashboard/add-project');
                 }
 
                 console.log(res);
