@@ -3,7 +3,7 @@ import { AiOutlineFileDone } from 'react-icons/ai';
 import { BiHash } from 'react-icons/bi';
 import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
 import { FaBirthdayCake, FaProjectDiagram, FaUniversity } from 'react-icons/fa';
-import { FcAbout, FcGlobe } from 'react-icons/fc';
+import { FcAbout, FcGlobe, FcStumbleupon } from 'react-icons/fc';
 import { FiEdit } from 'react-icons/fi';
 import { ImMobile } from 'react-icons/im';
 // import { IoLanguage } from 'react-icons/io';
@@ -28,11 +28,12 @@ import linkedin from '../../../Assets/SocialIcons/linkedIn.png';
 import twitter from '../../../Assets/SocialIcons/twitter.png';
 import AuthContext from '../../../Context/AuthContext';
 import {
-    CalculatedAge,
-    FormattedDate,
-    getDuration,
-    getEducationDuration
+  CalculatedAge,
+  FormattedDate,
+  getDuration,
+  getEducationDuration
 } from '../../../Utilities/DateFormater';
+import { convertProjectDate, getProjectDuration } from '../../../Utilities/projectDateFormater';
 
 const RemoForceProfile = () => {
     const { user } = useSelector((state) => state.auth);
@@ -386,8 +387,8 @@ const RemoForceProfile = () => {
                                               </ul>
                                               {/* <ul className="text-sm text-[#999999] list-disc flex gap-10">
                                             date of end and start will also show in this span
-                                         
-                                        
+
+
                                         </ul> */}
                                           </div>
                                       </div>
@@ -403,32 +404,59 @@ const RemoForceProfile = () => {
                             <span className="text-2xl font-semibold">Projects</span>
                         </div>
                         <div className="flex flex-col gap-2 mt-4">
-                            {projects.map((item) => (
-                                <div
-                                    key={Math.random()}
-                                    className="mt-2 flex w-full p-2 items-center space-x-4"
-                                >
-                                    <img src={item.icon} className="w-8 self-start" alt="" />
-                                    <div className="flex flex-col space-y-1">
-                                        <div className="flex space-x-4 items-center">
-                                            <span className="font-semibold text-base">
-                                                {item.name}{' '}
-                                            </span>
-                                            <span className="text-[#999999] bg-[#E5E5E566] text-xs p-1 rounded-lg">
-                                                {item.job_type}
-                                            </span>
+                            {remoProfile?.projectDetails?.length ? (
+                                remoProfile?.projectDetails?.map((item) => (
+                                    <div
+                                        key={Math.random()}
+                                        className="mt-2 flex w-full p-2 items-start space-x-4"
+                                    >
+                                        <div>
+                                            <FcStumbleupon className="text-3xl" />
                                         </div>
-                                        <ul className="text-sm text-[#999999] list-disc flex flex-col gap-y-2">
-                                            <span>{item.duration}</span>
-                                            <span className="font-semibold">
-                                                {item.description}
-                                            </span>
-                                            {/* <li>hello</li>
-                                                    <li>hello</li> */}
-                                        </ul>
+                                        <div className="flex flex-col space-y-1">
+                                            <div className="flex space-x-4 items-center">
+                                                <span className="font-semibold text-base">
+                                                    {item?.projectName}{' '}
+                                                </span>
+                                                <span className="text-[#999999] bg-[#E5E5E566] text-xs p-1 rounded-lg">
+                                                    {item?.projectType}
+                                                </span>
+                                            </div>
+                                            <ul className="text-sm text-[#999999]  flex flex-col gap-y-2">
+                                                <li className="">
+                                                    <div className="flex gap-3">
+                                                        <span>{item?.projectLink}</span>
+                                                        <span>•</span>
+                                                        <span>
+                                                            {getProjectDuration(
+                                                                item?.startingDate,
+                                                                item?.endingDate
+                                                            )}
+                                                        </span>
+                                                        <span>•</span>
+                                                        <span className="text-[#999999]  text-sm">
+                                                            {convertProjectDate(item?.startingDate)}
+                                                        </span>
+                                                        <span className="text-[#999999] font-semibold ">
+                                                            -
+                                                        </span>
+                                                        <span className="text-[#999999]  text-sm">
+                                                            {convertProjectDate(item?.endingDate)}
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <span className="font-semibold">
+                                                        {item.projectDescription}
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <p>No Projects Added</p>
+                            )}
                         </div>
                     </div>
                     {/* Language */}

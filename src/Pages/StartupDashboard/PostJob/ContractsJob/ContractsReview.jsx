@@ -17,7 +17,9 @@ import AuthContext from '../../../../Context/AuthContext';
 const ContractsReview = () => {
     const location = useLocation();
     const navigate = useNavigate();
-
+    const data = location?.state && location?.state?.data;
+    const path = location.pathname.split('/');
+    const review = path[path.length - 1];
     const storedJob = location?.state && location?.state?.data;
     const { user } = useSelector((state) => state.auth);
     const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
@@ -246,24 +248,27 @@ const ContractsReview = () => {
 
             {/* gig post and edit button */}
 
-            <div className="flex justify-center gap-4 mt-10">
-                <button type="button" onClick={handlePost}>
-                    <label
-                        htmlFor="postConfirmation"
-                        className="px-6 py-3 lg:px-10 lg:py-5 bg-[#0B132A] rounded-md text-white cursor-pointer"
-                    >
-                        Post Contract Job
-                    </label>
-                </button>
+            {review === 'review' && (
+                <div className="flex justify-center gap-4 mt-10">
+                    <button type="button" onClick={handlePost}>
+                        <label
+                            htmlFor="postConfirmation"
+                            className="px-6 py-3 lg:px-10 lg:py-5 bg-[#0B132A] rounded-md text-white cursor-pointer"
+                        >
+                            Post Contract Job
+                        </label>
+                    </button>
 
-                <button
-                    onClick={handleEdit}
-                    type="button"
-                    className="px-6 py-3 lg:px-10 lg:py-5 border-2 border-[#0B132A]  rounded-md text-black"
-                >
-                    Edit
-                </button>
-            </div>
+                    <button
+                        onClick={handleEdit}
+                        type="button"
+                        className="px-6 py-3 lg:px-10 lg:py-5 border-2 border-[#0B132A]  rounded-md text-black"
+                    >
+                        Edit
+                    </button>
+                </div>
+            )}
+
             {/* {contractsJob && (
                 <FinalConfirmation
                     storedJob={storedJob}
