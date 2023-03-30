@@ -144,7 +144,7 @@ const router = createBrowserRouter(
                 <Route path="/dashboard/post-job/contracts" element={<Contracts />} />
                 <Route path="/dashboard/post-job/edit/contracts" element={<Contracts />} />
                 <Route path="/dashboard/post-job/contracts/review" element={<ContractsReview />} />
-
+                <Route path="/dashboard/contracts/:id" element={<ContractsReview />} />
                 {/* view application */}
             </Route>
 

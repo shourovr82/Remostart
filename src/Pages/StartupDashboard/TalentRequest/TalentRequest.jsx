@@ -1,5 +1,6 @@
 import React from 'react';
 import headingIcon from '../../../Assets/Dashboard/talentRequest/headingIcon.svg';
+import TalentCards from './TalentCards';
 import TalentRequestBanner from './TalentRequestBanner';
 
 const TalentRequest = () => {
@@ -15,10 +16,13 @@ const TalentRequest = () => {
                 </h1>
             </div>
 
-            {/* heading */}
-
+            {/* banner */}
             <div>
                 <TalentRequestBanner />
+            </div>
+            {/* card */}
+            <div>
+                <TalentCards />
             </div>
         </section>
     );

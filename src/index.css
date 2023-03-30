@@ -525,3 +525,11 @@ input[type=number] {
     box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     border-color: transparent !important;
 }
+
+
+/* talent request  */
+.talentRequestBanner{
+  background-image: url(./Assets/Dashboard/talentRequest/bannerPhoto.svg);
+background-size: auto;
+background-position: top;
+}

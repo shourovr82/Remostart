@@ -45,6 +45,7 @@ const AllJobs = () => {
 
     // /dashboard/post-job/public-job/:id
     const viewHandler = (item) => {
+        console.log(item);
         const path = item?.categoryName?.toLowerCase().replace(/\s+/g, '-');
 
         path === 'public-job' &&
@@ -54,6 +55,9 @@ const AllJobs = () => {
             navigate(`/dashboard/private/${item.jobId}`, { state: { data: item } });
         path === 'internship' &&
             navigate(`/dashboard/internship/${item.jobId}`, { state: { data: item } });
+
+        path === 'contracts' &&
+            navigate(`/dashboard/contracts/${item.jobId}`, { state: { data: item } });
     };
 
     return (
