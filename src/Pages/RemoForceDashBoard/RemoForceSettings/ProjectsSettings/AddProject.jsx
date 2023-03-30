@@ -65,14 +65,14 @@ function AddProject() {
         <RemoForceSettingsItems>
             <section className="w-full mt-6 ">
                 {/* Experience section  starts */}
-                <div className="bg-[#F0F9FFBF] w-[70%] flex flex-col p-[0.5rem] rounded-md">
+                <div className="bg-[#F0F9FFBF] lg:w-[70%] flex flex-col p-[0.5rem] rounded-md">
                     <div className="w-[14rem] p-2 mb-4">
                         <h1 className="text-black font-sans font-semibold text-2xl w-[89%]">
                             Projects
                         </h1>
                     </div>
                     {/* Experience List Display starts */}
-                    <div className="mt-4 flex flex-col w-full">
+                    <div className="mt-4 flex   flex-col w-full">
                         {/* edit experience */}
 
                         {/* edit experience end */}
@@ -81,12 +81,12 @@ function AddProject() {
                         {projectsLists.length ? (
                             projectsLists?.map((item) => (
                                 <div
-                                    className="border-b-2 flex justify-start items-start p-[1rem]"
+                                    className="border-b-2 flex justify-start items-start lg:p-[1rem] p-[.6rem] "
                                     key={Math.random()}
                                 >
-                                    <SiWorkplace className="text-xl mr-4" />
+                                    <SiWorkplace className="text-xl max-md:hidden mr-4" />
                                     <div className=" ">
-                                        <div className="  flex  gap-5 items-center">
+                                        <div className=" flex  gap-5 items-center">
                                             <div className="flex  justify-between items-center ">
                                                 <h1 className="font-semibold text-md ">
                                                     {item.projectName}
@@ -106,8 +106,9 @@ function AddProject() {
                                                 <FiEdit className="text-[#999999] text-xl ml-2" />
                                             </div>
                                         </div>
-                                        <div className="w-full flex gap-2.5 items-center mt-3">
-                                            <p className="text-[#999999]  no-wrap text-sm">
+
+                                        <div className="w-full  flex gap-2.5 items-center mt-3">
+                                            <p className=" text-[#999999]  no-wrap text-sm">
                                                 {item.projectLink}
                                             </p>
                                             <span className="text-[#999999]">∙</span>
@@ -121,7 +122,7 @@ function AddProject() {
                                             <p className="text-[#999999]  text-sm">
                                                 {convertProjectDate(item?.startingDate)}
                                             </p>
-                                            <span className="text-[#999999] font-semibold ">∙</span>
+                                            <span className="text-[#999999] font-semibold ">-</span>
                                             <p className="text-[#999999]  text-sm">
                                                 {convertProjectDate(item?.endingDate)}
                                             </p>

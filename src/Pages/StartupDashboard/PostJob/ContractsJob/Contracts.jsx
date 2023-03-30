@@ -2,13 +2,13 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { BiChevronLeft, BiPlus } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import currencyIcon from '../../../../Assets/Dashboard/currency.png';
-import { getStoredJob, setJob } from '../../../../Hooks/useLocalStorage';
+import { setJob } from '../../../../Hooks/useLocalStorage';
 
 const Contracts = () => {
     // const [storedJob, setStoredJob] = useState({});
@@ -34,7 +34,7 @@ const Contracts = () => {
 
     // perks state
     const [deliverables, setDeliverables] = useState('');
-    const [deliverablesItems, setDeliverablesItems] = useState(storedJob?.deliverablesItems || []);
+    const [deliverablesItems, setDeliverablesItems] = useState(storedJob?.joiningPerks || []);
 
     // handle perk
     const changeDeliverablesHandler = (e) => {
@@ -143,7 +143,7 @@ const Contracts = () => {
                 )
                 .then((res) => {
                     if (res.data._id) {
-                        toast.success('Contracts job posted successfully');
+                        toast.success('Contracts job data added to review');
                         setLoading(false);
                         navigate('/dashboard/post-job/contracts/review', {
                             state: { data: res.data },
@@ -161,7 +161,7 @@ const Contracts = () => {
                 .post(`${process.env.REACT_APP_URL_STARTUP}/api/job/contracts`, formData)
                 .then((res) => {
                     if (res.data._id) {
-                        toast.success('Contracts job posted successfully');
+                        toast.success('Contracts job data edited successfully');
                         setLoading(false);
                         navigate('/dashboard/post-job/contracts/review', {
                             state: { data: res.data },

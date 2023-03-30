@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { BsCalendarRange } from 'react-icons/bs';
@@ -15,16 +16,19 @@ import { toast } from 'react-toastify';
 import image from '../../../Assets/Verification/Image.png';
 import { getFileSize } from '../../../Utilities/FileSize';
 
+import 'react-datepicker/dist/react-datepicker.css';
+
 const GeneralSettingsForNonRegistered = () => {
     const { user } = useSelector((state) => state.auth);
 
     const [error, setError] = useState();
     const [domain, setDomain] = useState(null);
     const [files, setFile] = useState();
-
     const [file, setFiles] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const [selectedDay, setSelectedDay] = useState(null);
+    const selectDate = `${selectedDay?.day}-${selectedDay?.month}-${selectedDay?.year}`;
 
     // Initialize use form from react hook form
     const {
@@ -108,7 +112,7 @@ const GeneralSettingsForNonRegistered = () => {
                     country: data.aboutCountry,
                     PIN: data.pinCode,
                     incubatedAt: data.Incubated,
-                    registrationDate: data.registrationDate,
+                    registrationDate: '',
                     gstinNumber: data.GSTINNumber,
                     registeredName: data.RegisteredName,
                     registered: false,
@@ -160,9 +164,8 @@ const GeneralSettingsForNonRegistered = () => {
         const updatedFiles = allFiles.filter((item) => item !== f);
         setAllFiles(updatedFiles);
     };
-
-    const [selectedDate, setSelectedDate] = useState(null);
-
+    console.log(selectDate);
+    const [startDate, setStartDate] = useState(new Date());
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {/* StartUp Form for Non-registered Start-up Starts */}
@@ -216,6 +219,12 @@ const GeneralSettingsForNonRegistered = () => {
                                 <div>
                                     <BsCalendarRange />
                                 </div>
+                                <DatePicker
+                                    className="border-transparent border focus:ring-transparent"
+                                    showIcon
+                                    selected={startDate}
+                                    onChange={(date) => setStartDate(date)}
+                                />
                                 {/* <input
                                     type="date"
                                     name="SelectDate"
@@ -231,15 +240,12 @@ const GeneralSettingsForNonRegistered = () => {
                                     className=" w-full outline-none  border-0 px-4 rounded-md focus:border-opacity-0  text-gray-900 "
                                 /> */}
                             </div>
-                            {/* <div>
-                                shafin
-                                <DatePicker
-                                    selected={selectedDate}
-                                    onChange={(date) => setSelectedDate(date)}
-                                    dateFormat="MM/dd/yyyy"
-                                    maxDate={new Date()}
-                                />
-                            </div> */}
+                            {/* <Calendar
+                                value={selectedDay}
+                                onChange={setSelectedDay}
+                                shouldHighlightWeekends
+                            /> */}
+
                             {/* Registration Date input ERROR Starts */}
 
                             <p className="py-2">
