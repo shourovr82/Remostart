@@ -1,9 +1,11 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { GoDiffAdded } from 'react-icons/go';
 import { SiWorkplace } from 'react-icons/si';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import RemoForceSettingsItems from '../../../../Routes/Roots/RemoforceSettingItems';
 import { convertProjectDate, getProjectDuration } from '../../../../Utilities/projectDateFormater';
 import AddProjectForm from './AddProjectForm';
@@ -27,36 +29,36 @@ function AddProject() {
 
     // submit
     const handleSubmitDetails = async () => {
-        // setLoading(true);
-        // if (!projectsLists.length) {
-        //     toast.error('Minimum 1 work experience required, Please add one or more');
-        //     return;
-        // }
+        setLoading(true);
+        if (!projectsLists.length) {
+            toast.error('Minimum 1 work experience required, Please add one or more');
+            return;
+        }
 
         const bodyData = {
-            experienceDetails: projectsLists,
+            projectDetails: projectsLists,
             email: user?.user?.email,
         };
         console.log(bodyData);
 
-        // await axios
-        //     .put(
-        //         `${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-settings-experience`,
-        //         bodyData
-        //     )
-        //     .then((res) => {
-        //         if (res.data.modifiedCount || res.data.upsertedCount) {
-        //             toast.success('Experience data updated successfully');
-        //             setLoading(false);
-        //             navigate('/remoforce-dashboard/account-settings');
-        //         }
+        await axios
+            .put(
+                `${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-settings-projects`,
+                bodyData
+            )
+            .then((res) => {
+                if (res.data.modifiedCount || res.data.upsertedCount) {
+                    toast.success('Projects data updated successfully');
+                    setLoading(false);
+                    navigate('/remoforce-dashboard/account-settings');
+                }
 
-        //         console.log(res);
-        //     })
-        //     .catch((err) => {
-        //         setLoading(false);
-        //         console.log(err);
-        //     });
+                console.log(res);
+            })
+            .catch((err) => {
+                setLoading(false);
+                console.log(err);
+            });
         console.log(projectsLists);
     };
     console.log(projectsLists);
