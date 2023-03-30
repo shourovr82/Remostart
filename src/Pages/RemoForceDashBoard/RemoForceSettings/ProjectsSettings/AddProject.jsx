@@ -143,7 +143,15 @@ function AddProject() {
 
                 <hr className="w-full bg-hr my-3" />
 
-                {editMode && <EditProject setEditMode={setEditMode} editData={editData} />}
+                {editMode && (
+                    <EditProject
+                        
+                        setEditMode={setEditMode}
+                        setProjectsLists={setProjectsLists}
+                        projectsLists={projectsLists}
+                        editData={editData}
+                    />
+                )}
 
                 {/* Add Experience section  starts */}
                 <div className="bg-[#F0F9FFBF] rounded-md w-full flex flex-col p-[0.5rem]">

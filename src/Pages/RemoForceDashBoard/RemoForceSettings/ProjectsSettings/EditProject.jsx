@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-const EditProject = ({ editData, setEditMode }) => {
+const EditProject = ({ editData, setProjectsLists, projectsLists, setEditMode }) => {
     const [padding, setPadding] = useState(false);
     // get values
     const { projectName, endingDate, projectLink, projectDescription, startingDate, projectType } =
@@ -22,8 +22,19 @@ const EditProject = ({ editData, setEditMode }) => {
         { name: 'Android' },
     ];
 
-    const handleUpdate = (updatedData) => {
-        console.log('updatedData', updatedData);
+    const handleUpdate = (data) => {
+        const getProject = projectsLists.filter(
+            (singleProject) => singleProject.id !== editData.id
+        );
+        console.log(getProject);
+        const updatedData = {
+            id: editData?.id,
+            ...data,
+        };
+        const updatedArr = [...getProject, updatedData];
+        setProjectsLists(updatedArr);
+
+        setEditMode(false);
     };
 
     return (

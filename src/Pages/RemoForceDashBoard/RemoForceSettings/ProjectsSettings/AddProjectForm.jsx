@@ -21,7 +21,8 @@ const AddProjectForm = ({ setProjectsLists, setBool, projectsLists }) => {
     ];
     const handleAddProject = (data) => {
         if (data) {
-            setProjectsLists([...projectsLists, data]);
+            const newData = { ...data, id: Math.random() };
+            setProjectsLists([...projectsLists, newData]);
             reset();
             setBool(false);
         }
