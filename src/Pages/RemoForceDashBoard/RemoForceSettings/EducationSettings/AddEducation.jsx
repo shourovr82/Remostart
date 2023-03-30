@@ -28,13 +28,10 @@ function AddEducation() {
         setBool(false);
     };
 
-
     const submitEducation = async () => {
-        setLoading(true)
+        setLoading(true);
         if (!allEducationLists.length) {
             toast.error('Add Education First');
-
- 
         }
 
         const bodyData = {

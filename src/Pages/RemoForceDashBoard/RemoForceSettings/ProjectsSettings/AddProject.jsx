@@ -145,7 +145,6 @@ function AddProject() {
 
                 {editMode && (
                     <EditProject
-                        
                         setEditMode={setEditMode}
                         setProjectsLists={setProjectsLists}
                         projectsLists={projectsLists}

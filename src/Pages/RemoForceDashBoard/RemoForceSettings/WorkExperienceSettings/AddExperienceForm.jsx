@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
 
 function AddExperienceForm({ setWorkExperienceLists, setBool, workExperienceLists }) {
     // Initialize use form hook
@@ -13,8 +12,6 @@ function AddExperienceForm({ setWorkExperienceLists, setBool, workExperienceList
         mode: 'onChange',
     });
 
-    const [padding, setPadding] = useState(false);
-
     // typeLists
     const typeLists = [
         { name: 'Internship' },
@@ -23,10 +20,12 @@ function AddExperienceForm({ setWorkExperienceLists, setBool, workExperienceList
         { name: 'Remote' },
     ];
     const httpAddWorkExperience = (data) => {
-        console.log(data);
         if (data) {
-            setWorkExperienceLists([...workExperienceLists, data]);
-            toast.success('Successfully added a Work Experience');
+            const experienceData = {
+                ...data,
+                id: Math.random(),
+            };
+            setWorkExperienceLists([...workExperienceLists, experienceData]);
             reset();
             setBool(false);
         }

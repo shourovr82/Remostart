@@ -130,7 +130,14 @@ function AddExperience() {
 
                 <hr className="w-full bg-hr my-3" />
 
-                {editMode && <EditExperience setEditMode={setEditMode} editData={editData} />}
+                {editMode && (
+                    <EditExperience
+                        setEditMode={setEditMode}
+                        setWorkExperienceLists={setWorkExperienceLists}
+                        workExperienceLists={workExperienceLists}
+                        editData={editData}
+                    />
+                )}
 
                 {/* Add Experience section  starts */}
                 <div className="bg-[#F0F9FFBF] w-full flex flex-col p-[0.5rem]">
