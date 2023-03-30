@@ -70,10 +70,10 @@ const EditProject = ({ editData, setEditMode }) => {
                                 id="projectLink"
                                 {...register('projectLink', {
                                     required: 'Project Link is Required',
-                                    pattern: {
-                                        value: /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?\/?$/,
-                                        message: 'Url is not valid',
-                                    },
+                                    // pattern: {
+                                    //     value: /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?\/?$/,
+                                    //     message: 'Url is not valid',
+                                    // },
                                 })}
                                 defaultValue={projectLink}
                                 type="text"
