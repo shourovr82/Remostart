@@ -461,7 +461,7 @@ const Contracts = () => {
                             {...register('startingDate', {
                                 required: true,
                             })}
-                            defaultValue={storedJob?.startingDate}
+                            defaultValue={storedJob?.startingDate?.slice(0, 10)}
                             id="startingDate"
                             className="lg:w-[330px] w-full px-4 py-3 rounded-md border border-[#e5e7eb]  text-gray-900 "
                         />
@@ -482,7 +482,7 @@ const Contracts = () => {
                             {...register('endingDate', {
                                 required: true,
                             })}
-                            defaultValue={storedJob?.endingDate}
+                            defaultValue={storedJob?.endingDate?.slice(0, 10)}
                             id="applyBefore"
                             className="lg:w-[330px] w-full px-4 py-3 rounded-md border border-[#e5e7eb]  text-gray-900 "
                         />
@@ -505,7 +505,7 @@ const Contracts = () => {
                         {...register('applyBefore', {
                             required: true,
                         })}
-                        defaultValue={storedJob?.applyBefore}
+                        defaultValue={storedJob?.applyBefore?.slice(0, 10)}
                         id="applyBefore"
                         className="lg:w-[330px] w-full px-4 py-3 rounded-md border border-[#e5e7eb]  text-gray-900 "
                     />

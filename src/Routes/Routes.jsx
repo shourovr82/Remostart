@@ -33,6 +33,7 @@ import RemoForceProfile from '../Pages/RemoForceDashBoard/RemoForceProfile/RemoF
 import RemoforceSettings from '../Pages/RemoForceDashBoard/RemoForceSetting/RemoForceSettings';
 import AccountSettings from '../Pages/RemoForceDashBoard/RemoForceSettings/AccountManagementSettings/AccountSettings';
 import AddEducation from '../Pages/RemoForceDashBoard/RemoForceSettings/EducationSettings/AddEducation';
+import AddProject from '../Pages/RemoForceDashBoard/RemoForceSettings/ProjectsSettings/AddProject';
 import SkillAndPreferenceSettings from '../Pages/RemoForceDashBoard/RemoForceSettings/SkillAndPreferenceSettings';
 import AddExperience from '../Pages/RemoForceDashBoard/RemoForceSettings/WorkExperienceSettings/AddExperience';
 import RemoForceVerify from '../Pages/RemoForceDashBoard/RemoForceVerify/RemoForceVerify';
@@ -54,7 +55,7 @@ import Settings from '../Pages/StartupDashboard/Settings/Settings';
 import SettingsGeneral from '../Pages/StartupDashboard/Settings/SettingsGeneral';
 import GeneralSettingsVerification from '../Pages/StartupDashboard/Settings/SettingsGeneral/GeneralSettingsVerification';
 import SettingsProfile from '../Pages/StartupDashboard/Settings/SettingsProfile';
-import TalentRequest from '../Pages/StartupDashboard/TalentRequest';
+import TalentRequest from '../Pages/StartupDashboard/TalentRequest/TalentRequest';
 import StartupHome from '../Pages/StartupPages/StartupHome';
 import StartupSignUp from '../Pages/StartupPages/StartupSignUp';
 import StartupWelcomePage from '../Pages/StartupPages/StartupWelcomePage';
@@ -65,7 +66,6 @@ import RemoForceRoute from './RemoforceRoute';
 import DashboardHome from './Roots/DashboardHome';
 import RemoForceDashboardRoot from './Roots/RemoForceDashBoardRoot';
 import StartupRoute from './StartupRoute';
-import AddProject from '../Pages/RemoForceDashBoard/RemoForceSettings/ProjectsSettings/AddProject';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
