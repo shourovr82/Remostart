@@ -1,24 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { BiBookmarks, BiUser } from 'react-icons/bi';
 import { FaRegClock } from 'react-icons/fa';
 import { GiSandsOfTime } from 'react-icons/gi';
 import { GoLocation } from 'react-icons/go';
 import { HiOutlineClipboardDocumentList } from 'react-icons/hi2';
 import { RiShareForwardLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+
+import { toast } from 'react-toastify';
 import contractLogo from '../../../../Assets/Dashboard/post_job/InternshipLogo.png';
 
 import FinalConfirmation from '../../../../Modal/ConfirmationModal/FinalConfirmation';
 
-const ContractsReview = () => {
-    const [contractsJob, setContractsJob] = useState(false);
+import AuthContext from '../../../../Context/AuthContext';
 
-    const getStoredItem = (key) => JSON.parse(localStorage.getItem('contracts')) || {};
-    const storedJob = getStoredItem();
+const ContractsReview = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const storedJob = location?.state && location?.state?.data;
+    const { user } = useSelector((state) => state.auth);
+    const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
+
+    // const { data: storedJob, refetch } = useQuery(['items'], () =>
+    //     axios
+    //         .get(
+    //             `${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${
+    //                 user?.user?.email || serviceUser?.email
+    //             }`
+    //         )
+    //         .then((res) => res.data)
+    // );
+
     const handlePost = () => {
-        setContractsJob(true);
-        console.log(storedJob);
+        toast.success('Contracts Job Posted successfully');
+        navigate('/dashboard');
     };
+    const handleEdit = () => {
+   
+        navigate('/dashboard/post-job/edit/contracts', { state: { data: storedJob } });
+    };
+
+    // console.log(storedJob?.contractsPaper.split('/')[3]);
+    console.log(storedJob);
+    
 
     return (
         <div className="w-full">
@@ -118,8 +147,8 @@ const ContractsReview = () => {
                             <hr className="h-[3px] bg-[#19A5FF]  w-2/3 lg:w-2/5" />
                             {/* Deliverable Skills */}
                             <div className=" mb-4 mt-[10px] grid grid-cols-2 lg:grid-cols-4 lg:flex items-center gap-[10px]">
-                                {storedJob?.deliverablesItems.length &&
-                                    storedJob?.deliverablesItems.map((items) => (
+                                {storedJob?.joiningPerks.length &&
+                                    storedJob?.joiningPerks.map((items) => (
                                         <p
                                             key={Math.random()}
                                             className="py-2 px-6 bg-[#F0F9FF] rounded-md font-semibold "
@@ -145,8 +174,8 @@ const ContractsReview = () => {
                                         <HiOutlineClipboardDocumentList className="text-2xl" />
                                     </span>
                                     <span>
-                                        {storedJob?.contractsPaper?.length &&
-                                            storedJob?.contractsPaper[0]?.path}
+                                        {storedJob?.contractsPaper &&
+                                            storedJob?.contractsPaper.split('/')[3]}
                                     </span>
                                 </button>
                             </div>
@@ -161,7 +190,10 @@ const ContractsReview = () => {
                             <div className="flex flex-wrap gap-2">
                                 {storedJob?.skills?.length &&
                                     storedJob?.skills.map((skill) => (
-                                        <p className="text-sm bg-[#F0F9FF] rounded-md px-1.5 py-1 ">
+                                        <p
+                                            key={Math.random()}
+                                            className="text-sm bg-[#F0F9FF] rounded-md px-1.5 py-1 "
+                                        >
                                             Front-End Developer
                                         </p>
                                     ))}
@@ -228,22 +260,23 @@ const ContractsReview = () => {
                     </label>
                 </button>
 
-                <Link to="/dashboard/post-job/contracts">
+             
                     <button
+                        onClick={handleEdit}
                         type="button"
                         className="px-6 py-3 lg:px-10 lg:py-5 border-2 border-[#0B132A]  rounded-md text-black"
                     >
                         Edit
                     </button>
-                </Link>
+            
             </div>
-            {contractsJob && (
+            {/* {contractsJob && (
                 <FinalConfirmation
                     storedJob={storedJob}
                     setConfirmPost={setContractsJob}
                     paths="contracts"
                 />
-            )}
+            )} */}
         </div>
     );
 };

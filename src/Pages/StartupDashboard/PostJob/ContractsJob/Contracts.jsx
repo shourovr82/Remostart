@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
@@ -9,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import currencyIcon from '../../../../Assets/Dashboard/currency.png';
-import { getStoredJob } from '../../../../Hooks/useLocalStorage';
+import { getStoredJob, setJob } from '../../../../Hooks/useLocalStorage';
 
 const Contracts = () => {
     // const [storedJob, setStoredJob] = useState({});
@@ -21,9 +20,12 @@ const Contracts = () => {
     const path = location.pathname.split('/');
     const jobName = path[path.length - 1];
 
+    const isEdit = path.includes('edit');
+
     const categoryName = jobName.replace(/-/g, ' ').replace(/\b[a-z]/g, (c) => c.toUpperCase());
 
-    const storedJob = getStoredJob(jobName);
+    // const storedJob = getStoredJob(jobName);
+    const storedJob = location?.state && location?.state?.data;
     const { user } = useSelector((state) => state.auth);
     const [skills, setSkills] = useState(storedJob?.skills || []);
 
@@ -110,7 +112,7 @@ const Contracts = () => {
 
     // data posting to ls
     const onSubmit = async (data) => {
-        setLoading(true)
+        setLoading(true);
         const jobData = {
             ...data,
             email: user?.user.email,
@@ -123,40 +125,62 @@ const Contracts = () => {
         };
         // const fileDeep = _.cloneDeep(file);
         // console.log(fileDeep);
-
+        setJob(jobName, jobData);
         const formData = new FormData();
 
         formData.append('obj', JSON.stringify(jobData));
-        const contractsFile = file[0];
+        const contractsFile = file && file[0];
 
         formData.append('contractsPaper', contractsFile);
 
         console.log(...formData);
-        await axios
-            .put(
-                `${process.env.REACT_APP_URL_STARTUP}/api/job/contracts`,
-                formData
-            )
-            .then((res) => {
-                if (res.data.modifiedCount || res.data.upsertedCount) {
-                    toast.success('profile data updated successfully');
+
+        if (isEdit) {
+            await axios
+                .put(
+                    `${process.env.REACT_APP_URL_STARTUP}/api/job/contracts/${storedJob._id}`,
+                    formData
+                )
+                .then((res) => {
+                    if (res.data._id) {
+                        toast.success('Contracts job posted successfully');
+                        setLoading(false);
+                        navigate('/dashboard/post-job/contracts/review', {
+                            state: { data: res.data },
+                        });
+                    }
+
+                    console.log(res);
+                })
+                .catch((err) => {
                     setLoading(false);
-                    navigate('/remoforce-dashboard/skill-preference');
-                }
+                    console.log(err);
+                });
+        } else {
+            await axios
+                .post(`${process.env.REACT_APP_URL_STARTUP}/api/job/contracts`, formData)
+                .then((res) => {
+                    if (res.data._id) {
+                        toast.success('Contracts job posted successfully');
+                        setLoading(false);
+                        navigate('/dashboard/post-job/contracts/review', {
+                            state: { data: res.data },
+                        });
+                    }
 
-                console.log(res);
-            })
-            .catch((err) => {
-                setLoading(false);
-                console.log(err);
-            });
+                    console.log(res);
+                })
+                .catch((err) => {
+                    setLoading(false);
+                    console.log(err);
+                });
+        }
 
-        // setJob(jobName, jobData);
         // navigate('/dashboard/post-job/contracts/review');
-        const jobDataString = JSON.stringify(jobData);
+        // const jobDataString = JSON.stringify(jobData);
 
         // Store the jobData in localStorage
-        localStorage.setItem('jobData', jobDataString);
+        // localStorage.setItem('jobData', jobDataString);
         // const reader = new FileReader();
         // reader.onload = () => {
         //   const fileData = {
@@ -174,9 +198,6 @@ const Contracts = () => {
     //     const fileData = JSON.parse(fileDataString);
     //     const { name, type, size, dataUrl } = fileData;
     //     const files = new File([dataUrl], name, { type, lastModified: Date.now() });
-
-    //  console.log(files);
-    //    }
 
     return (
         <div>
@@ -624,12 +645,21 @@ const Contracts = () => {
 
                 {/* Submit Button  */}
 
-                <button
-                    type="submit"
-                    className="px-6 py-3 mt-10 lg:px-10 lg:py-5 bg-[#0B132A] text-white text-xs font-semibold rounded-md"
-                >
-                    Post Contract Job
-                </button>
+                {isEdit ? (
+                    <button
+                        type="submit"
+                        className="px-6 py-3 mt-10 lg:px-10 lg:py-5 bg-[#0B132A] text-white text-xs font-semibold rounded-md"
+                    >
+                        Edit Contract Job
+                    </button>
+                ) : (
+                    <button
+                        type="submit"
+                        className="px-6 py-3 mt-10 lg:px-10 lg:py-5 bg-[#0B132A] text-white text-xs font-semibold rounded-md"
+                    >
+                        Review Contract Job
+                    </button>
+                )}
             </form>
         </div>
     );
