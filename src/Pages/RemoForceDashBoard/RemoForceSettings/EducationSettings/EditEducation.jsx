@@ -2,7 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 // import RemoForceSettingsItems from '../../../../Layout/RemoForceSettingsItems';
 
-function EditEducation({ setEditEducationMode, allEducationLists, editEducationItem }) {
+function EditEducation({
+    setEditEducationMode,
+    allEducationLists,
+    editEducationItem,
+    setAllEducationLists,
+}) {
     const { id, fieldOfStudy, school, startingDate, endingDate } = editEducationItem || {};
     const {
         register,
@@ -11,8 +16,15 @@ function EditEducation({ setEditEducationMode, allEducationLists, editEducationI
     } = useForm({ mode: 'onChange' });
 
     const httpAddEducationExperience = (data) => {
-        console.log(data);
-        console.log(allEducationLists);
+        const getEducation = allEducationLists.filter(
+            (singleEducation) => singleEducation.id !== editEducationItem.id
+        );
+        const updatedData = {
+            id: editEducationItem?.id,
+            ...data,
+        };
+        const updatedArr = [...getEducation, updatedData];
+        setAllEducationLists(updatedArr);
         setEditEducationMode(false);
     };
     return (

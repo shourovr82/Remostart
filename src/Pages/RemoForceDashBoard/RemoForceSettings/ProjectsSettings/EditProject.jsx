@@ -26,14 +26,12 @@ const EditProject = ({ editData, setProjectsLists, projectsLists, setEditMode })
         const getProject = projectsLists.filter(
             (singleProject) => singleProject.id !== editData.id
         );
-        console.log(getProject);
         const updatedData = {
             id: editData?.id,
             ...data,
         };
         const updatedArr = [...getProject, updatedData];
         setProjectsLists(updatedArr);
-
         setEditMode(false);
     };
 
