@@ -1,20 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BiBookmarks, BiUser } from 'react-icons/bi';
 import { FaRegClock } from 'react-icons/fa';
 import { GiSandsOfTime } from 'react-icons/gi';
 import { GoLocation } from 'react-icons/go';
 import { HiOutlineClipboardDocumentList } from 'react-icons/hi2';
 import { RiShareForwardLine } from 'react-icons/ri';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 import { toast } from 'react-toastify';
 import contractLogo from '../../../../Assets/Dashboard/post_job/InternshipLogo.png';
 
-import FinalConfirmation from '../../../../Modal/ConfirmationModal/FinalConfirmation';
 
 import AuthContext from '../../../../Context/AuthContext';
 
@@ -41,13 +38,11 @@ const ContractsReview = () => {
         navigate('/dashboard');
     };
     const handleEdit = () => {
-   
         navigate('/dashboard/post-job/edit/contracts', { state: { data: storedJob } });
     };
 
     // console.log(storedJob?.contractsPaper.split('/')[3]);
     console.log(storedJob);
-    
 
     return (
         <div className="w-full">
@@ -260,15 +255,13 @@ const ContractsReview = () => {
                     </label>
                 </button>
 
-             
-                    <button
-                        onClick={handleEdit}
-                        type="button"
-                        className="px-6 py-3 lg:px-10 lg:py-5 border-2 border-[#0B132A]  rounded-md text-black"
-                    >
-                        Edit
-                    </button>
-            
+                <button
+                    onClick={handleEdit}
+                    type="button"
+                    className="px-6 py-3 lg:px-10 lg:py-5 border-2 border-[#0B132A]  rounded-md text-black"
+                >
+                    Edit
+                </button>
             </div>
             {/* {contractsJob && (
                 <FinalConfirmation

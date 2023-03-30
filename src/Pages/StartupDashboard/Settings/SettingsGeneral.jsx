@@ -248,7 +248,6 @@ const SettingsGeneral = () => {
                                     <div className="space-y-1 text-sm">
                                         <label className="block font-semibold text-gray-900">
                                             {/* startup Name */}
-
                                             Startup Name
                                         </label>
                                         <input
