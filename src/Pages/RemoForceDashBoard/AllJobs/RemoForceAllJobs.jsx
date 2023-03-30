@@ -4,8 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
 import { AiOutlineFileDone } from 'react-icons/ai';
-import { BsThreeDots } from 'react-icons/bs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import RemoForceDashBoardItems from '../../../Routes/Roots/RemoForceDashBoardItems';
 import NoJob from '../../StartupDashboard/DashboardPages/NoJob';
 
@@ -39,7 +38,7 @@ const RemoForceAllJobs = () => {
                                     </div>
 
                                     {/* three dot option button */}
-                                    <div>
+                                    {/* <div>
                                         <div className="dropdown dropdown-bottom dropdown-end">
                                             <button type="button" className="p-1">
                                                 <label tabIndex={0} className="cursor-pointer">
@@ -68,7 +67,6 @@ const RemoForceAllJobs = () => {
                                                     </button>
                                                 </li>
 
-                                                {/* dynamic link should be here */}
                                                 <li>
                                                     <Link to="#" className="font-medium text-sm">
                                                         Details
@@ -76,12 +74,12 @@ const RemoForceAllJobs = () => {
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div>
-                                    <p className="text-start  text-base ">
+                                    <p className="text-start  text-sm ">
                                         {item?.description
-                                            ? `${item?.description?.slice(0, 100)}...`
+                                            ? `${item?.description?.slice(0, 100)}`
                                             : item?.description}
                                     </p>
                                 </div>

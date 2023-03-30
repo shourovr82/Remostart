@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BiBookmarks, BiUser } from 'react-icons/bi';
+import { BiBookmarks } from 'react-icons/bi';
 import { FaRegClock } from 'react-icons/fa';
 import { GiSandsOfTime } from 'react-icons/gi';
 import { GoLocation } from 'react-icons/go';
@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 
 import { toast } from 'react-toastify';
 import contractLogo from '../../../../Assets/Dashboard/post_job/InternshipLogo.png';
-
 
 import AuthContext from '../../../../Context/AuthContext';
 
@@ -106,7 +105,7 @@ const ContractsReview = () => {
                                         <span>
                                             <FaRegClock className="text-[#65DC7F] text-lg" />
                                         </span>
-                                        <span>{storedJob?.startingDate}</span>
+                                        <span>{storedJob?.startingDate.slice(0, 10)}</span>
                                     </p>
                                 </div>
                                 <div>
@@ -115,7 +114,7 @@ const ContractsReview = () => {
                                         <span>
                                             <FaRegClock className="text-[#F60C36] text-lg" />
                                         </span>
-                                        <span>{storedJob?.endingDate}</span>
+                                        <span>{storedJob?.endingDate.slice(0, 10)}</span>
                                     </p>
                                 </div>
                             </div>
@@ -215,7 +214,7 @@ const ContractsReview = () => {
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        {/* <div>
                             <h1 className="font-semibold text-[16px] mt-3 mb-3">
                                 Number of Applicants:
                             </h1>
@@ -227,7 +226,7 @@ const ContractsReview = () => {
                                     <p className="pr-[25px] ">34</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div>
                             <h1 className="font-semibold text-[16px] mt-3 mb-3">Apply Before:</h1>
                             <div className="">
@@ -235,7 +234,9 @@ const ContractsReview = () => {
                                     <p className="text-sm pl-[15px] py-[8px] ">
                                         <GiSandsOfTime className="text-red-500" />
                                     </p>
-                                    <p className="pr-[15px] font-bold ">{storedJob?.applyBefore}</p>
+                                    <p className="pr-[15px] font-bold ">
+                                        {storedJob?.applyBefore.slice(0, 10)}
+                                    </p>
                                 </div>
                             </div>
                         </div>
