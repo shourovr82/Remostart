@@ -127,11 +127,11 @@ const TalentCards = () => {
                                     `bg-[${item?.itemColor}] hover:bg-white hover:text-[#19a5ff] hover:border-[#19a5ff] border border-transparent text-white`
                                 }      ${
                                     item?.itemType === 'TEAM' &&
-                                    `hover:bg-[#ff9900] bg-white text-[#ff9900] border-[#ffc46b] border border-transparent hover:text-white`
+                                    `hover:bg-[#ff9900] bg-white text-[#ff9900] border-[#ffc46b] border hover:border-transparent hover:text-white`
                                 }
                                     ${
                                         item?.itemType === 'BUSINESS' &&
-                                        `hover:bg-[#ff3449] bg-white text-[#ff3449] border-[#ff3449] border border-transparent hover:text-white`
+                                        `hover:bg-[#ff3449] bg-white text-[#ff3449] border-[#ff3449] border hover:border-transparent hover:text-white`
                                     }
                                 rounded-lg py-1.5 2xl:px-8 px-5 duration-300 ease-in-out `}
                                 type="button"

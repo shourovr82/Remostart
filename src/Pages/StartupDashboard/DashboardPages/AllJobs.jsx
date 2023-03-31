@@ -58,6 +58,9 @@ const AllJobs = () => {
 
         path === 'contracts' &&
             navigate(`/dashboard/contracts/${item.jobId}`, { state: { data: item } });
+        path === 'shadowing' &&
+            navigate(`/dashboard/shadowing/${item.jobId}`, { state: { data: item } });
+        path === 'gigs' && navigate(`/dashboard/gigs/${item.jobId}`, { state: { data: item } });
     };
 
     return (
