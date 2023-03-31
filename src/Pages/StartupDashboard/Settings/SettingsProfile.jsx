@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { RiUser3Line } from 'react-icons/ri';
@@ -20,25 +20,36 @@ const SettingsProfile = () => {
     const { user } = useSelector((state) => state.auth);
     const [newArr, setNewArr] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [jData, setJData] = useState({});
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('/data.json');
+            const jsonData = await response.json();
+            setJData(jsonData);
+        }
+        fetchData();
+    }, []);
+    console.log(jData.Domains);
+    
 
-    const domainData = [
-        {
-            value: 'Mern Stack',
-            label: 'Mern Stack',
-        },
-        {
-            value: 'Tailwind CSS',
-            label: 'Tailwind CSS',
-        },
-        {
-            value: 'Javascript',
-            label: 'Javascript',
-        },
-        {
-            value: 'Node JS',
-            label: 'Node JS',
-        },
-    ];
+    // const domainData = [
+    //     {
+    //         value: 'Mern Stack',
+    //         label: 'Mern Stack',
+    //     },
+    //     {
+    //         value: 'Tailwind CSS',
+    //         label: 'Tailwind CSS',
+    //     },
+    //     {
+    //         value: 'Javascript',
+    //         label: 'Javascript',
+    //     },
+    //     {
+    //         value: 'Node JS',
+    //         label: 'Node JS',
+    //     },
+    // ];
 
     //! !!!! All Functional is ok . You now work with only onSubmit function
 
@@ -360,14 +371,14 @@ const SettingsProfile = () => {
                                             <option value="Domains" hidden>
                                                 Domains
                                             </option>
-                                            {domainData.map((D, i) => (
+                                            {jData?.domains?.map((D, i) => (
                                                 <option
                                                     onClick={handleClick}
                                                     disabled={disableOption}
-                                                    value={D.label}
+                                                    value={D}
                                                     key={i}
                                                 >
-                                                    {D.label}
+                                                    {D}
                                                 </option>
                                             ))}
                                         </select>
