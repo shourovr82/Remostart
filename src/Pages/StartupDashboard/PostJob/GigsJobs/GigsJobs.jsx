@@ -84,9 +84,8 @@ const GigsJobs = () => {
             </div>
             <p className="border-[#BCBCBC] bg-[#BCBCBC] border mt-2" />
             <p className="text-gray-400 mt-6 lg:mt-1">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et
-                velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora
-                torquent per conubia nostra, per inceptos himenaeos.
+                You need someone to do simple task, small tasks, no matter how small the task is,
+                post it here and our talents will do the tasks for you
             </p>
 
             {/* Start Form  */}

@@ -45,7 +45,6 @@ const ShadowingJob = () => {
         fetchData();
     }, []);
     console.log(jData.Domains);
-    
 
     const handleChange = (e) => {
         const selectedOptions = e.target.selectedOptions[0].innerHTML;
@@ -61,7 +60,6 @@ const ShadowingJob = () => {
         setDisable(false);
     };
 
-   
     // domains function end
     const {
         register,
@@ -71,21 +69,19 @@ const ShadowingJob = () => {
 
     // submit job data to local storage
     const onSubmit = (data) => {
-
-const {mentorsBio,mentorsName, mentorsLinkedInURL, ...rest} = data;
-
+        const { mentorsBio, mentorsName, mentorsLinkedInURL, ...rest } = data;
 
         const shadowingJobData = {
             ...rest,
             skills,
             domains: selectedValues,
             categoryName,
-            mentorsInfo:{mentorsBio, mentorsName, mentorsLinkedInURL},
+            mentorsInfo: { mentorsBio, mentorsName, mentorsLinkedInURL },
             apiPath: jobName,
             email: user?.user.email,
         };
         console.log(shadowingJobData);
-        
+
         if (shadowingJobData) {
             setJob(jobName, shadowingJobData);
             navigate('/dashboard/post-job/shadowing-job/review');
