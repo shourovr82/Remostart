@@ -71,7 +71,7 @@ const Contracts = () => {
         fetchData();
     }, []);
     console.log(jData.Domains);
-    
+
     const [disableOption, setDisable] = useState(false);
     // Cross  Button Domains
     const buttonHandle = () => {
@@ -202,9 +202,8 @@ const Contracts = () => {
             </div>
             <p className="border-[#e5e7eb] bg-[#BCBCBC] border mt-2" />
             <p className=" mt-6 lg:mt-1">
-                Contract section is where employers can hire talents for fixed-term projects or
-                commission-based work. Simplify your hiring process and find the right talent for
-                your project.
+                You can handover your tech and non tech projects to us, we will recruit the team,
+                gather the resource, micro-mange the project till its done
             </p>
 
             {/* Start Form  */}

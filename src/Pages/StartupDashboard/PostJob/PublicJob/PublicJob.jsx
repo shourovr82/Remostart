@@ -89,9 +89,8 @@ const PublicJob = () => {
             </div>
             <p className="border-[#BCBCBC] bg-[#BCBCBC] border mt-2" />
             <p className="text-gray-400 mt-6 lg:mt-1">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et
-                velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora
-                torquent per conubia nostra, per inceptos himenaeos.
+                Jobs posted here are ot limited to only our vetted talents. We open it to everyone
+                on the internet and any and everyone can apply.
             </p>
 
             {/* Start Form  */}
@@ -131,7 +130,7 @@ const PublicJob = () => {
                         })}
                         defaultValue={storedJob?.description}
                         id="description"
-                        placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+                        placeholder="description"
                         className="lg:w-3/4 h-16 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
                     />
                     <p className="pt-2">
