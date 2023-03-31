@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -61,24 +61,17 @@ const Contracts = () => {
     };
 
     // Domains
-    const domainData = [
-        {
-            value: 'Mern Stack',
-            label: 'Mern Stack',
-        },
-        {
-            value: 'Tailwind CSS',
-            label: 'Tailwind CSS',
-        },
-        {
-            value: 'Javascript',
-            label: 'Javascript',
-        },
-        {
-            value: 'Node JS',
-            label: 'Node JS',
-        },
-    ];
+    const [jData, setJData] = useState({});
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('/data.json');
+            const jsonData = await response.json();
+            setJData(jsonData);
+        }
+        fetchData();
+    }, []);
+    console.log(jData.Domains);
+    
     const [disableOption, setDisable] = useState(false);
     // Cross  Button Domains
     const buttonHandle = () => {
@@ -385,7 +378,7 @@ const Contracts = () => {
                             <option value="Domains" hidden>
                                 Domains
                             </option>
-                            {domainData.map((D, i) => (
+                            {jData?.domains?.map((D, i) => (
                                 <option
                                     onClick={handleClick}
                                     disabled={disableOption}
