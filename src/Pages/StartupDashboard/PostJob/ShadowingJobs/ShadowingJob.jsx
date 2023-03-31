@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft } from 'react-icons/bi';
@@ -35,20 +35,17 @@ const ShadowingJob = () => {
     const locationData = location?.state && location?.state?.data;
 
     // Domain Function start
-    const domainData = [
-        {
-            value: 'WebDevelopment',
-            label: 'WebDevelopment',
-        },
-        {
-            value: 'BlockChain',
-            label: 'BlockChain',
-        },
-        {
-            value: 'Content Writing',
-            label: 'Content Writing',
-        },
-    ];
+    const [jData, setJData] = useState({});
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('/data.json');
+            const jsonData = await response.json();
+            setJData(jsonData);
+        }
+        fetchData();
+    }, []);
+    console.log(jData.Domains);
+    
 
     const handleChange = (e) => {
         const selectedOptions = e.target.selectedOptions[0].innerHTML;
@@ -257,7 +254,7 @@ const {mentorsBio,mentorsName, mentorsLinkedInURL, ...rest} = data;
                             <option value="Domains" hidden className="px-2">
                                 Choose
                             </option>
-                            {domainData.map((D, i) => (
+                            {jData?.domains?.map((D, i) => (
                                 <option
                                     onClick={handleClick}
                                     disabled={disableOption}
