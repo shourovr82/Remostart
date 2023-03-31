@@ -107,7 +107,7 @@ const ContractsReview = () => {
                                         <span>
                                             <FaRegClock className="text-[#65DC7F] text-lg" />
                                         </span>
-                                        <span>{storedJob?.startingDate.slice(0, 10)}</span>
+                                        <span>{storedJob?.startingDate?.slice(0, 10)}</span>
                                     </p>
                                 </div>
                                 <div>
@@ -116,7 +116,7 @@ const ContractsReview = () => {
                                         <span>
                                             <FaRegClock className="text-[#F60C36] text-lg" />
                                         </span>
-                                        <span>{storedJob?.endingDate.slice(0, 10)}</span>
+                                        <span>{storedJob?.endingDate?.slice(0, 10)}</span>
                                     </p>
                                 </div>
                             </div>
@@ -237,7 +237,7 @@ const ContractsReview = () => {
                                         <GiSandsOfTime className="text-red-500" />
                                     </p>
                                     <p className="pr-[15px] font-bold ">
-                                        {storedJob?.applyBefore.slice(0, 10)}
+                                        {storedJob?.applyBefore?.slice(0, 10)}
                                     </p>
                                 </div>
                             </div>
