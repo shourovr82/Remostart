@@ -28,10 +28,10 @@ import linkedin from '../../../Assets/SocialIcons/linkedIn.png';
 import twitter from '../../../Assets/SocialIcons/twitter.png';
 import AuthContext from '../../../Context/AuthContext';
 import {
-  CalculatedAge,
-  FormattedDate,
-  getDuration,
-  getEducationDuration
+    CalculatedAge,
+    FormattedDate,
+    getDuration,
+    getEducationDuration,
 } from '../../../Utilities/DateFormater';
 import { convertProjectDate, getProjectDuration } from '../../../Utilities/projectDateFormater';
 
@@ -498,9 +498,9 @@ const RemoForceProfile = () => {
                 {/* side div Accepted Positions */}
                 <div className="lg:border-l-2 col-span-2 pl-0 mt-2 lg:mt-0 lg:pl-2  md:border-t-2  lg:border-t-0">
                     <div className="flex flex-col bg-[#F0F9FFBF] w-full p-2 space-y-2 rounded-lg">
-                        <span className="text-base font-semibold">Accepted Positions</span>
+                        <span className="text-base font-semibold">Want to Apply Job ?</span>
                         {/* map this div */}
-                        <div className="flex flex-col md:grid grid-cols-2 lg:flex">
+                        {/* <div className="flex flex-col md:grid grid-cols-2 lg:flex">
                             <div className="p-3 bg-white rounded-lg">
                                 <img src={one} alt="" />
                                 <span className="text-base lg:text-sm xl:text-base font-semibold">
@@ -513,13 +513,21 @@ const RemoForceProfile = () => {
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* ********** */}
 
                         <div className="flex flex-col md:grid grid-cols-2 lg:flex">
                             <div className="p-3 bg-white rounded-lg">
-                                <img src={one} alt="" />
+                                <Link to="/remoforce-dashboard/all-jobs">
+                                    <button
+                                        type="button"
+                                        className="bg-black rounded-full text-white px-5 py-1.5 hover:shadow-lg "
+                                    >
+                                        Apply Now
+                                    </button>
+                                </Link>
+                                {/* <img src={one} alt="" />
                                 <span className="text-base font-semibold">
                                     The Uncanny Inclusive
                                 </span>
@@ -528,7 +536,7 @@ const RemoForceProfile = () => {
                                     <span className="bg-[#65DC7F] text-white text-xs font-semibold p-1 rounded-lg">
                                         internship
                                     </span>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
