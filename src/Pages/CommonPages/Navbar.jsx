@@ -17,7 +17,6 @@ const Navbar = () => {
     const { user } = useAuth();
     const [currentUser, setCurrentUser] = useState({});
     const { serviceUser } = useContext(AuthContext);
-
     // logout functionality
     const navigate = useNavigate();
     const token = Cookies.get('token');
@@ -139,9 +138,9 @@ const Navbar = () => {
                         {/* dropdown: Desktop */}
                         <li>
                             <div className="dropdown dropdown-end">
-                                <label tabIndex={0} className="">
-                                    <BiUser className="inline-block" />
-                                    <span className="inline-block rotate-180">^</span>
+                                <label tabIndex={0} className="cursor-pointer">
+                                    <BiUser className="inline-block " />
+                                    <span className="inline-block rotate-180 ">^</span>
                                 </label>
 
                                 <ul
@@ -384,23 +383,23 @@ const Navbar = () => {
                                                 role === 'undefined' ||
                                                 role === 'remoforce') &&
                                                 serviceUser?.role !== 'startup' && (
-                                                <li>
-                                                    <Link
-                                                        to="/remoforce"
-                                                        aria-label="RemoForce"
-                                                        title="RemoForce"
-                                                        className="font-normal text-xs tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                                                    >
-                                                        {' '}
-                                                        <button
-                                                            onClick={() => setIsMenuOpen(false)}
-                                                            type="button"
+                                                    <li>
+                                                        <Link
+                                                            to="/remoforce"
+                                                            aria-label="RemoForce"
+                                                            title="RemoForce"
+                                                            className="font-normal text-xs tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                                         >
-                                                            RemoForce
-                                                        </button>
-                                                    </Link>
-                                                </li>
-                                            )}
+                                                            {' '}
+                                                            <button
+                                                                onClick={() => setIsMenuOpen(false)}
+                                                                type="button"
+                                                            >
+                                                                RemoForce
+                                                            </button>
+                                                        </Link>
+                                                    </li>
+                                                )}
 
                                             {/* Hamburger Remoforce */}
 

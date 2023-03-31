@@ -133,13 +133,14 @@ const router = createBrowserRouter(
                 {/* Gigs post job */}
                 <Route path="/dashboard/post-job/gigs" element={<GigsJobs />} />
                 <Route path="/dashboard/post-job/gigs/review" element={<GigsJobsReview />} />
+                <Route path="/dashboard/gigs/:id" element={<GigsJobsReview />} />
                 {/* shadowing post job */}
                 <Route path="/dashboard/post-job/shadowing" element={<ShadowingJob />} />
                 <Route
                     path="/dashboard/post-job/shadowing-job/review"
                     element={<ShadowingJobReview />}
                 />
-
+                <Route path="/dashboard/shadowing/:id" element={<ShadowingJobReview />} />
                 {/* Contracts */}
                 <Route path="/dashboard/post-job/contracts" element={<Contracts />} />
                 <Route path="/dashboard/post-job/edit/contracts" element={<Contracts />} />

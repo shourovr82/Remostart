@@ -239,7 +239,7 @@ const SettingsProfile = () => {
                             </div>
                         </div>
                         <div className="grid grid-cols-6 mt-6 gap-4 col-span-full lg:col-span-3">
-                            <div className="col-span-full sm:col-span-5 space-y-1">
+                            <div className="col-span-full sm:col-span-6 space-y-1">
                                 <label htmlFor="startupName" className="text-sm font-medium">
                                     Startup Name
                                 </label>
@@ -268,7 +268,7 @@ const SettingsProfile = () => {
                                     </span>
                                 </p>
                             </div>
-                            <div className="col-span-full sm:col-span-5 space-y-1">
+                            <div className="col-span-full sm:col-span-6 space-y-1">
                                 <label htmlFor="startupName" className="text-sm font-medium">
                                     Startup Slogan
                                 </label>
@@ -327,7 +327,7 @@ const SettingsProfile = () => {
                                     </span>
                                 </p>
                             </div>
-                            <div className="col-span-full mt-12 space-y-1">
+                            <div className="col-span-full space-y-1">
                                 <label htmlFor="bio" className="text-sm font-medium">
                                     Industries Work In
                                 </label>
@@ -356,7 +356,7 @@ const SettingsProfile = () => {
                         </div>
 
                         {/* Select Domains */}
-                        <div className="flex flex-col mt-12">
+                        <div className="flex flex-col ">
                             <div>
                                 <div className="lg:flex justify-center ">
                                     <div className="group w-full inline-block mt-6  lg:pr-10">

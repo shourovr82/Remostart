@@ -2,6 +2,7 @@ import React from 'react';
 import headingIcon from '../../../Assets/Dashboard/talentRequest/headingIcon.svg';
 import TalentCards from './TalentCards';
 import TalentRequestBanner from './TalentRequestBanner';
+import TalentsFounds from './TalentsFounds';
 
 const TalentRequest = () => {
     console.log('object');
@@ -23,6 +24,10 @@ const TalentRequest = () => {
             {/* card */}
             <div>
                 <TalentCards />
+            </div>
+            {/* Talent founds */}
+            <div>
+                <TalentsFounds />
             </div>
         </section>
     );

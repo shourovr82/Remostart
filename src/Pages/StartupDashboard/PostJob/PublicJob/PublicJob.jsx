@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
@@ -52,7 +53,32 @@ const PublicJob = () => {
         setJob(jobName, jobData);
         navigate('/dashboard/post-job/public-job/review');
     };
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' },
+    ];
 
+    const customStyles = (color = '#f4f') => ({
+        alignItems: 'center',
+        display: 'flex',
+        ':before': {
+            backgroundColor: color,
+            borderRadius: 10,
+            content: '" "',
+            display: 'grid',
+            marginRight: 10,
+            height: 10,
+            width: '100%',
+            border: '2px solid red',
+        },
+    });
+
+    const hanlleChangeSelect = (e) => {
+        console.log(e);
+    };
+
+    // const skillsValue = ['react', 'javascript', 'mongodb', 'express js'];
     return (
         <div>
             <div className="flex gap-4 items-center">
@@ -178,6 +204,15 @@ const PublicJob = () => {
                                 Skills Required
                             </label>
                             <div className=" lg:w-[50rm]  pr-2 rounded-md border border-[#BCBCBC]  text-gray-900 justify-between flex items-center">
+                                {/* <CreatableSelect
+                                    onChange={hanlleChangeSelect}
+                                    isMulti
+                                    name="color"
+                                    styles={customStyles}
+                                    placeholder="Select Skills"
+                                    options={options}
+                                /> */}
+
                                 <input
                                     id="skills"
                                     type="text"
