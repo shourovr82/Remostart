@@ -4,7 +4,7 @@ import { RiUserFollowLine } from 'react-icons/ri';
 import TalentsFoundTable from './TalentsFoundTable';
 
 const TalentsFounds = () => {
-    console.log('object');
+    console.log('');
     return (
         <section className="mt-20 max-md:p-2 ">
             {/* total talents found heading card */}

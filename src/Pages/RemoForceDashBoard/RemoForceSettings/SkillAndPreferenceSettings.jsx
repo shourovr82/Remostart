@@ -42,7 +42,6 @@ function SkillAndPreferenceSettings() {
         fetchData();
     }, []);
     console.log(jData.Domains);
-    
 
     // Initialize use form hook
     const {
@@ -166,7 +165,6 @@ function SkillAndPreferenceSettings() {
             email: user.user.email,
         };
         console.log(bodyData);
-        
 
         await axios
             .put(
@@ -187,8 +185,7 @@ function SkillAndPreferenceSettings() {
                 console.log(err);
             });
     };
-    console.log( selectedLanguages);
-    
+    console.log(selectedLanguages);
 
     return (
         <RemoForceSettingsItems>
@@ -210,13 +207,6 @@ function SkillAndPreferenceSettings() {
                         </div>
                         {/* Skill body */}
                         <div>
-                            <p className="text-hr text-xs lg:text-sm font-medium w-full">
-                                {' '}
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-                                turpis molestie, dictum est a, mattis tellus. Sed dignissim,
-                                metusnec fringilla accumsan, risus sem sollicitudin lacus, ut
-                                interdum tellus elit sed risus.
-                            </p>
                             <div className="flex w-full max-md:flex-col  items-start py-[2rem]">
                                 <div className="lg:w-[45%] flex justify-between gap-3 ">
                                     {/* Skills dropdown */}
@@ -346,13 +336,6 @@ function SkillAndPreferenceSettings() {
                         </div>
                         {/* Skill body */}
                         <div>
-                            <p className="text-hr text-xs lg:text-sm font-medium w-full">
-                                {' '}
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-                                turpis molestie, dictum est a, mattis tellus. Sed dignissim,
-                                metusnec fringilla accumsan, risus sem sollicitudin lacus, ut
-                                interdum tellus elit sed risus.
-                            </p>
                             <div className="flex w-full max-md:flex-col  items-start py-[2rem]">
                                 <div className="lg:w-[45%] flex justify-between gap-3 ">
                                     {/* Skills dropdown */}
@@ -474,13 +457,6 @@ function SkillAndPreferenceSettings() {
                             </h1>
                         </div>
                         <div className="w-full">
-                            <p className="text-hr  text-sm lg:text-base font-medium w-full">
-                                {' '}
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-                                turpis molestie, dictum est a, mattis tellus. Sed dignissim,
-                                metusnec fringilla accumsan, risus sem sollicitudin lacus, ut
-                                interdum tellus elit sed risus.
-                            </p>
                             <div className="mt-[2rem] lg:w-[90%] ">
                                 <h1 className="font-semibold pl-3 w-full text-sm ">
                                     Preferred Job Type
@@ -495,8 +471,8 @@ function SkillAndPreferenceSettings() {
                                                 item.color
                                             } ${
                                                 preferredJobType === item.name &&
-                                                ' bg-[#19a5ff] text-white'
-                                            } bg-white lg:m-[1rem] p-2  lg:w-[20%]`}
+                                                'bg-[#19a5ff] text-white'
+                                            }  lg:m-[1rem] p-2  lg:w-[20%]`}
                                         >
                                             <span
                                                 className={`mr-1  ${

@@ -119,7 +119,7 @@ const AllJobs = () => {
                         {items?.map((item) => (
                             <div
                                 key={Math.random()}
-                                className="flex flex-col border px-2 jobPostCardShaddow py-6 justify-center space-y-2 space-x-5 rounded-lg"
+                                className="flex flex-col  px-2  jobPostCardShaddow py-6 justify-between items-stretch border space-y-2 space-x-5 rounded-lg"
                             >
                                 <div className="flex justify-between">
                                     <div className="flex flex-col">

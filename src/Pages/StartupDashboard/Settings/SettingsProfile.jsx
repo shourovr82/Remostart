@@ -30,28 +30,6 @@ const SettingsProfile = () => {
         fetchData();
     }, []);
     console.log(jData.Domains);
-    
-
-    // const domainData = [
-    //     {
-    //         value: 'Mern Stack',
-    //         label: 'Mern Stack',
-    //     },
-    //     {
-    //         value: 'Tailwind CSS',
-    //         label: 'Tailwind CSS',
-    //     },
-    //     {
-    //         value: 'Javascript',
-    //         label: 'Javascript',
-    //     },
-    //     {
-    //         value: 'Node JS',
-    //         label: 'Node JS',
-    //     },
-    // ];
-
-    //! !!!! All Functional is ok . You now work with only onSubmit function
 
     // File State
     const [file, setFile] = useState();

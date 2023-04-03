@@ -9,7 +9,7 @@ import logo from '../../Assets/Images/logoBlack.svg';
 import SignOutModal from '../../Modal/signOutModal/SignOutModal';
 import SupportModal from '../../Modal/supportModal/SupportModal';
 // import SignOutModal from '../../Modal/SignOutModal/SignOutModal';
-import avatarLogo from '../../Assets/Images/avatar.png';
+// import avatarLogo from '../../Assets/Images/avatar.png';
 import AuthContext from '../../Context/AuthContext';
 
 const DashboardNavbar = () => {
@@ -132,7 +132,7 @@ const DashboardNavbar = () => {
                                     </NavLink>
                                 </li>
                             )}
-                            {(role === 'startup' || serviceUser?.role === 'startup') && (
+                            {/* {(role === 'startup' || serviceUser?.role === 'startup') && (
                                 <li>
                                     <NavLink
                                         to="/dashboard/talent-request"
@@ -143,7 +143,7 @@ const DashboardNavbar = () => {
                                         Talent Request
                                     </NavLink>
                                 </li>
-                            )}
+                            )} */}
                             {(role === 'startup' || serviceUser?.role === 'startup') && (
                                 <li>
                                     <NavLink
@@ -358,13 +358,13 @@ const DashboardNavbar = () => {
                                         {(token || serviceUser?.role) && (
                                             <li className="bg-[#f3f4f6]">
                                                 <div className="flex  py-1.5 flex-row justify-center items-center text-center">
-                                                    <div className="w-1/3 pl-4">
+                                                    {/* <div className="w-1/3 pl-4">
                                                         <img
                                                             src={avatarLogo}
                                                             className="rounded-full w-10 h-10"
                                                             alt=""
                                                         />
-                                                    </div>
+                                                    </div> */}
                                                     <div className="flex flex-1 flex-col space-y-1 items-start">
                                                         <span className="text-[#6B7280] text-sm font-normal">
                                                             Signed in as

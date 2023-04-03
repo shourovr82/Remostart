@@ -17,15 +17,6 @@ import { SiGmail } from 'react-icons/si';
 import { TfiTwitter } from 'react-icons/tfi';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import five from '../../../Assets/RemoForceDashboard/RemoForceProfile/freebsd.png';
-import six from '../../../Assets/RemoForceDashboard/RemoForceProfile/grooveshark.png';
-import three from '../../../Assets/RemoForceDashboard/RemoForceProfile/joomla.png';
-import one from '../../../Assets/RemoForceDashboard/RemoForceProfile/kickstarter.png';
-import four from '../../../Assets/RemoForceDashboard/RemoForceProfile/marvel.png';
-import github from '../../../Assets/SocialIcons/github.png';
-import insta from '../../../Assets/SocialIcons/insta.png';
-import linkedin from '../../../Assets/SocialIcons/linkedIn.png';
-import twitter from '../../../Assets/SocialIcons/twitter.png';
 import AuthContext from '../../../Context/AuthContext';
 import {
     CalculatedAge,
@@ -88,120 +79,6 @@ const RemoForceProfile = () => {
                     ? remoProfile?.jobPreference?.locationPreference
                     : 'Location not given'
             }`,
-        },
-    ];
-
-    //  Experience
-
-    // const experience = [
-    //     {
-    //         id: 1,
-    //         icon: one,
-    //         name: 'Jack Stones Industry Ltd',
-    //         job_type: 'fulltime',
-    //         duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-    //     },
-    //     {
-    //         id: 2,
-    //         icon: two,
-    //         name: 'Hero lorem ipsume',
-    //         job_type: 'internship',
-    //         duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-    //     },
-    //     {
-    //         id: 3,
-    //         icon: three,
-    //         name: 'impdom dore qiene',
-    //         job_type: 'Contract',
-    //         duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-    //     },
-    // ];
-
-    // education
-
-    const education = [
-        {
-            id: 1,
-            icon: four,
-            name: 'Middle Earth Technical University',
-            duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-        },
-        {
-            id: 2,
-            icon: five,
-            name: 'Raisoni Collage of Engineering',
-            duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-        },
-        {
-            id: 3,
-            icon: six,
-            name: 'Middle Earth Techincal University',
-            duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-        },
-    ];
-
-    // Social Links
-
-    const socialLinks = [
-        {
-            id: 1,
-            icon: insta,
-            name: remoProfile?.socialLinks?.Instagram?.split('/').pop(),
-        },
-        {
-            id: 2,
-            icon: linkedin,
-            name: remoProfile?.socialLinks?.Linkedin?.split('/').pop(),
-        },
-        {
-            id: 3,
-            icon: github,
-            name: remoProfile?.socialLinks?.Github?.split('/').pop(),
-        },
-        {
-            id: 4,
-            icon: twitter,
-            name: remoProfile?.socialLinks?.Twitter?.split('/').pop(),
-        },
-    ];
-
-    // Projects
-
-    const projects = [
-        {
-            id: 1,
-            icon: one,
-            name: 'Middle Earth Techincal University',
-            duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-            description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-        },
-        {
-            id: 2,
-            icon: three,
-            name: 'Raisoni Collage of Engineering',
-            duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-            description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-        },
-    ];
-
-    // Languages
-    const languages = [
-        {
-            id: 1,
-            name: 'English',
-            langType: 'Native Language',
-        },
-        {
-            id: 2,
-            name: 'Hindi',
-            langType: 'Advance',
-        },
-        {
-            id: 3,
-            name: 'Bangla',
-            langType: 'Advance',
         },
     ];
 

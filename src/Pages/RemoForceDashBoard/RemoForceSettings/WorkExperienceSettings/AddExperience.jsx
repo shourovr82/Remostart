@@ -65,7 +65,7 @@ function AddExperience() {
         <RemoForceSettingsItems>
             <section className="w-full mt-4 ">
                 {/* Experience section  starts */}
-                <div className="bg-[#F0F9FFBF] w-[70%] flex flex-col p-[0.5rem] rounded-md">
+                <div className="bg-[#F0F9FFBF] w-[70%] mt-8 flex flex-col p-[0.5rem] rounded-md">
                     <div className="w-[14rem] p-2 mb-4">
                         <h1 className="text-black font-sans font-semibold text-2xl w-[89%]">
                             Experience
@@ -149,12 +149,6 @@ function AddExperience() {
 
                     {bool === false ? (
                         <div className="space-y-3 w-full">
-                            <p className="w-full text-hr text-sm font-sans">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-                                turpis molestie, dictum est a, mattis tellus. Sed dignissim,
-                                metusnec fringilla accumsan, risus sem sollicitudin lacus, ut
-                                interdum tellus elit sed risus
-                            </p>
                             <button
                                 type="button"
                                 className="my-4 bg-[#A5DBFF] py-3 px-6 font-sans text-center ml-[1rem] border-[2px] border-[#4DB9FF] rounded-md text-black flex items-center"
