@@ -1,5 +1,5 @@
 import React from 'react';
-import RemoForceAllJobs from './RemoForceAllJobs';
+import RemoForceAllJobs from './JobCategoryPages/RemoForceAllJobs';
 
 const RemoForceDashBoard = () => (
     <section className="flex flex-col w-full">

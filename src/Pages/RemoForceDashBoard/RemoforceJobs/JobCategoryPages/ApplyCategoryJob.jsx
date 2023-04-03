@@ -10,10 +10,10 @@ import { GoLocation } from 'react-icons/go';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import initialLogo from '../../../Assets/RemoForceDashboard/RemoForceAllJobs/InitialLogo.png';
-import RecommendedJobs from '../RecommendedJobs';
+import initialLogo from '../../../../Assets/RemoForceDashboard/RemoForceAllJobs/InitialLogo.png';
+import RecommendedJobs from '../../RecommendedJobs';
 
-const ApplyJob = () => {
+const ApplyCategoryJob = () => {
     const { user } = useSelector((state) => state.auth);
     const location = useLocation();
     const data = location.state && location.state.data;
@@ -23,7 +23,7 @@ const ApplyJob = () => {
     const { data: job, refetch } = useQuery(['job'], () =>
         axios
             .get(
-                `${process.env.REACT_APP_URL_STARTUP}/api/job/apply-status?id=${data._id}&email=${user.user.email}`
+                `${process.env.REACT_APP_URL_STARTUP}/api/job/apply-status?id=${data.jobId}&email=${user?.user.email}`
             )
             .then((res) => res.data)
     );
@@ -40,7 +40,7 @@ const ApplyJob = () => {
     } = data;
 
     const applyJobHandler = () => {
-        const url = `${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${data._id}`;
+        const url = `${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${data.jobId}`;
         const applicantsData = {
             applicantsName: user?.user.fullName,
             applicantsEmail: user?.user.email,
@@ -313,4 +313,4 @@ const ApplyJob = () => {
     );
 };
 
-export default ApplyJob;
+export default ApplyCategoryJob;

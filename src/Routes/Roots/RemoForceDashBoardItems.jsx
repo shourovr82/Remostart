@@ -10,7 +10,7 @@ const RemoForceDashBoardItems = ({ children }) => (
             <h1 className="text-4xl flex items-center gap-3 font-semibold">
                 <span>
                     <BsLayoutTextWindowReverse className="text-2xl mt-1" />
-                </span>{' '}
+                </span>
                 Jobs
             </h1>
         </div>
@@ -20,22 +20,22 @@ const RemoForceDashBoardItems = ({ children }) => (
                     <Link to="/remoforce-dashboard/all-jobs">All</Link>
                 </li>
                 <li className="font-semibold text-xs sm:text-sm">
-                    <Link to="#">Shadowing</Link>
+                    <Link to="/remoforce-dashboard/shadowing-jobs">Shadowing</Link>
                 </li>
                 <li className="font-semibold text-xs sm:text-sm">
-                    <Link to="#"> Public Jobs</Link>
+                    <Link to="/remoforce-dashboard/public-jobs"> Public Jobs</Link>
                 </li>
                 <li className="font-semibold text-xs sm:text-sm">
-                    <Link to="#"> Private Jobs</Link>
+                    <Link to="/remoforce-dashboard/private-jobs"> Private Jobs</Link>
                 </li>
                 <li className="font-semibold text-xs sm:text-sm">
-                    <Link to="#"> Internship</Link>
+                    <Link to="/remoforce-dashboard/internship"> Internship</Link>
                 </li>
                 <li className="font-semibold text-xs sm:text-sm">
-                    <Link to="#"> Gigs</Link>
+                    <Link to="/remoforce-dashboard/gigs"> Gigs</Link>
                 </li>
                 <li className="font-semibold text-xs sm:text-sm">
-                    <Link to="#"> Contracts</Link>
+                    <Link to="/remoforce-dashboard/contracts"> Contracts</Link>
                 </li>
             </nav>
             <div className="lg:col-span-1   relative text-gray-600">
