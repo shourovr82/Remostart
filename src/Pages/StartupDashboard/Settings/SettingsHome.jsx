@@ -48,11 +48,7 @@ const SettingsHome = () => (
                 <div className="flex flex-col mt-10">
                     <div className="gap-2 grid">
                         <span className="text-base font-medium my-4">Industires Work In</span>
-                        <p className="text-xs font-medium">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-                            libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-                            sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                        </p>
+                        {/* <p className="text-xs font-medium">....</p> */}
                     </div>
 
                     <div className="flex justify-center ">

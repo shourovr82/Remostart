@@ -4,7 +4,7 @@ import { HiChevronUpDown } from 'react-icons/hi2';
 import gmailIcon from '../../../Assets/Dashboard/talentRequest/gmailIcon.svg';
 
 const TalentsFoundTable = () => {
-    console.log('object');
+    console.log('');
     return (
         <section className="mt-10">
             <div className="container bg-white shadow-lg shadow-slate-300 rounded-3xl mx-auto px-4 sm:px-8">

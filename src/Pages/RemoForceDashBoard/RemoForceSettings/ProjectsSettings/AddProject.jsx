@@ -65,9 +65,9 @@ function AddProject() {
 
     return (
         <RemoForceSettingsItems>
-            <section className="w-full mt-6 ">
+            <section className="w-full mt-8 ">
                 {/* Experience section  starts */}
-                <div className="bg-[#F0F9FFBF] lg:w-[70%] flex flex-col p-[0.5rem] rounded-md">
+                <div className="bg-[#F0F9FFBF] lg:w-[70%]  flex flex-col p-[0.5rem] rounded-md">
                     <div className="w-[14rem] p-2 mb-4">
                         <h1 className="text-black font-sans font-semibold text-2xl w-[89%]">
                             Projects
@@ -155,7 +155,7 @@ function AddProject() {
                 )}
 
                 {/* Add Experience section  starts */}
-                <div className="bg-[#F0F9FFBF] rounded-md w-full flex flex-col p-[0.5rem]">
+                <div className="bg-[#F0F9FFBF]  rounded-md w-full flex flex-col p-[0.5rem]">
                     <div className="flex flex-nowrap justify-between items-center border-b-2 border-b-[#19a5ff] w-[14rem] p-2 mb-4">
                         <h1 className="text-[#19a5ff] text-start font-sans font-semibold text-xl w-[89%]">
                             Project Work
@@ -164,12 +164,6 @@ function AddProject() {
 
                     {bool === false ? (
                         <div className="space-y-3 w-full">
-                            <p className="w-full text-[#b0b1b2] text-sm font-sans">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-                                turpis molestie, dictum est a, mattis tellus. Sed dignissim,
-                                metusnec fringilla accumsan, risus sem sollicitudin lacus, ut
-                                interdum tellus elit sed risus
-                            </p>
                             <button
                                 type="button"
                                 className="my-4 bg-[#A5DBFF] py-3 px-6 font-sans text-center ml-[1rem] border-[2px] border-[#4DB9FF] rounded-md text-black flex items-center"

@@ -3,7 +3,7 @@ import { BsCheckLg } from 'react-icons/bs';
 import { MdOutlineClear } from 'react-icons/md';
 
 const TalentCards = () => {
-    console.log('object');
+    console.log('');
     const talentsCardsItems = [
         {
             itemType: 'STARTER',
@@ -106,7 +106,7 @@ const TalentCards = () => {
         },
     ];
     return (
-        <div className="flex flex-col  lg:grid lg:grid-cols-6 mt-10 2xl:mt-5 gap-6 2xl:gap-14 max-md:px-3">
+        <div className="flex flex-col  lg:grid lg:grid-cols-6 mt-10 2xl:mt-5 gap-6 2xl:gap-10 max-md:px-3">
             {talentsCardsItems?.map((item) => (
                 <div
                     className={`border col-span-2 py-6 shadow-sm duration-300 ease-in-out hover:shadow-2xl hover:shadow-[#dfdcdc] shadow-[#f7f7f7] px-5 rounded-lg ${item?.borderColor}`}

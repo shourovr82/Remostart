@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../../../Context/AuthContext';
 import RemoForceSettingsItems from '../../../../Routes/Roots/RemoforceSettingItems';
 import ChangePasswordForm from './ChangePasswordForm';
-import AuthContext from '../../../../Context/AuthContext';
 
 function AccountSettings() {
     const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
@@ -37,8 +37,8 @@ function AccountSettings() {
         console.log(data);
         setLoading(true);
         if (data.alternativeEmail === remoProfile.personalDetails.alternativeEmail) {
-            toast.error('Its already updated')
-            return
+            toast.error('Its already updated');
+            return;
         }
 
         const bodyData = {
@@ -58,7 +58,6 @@ function AccountSettings() {
                     // navigate('/remoforce-dashboard/profile');
                 }
 
-
                 console.log(res);
             })
             .catch((err) => {
@@ -72,18 +71,13 @@ function AccountSettings() {
 
     return (
         <RemoForceSettingsItems>
-            <div className="bg-[#F0F9FFBF] w-full flex flex-col p-[0.5rem]">
+            <div className="bg-[#F0F9FFBF] w-full mt-8 flex flex-col p-[0.5rem]">
                 <div className="flex flex-nowrap justify-between items-center border-b-2 border-b-headers w-[14rem] pt-2 mb-4">
                     <h1 className="text-headers text-start font-sans font-semibold text-xl w-[89%]">
                         Account Settings
                     </h1>
                 </div>
                 <form className="space-y-4 w-full " onSubmit={handleSubmit(httpAccountSettings)}>
-                    <p className="w-full text-hr text-sm font-sans">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis
-                        molestie, dictum est a, mattis tellus. Sed dignissim, metusnec fringilla
-                        accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus
-                    </p>
                     {/* Add Experience Beginnings */}
                     <div className="w-full lg:w-[70%] space-y-3">
                         {/* Permanent Email  Beginnings */}

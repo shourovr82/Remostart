@@ -109,7 +109,8 @@ const GeneralSettingsPersonal = () => {
     // on Submit form and http request
     const onSubmit = async (data) => {
         setLoading(true);
-        if (files === undefined) {
+        if (!allFiles?.length) {
+            setLoading(false);
             return setError('Please upload at least one ID type');
         }
         const bodyData = {
