@@ -177,7 +177,11 @@ const AllJobs = () => {
                                 </div>
 
                                 <div>
-                                    <p className="font-normal text-sm">{item.description}</p>
+                                    <p className="font-normal text-sm">
+                                        {item.description
+                                            ? item?.description?.slice(0, 100)
+                                            : item?.description}
+                                    </p>
                                 </div>
                                 <div className="flex flex-col space-y-1">
                                     <span className="flex space-x-1">

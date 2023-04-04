@@ -29,7 +29,8 @@ const GeneralSettingsForNonRegistered = () => {
     const navigate = useNavigate();
     const [selectedDay, setSelectedDay] = useState(null);
     const selectDate = `${selectedDay?.day}-${selectedDay?.month}-${selectedDay?.year}`;
-
+    const [startDate, setStartDate] = useState(new Date());
+    console.log(startDate.toLocaleDateString());
     // Initialize use form from react hook form
     const {
         register,
@@ -112,7 +113,7 @@ const GeneralSettingsForNonRegistered = () => {
                     country: data.aboutCountry,
                     PIN: data.pinCode,
                     incubatedAt: data.Incubated,
-                    registrationDate: '',
+                    registrationDate: startDate.toLocaleDateString(),
                     gstinNumber: data.GSTINNumber,
                     registeredName: data.RegisteredName,
                     registered: false,
@@ -126,7 +127,7 @@ const GeneralSettingsForNonRegistered = () => {
                     address: data.Address,
                 },
             };
-
+            console.log(bodyData);
             const formData = new FormData();
 
             // Append file fields to the form data
@@ -165,7 +166,7 @@ const GeneralSettingsForNonRegistered = () => {
         setAllFiles(updatedFiles);
     };
     console.log(selectDate);
-    const [startDate, setStartDate] = useState(new Date());
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {/* StartUp Form for Non-registered Start-up Starts */}

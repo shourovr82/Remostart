@@ -9,7 +9,6 @@ const TalentCards = () => {
             itemType: 'STARTER',
             price: 19,
             itemColor: '#19a5ff',
-            textColor: 'text-[#19a5ff]',
             borderColor: 'border-[#30d7ff]',
             description: {
                 searches: '5 Searches',
@@ -42,7 +41,6 @@ const TalentCards = () => {
             itemType: 'TEAM',
             price: 29,
             itemColor: '#ff9900',
-            textColor: 'text-[#ff9900]',
             borderColor: 'border-[#fcbc5c]',
             description: {
                 searches: '25 Searches',
@@ -74,7 +72,6 @@ const TalentCards = () => {
         {
             itemType: 'BUSINESS',
             itemColor: '#ff1830',
-            textColor: 'text-[#ff1830]',
             borderColor: 'border-[#fee719]',
             price: 39,
             description: {

@@ -24,11 +24,11 @@ const Password = () => {
     const { mutate } = useMutation(muteFunc, {
         onSuccess: (res) => {
             if (res.data.success) {
-                setCurrentPass(true)
+                setCurrentPass(true);
                 console.log(res);
             }
             if (!res.data.success) {
-              toast.error('X wrong pass X insert a correct one' )
+                toast.error('X wrong pass X insert a correct one');
             }
 
             // navigate(from, { replace: true });
@@ -36,11 +36,9 @@ const Password = () => {
         onError: () => toast.error('There is an error'),
     });
 
-    const oldPass = 'oldPassword';
-
     const onSubmit = (data) => {
         console.log(data);
-        const bodyData = { email: user?.user.email, password:data.CurrentPassword };
+        const bodyData = { email: user?.user.email, password: data.CurrentPassword };
 
         mutate(bodyData);
     };
@@ -62,7 +60,7 @@ const Password = () => {
                         <label className="text-sm font-medium" htmlFor="MyName">
                             Current Password
                         </label>
-                        <div className="lg:flex items-center gap-12">
+                        <div className="lg:flex items-center lg:gap-12">
                             <div className="lg:w-1/2">
                                 <div className="lg:flex w-full  lg:gap-10 items-center">
                                     <input
