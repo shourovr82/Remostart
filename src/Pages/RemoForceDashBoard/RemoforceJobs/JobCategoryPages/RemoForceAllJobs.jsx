@@ -17,7 +17,7 @@ const RemoForceAllJobs = () => {
     const handleApplyNow = (item) => {
         navigate(`/remoforce-dashboard/all-jobs/${item._id}`, { state: { data: item } });
     };
-
+    console.log(allJobs);
     return (
         <RemoForceDashBoardItems>
             <section>
@@ -76,6 +76,11 @@ const RemoForceAllJobs = () => {
                                         </div>
                                     </div> */}
                                 </div>
+                                <div className="py-2">
+                                    <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                                        {item?.categoryName}
+                                    </span>
+                                </div>
                                 <div>
                                     <p className="text-start  text-sm ">
                                         {item?.description
@@ -93,7 +98,7 @@ const RemoForceAllJobs = () => {
                                                     key={Math.random()}
                                                     className="bg-[#F0F9FF]  rounded-md "
                                                 >
-                                                    <p className="text-xs px-[5px] py-[5px] ">
+                                                    <p className="text-xs px-[5px] py-[5px] bg-blue-200 rounded-md ">
                                                         {skill}
                                                     </p>
                                                 </div>
