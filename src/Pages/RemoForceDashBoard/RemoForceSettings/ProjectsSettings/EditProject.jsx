@@ -1,215 +1,233 @@
-import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useParams } from "react-router-dom";
-import { FiEdit } from 'react-icons/fi'
-import { GoDiffAdded } from 'react-icons/go'
-import { MdOutlineWork } from 'react-icons/md'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-import RemoForceSettingsItems from '../../../../Layout/RemoForceSettingsItems'
-function EditProject() {
-   const [data, setData] = useState([])
-   const [list, setList] = useState([])
-     // Initialize use form hook
-     const [padding, setPadding] = useState(false)
+const EditProject = ({ editData, setProjectsLists, projectsLists, setEditMode }) => {
+    const [padding, setPadding] = useState(false);
+    // get values
+    const { projectName, endingDate, projectLink, projectDescription, startingDate, projectType } =
+        editData || {};
+
+    // Initialize use form hook
     const {
         register,
         handleSubmit,
-
         formState: { errors },
-    } = useForm({
-    })
+    } = useForm({});
 
-   const id = useParams()
-    const project_experience_list = [{ _id: "1", projectName: 'Alt school Ltd', projectLink: 'Cyber Security B.Sc', startingDate: "Oct 2021", endDate: 'Dec 2022', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metusnec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.' }, { _id: "2", projectName: 'Alx School of Engineering', projectLink: 'Full Java Spring Framework', startingDate: "Oct 2019", endDate: 'Dec 2022', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metusnec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.' }, { _id: "3", projectName: 'RemoStart', projectLink: 'Software Engineering', startingDate: "Oct 2021", endDate: 'Dec 2022', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metusnec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.' } ]
+    // typeLists
+    const typeLists = [
+        { name: 'JAVA' },
+        { name: 'Python' },
+        { name: 'Web Development' },
+        { name: 'Android' },
+    ];
 
-   useEffect(() => {
-   const newList = project_experience_list.filter(item => item._id !== id.id.split("=")[1] )
-   setList(newList)
-   // console.log(newList)
-   const obj = project_experience_list.filter(item => item._id === id.id.split("=")[1] )
-   setData(obj)
-  }, [])
+    const handleUpdate = (data) => {
+        const getProject = projectsLists.filter(
+            (singleProject) => singleProject.id !== editData.id
+        );
+        const updatedData = {
+            id: editData?.id,
+            ...data,
+        };
+        const updatedArr = [...getProject, updatedData];
+        setProjectsLists(updatedArr);
+        setEditMode(false);
+    };
 
-  const httpAddEducationExperience = (data) => {
-  console.log(data)
-  window.location.href = `${origin}`+ "/user_dashboard/project"
-
- }
-  return (
-      <RemoForceSettingsItems>
-      <section className='w-full mt-4 '>
-        {/* Experience section  starts */}
-        <div className='bg-lightblue w-[70%] flex flex-col p-[0.5rem] rounded-md'>
-          <div className='w-[14rem] p-2 mb-4'>
-            <h1 className="text-black font-sans font-semibold text-xl w-[89%]">Project</h1>
-          </div>
-          {/* Experience List Display starts */}
-          <div className='mt-4 flex flex-col w-full'>
-            {/* Experience List Display Card */}
-            {list.map((item, idx) => {
-              return (
-                <div className='border-b-2 flex justify-start items-start p-[1rem]' key={idx}>
-                  <MdOutlineWork className='text-xl mr-4' />
-
-                  <div className='w-5/6'>
-                    <div className='w-full flex justify-start items-center'>
-                      <h1 className='font-semibold text-md w-[50%]'>{item.projectName}</h1>
-                      <div className="relative">
-                      <input type="button" className='ml-2 w-[2rem] bg-slate-300 absolute opacity-0' name={item._id}  />
-                        <FiEdit className='text-[#999999] ml-2' />
-                      </div>
-                    </div>
-                    <div className='w-full flex justify-between items-center mt-3'>
-                      <p className='text-[#999999] w-[40%] no-wrap text-sm'>{item.projectLink}</p>
-                      <span className='text-[#999999]'>.</span>
-                      <p className='text-[#999999] w-[20%] text-sm'>{item.startingDate}</p>
-                      <span className='text-[#999999]'>.</span>
-                      <p className='text-[#999999] w-[20%] text-sm'>{item.endDate}</p>
-                    </div>
-                    <div className='w-full flex justify-start items-center mt-2'>
-                      <p className='text-[#999999] no-wrap text-sm'>{item.description}</p>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-
-        <hr className='w-full bg-hr my-3' />
-        {/*Add Experience section  starts */}
-        <div className='bg-lightblue w-full flex flex-col p-[0.5rem]'>
-          <div className='flex flex-nowrap justify-between items-center border-b-2 border-b-headers w-[14rem] p-2 mb-4'>
-            <h1 className="text-headers text-start font-sans font-semibold text-xl w-[89%]">Project Work</h1>
-          </div> 
-            {
-            data.map((item,idx)=>{
-             return(
-
-              <form className='space-y-3 w-full' onSubmit={handleSubmit(httpAddEducationExperience)}  key={idx}> 
-                 {/* Add Experience Beginnings */}
-               <div className='w-full lg:w-[70%] space-y-3'>
-                  {/* Project Name  Beginnings */}
-                  <div className="'w-full lg:w-[70%] space-y-1">
-                    <label htmlFor="age" className="text-sm font-medium">
-                     Project Name
-                    </label>
-                    <input
-                     id="full_name"
-                     {...register('projectName', {
-                      required: true,
-                     })}
-                     type="text"
-                     defaultValue={item.projectName}
-                     placeholder="Sample Name"
-                     className="w-full border p-3 rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
-                    />
-                    <p className="pt-1">
-                     <span className="text-red-400 ">
-                      {errors.projectName && (
-                       <span>Project Name is Needed!</span>
-                      )}
-                     </span>
-                    </p>
-                 </div>    
-                {/*   Project Link Beginnings */}
-                 <div className="'w-full lg:w-[70%]   space-y-1">
-                  <label htmlFor="age" className="text-sm font-medium">
-                   Project Link
-                  </label>
-                  <input
-                   id="full_name"
-                   {...register('projectLink', {
-                    required: true,
-                   })}
-                   type="text"
-                   defaultValue={item.projectLink}
-                   placeholder="Manager, C.T.O, assistant Engineer"
-                   className="w-full border p-3 rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
-                  />
-                  <p className="pt-1">
-                   <span className="text-red-400 ">
-                    {errors.projectLink && (
-                     <span>Project Link is Needed!</span>
-                    )}
-                   </span>
-                  </p>
-                 </div>
-                {/* Project Description Beginnings */}
-                 <div className="'w-full lg:w-[70%]   space-y-1">
-                  <label htmlFor="age" className="text-sm font-medium">
-                   Project Description
-                  </label>
-                    <input
-                     id="full_name"
-                     {...register('description', {
-                      required: true,
-                     })}
-                     type="text"
-                     defaultValue={item.description}
-                     placeholder="Manager, C.T.O, assistant Engineer"
-                     className="w-full border p-3 rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
-                    />
-                  <p className="pt-1">
-                   <span className="text-red-400 ">
-                    {errors.description && (
-                     <span>Project Description is Needed!</span>
-                    )}
-                   </span>
-                  </p>
-                 </div>
-                {/* Dates Beginnings */}
-                <div className={` w-full lg:w-[90%] gap-2 lg:gap-0 flex justify-between items-center ${padding && "pb-[18rem]"}`}>
-                 {/* Start Date Beginnings */}
-                 <div className="w-full lg:w-[40%] flex flex-col space-y-1">
-                  <label htmlFor="birthDate" className="text-sm font-medium">
-                   Starting Date
-                  </label>
-                  <input type="date" name="date" id="date"
-                  defaultValue={item.startingDate}
-                   {...register('startingDate', {
-                   required: true,
-                  })} className='p-[0.65rem] w-full focus:ring  rounded-md border focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-90' onClick={() => setPadding(!padding)} onChange={() => setPadding(!padding)} />
-                  <p className="pt-1">
-                   <span className="text-red-400 ">
-                    {errors.startingDate && (
-                     <span>Starting Date is Needed!</span>
-                    )}
-                   </span>
-                  </p>
-                 </div>
-                 {/* End Date Beginnings */}
-                 <div className="w-full lg:w-[40%] flex flex-col space-y-1">
-                  <label htmlFor="birthDate" className="text-sm font-medium">
-                   Ending Date
-                  </label>
-                  <input type="date" name="date"
-                  defaultValue={item.startingDate}
-                  id="date" {...register('endingDate', {
-                   required: true,
-                  })} className='p-[0.65rem] w-full focus:ring  rounded-md border focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-90' onClick={() => setPadding(!padding)} onChange={() => setPadding(!padding)} />
-                  <p className="pt-1">
-                   <span className="text-red-400 ">
-                    {errors.endingDate && (
-                     <span>Ending Date is Needed!</span>
-                    )}
-                   </span>
-                  </p>
-                 </div>
+    return (
+        <section className="w-full bg-[#f4fbff] mt-4 ">
+            {/* Add Project section  starts */}
+            <div className="bg-lightblue w-full flex flex-col p-[0.5rem]">
+                <div className="flex flex-nowrap justify-between items-center border-b-headers  p-2 mb-4">
+                    <h1 className="text-[#19A5FF] text-start font-sans  border-b-2 border-[#19A5FF] font-semibold text-2xl ">
+                        Edit Project
+                    </h1>
                 </div>
 
-               </div>
-                <button className='my-4 bg-[#A5DBFF] py-3 px-6 font-sans text-center ml-[1rem] border-[2px] border-[#4DB9FF] rounded-md text-black' type='submit'>ADD</button>
+                <form onSubmit={handleSubmit(handleUpdate)} className="space-y-3 w-full">
+                    <p className="w-full text-[#b0b1b2] text-sm font-sans">Edit Project</p>
+                    {/* Add Project Beginnings */}
+                    <div className=" w-[70%] space-y-8 pt-4">
+                        {/* Project Name Beginnings */}
+                        <div className="w-[75%] space-y-1">
+                            <label htmlFor="age" className="text-sm font-medium">
+                                Project Name
+                            </label>
+                            <input
+                                id="full_name"
+                                {...register('projectName', {
+                                    required: 'Project Name is Required',
+                                })}
+                                defaultValue={projectName}
+                                type="text"
+                                placeholder="Sample Name"
+                                className="w-full border p-md rounded-md   border-gray-200"
+                            />
+                            <p className="pt-1">
+                                <span className="text-red-400 ">
+                                    {errors.projectName && errors?.projectName?.message}
+                                </span>
+                            </p>
+                        </div>
+                        {/* Project Link Beginnings */}
+                        <div className="w-[75%]   space-y-1">
+                            <label htmlFor="projectLink" className="text-sm font-medium">
+                                Project Link
+                            </label>
+                            <input
+                                id="projectLink"
+                                {...register('projectLink', {
+                                    required: 'Project Link is Required',
+                                    // pattern: {
+                                    //     value: /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?\/?$/,
+                                    //     message: 'Url is not valid',
+                                    // },
+                                })}
+                                defaultValue={projectLink}
+                                type="text"
+                                placeholder="https://"
+                                className="w-full border p-3 border-gray-200 rounded-md focus:ring focus:ring-opacity-75 focus:ring-[#3b82f6] "
+                            />
+                            <p className="pt-1">
+                                <span className="text-red-400 ">
+                                    {errors.projectLink && (
+                                        <span>{errors?.projectLink?.message}</span>
+                                    )}
+                                </span>
+                            </p>
+                        </div>
+                        {/* Description Beginnings */}
+                        <div className="w-[75%]   space-y-1">
+                            <label htmlFor="age" className="text-sm font-medium">
+                                Project Description
+                            </label>
+                            <textarea
+                                id="projectDescription"
+                                {...register('projectDescription', {
+                                    required: 'Project Description is Required',
+                                    minLength: {
+                                        value: 3,
+                                        message: 'Min 3 characters Required',
+                                    },
+                                })}
+                                defaultValue={projectDescription}
+                                type="text"
+                                placeholder="Your Project Description"
+                                className="w-full textarea border p-3 border-gray-200 rounded-md "
+                            />
 
-              </form>
-             )
-            })
-              }
- 
-        </div>
-      </section>
-    </RemoForceSettingsItems>
-  )
-}
+                            <p className="pt-1">
+                                <span className="text-red-400 ">
+                                    {errors.projectDescription &&
+                                        errors?.projectDescription?.message}
+                                </span>
+                            </p>
+                        </div>
+                        {/* Type Beginnings */}
+                        <div className="w-[45%]   space-y-1">
+                            <label htmlFor="projectType" className="text-sm font-medium">
+                                Type
+                            </label>
+                            <select
+                                name="projectType"
+                                id="projectType"
+                                className="select w-full mt-3"
+                                {...register('projectType', {
+                                    required: 'Project Type is Required',
+                                })}
+                                defaultValue={projectType}
+                            >
+                                <option defaultValue={projectType} className="hidden">
+                                    {projectType || 'Choose'}
+                                </option>
+                                {typeLists.map((item) => (
+                                    <option
+                                        value={item.name.toLowerCase()}
+                                        key={Math.random()}
+                                        className="text-[18px]"
+                                    >
+                                        {item.name}
+                                    </option>
+                                ))}
+                            </select>
+                            <p className="pt-1">
+                                <span className="text-red-400 ">
+                                    {errors.projectType && errors?.projectType?.message}
+                                </span>
+                            </p>
+                        </div>
+                        {/* Dates Beginnings */}
+                        <div className="w-[90%] flex gap-2 justify-between items-center">
+                            {/* Start Date Beginnings */}
+                            <div className="w-full lg:w-[40%] flex flex-col space-y-1">
+                                <label htmlFor="birthDate" className="text-sm font-medium">
+                                    Starting Date
+                                </label>
+                                <input
+                                    type="date"
+                                    name="date"
+                                    id="date"
+                                    {...register('startingDate', {
+                                        required: true,
+                                    })}
+                                    className="p-[0.65rem] w-full   rounded-md border border-[#e5e7eb]  "
+                                    defaultValue={startingDate}
+                                    onClick={() => setPadding(!padding)}
+                                    onChange={() => setPadding(!padding)}
+                                />
+                                <p className="pt-1">
+                                    <span className="text-red-400 ">
+                                        {errors.startingDate && (
+                                            <span>Starting Date is Needed!</span>
+                                        )}
+                                    </span>
+                                </p>
+                            </div>
+                            {/* End Date Beginnings */}
+                            <div className="w-full lg:w-[40%] flex flex-col space-y-1">
+                                <label htmlFor="birthDate" className="text-sm font-medium">
+                                    Ending Date
+                                </label>
+                                <input
+                                    type="date"
+                                    name="date"
+                                    id="date"
+                                    {...register('endingDate', {
+                                        required: true,
+                                    })}
+                                    className="p-[0.65rem] w-full   rounded-md border border-[#e5e7eb]  "
+                                    defaultValue={endingDate}
+                                    onClick={() => setPadding(!padding)}
+                                    onChange={() => setPadding(!padding)}
+                                />
+                                <p className="pt-1">
+                                    <span className="text-red-400 ">
+                                        {errors.endingDate && <span>Ending Date is Needed!</span>}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex">
+                        <button
+                            className="my-4 bg-[#A5DBFF] py-3 px-6 font-sans text-center ml-[1rem] border-[2px] border-[#4DB9FF] rounded-md text-black"
+                            type="submit"
+                        >
+                            UPDATE
+                        </button>
+                        <button
+                            className="my-4 bg-black py-3 px-6 font-sans text-center ml-[1rem]  rounded-md text-white"
+                            type="button"
+                            onClick={() => setEditMode(false)}
+                        >
+                            CANCEL
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    );
+};
 
-export default EditProject
+export default EditProject;

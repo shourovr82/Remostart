@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
 
 function AddExperienceForm({ setWorkExperienceLists, setBool, workExperienceLists }) {
     // Initialize use form hook
@@ -13,8 +12,6 @@ function AddExperienceForm({ setWorkExperienceLists, setBool, workExperienceList
         mode: 'onChange',
     });
 
-    const [padding, setPadding] = useState(false);
-
     // typeLists
     const typeLists = [
         { name: 'Internship' },
@@ -23,10 +20,12 @@ function AddExperienceForm({ setWorkExperienceLists, setBool, workExperienceList
         { name: 'Remote' },
     ];
     const httpAddWorkExperience = (data) => {
-        console.log(data);
         if (data) {
-            setWorkExperienceLists([...workExperienceLists, data]);
-            toast.success('Successfully added a Work Experience');
+            const experienceData = {
+                ...data,
+                id: Math.random(),
+            };
+            setWorkExperienceLists([...workExperienceLists, experienceData]);
             reset();
             setBool(false);
         }
@@ -34,11 +33,7 @@ function AddExperienceForm({ setWorkExperienceLists, setBool, workExperienceList
 
     return (
         <form className="space-y-3 w-full" onSubmit={handleSubmit(httpAddWorkExperience)}>
-            <p className="w-full text-hr text-sm font-sans">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie,
-                dictum est a, mattis tellus. Sed dignissim, metusnec fringilla accumsan, risus sem
-                sollicitudin lacus, ut interdum tellus elit sed risus
-            </p>
+          
             {/* Add Experience Beginnings */}
             <div className=" w-[70%] space-y-8 pt-4">
                 {/* Company Name Beginnings */}

@@ -25,14 +25,21 @@ import AllBlogsList from '../AdminPages/AlllBlogsList';
 import UpdateBlog from '../AdminPages/UpdateBlog';
 import TermsAndCondition from '../Pages/CommonPages/TermsAndCondition';
 import RemoForceShadowing from '../Pages/RemoForce/RemoForceShadowing';
-import ApplyJob from '../Pages/RemoForceDashBoard/AllJobs/ApplyJob';
-import RemoForceDashBoard from '../Pages/RemoForceDashBoard/AllJobs/RemoForceDashBoard';
 import RemoForceDashboard from '../Pages/RemoForceDashBoard/RemoForceDashboard/RemoForceDashboard';
+import ApplyJob from '../Pages/RemoForceDashBoard/RemoforceJobs/ApplyJob';
+import RemoforceContracts from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/RemoforceContracts';
+import RemoforceGigs from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/RemoforceGigs';
+import RemoforceInternship from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/RemoforceInternship';
+import RemoforcePrivateJobs from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/RemoforcePrivateJobs';
+import RemoforcePublicJobs from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/RemoforcePublicJobs';
+import RemoforceShadowing from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/RemoforceShadowing';
+import RemoForceDashBoard from '../Pages/RemoForceDashBoard/RemoforceJobs/RemoForceDashBoard';
 import RemoForceMyJob from '../Pages/RemoForceDashBoard/RemoForceMyJob/RemoForceMyJob';
 import RemoForceProfile from '../Pages/RemoForceDashBoard/RemoForceProfile/RemoForceProfile';
 import RemoforceSettings from '../Pages/RemoForceDashBoard/RemoForceSetting/RemoForceSettings';
 import AccountSettings from '../Pages/RemoForceDashBoard/RemoForceSettings/AccountManagementSettings/AccountSettings';
 import AddEducation from '../Pages/RemoForceDashBoard/RemoForceSettings/EducationSettings/AddEducation';
+import AddProject from '../Pages/RemoForceDashBoard/RemoForceSettings/ProjectsSettings/AddProject';
 import SkillAndPreferenceSettings from '../Pages/RemoForceDashBoard/RemoForceSettings/SkillAndPreferenceSettings';
 import AddExperience from '../Pages/RemoForceDashBoard/RemoForceSettings/WorkExperienceSettings/AddExperience';
 import RemoForceVerify from '../Pages/RemoForceDashBoard/RemoForceVerify/RemoForceVerify';
@@ -54,7 +61,7 @@ import Settings from '../Pages/StartupDashboard/Settings/Settings';
 import SettingsGeneral from '../Pages/StartupDashboard/Settings/SettingsGeneral';
 import GeneralSettingsVerification from '../Pages/StartupDashboard/Settings/SettingsGeneral/GeneralSettingsVerification';
 import SettingsProfile from '../Pages/StartupDashboard/Settings/SettingsProfile';
-import TalentRequest from '../Pages/StartupDashboard/TalentRequest';
+import TalentRequest from '../Pages/StartupDashboard/TalentRequest/TalentRequest';
 import StartupHome from '../Pages/StartupPages/StartupHome';
 import StartupSignUp from '../Pages/StartupPages/StartupSignUp';
 import StartupWelcomePage from '../Pages/StartupPages/StartupWelcomePage';
@@ -65,6 +72,7 @@ import RemoForceRoute from './RemoforceRoute';
 import DashboardHome from './Roots/DashboardHome';
 import RemoForceDashboardRoot from './Roots/RemoForceDashBoardRoot';
 import StartupRoute from './StartupRoute';
+import ApplyCategoryJob from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/ApplyCategoryJob';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -132,26 +140,28 @@ const router = createBrowserRouter(
                 {/* Gigs post job */}
                 <Route path="/dashboard/post-job/gigs" element={<GigsJobs />} />
                 <Route path="/dashboard/post-job/gigs/review" element={<GigsJobsReview />} />
+                <Route path="/dashboard/gigs/:id" element={<GigsJobsReview />} />
                 {/* shadowing post job */}
                 <Route path="/dashboard/post-job/shadowing" element={<ShadowingJob />} />
                 <Route
                     path="/dashboard/post-job/shadowing-job/review"
                     element={<ShadowingJobReview />}
                 />
-
+                <Route path="/dashboard/shadowing/:id" element={<ShadowingJobReview />} />
                 {/* Contracts */}
                 <Route path="/dashboard/post-job/contracts" element={<Contracts />} />
+                <Route path="/dashboard/post-job/edit/contracts" element={<Contracts />} />
                 <Route path="/dashboard/post-job/contracts/review" element={<ContractsReview />} />
-
+                <Route path="/dashboard/contracts/:id" element={<ContractsReview />} />
                 {/* view application */}
             </Route>
 
             {/* remoforce routes */}
 
             <Route path="/remoforce" element={<RemoForceHome />} />
-            {/* remoforce shadowing */}
+
             <Route path="/remoforce/shadowing" element={<RemoForceShadowing />} />
-            {/* remoforce shadowing ---------------*/}
+            {/* Remoforce Dashboard */}
             <Route
                 path="/remoforce-dashboard"
                 element={
@@ -162,14 +172,34 @@ const router = createBrowserRouter(
                 errorElement={<ErrorPage />}
             >
                 <Route path="/remoforce-dashboard" element={<RemoForceDashBoard />} />
+                {/* Remoforce Dashboard profile */}
                 <Route path="/remoforce-dashboard/profile" element={<RemoForceProfile />} />
+                {/* Remoforce Dashboard my job */}
                 <Route path="/remoforce-dashboard/my_job" element={<RemoForceMyJob />} />
+                {/* Remoforce Dashboard verify */}
                 <Route path="/remoforce-dashboard/verify" element={<RemoForceVerify />} />
+                {/* Remoforce Dashboard dashboard */}
                 <Route path="/remoforce-dashboard/dashboard" element={<RemoForceDashboard />} />
+                {/* Remoforce Dashboard settings */}
                 <Route path="/remoforce-dashboard/setting" element={<RemoForceMyJob />} />
+                {/* Remoforce Dashboard shadowing */}
                 <Route path="/remoforce-dashboard/shadowing" element={<RemoForceMyJob />} />
+                {/* Remoforce Dashboard job pages */}
                 <Route path="/remoforce-dashboard/all-jobs" element={<RemoForceDashBoard />} />
+                <Route
+                    path="/remoforce-dashboard/shadowing-jobs"
+                    element={<RemoforceShadowing />}
+                />
+                <Route path="/remoforce-dashboard/public-jobs" element={<RemoforcePublicJobs />} />
+                <Route
+                    path="/remoforce-dashboard/private-jobs"
+                    element={<RemoforcePrivateJobs />}
+                />
+                <Route path="/remoforce-dashboard/internship" element={<RemoforceInternship />} />
+                <Route path="/remoforce-dashboard/gigs" element={<RemoforceGigs />} />
+                <Route path="/remoforce-dashboard/contracts" element={<RemoforceContracts />} />
                 <Route path="/remoforce-dashboard/all-jobs/:id" element={<ApplyJob />} />
+                <Route path="/remoforce-dashboard/category-jobs/:id" element={<ApplyCategoryJob />} />
                 {/* Remoforce Settings route */}
                 <Route path="/remoforce-dashboard/settings" element={<RemoforceSettings />} />
                 <Route
@@ -182,6 +212,7 @@ const router = createBrowserRouter(
                     element={<AddExperience />}
                 />
                 <Route path="/remoforce-dashboard/account-settings" element={<AccountSettings />} />
+                <Route path="/remoforce-dashboard/add-project" element={<AddProject />} />
             </Route>
 
             {/* blog routes */}

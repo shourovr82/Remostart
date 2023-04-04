@@ -1,5 +1,5 @@
 import React from 'react';
-import { HiOutlineUser } from 'react-icons/hi2';
+import { HiOutlineUser, HiOutlineUsers } from 'react-icons/hi2';
 import { NavLink } from 'react-router-dom';
 import set from '../../Assets/RemoForceDashboard/ProfileSettings/settings.png';
 
@@ -25,11 +25,11 @@ const data = [
         path: '/remoforce-dashboard/add-work-experience',
         icon: <HiOutlineUser className="inline-block pr-1 text-xl mb-px" />,
     },
-    // {
-    //     title: 'Projects',
-    //     path: '/remoforce-dashboard/project',
-    //     icon: <HiOutlineUsers className="inline-block pr-1 text-xl mb-px" />,
-    // },
+    {
+        title: 'Projects',
+        path: '/remoforce-dashboard/add-project',
+        icon: <HiOutlineUsers className="inline-block pr-1 text-xl mb-px" />,
+    },
     {
         title: 'Account Settings',
         path: '/remoforce-dashboard/account-settings',
@@ -50,8 +50,7 @@ function RemoForceSettingsItems({ children }) {
                         <li className=" text-xs lg:text-md 2xl:text-base" key={Math.random()}>
                             <NavLink
                                 className={({ isActive }) =>
-                                    ` border-b-[3px] px-1.5   py-1.5 font-medium lg:p-4 ${
-                                        isActive ? ' border-[#19A5FF]  text-[#19A5FF]' : ''
+                                    ` border-b-[3px] px-1.5   py-1.5 font-medium lg:p-4 ${isActive ? ' border-[#19A5FF]  text-[#19A5FF]' : ''
                                     }`
                                 }
                                 to={item.path}

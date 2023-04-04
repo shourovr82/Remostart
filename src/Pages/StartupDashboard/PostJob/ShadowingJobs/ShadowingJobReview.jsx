@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BiBookmarks, BiUser } from 'react-icons/bi';
+import { FaRegClock } from 'react-icons/fa';
 import { GiSandsOfTime } from 'react-icons/gi';
 import { GoLocation } from 'react-icons/go';
 import { RiShareForwardLine } from 'react-icons/ri';
@@ -12,7 +13,6 @@ import ApplicationRequests from '../InternshipJob/ApplicationRequests';
 
 const ShadowingJobReview = () => {
     const [shadowingJob, setShadowingJob] = useState(false);
-
     const [storedJob, setStoredJob] = useState({});
     const location = useLocation();
     const data = location?.state && location?.state?.data;
@@ -78,14 +78,48 @@ const ShadowingJobReview = () => {
             <div className="mt-[121px] lg:grid lg:grid-cols-4  ">
                 <div className="lg:col-span-3 mt-5 pr-2">
                     {/* Job Description   */}
-
-                    <p className="whitespace-pre-wrap ">{storedJob?.description}</p>
+                    <div>
+                        <p className="whitespace-pre-wrap ">{storedJob?.description}</p>
+                        {/* curriculum */}
+                    </div>
+                    <div>
+                        <h1 className=" mt-6 font-semibold text-2xl">Curriculum:</h1>
+                        <hr className="h-[3px] bg-[#19A5FF]  w-2/5" />
+                        <p className="whitespace-pre-wrap ">{storedJob?.curriculum}</p>
+                    </div>
+                    {/* shadowing duration start  */}
+                    {/* shadowing Duration Details */}
+                    <div>
+                        <h1 className=" mt-[30px] font-semibold text-2xl">Shadowing Duration:</h1>
+                        <hr className="h-[3px] bg-[#19A5FF]  w-3/4 lg:w-2/4" />
+                        <div className=" mb-4 mt-[10px] flex gap-5">
+                            <div>
+                                <h4 className="font-semibold">Starting Date</h4>
+                                <p className="flex items-center rounded-md gap-3 font-semibold py-2 px-4 bg-[#F0F9FF]  ">
+                                    <span>
+                                        <FaRegClock className="text-[#65DC7F] text-lg" />
+                                    </span>
+                                    <span>{storedJob?.StartingDate}</span>
+                                </p>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold">Ending Date</h4>
+                                <p className="flex  rounded-md items-center gap-3 font-semibold py-2 px-4 bg-[#F0F9FF]  ">
+                                    <span>
+                                        <FaRegClock className="text-[#F60C36] text-lg" />
+                                    </span>
+                                    <span>{storedJob?.EndingDate}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {/* shadowing duration ends */}
 
                     {/* Mentor Section */}
                     <h1 className=" mt-[30px] font-semibold text-2xl">Mentor:</h1>
-                    <hr className="h-[4px] bg-[#19A5FF]  w-2/5" />
+                    <hr className="h-[3px] bg-[#19A5FF]  w-2/5" />
                     <div className="mt-[30px] relative w-[90%] mb-4 p-3 border rounded-md border-[#ffee55] bg-gradient-to-r from-[#ffee55]  to-[#fffef4]">
-                        <h2 className="font-semibold"> Mentor Name:</h2>
+                        <h2 className="font-semibold"> Mentor Name: {storedJob?.MentorName} </h2>
                         <p className="mt-[9px]  py-2 rounded-md font-semibold">
                             {storedJob?.AddMentorBio}
                         </p>
@@ -117,6 +151,16 @@ const ShadowingJobReview = () => {
                                         <p className="text-sm px-[10px] py-[8px] ">
                                             {requiredSkill}
                                         </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div>
+                            <h1 className="font-semibold text-2xl mb-3">Domains Required:</h1>
+                            <div className="flex flex-wrap  w-full gap-2">
+                                {storedJob?.domains?.map((domain) => (
+                                    <div key={Math.random()} className="bg-[#F0F9FF]  rounded-md ">
+                                        <p className="text-sm px-[10px] py-[8px] ">{domain}</p>
                                     </div>
                                 ))}
                             </div>

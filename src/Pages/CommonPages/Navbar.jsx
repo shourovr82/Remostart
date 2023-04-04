@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { BiUser } from 'react-icons/bi';
 
-import userLogo from '../../Assets/Images/avatar.png';
+// import userLogo from '../../Assets/Images/avatar.png';
 import logo from '../../Assets/Images/logoBlack.png';
 import AuthContext from '../../Context/AuthContext';
 import useAuth from '../../Hooks/useAuth';
@@ -17,7 +17,6 @@ const Navbar = () => {
     const { user } = useAuth();
     const [currentUser, setCurrentUser] = useState({});
     const { serviceUser } = useContext(AuthContext);
-
     // logout functionality
     const navigate = useNavigate();
     const token = Cookies.get('token');
@@ -139,9 +138,9 @@ const Navbar = () => {
                         {/* dropdown: Desktop */}
                         <li>
                             <div className="dropdown dropdown-end">
-                                <label tabIndex={0} className="">
-                                    <BiUser className="inline-block" />
-                                    <span className="inline-block rotate-180">^</span>
+                                <label tabIndex={0} className="cursor-pointer">
+                                    <BiUser className="inline-block " />
+                                    <span className="inline-block rotate-180 ">^</span>
                                 </label>
 
                                 <ul
@@ -152,13 +151,13 @@ const Navbar = () => {
                                     {(token || serviceUser?.role) && (
                                         <li className="bg-[#f3f4f6]">
                                             <div className="flex  py-1.5 flex-row justify-center items-center text-center">
-                                                <div className="w-1/3 pl-4">
+                                                {/* <div className="w-1/3 pl-4">
                                                     <img
                                                         src={userLogo}
                                                         className="rounded-full w-10 h-10"
                                                         alt=""
                                                     />
-                                                </div>
+                                                </div> */}
                                                 <div className="flex flex-1 flex-col space-y-1 items-start">
                                                     <span className="text-[#6B7280] text-sm font-normal">
                                                         Signed in as
@@ -384,23 +383,23 @@ const Navbar = () => {
                                                 role === 'undefined' ||
                                                 role === 'remoforce') &&
                                                 serviceUser?.role !== 'startup' && (
-                                                <li>
-                                                    <Link
-                                                        to="/remoforce"
-                                                        aria-label="RemoForce"
-                                                        title="RemoForce"
-                                                        className="font-normal text-xs tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                                                    >
-                                                        {' '}
-                                                        <button
-                                                            onClick={() => setIsMenuOpen(false)}
-                                                            type="button"
+                                                    <li>
+                                                        <Link
+                                                            to="/remoforce"
+                                                            aria-label="RemoForce"
+                                                            title="RemoForce"
+                                                            className="font-normal text-xs tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                                         >
-                                                            RemoForce
-                                                        </button>
-                                                    </Link>
-                                                </li>
-                                            )}
+                                                            {' '}
+                                                            <button
+                                                                onClick={() => setIsMenuOpen(false)}
+                                                                type="button"
+                                                            >
+                                                                RemoForce
+                                                            </button>
+                                                        </Link>
+                                                    </li>
+                                                )}
 
                                             {/* Hamburger Remoforce */}
 
@@ -437,13 +436,13 @@ const Navbar = () => {
                                                             {token && (
                                                                 <li className="bg-[#f3f4f6]">
                                                                     <div className="flex  py-1.5 flex-row justify-center items-center text-center">
-                                                                        <div className="w-1/3 pl-4">
+                                                                        {/* <div className="w-1/3 pl-4">
                                                                             <img
                                                                                 src={userLogo}
                                                                                 className="rounded-full w-10 h-10"
                                                                                 alt=""
                                                                             />
-                                                                        </div>
+                                                                        </div> */}
                                                                         <div className="flex flex-1 flex-col space-y-1 items-start">
                                                                             <span className="text-[#6B7280] text-sm font-normal">
                                                                                 Signed in as

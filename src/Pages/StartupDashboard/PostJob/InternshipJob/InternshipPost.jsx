@@ -93,9 +93,8 @@ const InternshipPost = () => {
             </div>
             <p className="border-[#BCBCBC] bg-[#BCBCBC] border mt-2" />
             <p className="text-gray-400 mt-6 lg:mt-1">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et
-                velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora
-                torquent per conubia nostra, per inceptos himenaeos.
+                This is a kind of job where you are concerned with training the talents to grow, it
+                can be paid or unpaid and you commit to certify them on completion
             </p>
 
             {/* Start Form  */}

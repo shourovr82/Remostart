@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft } from 'react-icons/bi';
@@ -11,12 +11,16 @@ import { setJob } from '../../../../Hooks/useLocalStorage';
 
 const ShadowingJob = () => {
     // handle skill input
+    const getStoredItem = (key) => JSON.parse(localStorage.getItem('shadowing')) || {};
+    const storedJob = getStoredItem();
     const [tag, setTag] = useState('');
-    const [skills, setSkills] = useState([]);
+    const [skills, setSkills] = useState((storedJob?.skills?.length && storedJob?.skills) || []);
 
     // State Of Disable Domains
     const [disableOption, setDisable] = useState(false);
-    const [selectedValues, setSelectedValues] = useState([]);
+    const [selectedValues, setSelectedValues] = useState(
+        (storedJob?.domains?.length && storedJob?.domains) || []
+    );
     // get values
 
     const { user } = useSelector((state) => state.auth);
@@ -31,20 +35,16 @@ const ShadowingJob = () => {
     const locationData = location?.state && location?.state?.data;
 
     // Domain Function start
-    const domainData = [
-        {
-            value: 'WebDevelopment',
-            label: 'WebDevelopment',
-        },
-        {
-            value: 'BlockChain',
-            label: 'BlockChain',
-        },
-        {
-            value: 'Content Writing',
-            label: 'Content Writing',
-        },
-    ];
+    const [jData, setJData] = useState({});
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('/data.json');
+            const jsonData = await response.json();
+            setJData(jsonData);
+        }
+        fetchData();
+    }, []);
+    console.log(jData.Domains);
 
     const handleChange = (e) => {
         const selectedOptions = e.target.selectedOptions[0].innerHTML;
@@ -59,8 +59,7 @@ const ShadowingJob = () => {
     const buttonHandle = () => {
         setDisable(false);
     };
-    const getStoredItem = (key) => JSON.parse(localStorage.getItem('shadowing')) || {};
-    const storedJob = getStoredItem();
+
     // domains function end
     const {
         register,
@@ -70,14 +69,19 @@ const ShadowingJob = () => {
 
     // submit job data to local storage
     const onSubmit = (data) => {
+        const { mentorsBio, mentorsName, mentorsLinkedInURL, ...rest } = data;
+
         const shadowingJobData = {
-            ...data,
+            ...rest,
             skills,
-            selectedValues,
+            domains: selectedValues,
             categoryName,
+            mentorsInfo: { mentorsBio, mentorsName, mentorsLinkedInURL },
             apiPath: jobName,
             email: user?.user.email,
         };
+        console.log(shadowingJobData);
+
         if (shadowingJobData) {
             setJob(jobName, shadowingJobData);
             navigate('/dashboard/post-job/shadowing-job/review');
@@ -115,19 +119,19 @@ const ShadowingJob = () => {
                     <label className="block font-semibold text-gray-900 ">Shadowing Title</label>
                     <input
                         type="Text"
-                        name="shadowingTitle"
-                        {...register('shadowingTitle', {
+                        name="title"
+                        {...register('title', {
                             required: true,
                         })}
-                        defaultValue={storedJob?.shadowingTitle}
-                        id="shadowingTitle"
+                        defaultValue={storedJob?.title}
+                        id="title"
                         placeholder="Shadowing Title"
                         className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#e5e5e5]  text-gray-900 "
                     />
                     <p className="pt-2">
-                        {errors.shadowingTitle && (
+                        {errors.title && (
                             <span className="text-red-400 ">
-                                {errors.shadowingTitle?.type === 'required' &&
+                                {errors.title?.type === 'required' &&
                                     'Please provide your Shadowing Title '}
                             </span>
                         )}
@@ -246,7 +250,7 @@ const ShadowingJob = () => {
                             <option value="Domains" hidden className="px-2">
                                 Choose
                             </option>
-                            {domainData.map((D, i) => (
+                            {jData?.domains?.map((D, i) => (
                                 <option
                                     onClick={handleClick}
                                     disabled={disableOption}
@@ -321,12 +325,12 @@ const ShadowingJob = () => {
                     <div className="flex gap-2 justify-between items-center w-full md:w-1/2  pr-3 rounded-md border border-[#BCBCBC focus:outline-none] ">
                         <input
                             type="number"
-                            name="Salary"
-                            {...register('Salary', {
+                            name="salary"
+                            {...register('salary', {
                                 required: 'Compensation is Required',
                             })}
-                            id="Salary"
-                            defaultValue={storedJob?.Salary}
+                            id="salary"
+                            defaultValue={storedJob?.salary}
                             placeholder="Compensation Range"
                             className="w-full border-transparent rounded-md ring-white py-5 text-gray-900 focus:outline-none "
                         />
@@ -334,8 +338,8 @@ const ShadowingJob = () => {
                         {/* <img src={currencyIcon} alt="" /> */}
                     </div>
                     <p className="pt-2">
-                        {errors.Salary && (
-                            <span className="text-red-400 ">{errors.Salary?.message}</span>
+                        {errors.salary && (
+                            <span className="text-red-400 ">{errors.salary?.message}</span>
                         )}
                     </p>
                 </div>
@@ -369,18 +373,18 @@ const ShadowingJob = () => {
                         <label className="block font-semibold text-gray-900">Ending Date</label>
                         <input
                             type="date"
-                            name="EndingDate"
-                            {...register('EndingDate', {
+                            name="endingDate"
+                            {...register('endingDate', {
                                 required: true,
                             })}
-                            defaultValue={storedJob && storedJob?.EndingDate}
-                            id="ApplyBefore"
+                            defaultValue={storedJob && storedJob?.endingDate}
+                            id="applyBefore"
                             className="lg:w-[330px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
                         />
                         <p className="pt-2">
-                            {errors.EndingDate && (
+                            {errors.endingDate && (
                                 <span className="text-red-400 ">
-                                    {errors.EndingDate?.type === 'required' &&
+                                    {errors.endingDate?.type === 'required' &&
                                         'Please provide your Ending Date'}
                                 </span>
                             )}
@@ -392,18 +396,18 @@ const ShadowingJob = () => {
                     <label className="block font-semibold text-gray-900">Apply Before</label>
                     <input
                         type="date"
-                        name="ApplyBefore"
-                        {...register('ApplyBefore', {
+                        name="applyBefore"
+                        {...register('applyBefore', {
                             required: true,
                         })}
-                        defaultValue={storedJob?.ApplyBefore}
-                        id="ApplyBefore"
+                        defaultValue={storedJob?.applyBefore}
+                        id="applyBefore"
                         className="lg:w-[330px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
                     />
                     <p className="pt-2">
-                        {errors?.ApplyBefore && (
+                        {errors?.applyBefore && (
                             <span className="text-red-400 ">
-                                {errors?.ApplyBefore?.type === 'required' &&
+                                {errors?.applyBefore?.type === 'required' &&
                                     'Please provide your Apply Before'}
                             </span>
                         )}
@@ -413,19 +417,19 @@ const ShadowingJob = () => {
                     <label className="block font-semibold text-gray-900">Location </label>
                     <input
                         type="Text"
-                        name="Location"
-                        {...register('Location', {
+                        name="location"
+                        {...register('location', {
                             required: true,
                         })}
-                        id="Location"
-                        defaultValue={storedJob?.Location}
+                        id="location"
+                        defaultValue={storedJob?.location}
                         placeholder="Remote"
                         className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
                     />
                     <p className="pt-2">
-                        {errors.Location && (
+                        {errors.location && (
                             <span className="text-red-400 ">
-                                {errors.Location?.type === 'required' &&
+                                {errors.location?.type === 'required' &&
                                     'Please provide your Job Title'}
                             </span>
                         )}
@@ -439,19 +443,19 @@ const ShadowingJob = () => {
 
                     <input
                         type="Text"
-                        name="MentorName"
-                        {...register('MentorName', {
+                        name="mentorsName"
+                        {...register('mentorsName', {
                             required: true,
                         })}
-                        defaultValue={storedJob?.MentorName}
+                        defaultValue={storedJob?.mentorsName}
                         placeholder="Sample input"
-                        id="MentorName"
+                        id="mentorsName"
                         className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
                     />
                     <p className="pt-2">
-                        {errors.MentorName && (
+                        {errors.mentorsName && (
                             <span className="text-red-400 ">
-                                {errors.MentorName?.type === 'required' &&
+                                {errors.mentorsName?.type === 'required' &&
                                     'Please provide your mentor name'}
                             </span>
                         )}
@@ -462,32 +466,32 @@ const ShadowingJob = () => {
                     <label className="block font-semibold text-gray-900">Add Mentor Bio</label>
                     {/* <input
                         type="Text"
-                        name="AddMentorBio"
-                        {...register('AddMentorBio', {
+                        name="mentorsBio"
+                        {...register('mentorsBio', {
                             required: true,
                         })}
-                        id="AddMentorBio"
-                        defaultValue={storedJob?.AddMentorBio || ''}
+                        id="mentorsBio"
+                        defaultValue={storedJob?.mentorsBio || ''}
                         placeholder="Sample input"
                         className=" w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
             /> */}
 
                     <textarea
                         type="Text"
-                        name="AddMentorBio"
-                        {...register('AddMentorBio', {
+                        name="mentorsBio"
+                        {...register('mentorsBio', {
                             required: true,
                         })}
-                        id="AddMentorBio"
-                        defaultValue={storedJob?.AddMentorBio}
+                        id="mentorsBio"
+                        defaultValue={storedJob?.mentorsBio}
                         placeholder="Mentor Bio"
                         className="lg:w-[520px] h-20 w-full px-4 py-3 rounded-md border border-[#e5e5e5]  text-gray-900 "
                     />
 
                     <p className="pt-2">
-                        {errors.AddMentorBio && (
+                        {errors.mentorsBio && (
                             <span className="text-red-400 ">
-                                {errors.AddMentorBio?.type === 'required' &&
+                                {errors.mentorsBio?.type === 'required' &&
                                     'Please provide your Add Mentor Bio'}
                             </span>
                         )}
@@ -497,21 +501,21 @@ const ShadowingJob = () => {
                     <label className="block font-semibold text-gray-900">LinkedIn URL</label>
                     <input
                         type="Text"
-                        name="LinkedInURL"
-                        {...register('LinkedInURL', {
+                        name="mentorsLinkedInURL"
+                        {...register('mentorsLinkedInURL', {
                             required: true,
                             pattern:
                                 /^(http(s):\/\/.)[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/,
                         })}
-                        id="LinkedInURL"
-                        defaultValue={storedJob?.LinkedInURL}
+                        id="mentorsLinkedInURL"
+                        defaultValue={storedJob?.mentorsLinkedInURL}
                         placeholder="Linkedin"
                         className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
                     />
                     <p className="pt-2">
-                        {errors.LinkedInURL && (
+                        {errors.mentorsLinkedInURL && (
                             <span className="text-red-400 ">
-                                {errors.LinkedInURL?.type === 'required' &&
+                                {errors.mentorsLinkedInURL?.type === 'required' &&
                                     'Please provide a valid Linkedin URL'}
                             </span>
                         )}

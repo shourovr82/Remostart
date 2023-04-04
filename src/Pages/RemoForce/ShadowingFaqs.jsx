@@ -1,7 +1,7 @@
 import React from 'react';
 /* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
-import faqImage from '../../Assets/Images/RemoForceHome/Faq.png'
+import faqImage from '../../Assets/Images/RemoForceHome/Faq.png';
 
 const ShadowingFaqs = () => {
   const shadowingFaqs = [

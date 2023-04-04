@@ -16,6 +16,7 @@ import './Input.CSS';
 
 const SettingsProfile = () => {
     const { user } = useSelector((state) => state.auth);
+    // hello
 
     const domainData = [
         {

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
@@ -52,7 +53,32 @@ const PublicJob = () => {
         setJob(jobName, jobData);
         navigate('/dashboard/post-job/public-job/review');
     };
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' },
+    ];
 
+    const customStyles = (color = '#f4f') => ({
+        alignItems: 'center',
+        display: 'flex',
+        ':before': {
+            backgroundColor: color,
+            borderRadius: 10,
+            content: '" "',
+            display: 'grid',
+            marginRight: 10,
+            height: 10,
+            width: '100%',
+            border: '2px solid red',
+        },
+    });
+
+    const hanlleChangeSelect = (e) => {
+        console.log(e);
+    };
+
+    // const skillsValue = ['react', 'javascript', 'mongodb', 'express js'];
     return (
         <div>
             <div className="flex gap-4 items-center">
@@ -63,9 +89,8 @@ const PublicJob = () => {
             </div>
             <p className="border-[#BCBCBC] bg-[#BCBCBC] border mt-2" />
             <p className="text-gray-400 mt-6 lg:mt-1">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et
-                velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora
-                torquent per conubia nostra, per inceptos himenaeos.
+                Jobs posted here are ot limited to only our vetted talents. We open it to everyone
+                on the internet and any and everyone can apply.
             </p>
 
             {/* Start Form  */}
@@ -105,7 +130,7 @@ const PublicJob = () => {
                         })}
                         defaultValue={storedJob?.description}
                         id="description"
-                        placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+                        placeholder="description"
                         className="lg:w-3/4 h-16 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
                     />
                     <p className="pt-2">
@@ -178,6 +203,15 @@ const PublicJob = () => {
                                 Skills Required
                             </label>
                             <div className=" lg:w-[50rm]  pr-2 rounded-md border border-[#BCBCBC]  text-gray-900 justify-between flex items-center">
+                                {/* <CreatableSelect
+                                    onChange={hanlleChangeSelect}
+                                    isMulti
+                                    name="color"
+                                    styles={customStyles}
+                                    placeholder="Select Skills"
+                                    options={options}
+                                /> */}
+
                                 <input
                                     id="skills"
                                     type="text"

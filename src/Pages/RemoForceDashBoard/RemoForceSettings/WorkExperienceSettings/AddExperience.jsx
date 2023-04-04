@@ -21,33 +21,6 @@ function AddExperience() {
     const [editMode, setEditMode] = useState(false);
     const [editData, setEditData] = useState({});
 
-    // const workExperienceLists = [
-    //     {
-    //         _id: '1',
-    //         companyName: 'Jack Stones Industry Ltd',
-    //         position: 'Web Developer Intern',
-    //         type: 'Fulltime',
-    //         startingDate: 'Oct 2021',
-    //         endDate: 'Dec 2022',
-    //     },
-    //     {
-    //         _id: '2',
-    //         companyName: 'Hero lorem ipsume',
-    //         position: 'Full Java Spring Framework',
-    //         type: 'Internship',
-    //         startingDate: 'Oct 2019',
-    //         endDate: 'Dec 2022',
-    //     },
-    //     {
-    //         _id: '3',
-    //         companyName: 'RemoStart',
-    //         position: 'Web Developer Intern',
-    //         type: 'Contract',
-    //         startingDate: 'Oct 2021',
-    //         endDate: 'Dec 2022',
-    //     },
-    // ];
-
     const editExperience = (experience) => {
         setEditMode(true);
         setEditData(experience);
@@ -63,7 +36,7 @@ function AddExperience() {
         }
 
         const bodyData = {
-            experienceDetails:workExperienceLists,
+            experienceDetails: workExperienceLists,
             email: user.user.email,
         };
 
@@ -76,7 +49,7 @@ function AddExperience() {
                 if (res.data.modifiedCount || res.data.upsertedCount) {
                     toast.success('Experience data updated successfully');
                     setLoading(false);
-                    navigate('/remoforce-dashboard/account-settings');
+                    navigate('/remoforce-dashboard/add-project');
                 }
 
                 console.log(res);
@@ -92,7 +65,7 @@ function AddExperience() {
         <RemoForceSettingsItems>
             <section className="w-full mt-4 ">
                 {/* Experience section  starts */}
-                <div className="bg-[#F0F9FFBF] w-[70%] flex flex-col p-[0.5rem] rounded-md">
+                <div className="bg-[#F0F9FFBF] w-[70%] mt-8 flex flex-col p-[0.5rem] rounded-md">
                     <div className="w-[14rem] p-2 mb-4">
                         <h1 className="text-black font-sans font-semibold text-2xl w-[89%]">
                             Experience
@@ -157,7 +130,14 @@ function AddExperience() {
 
                 <hr className="w-full bg-hr my-3" />
 
-                {editMode && <EditExperience setEditMode={setEditMode} editData={editData} />}
+                {editMode && (
+                    <EditExperience
+                        setEditMode={setEditMode}
+                        setWorkExperienceLists={setWorkExperienceLists}
+                        workExperienceLists={workExperienceLists}
+                        editData={editData}
+                    />
+                )}
 
                 {/* Add Experience section  starts */}
                 <div className="bg-[#F0F9FFBF] w-full flex flex-col p-[0.5rem]">
@@ -169,12 +149,6 @@ function AddExperience() {
 
                     {bool === false ? (
                         <div className="space-y-3 w-full">
-                            <p className="w-full text-hr text-sm font-sans">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-                                turpis molestie, dictum est a, mattis tellus. Sed dignissim,
-                                metusnec fringilla accumsan, risus sem sollicitudin lacus, ut
-                                interdum tellus elit sed risus
-                            </p>
                             <button
                                 type="button"
                                 className="my-4 bg-[#A5DBFF] py-3 px-6 font-sans text-center ml-[1rem] border-[2px] border-[#4DB9FF] rounded-md text-black flex items-center"
@@ -204,8 +178,8 @@ function AddExperience() {
                     >
                         Submit Details
                         {loading && (
-                                <span className="w-7 h-7 font-bold border-4 border-dashed rounded-full animate-spin border-white" />
-                            )}
+                            <span className="w-7 h-7 font-bold border-4 border-dashed rounded-full animate-spin border-white" />
+                        )}
                     </button>
                 </div>
             </section>

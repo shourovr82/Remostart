@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { AiOutlineInbox } from 'react-icons/ai';
@@ -32,6 +32,17 @@ function SkillAndPreferenceSettings() {
     const [name, setName] = useState();
     const [error, setError] = useState('');
 
+    const [jData, setJData] = useState({});
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('/data.json');
+            const jsonData = await response.json();
+            setJData(jsonData);
+        }
+        fetchData();
+    }, []);
+    console.log(jData.Domains);
+
     // Initialize use form hook
     const {
         register,
@@ -42,10 +53,10 @@ function SkillAndPreferenceSettings() {
     });
     // skill list
 
-    const industries = ['Blockchain', 'Health', 'Front-End', 'MERN Stack'];
+    // const industries = ['Blockchain', 'Health', 'Front-End', 'MERN Stack'];
     const domainLists = ['Beginner', 'Intermediate', 'Advance', 'Professional'];
     const workingPreferences = ['Work from Home', 'Remote', 'Hybrid', 'Full Time'];
-    const languages = ['English', 'Hindi', ' German'];
+    // const languages = ['English', 'Hindi', ' German'];
     const languageLevel = ['Native Language', 'Advance', 'Intermediate'];
 
     // disable level if skill isn't selected
@@ -154,7 +165,6 @@ function SkillAndPreferenceSettings() {
             email: user.user.email,
         };
         console.log(bodyData);
-        
 
         await axios
             .put(
@@ -175,8 +185,7 @@ function SkillAndPreferenceSettings() {
                 console.log(err);
             });
     };
-    console.log( selectedLanguages);
-    
+    console.log(selectedLanguages);
 
     return (
         <RemoForceSettingsItems>
@@ -198,13 +207,6 @@ function SkillAndPreferenceSettings() {
                         </div>
                         {/* Skill body */}
                         <div>
-                            <p className="text-hr text-xs lg:text-sm font-medium w-full">
-                                {' '}
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-                                turpis molestie, dictum est a, mattis tellus. Sed dignissim,
-                                metusnec fringilla accumsan, risus sem sollicitudin lacus, ut
-                                interdum tellus elit sed risus.
-                            </p>
                             <div className="flex w-full max-md:flex-col  items-start py-[2rem]">
                                 <div className="lg:w-[45%] flex justify-between gap-3 ">
                                     {/* Skills dropdown */}
@@ -226,7 +228,7 @@ function SkillAndPreferenceSettings() {
                                             <option value="" className="hidden">
                                                 Skills
                                             </option>
-                                            {industries.map((item) => (
+                                            {jData?.skills?.map((item) => (
                                                 <option
                                                     className="text-[18px]"
                                                     value={item}
@@ -334,13 +336,6 @@ function SkillAndPreferenceSettings() {
                         </div>
                         {/* Skill body */}
                         <div>
-                            <p className="text-hr text-xs lg:text-sm font-medium w-full">
-                                {' '}
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-                                turpis molestie, dictum est a, mattis tellus. Sed dignissim,
-                                metusnec fringilla accumsan, risus sem sollicitudin lacus, ut
-                                interdum tellus elit sed risus.
-                            </p>
                             <div className="flex w-full max-md:flex-col  items-start py-[2rem]">
                                 <div className="lg:w-[45%] flex justify-between gap-3 ">
                                     {/* Skills dropdown */}
@@ -359,9 +354,9 @@ function SkillAndPreferenceSettings() {
                                             value={selectedLanguage}
                                         >
                                             <option value="" className="hidden">
-                                                Skills
+                                                Languages
                                             </option>
-                                            {languages.map((item) => (
+                                            {jData?.languages?.map((item) => (
                                                 <option
                                                     className="text-[18px]"
                                                     value={item}
@@ -426,7 +421,7 @@ function SkillAndPreferenceSettings() {
                                 </div>
                                 {/* Selected skill display box */}
                                 <div className="lg:w-[45%] w-full ">
-                                    <label htmlFor="selected skill">Selected Skill</label>
+                                    <label htmlFor="selected skill">Selected Languages</label>
                                     <div className="w-90%  h-auto rounded-md bg-white mt-[1rem] flex flex-wrap gap-2 lg:gap-3 items-start   p-2 lg:p-[.5rem]">
                                         {selectedLanguages &&
                                             selectedLanguages.map((item) => (
@@ -462,13 +457,6 @@ function SkillAndPreferenceSettings() {
                             </h1>
                         </div>
                         <div className="w-full">
-                            <p className="text-hr  text-sm lg:text-base font-medium w-full">
-                                {' '}
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-                                turpis molestie, dictum est a, mattis tellus. Sed dignissim,
-                                metusnec fringilla accumsan, risus sem sollicitudin lacus, ut
-                                interdum tellus elit sed risus.
-                            </p>
                             <div className="mt-[2rem] lg:w-[90%] ">
                                 <h1 className="font-semibold pl-3 w-full text-sm ">
                                     Preferred Job Type
@@ -483,8 +471,8 @@ function SkillAndPreferenceSettings() {
                                                 item.color
                                             } ${
                                                 preferredJobType === item.name &&
-                                                ' bg-[#19a5ff] text-white'
-                                            } bg-white lg:m-[1rem] p-2  lg:w-[20%]`}
+                                                'bg-[#19a5ff] text-white'
+                                            }  lg:m-[1rem] p-2  lg:w-[20%]`}
                                         >
                                             <span
                                                 className={`mr-1  ${
@@ -503,7 +491,7 @@ function SkillAndPreferenceSettings() {
                             <div className="flex flex-col md:flex-row items-start mt-10">
                                 <div className="lg:w-[43%] w-full flex flex-col">
                                     <label htmlFor="Industry" className="text-base font-medium">
-                                        Select Industry
+                                        Select Domain
                                     </label>
                                     <select
                                         name=""
@@ -516,7 +504,7 @@ function SkillAndPreferenceSettings() {
                                         <option value="" className="hidden" hidden>
                                             Choose
                                         </option>
-                                        {industries.map((item) => (
+                                        {jData?.domains?.map((item) => (
                                             <option
                                                 value={item}
                                                 key={Math.random()}
@@ -529,7 +517,7 @@ function SkillAndPreferenceSettings() {
                                 </div>
                                 <div className="lg:w-[43%] w-full flex flex-col">
                                     <label htmlFor="Domain" className="text-base font-medium">
-                                        Select Domain
+                                        Select Level
                                     </label>
                                     <select
                                         name=""
@@ -541,7 +529,7 @@ function SkillAndPreferenceSettings() {
                                         <option value="" className="hidden" hidden>
                                             Choose
                                         </option>
-                                        {domainLists.map((item) => (
+                                        {domainLists?.map((item) => (
                                             <option
                                                 value={item}
                                                 key={Math.random()}

@@ -45,6 +45,7 @@ const AllJobs = () => {
 
     // /dashboard/post-job/public-job/:id
     const viewHandler = (item) => {
+        console.log(item);
         const path = item?.categoryName?.toLowerCase().replace(/\s+/g, '-');
 
         path === 'public-job' &&
@@ -54,6 +55,12 @@ const AllJobs = () => {
             navigate(`/dashboard/private/${item.jobId}`, { state: { data: item } });
         path === 'internship' &&
             navigate(`/dashboard/internship/${item.jobId}`, { state: { data: item } });
+
+        path === 'contracts' &&
+            navigate(`/dashboard/contracts/${item.jobId}`, { state: { data: item } });
+        path === 'shadowing' &&
+            navigate(`/dashboard/shadowing/${item.jobId}`, { state: { data: item } });
+        path === 'gigs' && navigate(`/dashboard/gigs/${item.jobId}`, { state: { data: item } });
     };
 
     return (
@@ -111,8 +118,8 @@ const AllJobs = () => {
                     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-8 flex-1">
                         {items?.map((item) => (
                             <div
-                                key={item.id}
-                                className="flex flex-col border px-2 jobPostCardShaddow py-6 justify-center space-y-2 space-x-5 rounded-lg"
+                                key={Math.random()}
+                                className="flex flex-col  px-2  jobPostCardShaddow py-6 justify-between items-stretch border space-y-2 space-x-5 rounded-lg"
                             >
                                 <div className="flex justify-between">
                                     <div className="flex flex-col">

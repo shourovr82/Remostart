@@ -3,7 +3,7 @@ import { AiOutlineFileDone } from 'react-icons/ai';
 import { BiHash } from 'react-icons/bi';
 import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
 import { FaBirthdayCake, FaProjectDiagram, FaUniversity } from 'react-icons/fa';
-import { FcAbout, FcGlobe } from 'react-icons/fc';
+import { FcAbout, FcGlobe, FcStumbleupon } from 'react-icons/fc';
 import { FiEdit } from 'react-icons/fi';
 import { ImMobile } from 'react-icons/im';
 // import { IoLanguage } from 'react-icons/io';
@@ -17,22 +17,14 @@ import { SiGmail } from 'react-icons/si';
 import { TfiTwitter } from 'react-icons/tfi';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import five from '../../../Assets/RemoForceDashboard/RemoForceProfile/freebsd.png';
-import six from '../../../Assets/RemoForceDashboard/RemoForceProfile/grooveshark.png';
-import three from '../../../Assets/RemoForceDashboard/RemoForceProfile/joomla.png';
-import one from '../../../Assets/RemoForceDashboard/RemoForceProfile/kickstarter.png';
-import four from '../../../Assets/RemoForceDashboard/RemoForceProfile/marvel.png';
-import github from '../../../Assets/SocialIcons/github.png';
-import insta from '../../../Assets/SocialIcons/insta.png';
-import linkedin from '../../../Assets/SocialIcons/linkedIn.png';
-import twitter from '../../../Assets/SocialIcons/twitter.png';
 import AuthContext from '../../../Context/AuthContext';
 import {
     CalculatedAge,
     FormattedDate,
     getDuration,
-    getEducationDuration
+    getEducationDuration,
 } from '../../../Utilities/DateFormater';
+import { convertProjectDate, getProjectDuration } from '../../../Utilities/projectDateFormater';
 
 const RemoForceProfile = () => {
     const { user } = useSelector((state) => state.auth);
@@ -87,120 +79,6 @@ const RemoForceProfile = () => {
                     ? remoProfile?.jobPreference?.locationPreference
                     : 'Location not given'
             }`,
-        },
-    ];
-
-    //  Experience
-
-    // const experience = [
-    //     {
-    //         id: 1,
-    //         icon: one,
-    //         name: 'Jack Stones Industry Ltd',
-    //         job_type: 'fulltime',
-    //         duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-    //     },
-    //     {
-    //         id: 2,
-    //         icon: two,
-    //         name: 'Hero lorem ipsume',
-    //         job_type: 'internship',
-    //         duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-    //     },
-    //     {
-    //         id: 3,
-    //         icon: three,
-    //         name: 'impdom dore qiene',
-    //         job_type: 'Contract',
-    //         duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-    //     },
-    // ];
-
-    // education
-
-    const education = [
-        {
-            id: 1,
-            icon: four,
-            name: 'Middle Earth Technical University',
-            duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-        },
-        {
-            id: 2,
-            icon: five,
-            name: 'Raisoni Collage of Engineering',
-            duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-        },
-        {
-            id: 3,
-            icon: six,
-            name: 'Middle Earth Techincal University',
-            duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-        },
-    ];
-
-    // Social Links
-
-    const socialLinks = [
-        {
-            id: 1,
-            icon: insta,
-            name: remoProfile?.socialLinks?.Instagram?.split('/').pop(),
-        },
-        {
-            id: 2,
-            icon: linkedin,
-            name: remoProfile?.socialLinks?.Linkedin?.split('/').pop(),
-        },
-        {
-            id: 3,
-            icon: github,
-            name: remoProfile?.socialLinks?.Github?.split('/').pop(),
-        },
-        {
-            id: 4,
-            icon: twitter,
-            name: remoProfile?.socialLinks?.Twitter?.split('/').pop(),
-        },
-    ];
-
-    // Projects
-
-    const projects = [
-        {
-            id: 1,
-            icon: one,
-            name: 'Middle Earth Techincal University',
-            duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-            description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-        },
-        {
-            id: 2,
-            icon: three,
-            name: 'Raisoni Collage of Engineering',
-            duration: 'Web Developer Intern 1 Year 2 Months Oct 2021 - Dec 2022',
-            description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-        },
-    ];
-
-    // Languages
-    const languages = [
-        {
-            id: 1,
-            name: 'English',
-            langType: 'Native Language',
-        },
-        {
-            id: 2,
-            name: 'Hindi',
-            langType: 'Advance',
-        },
-        {
-            id: 3,
-            name: 'Bangla',
-            langType: 'Advance',
         },
     ];
 
@@ -386,8 +264,8 @@ const RemoForceProfile = () => {
                                               </ul>
                                               {/* <ul className="text-sm text-[#999999] list-disc flex gap-10">
                                             date of end and start will also show in this span
-                                         
-                                        
+
+
                                         </ul> */}
                                           </div>
                                       </div>
@@ -403,32 +281,59 @@ const RemoForceProfile = () => {
                             <span className="text-2xl font-semibold">Projects</span>
                         </div>
                         <div className="flex flex-col gap-2 mt-4">
-                            {projects.map((item) => (
-                                <div
-                                    key={Math.random()}
-                                    className="mt-2 flex w-full p-2 items-center space-x-4"
-                                >
-                                    <img src={item.icon} className="w-8 self-start" alt="" />
-                                    <div className="flex flex-col space-y-1">
-                                        <div className="flex space-x-4 items-center">
-                                            <span className="font-semibold text-base">
-                                                {item.name}{' '}
-                                            </span>
-                                            <span className="text-[#999999] bg-[#E5E5E566] text-xs p-1 rounded-lg">
-                                                {item.job_type}
-                                            </span>
+                            {remoProfile?.projectDetails?.length ? (
+                                remoProfile?.projectDetails?.map((item) => (
+                                    <div
+                                        key={Math.random()}
+                                        className="mt-2 flex w-full p-2 items-start space-x-4"
+                                    >
+                                        <div>
+                                            <FcStumbleupon className="text-3xl" />
                                         </div>
-                                        <ul className="text-sm text-[#999999] list-disc flex flex-col gap-y-2">
-                                            <span>{item.duration}</span>
-                                            <span className="font-semibold">
-                                                {item.description}
-                                            </span>
-                                            {/* <li>hello</li>
-                                                    <li>hello</li> */}
-                                        </ul>
+                                        <div className="flex flex-col space-y-1">
+                                            <div className="flex space-x-4 items-center">
+                                                <span className="font-semibold text-base">
+                                                    {item?.projectName}{' '}
+                                                </span>
+                                                <span className="text-[#999999] bg-[#E5E5E566] text-xs p-1 rounded-lg">
+                                                    {item?.projectType}
+                                                </span>
+                                            </div>
+                                            <ul className="text-sm text-[#999999]  flex flex-col gap-y-2">
+                                                <li className="">
+                                                    <div className="flex gap-3">
+                                                        <span>{item?.projectLink}</span>
+                                                        <span>•</span>
+                                                        <span>
+                                                            {getProjectDuration(
+                                                                item?.startingDate,
+                                                                item?.endingDate
+                                                            )}
+                                                        </span>
+                                                        <span>•</span>
+                                                        <span className="text-[#999999]  text-sm">
+                                                            {convertProjectDate(item?.startingDate)}
+                                                        </span>
+                                                        <span className="text-[#999999] font-semibold ">
+                                                            -
+                                                        </span>
+                                                        <span className="text-[#999999]  text-sm">
+                                                            {convertProjectDate(item?.endingDate)}
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <span className="font-semibold">
+                                                        {item.projectDescription}
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <p>No Projects Added</p>
+                            )}
                         </div>
                     </div>
                     {/* Language */}
@@ -470,9 +375,9 @@ const RemoForceProfile = () => {
                 {/* side div Accepted Positions */}
                 <div className="lg:border-l-2 col-span-2 pl-0 mt-2 lg:mt-0 lg:pl-2  md:border-t-2  lg:border-t-0">
                     <div className="flex flex-col bg-[#F0F9FFBF] w-full p-2 space-y-2 rounded-lg">
-                        <span className="text-base font-semibold">Accepted Positions</span>
+                        <span className="text-base font-semibold">Want to Apply Job ?</span>
                         {/* map this div */}
-                        <div className="flex flex-col md:grid grid-cols-2 lg:flex">
+                        {/* <div className="flex flex-col md:grid grid-cols-2 lg:flex">
                             <div className="p-3 bg-white rounded-lg">
                                 <img src={one} alt="" />
                                 <span className="text-base lg:text-sm xl:text-base font-semibold">
@@ -485,13 +390,21 @@ const RemoForceProfile = () => {
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* ********** */}
 
                         <div className="flex flex-col md:grid grid-cols-2 lg:flex">
                             <div className="p-3 bg-white rounded-lg">
-                                <img src={one} alt="" />
+                                <Link to="/remoforce-dashboard/all-jobs">
+                                    <button
+                                        type="button"
+                                        className="bg-black rounded-full text-white px-5 py-1.5 hover:shadow-lg "
+                                    >
+                                        Apply Now
+                                    </button>
+                                </Link>
+                                {/* <img src={one} alt="" />
                                 <span className="text-base font-semibold">
                                     The Uncanny Inclusive
                                 </span>
@@ -500,7 +413,7 @@ const RemoForceProfile = () => {
                                     <span className="bg-[#65DC7F] text-white text-xs font-semibold p-1 rounded-lg">
                                         internship
                                     </span>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

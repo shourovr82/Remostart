@@ -2,8 +2,10 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable consistent-return */
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -13,23 +15,35 @@ import { TiTick } from 'react-icons/ti';
 import PhoneInput from 'react-phone-number-input';
 import { useSelector } from 'react-redux';
 import image from '../../../../Assets/Verification/Image.png';
+import AuthContext from '../../../../Context/AuthContext';
+import { getFileSize } from '../../../../Utilities/FileSize';
 
 const GeneralSettingsPersonal = () => {
     const { user } = useSelector((state) => state.auth);
     const [loading, setLoading] = useState(false);
     const [contactNumberError, setContactNumberError] = useState('');
-
     const [files, setFile] = useState();
-    const [domain, setDomain] = useState(null);
-    const [allFiles, setAllFiles] = useState(null);
+    const [domain, setDomain] = useState('Pan Card');
     const [error, setError] = useState();
-    // State for file progress bar
-    const [file, setFiles] = useState([]);
+    const { serviceUser } = useContext(AuthContext);
+    const { data: startupData } = useQuery(['startupData'], () =>
+        axios
+            .get(
+                `${process.env.REACT_APP_URL_STARTUP}/api/startup/startup-preview/${
+                    user?.user?.email || serviceUser?.email
+                }`
+            )
+            .then((res) => res.data)
+    );
+
+    const [allFiles, setAllFiles] = useState(
+        (startupData?.personalIds?.length && startupData?.personalIds) || null
+    );
 
     // Domain array
     const domains = ['Pan Card', 'Adhar Card', 'Driving License', 'Passport'];
     // Initialize use form hook
-    const [contactNumber, setContactNumber] = useState('');
+    const [contactNumber, setContactNumber] = useState(startupData?.personalPhone || '');
     const handleSetContactNumber = (contact) => {
         if (contact) {
             setContactNumberError('');
@@ -38,7 +52,6 @@ const GeneralSettingsPersonal = () => {
             setContactNumberError('Contact Number is required');
         }
     };
-    // console.log(contactNumber);
 
     const {
         register,
@@ -70,16 +83,34 @@ const GeneralSettingsPersonal = () => {
         await setAllFilesArray(newObj);
     };
 
-    // function to display progressBar
-    const progressBar = () => {
-        const document = { name: domain, file: files };
-        setFiles([...file, document]);
-        setDomain(null);
+    // handle drop
+    const handleDropFile = async (acceptedFiles) => {
+        setError('');
+        const fileSizeBytes = acceptedFiles[0]?.size;
+        const checkFileSize = getFileSize(fileSizeBytes);
+        if (checkFileSize > 1024) {
+            toast.error('Maximum file upload size is 1Mb / 1024 Kb');
+        } else {
+            setFile(acceptedFiles);
+            if (allFiles?.length) {
+                const fileNameArr = allFiles.map((card) => Object.keys(card)[0]);
+                const isFileExist = fileNameArr.find((card) => card === domain);
+                if (isFileExist) {
+                    toast.error(`Already added ${isFileExist}`);
+                } else {
+                    await createFileArray(acceptedFiles);
+                }
+            } else {
+                await createFileArray(acceptedFiles);
+            }
+        }
     };
+
     // on Submit form and http request
     const onSubmit = async (data) => {
         setLoading(true);
-        if (files === undefined) {
+        if (!allFiles?.length) {
+            setLoading(false);
             return setError('Please upload at least one ID type');
         }
         const bodyData = {
@@ -94,8 +125,6 @@ const GeneralSettingsPersonal = () => {
         const obj = { ...bodyData, document: allFiles };
         const formData = new FormData();
 
-        console.log(obj);
-
         Object.entries(obj).forEach(([key, value]) => {
             if (key !== 'document') {
                 formData.append(key, value);
@@ -106,7 +135,6 @@ const GeneralSettingsPersonal = () => {
         obj.document.forEach((doc) => {
             Object.entries(doc).forEach(([key, value]) => {
                 const newKey = key.replace(/\s/g, '').replace(/^./, key[0].toLowerCase());
-
                 formData.append(newKey, value);
             });
         });
@@ -128,11 +156,9 @@ const GeneralSettingsPersonal = () => {
 
     // delete
     const handleDelete = (f) => {
-        console.log(f);
         const updatedFiles = allFiles.filter((item) => item !== f);
         setAllFiles(updatedFiles);
     };
-    // console.log(file);
 
     return (
         <div>
@@ -153,6 +179,7 @@ const GeneralSettingsPersonal = () => {
                                     message: 'Maximum 100 characters',
                                 },
                             })}
+                            defaultValue={startupData?.fullName}
                             id="MyName"
                             type="text"
                             placeholder="Your name"
@@ -180,6 +207,7 @@ const GeneralSettingsPersonal = () => {
                                     message: 'Max 200 characters allowed',
                                 },
                             })}
+                            defaultValue={startupData?.designation}
                             id="Designation"
                             type="text"
                             placeholder="CTO, CFO, CEO etc..."
@@ -207,6 +235,7 @@ const GeneralSettingsPersonal = () => {
                                     message: 'Email address must be valid',
                                 },
                             })}
+                            defaultValue={startupData?.secondaryEmail}
                             id="Email"
                             type="email"
                             placeholder="samplemail@gmail.com"
@@ -234,21 +263,7 @@ const GeneralSettingsPersonal = () => {
                             placeholder="+91 99999 78787"
                             className="w-full border p-4  space-x-3 border-gray-200 rounded-md  mt-2  "
                         />
-                        {/* <input
-                            {...register('Contact', {
-                                required: 'Contact number is required',
-                                pattern: {
-                                    value: /^\+(?:[0-9]●?){6,14}[0-9]$/,
 
-                                    message:
-                                        'Contact number is not valid , you must add country code ',
-                                },
-                            })}
-                            id="Contact"
-                            type="tel"
-                            placeholder="+91 99999 78787"
-                            className="block w-full px-4 py-4 mt-1 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                        /> */}
                         {/* Contact Input Error starts */}
 
                         <p className="pt-2 ">
@@ -271,6 +286,7 @@ const GeneralSettingsPersonal = () => {
                                     message: '*Your  Linkedin Profile url is not valid',
                                 },
                             })}
+                            defaultValue={startupData?.linkedIn}
                             id="LinkedIn"
                             type="text"
                             placeholder="https://mypersonallinkedin.com"
@@ -297,9 +313,10 @@ const GeneralSettingsPersonal = () => {
                                 className="select  mt-1 max-w-xs font-semibold border 
                      border-gray-400 rounded-md "
                             >
-                                <option>Id Type</option>
                                 {domains.map((D, i) => (
-                                    <option key={i}>{D}</option>
+                                    <option key={i} value={D}>
+                                        {D}
+                                    </option>
                                 ))}
                             </select>
                         </div>
@@ -307,17 +324,10 @@ const GeneralSettingsPersonal = () => {
                         <div>
                             <Dropzone
                                 className="lg:w-[335px] lg:mt-0 h-[213px] mt-10 mx-auto"
-                                onDrop={async (acceptedFiles) => {
-                                    setError('');
-                                    setFile(acceptedFiles);
-                                    // OnDrop on select file run function to get domain and set as property to file value
-                                    await createFileArray(acceptedFiles);
-                                    // render progressBar
-                                    // await progressBar();
-                                }}
+                                onDrop={handleDropFile}
                             >
                                 {({ getRootProps, getInputProps }) => (
-                                    <section className="container">
+                                    <section className="container lg:w-[335px]">
                                         <div {...getRootProps({ className: 'dropzone' })}>
                                             <input {...getInputProps()} />
                                             <section
@@ -335,7 +345,7 @@ const GeneralSettingsPersonal = () => {
                                                             </span>
                                                         </h2>
                                                         <span className="text-xs font-medium">
-                                                            Maximum size: 50MB
+                                                            Maximum size: 1MB
                                                         </span>
                                                     </>
                                                 ) : (
@@ -349,7 +359,7 @@ const GeneralSettingsPersonal = () => {
                                                             </span>
                                                         </h2>
                                                         <span className="text-xs font-medium">
-                                                            Maximum size: 50MB
+                                                            Maximum size: 1MB
                                                         </span>
                                                     </>
                                                 )}
@@ -363,41 +373,6 @@ const GeneralSettingsPersonal = () => {
                             {error && <span className="text-red-400 ">{error}</span>}
                             {/* Progress Bar Section UI starts */}
 
-                            {/* {file.length ? (
-                                <div className="mt-6">
-                                    {file.map((f, i) => (
-                                        <div key={i} className="border rounded-md w-full mt-3">
-                                            <div className="p-5">
-                                                <div className="flex justify-between items-center">
-                                                    <div className="flex  gap-4 items-center">
-                                                        <FiUpload className="text-sm" />
-                                                        <p className="text-sm lg:w-[627px]">
-                                                            {f?.name}
-                                                        </p>
-                                                    </div>
-                                                    <div className="flex items-center gap-2">
-                                                        <button
-                                                            type="button"
-                                                            className="bg-teal-500 text-white rounded-full"
-                                                        >
-                                                            <TiTick className="text-md " />
-                                                        </button>
-                                                        <button
-                                                            onClick={() => handleDeleteFile(f)}
-                                                            type="button"
-                                                        >
-                                                            <MdDeleteOutline className="text-lg " />
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <p className="w-full mt-2 h-[6px] bg-[#3B82F6]" />
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                ''
-                            )} */}
                             {allFiles?.length ? (
                                 <div className="mt-6">
                                     {allFiles?.map((f, i) => (
@@ -439,6 +414,7 @@ const GeneralSettingsPersonal = () => {
                 <div className="flex justify-center mt-10 lg:mt-16">
                     <button
                         type="submit"
+                        disabled={loading}
                         className="px-6 py-3 lg:px-10 lg:py-5 bg-[#0B132A] text-white text-xs font-semibold rounded-md flex items-center gap-2"
                     >
                         Update General Settings{' '}

@@ -1,31 +1,29 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
 import { AiOutlineFileDone } from 'react-icons/ai';
-import { BsThreeDots } from 'react-icons/bs';
-import { Link, useNavigate } from 'react-router-dom';
-import RemoForceDashBoardItems from '../../../Routes/Roots/RemoForceDashBoardItems';
-import NoJob from '../../StartupDashboard/DashboardPages/NoJob';
+import { useNavigate } from 'react-router-dom';
+import RemoForceDashBoardItems from '../../../../Routes/Roots/RemoForceDashBoardItems';
+import NoJob from '../../../StartupDashboard/DashboardPages/NoJob';
 
-const RemoForceAllJobs = () => {
-    const { data: allJobs } = useQuery(['items'], () =>
-        axios.get(`${process.env.REACT_APP_URL_STARTUP}/api/job/all-jobs`).then((res) => res.data)
+const RemoforcePublicJobs = () => {
+    const { data: publicJobs } = useQuery(['publicJobs'], () =>
+        axios
+            .get(`${process.env.REACT_APP_URL_STARTUP}/api/job/remoforce/public-job`)
+            .then((res) => res.data)
     );
     const navigate = useNavigate();
 
     const handleApplyNow = (item) => {
-        navigate(`/remoforce-dashboard/all-jobs/${item._id}`, { state: { data: item } });
+        navigate(`/remoforce-dashboard/category-jobs/${item._id}`, { state: { data: item } });
     };
-
     return (
         <RemoForceDashBoardItems>
             <section>
                 {/* card section */}
-                {allJobs.length ? (
+                {publicJobs?.length ? (
                     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto gap-3  ">
-                        {allJobs.map((item) => (
+                        {publicJobs?.map((item) => (
                             <div
                                 key={Math.random()}
                                 className=" p-3 2xl:p-2.5 border  duration-300 ease-in xl:m-1 shadow-lg shadow-[#78a5c554] bg-white border-[#a5dbff9d] rounded-md flex flex-col justify-between"
@@ -39,49 +37,48 @@ const RemoForceAllJobs = () => {
                                     </div>
 
                                     {/* three dot option button */}
-                                    <div>
-                                        <div className="dropdown dropdown-bottom dropdown-end">
-                                            <button type="button" className="p-1">
-                                                <label tabIndex={0} className="cursor-pointer">
-                                                    {' '}
-                                                    <BsThreeDots className="text-xl" />
-                                                </label>
-                                            </button>
-                                            <ul
-                                                tabIndex={0}
-                                                className="dropdown-content menu p-2 shadow-xl shadow-[#4e00b42d]  bg-base-100 rounded-box w-52"
-                                            >
-                                                <li>
-                                                    <button
-                                                        type="button"
-                                                        className="font-medium text-sm"
-                                                    >
-                                                        View Applicants
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button
-                                                        className="font-medium text-sm"
-                                                        type="button"
-                                                    >
-                                                        Hide Post
-                                                    </button>
-                                                </li>
+                                    {/* <div>
+                                    <div className="dropdown dropdown-bottom dropdown-end">
+                                        <button type="button" className="p-1">
+                                            <label tabIndex={0} className="cursor-pointer">
+                                                {' '}
+                                                <BsThreeDots className="text-xl" />
+                                            </label>
+                                        </button>
+                                        <ul
+                                            tabIndex={0}
+                                            className="dropdown-content menu p-2 shadow-xl shadow-[#4e00b42d]  bg-base-100 rounded-box w-52"
+                                        >
+                                            <li>
+                                                <button
+                                                    type="button"
+                                                    className="font-medium text-sm"
+                                                >
+                                                    View Applicants
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button
+                                                    className="font-medium text-sm"
+                                                    type="button"
+                                                >
+                                                    Hide Post
+                                                </button>
+                                            </li>
 
-                                                {/* dynamic link should be here */}
-                                                <li>
-                                                    <Link to="#" className="font-medium text-sm">
-                                                        Details
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                            <li>
+                                                <Link to="#" className="font-medium text-sm">
+                                                    Details
+                                                </Link>
+                                            </li>
+                                        </ul>
                                     </div>
+                                </div> */}
                                 </div>
                                 <div>
-                                    <p className="text-start  text-base ">
+                                    <p className="text-start  text-sm ">
                                         {item?.description
-                                            ? `${item?.description?.slice(0, 100)}...`
+                                            ? `${item?.description?.slice(0, 100)}`
                                             : item?.description}
                                     </p>
                                 </div>
@@ -140,4 +137,4 @@ const RemoForceAllJobs = () => {
     );
 };
 
-export default RemoForceAllJobs;
+export default RemoforcePublicJobs;

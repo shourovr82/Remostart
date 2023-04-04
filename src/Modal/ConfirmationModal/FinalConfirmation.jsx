@@ -10,6 +10,8 @@ const FinalConfirmation = ({ setConfirmPost, storedJob, paths }) => {
     const [submitPost, setSubmitPost] = useState(false);
     const navigate = useNavigate();
 
+    console.log(storedJob);
+    
     const muteFunc = async (data) =>
         axios.post(
             `${process.env.REACT_APP_URL_STARTUP}/api/job/${storedJob?.apiPath || paths}`,

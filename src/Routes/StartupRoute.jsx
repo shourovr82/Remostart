@@ -24,7 +24,7 @@ const StartupRoute = ({ children }) => {
     //     return <Navigate to="/login" state={{ from: location }} replace />;
     // }
 
-    if (user?.user?.role) {
+    if (user) {
         if (user?.user?.role === 'remoforce') {
             return <Navigate to="/login" state={{ from: location }} replace />;
         }

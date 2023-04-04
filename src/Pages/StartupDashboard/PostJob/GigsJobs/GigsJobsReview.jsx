@@ -11,7 +11,7 @@ import FinalConfirmation from '../../../../Modal/ConfirmationModal/FinalConfirma
 import ApplicationRequests from '../InternshipJob/ApplicationRequests';
 
 const GigsJobsReview = () => {
-    const [gigJob, setGig] = useState(false);
+    const [gig, setGig] = useState(false);
     const [storedJob, setStoredJob] = useState({});
     const location = useLocation();
     const data = location?.state && location?.state?.data;
@@ -123,7 +123,7 @@ const GigsJobsReview = () => {
                             <hr className="h-[2px] bg-[#19A5FF]  w-2/3 lg:w-[35%]" />
                             {/* gig deliverables Details */}
                             <div className=" mb-4 mt-[10px] flex flex-wrap pr-10 items-center gap-[10px]">
-                                {storedJob?.deliverablesItems?.map((perk) => (
+                                {storedJob?.joiningPerks?.map((perk) => (
                                     <p
                                         key={Math.random()}
                                         className="py-2 px-4 lg:px-6 bg-[#F0F9FF] rounded-md font-semibold "
@@ -213,7 +213,7 @@ const GigsJobsReview = () => {
                             htmlFor="postConfirmation"
                             className="px-6 py-3 lg:px-10 lg:py-5 bg-[#0B132A] rounded-md text-white cursor-pointer"
                         >
-                            Post Gig
+                            Post Gigs
                         </label>
                     </button>
                     <Link to="/dashboard/post-job/gigs">
@@ -227,7 +227,7 @@ const GigsJobsReview = () => {
                 </div>
             )}
 
-            {gigJob && <FinalConfirmation storedJob={storedJob} setConfirmPost={setGig} />}
+            {gig && <FinalConfirmation storedJob={storedJob} setConfirmPost={setGig} />}
             {/* Application Requests */}
             {review !== 'review' && data.applicationRequest.length > 0 && (
                 <ApplicationRequests jobData={data} />

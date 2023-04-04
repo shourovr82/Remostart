@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { BiChevronLeft, BiPlus } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import currencyIcon from '../../../../Assets/Dashboard/currency.png';
-import { getStoredJob, setJob } from '../../../../Hooks/useLocalStorage';
+import { setJob } from '../../../../Hooks/useLocalStorage';
 
 const Contracts = () => {
     // const [storedJob, setStoredJob] = useState({});
-
     const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
+
     const location = useLocation();
     const path = location.pathname.split('/');
     const jobName = path[path.length - 1];
 
+    const isEdit = path.includes('edit');
+
     const categoryName = jobName.replace(/-/g, ' ').replace(/\b[a-z]/g, (c) => c.toUpperCase());
 
-    const storedJob = getStoredJob(jobName);
+    // const storedJob = getStoredJob(jobName);
+    const storedJob = location?.state && location?.state?.data;
     const { user } = useSelector((state) => state.auth);
     const [skills, setSkills] = useState(storedJob?.skills || []);
 
@@ -27,7 +34,7 @@ const Contracts = () => {
 
     // perks state
     const [deliverables, setDeliverables] = useState('');
-    const [deliverablesItems, setDeliverablesItems] = useState(storedJob?.deliverablesItems || []);
+    const [deliverablesItems, setDeliverablesItems] = useState(storedJob?.joiningPerks || []);
 
     // handle perk
     const changeDeliverablesHandler = (e) => {
@@ -54,24 +61,17 @@ const Contracts = () => {
     };
 
     // Domains
-    const domainData = [
-        {
-            value: 'Mern Stack',
-            label: 'Mern Stack',
-        },
-        {
-            value: 'Tailwind CSS',
-            label: 'Tailwind CSS',
-        },
-        {
-            value: 'Javascript',
-            label: 'Javascript',
-        },
-        {
-            value: 'Node JS',
-            label: 'Node JS',
-        },
-    ];
+    const [jData, setJData] = useState({});
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('/data.json');
+            const jsonData = await response.json();
+            setJData(jsonData);
+        }
+        fetchData();
+    }, []);
+    console.log(jData.Domains);
+
     const [disableOption, setDisable] = useState(false);
     // Cross  Button Domains
     const buttonHandle = () => {
@@ -104,20 +104,93 @@ const Contracts = () => {
     // }, [jobName]);
 
     // data posting to ls
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        setLoading(true);
         const jobData = {
             ...data,
             email: user?.user.email,
             categoryName,
             skills,
             domains: selectedValues,
-            deliverablesItems,
+            joiningPerks: deliverablesItems,
             apiPath: jobName,
-            contractsPaper: file,
+            // contractsPaper: _.cloneDeep(file),
         };
+        // const fileDeep = _.cloneDeep(file);
+        // console.log(fileDeep);
         setJob(jobName, jobData);
-        navigate('/dashboard/post-job/contracts/review');
+        const formData = new FormData();
+
+        formData.append('obj', JSON.stringify(jobData));
+        const contractsFile = file && file[0];
+
+        formData.append('contractsPaper', contractsFile);
+
+        console.log(...formData);
+
+        if (isEdit) {
+            await axios
+                .put(
+                    `${process.env.REACT_APP_URL_STARTUP}/api/job/contracts/${storedJob._id}`,
+                    formData
+                )
+                .then((res) => {
+                    if (res.data._id) {
+                        toast.success('Contracts job data added to review');
+                        setLoading(false);
+                        navigate('/dashboard/post-job/contracts/review', {
+                            state: { data: res.data },
+                        });
+                    }
+
+                    console.log(res);
+                })
+                .catch((err) => {
+                    setLoading(false);
+                    console.log(err);
+                });
+        } else {
+            await axios
+                .post(`${process.env.REACT_APP_URL_STARTUP}/api/job/contracts`, formData)
+                .then((res) => {
+                    if (res.data._id) {
+                        toast.success('Contracts job data edited successfully');
+                        setLoading(false);
+                        navigate('/dashboard/post-job/contracts/review', {
+                            state: { data: res.data },
+                        });
+                    }
+
+                    console.log(res);
+                })
+                .catch((err) => {
+                    setLoading(false);
+                    console.log(err);
+                });
+        }
+
+        // navigate('/dashboard/post-job/contracts/review');
+        // const jobDataString = JSON.stringify(jobData);
+
+        // Store the jobData in localStorage
+        // localStorage.setItem('jobData', jobDataString);
+        // const reader = new FileReader();
+        // reader.onload = () => {
+        //   const fileData = {
+        //     name: file[0].name,
+        //     type: file[0].type,
+        //     size: file[0].size,
+        //     dataUrl: reader.result,
+        //   };
+        //   localStorage.setItem('fileData', JSON.stringify(fileData));
+        // };
+        // reader.readAsDataURL(file[0]);
     };
+    //     const fileDataString = localStorage.getItem('fileData');
+    //    if (fileDataString) {
+    //     const fileData = JSON.parse(fileDataString);
+    //     const { name, type, size, dataUrl } = fileData;
+    //     const files = new File([dataUrl], name, { type, lastModified: Date.now() });
 
     return (
         <div>
@@ -129,9 +202,8 @@ const Contracts = () => {
             </div>
             <p className="border-[#e5e7eb] bg-[#BCBCBC] border mt-2" />
             <p className=" mt-6 lg:mt-1">
-                Contract section is where employers can hire talents for fixed-term projects or
-                commission-based work. Simplify your hiring process and find the right talent for
-                your project.
+                You can handover your tech and non tech projects to us, we will recruit the team,
+                gather the resource, micro-mange the project till its done
             </p>
 
             {/* Start Form  */}
@@ -305,7 +377,7 @@ const Contracts = () => {
                             <option value="Domains" hidden>
                                 Domains
                             </option>
-                            {domainData.map((D, i) => (
+                            {jData?.domains?.map((D, i) => (
                                 <option
                                     onClick={handleClick}
                                     disabled={disableOption}
@@ -381,7 +453,7 @@ const Contracts = () => {
                             {...register('startingDate', {
                                 required: true,
                             })}
-                            defaultValue={storedJob?.startingDate}
+                            defaultValue={storedJob?.startingDate?.slice(0, 10)}
                             id="startingDate"
                             className="lg:w-[330px] w-full px-4 py-3 rounded-md border border-[#e5e7eb]  text-gray-900 "
                         />
@@ -402,7 +474,7 @@ const Contracts = () => {
                             {...register('endingDate', {
                                 required: true,
                             })}
-                            defaultValue={storedJob?.endingDate}
+                            defaultValue={storedJob?.endingDate?.slice(0, 10)}
                             id="applyBefore"
                             className="lg:w-[330px] w-full px-4 py-3 rounded-md border border-[#e5e7eb]  text-gray-900 "
                         />
@@ -425,7 +497,7 @@ const Contracts = () => {
                         {...register('applyBefore', {
                             required: true,
                         })}
-                        defaultValue={storedJob?.applyBefore}
+                        defaultValue={storedJob?.applyBefore?.slice(0, 10)}
                         id="applyBefore"
                         className="lg:w-[330px] w-full px-4 py-3 rounded-md border border-[#e5e7eb]  text-gray-900 "
                     />
@@ -565,12 +637,21 @@ const Contracts = () => {
 
                 {/* Submit Button  */}
 
-                <button
-                    type="submit"
-                    className="px-6 py-3 mt-10 lg:px-10 lg:py-5 bg-[#0B132A] text-white text-xs font-semibold rounded-md"
-                >
-                    Post Contract Job
-                </button>
+                {isEdit ? (
+                    <button
+                        type="submit"
+                        className="px-6 py-3 mt-10 lg:px-10 lg:py-5 bg-[#0B132A] text-white text-xs font-semibold rounded-md"
+                    >
+                        Edit Contract Job
+                    </button>
+                ) : (
+                    <button
+                        type="submit"
+                        className="px-6 py-3 mt-10 lg:px-10 lg:py-5 bg-[#0B132A] text-white text-xs font-semibold rounded-md"
+                    >
+                        Review Contract Job
+                    </button>
+                )}
             </form>
         </div>
     );

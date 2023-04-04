@@ -23,11 +23,6 @@ function AddEducationForm({ allEducationLists, setAllEducationLists, setBool }) 
 
     return (
         <form className="space-y-3  w-full" onSubmit={handleSubmit(httpAddEducationExperience)}>
-            <p className="w-full text-hr text-[#999999] font-medium text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie,
-                dictum est a, mattis tellus. Sed dignissim, metusnec fringilla accumsan, risus sem
-                sollicitudin lacus, ut interdum tellus elit sed risus
-            </p>
             {/* Add Experience Beginnings */}
             <div className="w-full lg:w-[70%] space-y-3">
                 {/*  School / University Beginnings */}

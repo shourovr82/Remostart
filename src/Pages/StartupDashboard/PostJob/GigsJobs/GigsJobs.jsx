@@ -27,7 +27,7 @@ const GigsJobs = () => {
 
     // perks state
     const [deliverables, setDeliverables] = useState('');
-    const [deliverablesItems, setDeliverablesItems] = useState(storedData?.deliverablesItems || []);
+    const [deliverablesItems, setDeliverablesItems] = useState(storedData?.joiningPerks || []);
 
     const categoryName = jobName.replace(/-/g, ' ').replace(/\b[a-z]/g, (c) => c.toUpperCase());
 
@@ -62,16 +62,16 @@ const GigsJobs = () => {
     };
 
     const onSubmit = (data) => {
-        const internshipData = {
+        const gigsData = {
             ...data,
             email: user?.user.email,
             categoryName,
             skills,
             apiPath: jobName,
-            deliverablesItems,
+            joiningPerks: deliverablesItems,
         };
 
-        setJob(jobName, internshipData);
+        setJob(jobName, gigsData);
         navigate('/dashboard/post-job/gigs/review');
     };
     return (
@@ -84,9 +84,8 @@ const GigsJobs = () => {
             </div>
             <p className="border-[#BCBCBC] bg-[#BCBCBC] border mt-2" />
             <p className="text-gray-400 mt-6 lg:mt-1">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et
-                velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora
-                torquent per conubia nostra, per inceptos himenaeos.
+                You need someone to do simple task, small tasks, no matter how small the task is,
+                post it here and our talents will do the tasks for you
             </p>
 
             {/* Start Form  */}
@@ -411,7 +410,7 @@ const GigsJobs = () => {
                     type="submit"
                     className="px-6 py-3 mt-10 lg:px-10 lg:py-5 bg-[#0B132A] text-white text-xs font-semibold rounded-md"
                 >
-                    Post Internship Job
+                    Review Gigs
                 </button>
             </form>
         </div>

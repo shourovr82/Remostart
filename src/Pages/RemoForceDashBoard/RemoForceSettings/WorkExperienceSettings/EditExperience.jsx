@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-function EditExperience({ editData, setEditMode }) {
-    const [list, setList] = useState([]);
+function EditExperience({ editData, setEditMode, setWorkExperienceLists, workExperienceLists }) {
     const [padding, setPadding] = useState(false);
     // get values
     const { companyName, endingDate, position, startingDate, type } = editData || {};
@@ -22,8 +21,17 @@ function EditExperience({ editData, setEditMode }) {
         { name: 'Remote' },
     ];
 
-    const handleUpdate = (updatedData) => {
-        console.log('updatedData', updatedData);
+    const handleUpdate = (data) => {
+        const getWorkExperience = workExperienceLists.filter(
+            (singleWorkExperience) => singleWorkExperience.id !== editData.id
+        );
+        const updatedData = {
+            id: editData?.id,
+            ...data,
+        };
+        const updatedArr = [...getWorkExperience, updatedData];
+        setWorkExperienceLists(updatedArr);
+        setEditMode(false);
     };
 
     return (
@@ -37,11 +45,7 @@ function EditExperience({ editData, setEditMode }) {
                 </div>
 
                 <form onSubmit={handleSubmit(handleUpdate)} className="space-y-3 w-full">
-                    <p className="w-full text-hr text-sm font-sans">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis
-                        molestie, dictum est a, mattis tellus. Sed dignissim, metusnec fringilla
-                        accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus
-                    </p>
+                   
                     {/* Add Experience Beginnings */}
                     <div className=" w-[70%] space-y-8 pt-4">
                         {/* Company Name Beginnings */}
