@@ -68,7 +68,7 @@ function SkillAndPreferenceSettings() {
 
     const handleGetSoftSkill = (e) => {
         if (softSkills.length >= 5) {
-            toast.error('You can only add 5 soft Skills');
+            toast.error('You can  add 5 soft Skills only');
         } else if (!softSkills?.length < 5) {
             console.log(softSkills.length);
             if (softSkills.includes(e.target.value)) {
@@ -176,6 +176,7 @@ function SkillAndPreferenceSettings() {
             },
             selectedSkills,
             selectedLanguages,
+            softSkills,
 
             email: user.user.email,
         };
