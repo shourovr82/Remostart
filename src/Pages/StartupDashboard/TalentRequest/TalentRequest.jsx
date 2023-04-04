@@ -26,7 +26,7 @@ const TalentRequest = () => {
                     <TalentRequestBanner />
                 </div>
                 {/* Try Free or view plan option */}
-                <div className="flex items-center justify-between pr-5 rounded-md bg-[#f0f9ff]">
+                <div className="flex items-center mt-5 justify-between pr-5 rounded-md bg-[#f0f9ff]">
                     <div className="flex gap-2 px-2 py-3">
                         <span className="mt-1">
                             <BsStarFill />
@@ -35,7 +35,9 @@ const TalentRequest = () => {
                             <h4 className="font-semibold">Try for free</h4>
                             <p className="  text-[#999999] text-sm">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                                vulputate libero et velit interdum, ac <br /> aliquet odio mattis.
+                                vulputate <br className="lg:block 2xl:hidden max-md:hidden" />{' '}
+                                libero et velit interdum, ac <br className="hidden 2xl:block" />{' '}
+                                aliquet odio mattis.
                             </p>
                         </div>
                     </div>

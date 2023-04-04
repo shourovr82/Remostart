@@ -173,7 +173,7 @@ const SettingsGeneral = () => {
             {/* UPDATE PASSWORD FORM STARTS IF Start-up is Registered */}
             <br />
 
-            {toggle && <Password />}
+            <Password />
             {/* START-UP VERIFICATION START */}
 
             <h1 className="text-3xl font-semibold mt-10">

@@ -167,10 +167,10 @@ const InternshipPost = () => {
                             {...register('experience', {
                                 required: true,
                             })}
-                            className="select lg:w-[67px]  mt-1 w-full block font-semibold border 
+                            className="select  mt-1 w-full block font-semibold border 
                        border-gray-400 rounded-md "
                         >
-                            <option defaultValue={storedData?.experience || 'select a year'}>
+                            <option value="" hidden>
                                 {storedData?.experience || 'select a year'}
                             </option>
                             {experience.map((D) => (
@@ -205,14 +205,14 @@ const InternshipPost = () => {
                             <label className="block font-semibold text-gray-900">
                                 Skills Required
                             </label>
-                            <div className=" lg:w-[50rm]  pr-2 rounded-md border border-[#BCBCBC]  text-gray-900 justify-between flex items-center">
+                            <div className=" lg:w-[50rm]   pr-2 rounded-md border border-[#BCBCBC]  text-gray-900 justify-between flex items-center">
                                 <input
                                     type="text"
                                     name="inputSkill"
                                     value={tag}
                                     onChange={changeHandler}
                                     placeholder="node js"
-                                    className="px-4 py-3 focus:outline-none border border-transparent rounded-md outline-none w-full focus:bg-transparent"
+                                    className="px-4 py-3 focus:outline-none  focus:ring-0 border border-transparent rounded-md outline-none w-full focus:bg-transparent"
                                 />
                                 <button onClick={handleTags} type="button">
                                     <BiPlus className="border p-1 text-xl" />

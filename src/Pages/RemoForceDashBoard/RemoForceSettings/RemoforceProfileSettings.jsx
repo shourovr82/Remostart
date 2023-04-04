@@ -385,8 +385,8 @@ function RemoforceProfileSettings() {
                 </Dropzone> */}
                             </div>
                         </div>
-                        <div className="flex justify-between items-center flex-wrap lg:flex-nowrap mt-2 space-y-2 p-2 lg:p-6">
-                            <div className="w-[40%] lg:w-[20%] space-y-1">
+                        <div className="flex justify-between   items-center flex-wrap lg:flex-nowrap mt-2 space-y-2 p-2 lg:p-6">
+                            <div className="w-[45%] lg:w-[20%] space-y-1">
                                 <label htmlFor="age" className="text-sm font-medium">
                                     Age
                                 </label>
@@ -405,7 +405,7 @@ function RemoforceProfileSettings() {
                                     </span>
                                 </p>
                             </div>
-                            <div className="w-[40%] lg:w-[20%] space-y-1">
+                            <div className="w-[45%] lg:w-[20%] space-y-1">
                                 <label htmlFor="age" className="text-sm block font-medium">
                                     Gender
                                 </label>
@@ -416,7 +416,9 @@ function RemoforceProfileSettings() {
                                     value={selectedGender}
                                     onChange={handleChange}
                                 >
-                                    <option>Select Gender</option>
+                                    <option value="" hidden>
+                                        Select Gender
+                                    </option>
                                     {gender.map((genderOption) => (
                                         <option key={Math.random()} value={genderOption}>
                                             {genderOption}

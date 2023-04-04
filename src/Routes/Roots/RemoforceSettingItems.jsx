@@ -38,19 +38,20 @@ const data = [
 ];
 function RemoForceSettingsItems({ children }) {
     return (
-        <section className="flex flex-col w-full">
+        <section className="flex flex-col  w-full">
             <div className="flex w-full h-1/2 items-center justify-evenly flex-nowrap">
                 <img src={set} alt="settings-icon" width="30px" />
                 <h1 className="text-4xl font-semibold w-11/12">Settings</h1>
             </div>
             <div className="h-[2px] w-full bg-slate-500 mt-4 mb-1" />
             <div className="h-full lg:h-4 mb-6 py-2 ">
-                <nav className="flex justify-start   w-[fit-content] list-none font-semibold text-sm items-center flex-wrap lg:flex-nowrap">
+                <nav className="flex justify-start gap-y-5   w-[fit-content] list-none font-semibold text-sm items-center flex-wrap ">
                     {data.map((item) => (
                         <li className=" text-xs lg:text-md 2xl:text-base" key={Math.random()}>
                             <NavLink
                                 className={({ isActive }) =>
-                                    ` border-b-[3px] px-1.5   py-1.5 font-medium lg:p-4 ${isActive ? ' border-[#19A5FF]  text-[#19A5FF]' : ''
+                                    ` border-b-[3px] px-1.5   py-1.5 font-medium lg:p-2.5 xl:p-4 ${
+                                        isActive ? ' border-[#19A5FF]  text-[#19A5FF]' : ''
                                     }`
                                 }
                                 to={item.path}
@@ -62,7 +63,7 @@ function RemoForceSettingsItems({ children }) {
                     ))}
                 </nav>
             </div>
-            <div>{children}</div>
+            <div className="">{children}</div>
         </section>
     );
 }

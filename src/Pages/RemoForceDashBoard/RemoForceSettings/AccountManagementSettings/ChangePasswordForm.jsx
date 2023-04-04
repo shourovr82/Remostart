@@ -78,7 +78,7 @@ function ChangePasswordForm() {
                 </div>
                 {!currentPass && (
                     <button
-                        className=" bg-black py-4 px-8 mt-6 font-sans text-center rounded-md text-white w-[15%]"
+                        className=" bg-black py-3.5  px-8 mt-7 font-sans text-center rounded-md text-white lg:w-[15%]"
                         type="submit"
                     >
                         Verify

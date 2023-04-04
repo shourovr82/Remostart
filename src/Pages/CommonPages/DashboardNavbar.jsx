@@ -34,11 +34,13 @@ const DashboardNavbar = () => {
     };
     const { user } = useSelector((state) => state.auth);
 
-    const active = 'flex bg-[#E3D5FF] flex-col space-y-2 w-4/5 py-8 rounded-md items-center';
-    const notActive = 'flex flex-col space-y-2 w-4/5 py-8 rounded-md items-center';
+    const active =
+        'flex bg-[#E3D5FF] flex-col mt-2 space-y-2 lg:w-4/5 lg:py-8 rounded-md items-start lg:items-center';
+    const notActive =
+        'flex flex-col mt-2  space-y-2 lg:w-4/5 lg:py-8 rounded-md lg:items-center items-start';
     return (
         <>
-            <div className="navbar bg-base-100 flex justify-between px-0 py-2 md:py-4">
+            <div className="navbar bg-base-100  flex justify-between px-0 py-2 md:py-4">
                 <div className="navbar-start block lg:hidden">
                     <div className="dropdown ">
                         <label tabIndex={0} className="btn btn-ghost btn-circle">

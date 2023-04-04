@@ -305,7 +305,7 @@ const RemoForceProfile = () => {
                                 remoProfile?.projectDetails?.map((item) => (
                                     <div
                                         key={Math.random()}
-                                        className="mt-2 flex w-full p-2 items-start space-x-4"
+                                        className="mt-2 flex w-full p-2 items-start lg:space-x-4"
                                     >
                                         <div>
                                             <FcStumbleupon className="text-3xl" />
@@ -321,8 +321,10 @@ const RemoForceProfile = () => {
                                             </div>
                                             <ul className="text-sm text-[#999999]  flex flex-col gap-y-2">
                                                 <li className="">
-                                                    <div className="flex gap-3">
-                                                        <span>{item?.projectLink}</span>
+                                                    <div className="flex flex-wrap gap-1 lg:gap-3">
+                                                        <span className="max-md:w-full">
+                                                            {item?.projectLink}
+                                                        </span>
                                                         <span>•</span>
                                                         <span>
                                                             {getProjectDuration(
@@ -343,7 +345,7 @@ const RemoForceProfile = () => {
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <span className="font-semibold">
+                                                    <span className="font-semibold whitespace-pre-wrap ">
                                                         {item.projectDescription}
                                                     </span>
                                                 </li>
