@@ -41,7 +41,6 @@ function SkillAndPreferenceSettings() {
         }
         fetchData();
     }, []);
-    console.log(jData.Domains);
 
     // Initialize use form hook
     const {
@@ -64,6 +63,22 @@ function SkillAndPreferenceSettings() {
     const getSkill = (e) => {
         setSelectedSkill(e.target.value);
         setLevel(true);
+    };
+    const [softSkills, setSoftSkills] = useState([]);
+
+    const handleGetSoftSkill = (e) => {
+        if (softSkills.length >= 5) {
+            toast.error('You can only add 5 soft Skills');
+        } else if (!softSkills?.length < 5) {
+            console.log(softSkills.length);
+            if (softSkills.includes(e.target.value)) {
+                toast.error(`Your have already added ${e.target.value}`);
+            }
+            if (!softSkills.includes(e.target.value)) {
+                setSoftSkills([...softSkills, e.target.value]);
+                console.log(softSkills);
+            }
+        }
     };
 
     // get language
@@ -164,7 +179,6 @@ function SkillAndPreferenceSettings() {
 
             email: user.user.email,
         };
-        console.log(bodyData);
 
         await axios
             .put(
@@ -177,16 +191,11 @@ function SkillAndPreferenceSettings() {
                     setLoading(false);
                     navigate('/remoforce-dashboard/add-education');
                 }
-
-                console.log(res);
             })
             .catch((err) => {
                 setLoading(false);
-                console.log(err);
             });
     };
-    console.log(selectedLanguages);
-
     return (
         <RemoForceSettingsItems>
             <section className="w-full lg:mt-4 h-full  bg-white">
@@ -296,7 +305,7 @@ function SkillAndPreferenceSettings() {
                                 <div className="lg:w-[45%] w-full ">
                                     <label htmlFor="selected skill">Selected Skill</label>
                                     <div className="w-90%  h-auto rounded-md bg-white mt-[1rem] flex flex-wrap gap-2 lg:gap-3 items-start   p-2 lg:p-[.5rem]">
-                                        {selectedSkills &&
+                                        {selectedSkills?.length &&
                                             selectedSkills.map((item) => (
                                                 <button
                                                     type="button"
@@ -322,6 +331,82 @@ function SkillAndPreferenceSettings() {
                             </div>
                         </div>
                     </div>
+
+                    {/* soft skills -------------------------- */}
+                    <div className=" w-full flex bg-[#F0F9FFBF]  rounded-lg flex-col p-2 lg:p-5">
+                        {/* Skill Header  starts */}
+                        <div className="flex flex-nowrap justify-between items-center border-b border-b-headers lg:w-[14rem]  mb-5 ">
+                            <span>
+                                <FaDeaf className="text-[#19A5FF]" />
+                            </span>
+                            <h1 className="text-headers  font-sans font-semibold text-xl w-[89%]">
+                                Soft Skills
+                            </h1>
+                        </div>
+                        {/* Skill body */}
+                        <div>
+                            <div className="flex w-full max-md:flex-col  items-start py-[2rem]">
+                                <div className="lg:w-[45%] flex justify-between gap-3 ">
+                                    {/* Skills dropdown */}
+                                    <div className="flex flex-col">
+                                        <label
+                                            htmlFor="skills"
+                                            className="mb-[1rem] font-medium text-sm"
+                                        >
+                                            Choose Soft Skill
+                                        </label>
+                                        <select
+                                            name=""
+                                            id=""
+                                            className="select w-full select-bordered focus:outline-none "
+                                            onChange={handleGetSoftSkill}
+                                            required
+                                        >
+                                            <option value="" className="hidden">
+                                                Skills
+                                            </option>
+                                            {jData?.softSkills?.map((item) => (
+                                                <option
+                                                    className="text-[18px]"
+                                                    value={item}
+                                                    key={Math.random()}
+                                                >
+                                                    {item}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                                {/* Selected skill display box */}
+                                <div className="lg:w-[45%] w-full ">
+                                    <label htmlFor="selected  skill">Selected Soft Skills</label>
+                                    <div className="w-90%  h-auto rounded-md bg-white mt-[1rem] grid grid-cols-2 gap-2 lg:gap-3 items-start   p-2 lg:p-[.5rem]">
+                                        {softSkills?.length &&
+                                            softSkills.map((item) => (
+                                                <button
+                                                    type="button"
+                                                    key={Math.random()}
+                                                    name={item}
+                                                    className=" col-span-1 px-2 text-xs lg:text-sm py-0.5 2xl:py-1.5  flex rounded-full justify-between 
+                                                     items-center bg-[#19A5FF] text-white"
+                                                    onClick={() => {
+                                                        const unremoved = softSkills.filter(
+                                                            (val) => val !== item
+                                                        );
+                                                        setSoftSkills(unremoved);
+                                                    }}
+                                                >
+                                                    {item}
+                                                    <CgClose className=" text-xl font-semibold text-white" />
+                                                </button>
+                                            ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* soft skills end -------------------------- */}
+
                     {/* -----------------Language--------------------------- */}
                     {/* language section  starts */}
                     <div className=" w-full flex bg-[#F0F9FFBF]  rounded-lg flex-col p-2 lg:p-5">
