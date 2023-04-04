@@ -42,23 +42,23 @@ const AllJobs = () => {
             });
         refetch();
     };
-    const handleClose = async(id) => {
-        console.log(id);
+    // const handleClose = async(id) => {
+    //     console.log(id);
 
-      await axios
-            .put(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/close/${id}`)
-            .then((response) => {
-                console.log(response);
+    //   await axios
+    //         .put(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/close/${id}`)
+    //         .then((response) => {
+    //             console.log(response);
                 
 
-                // refetch();
-                // toast.success(`${response.data.title} closed successfully`);
-            })
-            .catch((error) => {
-                console.error('Error deleting data:', error);
-            });
-        refetch();
-    };
+    //             // refetch();
+    //             // toast.success(`${response.data.title} closed successfully`);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error deleting data:', error);
+    //         });
+    //     refetch();
+    // };
 
     // /dashboard/post-job/public-job/:id
     const viewHandler = (item) => {
@@ -170,7 +170,7 @@ const AllJobs = () => {
                                                 </li>
                                                 <li>
                                                     <button
-                                                        onClick={() => handleClose(item.jobId)}
+                                                        // onClick={() => handleClose(item.jobId)}
                                                         className="font-medium text-sm"
                                                         type="button"
                                                     >
