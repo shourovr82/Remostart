@@ -101,7 +101,7 @@ const router = createBrowserRouter(
                 <Route path="/dashboard" element={<DashBoard />} />
                 <Route path="/dashboard/home" element={<DashBoard />} />
                 <Route path="/dashboard/reviews" element={<ReviewsAndRatings />} />
-                <Route path="/dashboard/talent-request" element={<TalentRequest />} />
+                {/* <Route path="/dashboard/talent-request" element={<TalentRequest />} /> */}
                 <Route path="/dashboard/manage-teams" element={<ManageTeams />} />
                 <Route path="/dashboard/all-jobs" element={<DashBoard />} />
                 <Route path="/dashboard/active-jobs" element={<ActiveJobs />} />
