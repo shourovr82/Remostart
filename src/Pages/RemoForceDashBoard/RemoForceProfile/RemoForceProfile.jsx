@@ -163,7 +163,7 @@ const RemoForceProfile = () => {
                     </div>
 
                     {/* Skills */}
-                    <div className="rounded-lg bg-[#F0F9FFBF] p-2 mt-4">
+                    <div className="rounded-lg bg-[#F0F9FFBF] p-2 pb-4 mt-4">
                         <div className="space-x-2 flex items-center">
                             <BiHash className="text-2xl mt-1" />
                             <span className="text-2xl font-semibold">Skills</span>
@@ -181,6 +181,26 @@ const RemoForceProfile = () => {
                                 : `You haven't added any skills! complete your profile first `}
                         </div>
                     </div>
+                    {/*  soft Skills ---------------- */}
+                    <div className="rounded-lg bg-[#F0F9FFBF] p-2 pb-4 mt-4">
+                        <div className="space-x-2 flex items-center">
+                            <GiSkills className="text-2xl mt-1" />
+                            <span className="text-2xl font-semibold"> Soft Skills</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2 mt-4">
+                            {remoProfile?.softSkills?.length
+                                ? remoProfile?.softSkills?.map((item) => (
+                                      <p
+                                          key={Math.random()}
+                                          className="border bg-white  rounded-md p-px px-1.5 border-[#61C1FF] text-base"
+                                      >
+                                          {item}
+                                      </p>
+                                  ))
+                                : `You haven't added any skills! complete your profile first `}
+                        </div>
+                    </div>
+                    {/*  soft Skills end ---------------- */}
 
                     {/* Experience */}
                     <div className="rounded-lg bg-[#F0F9FFBF] p-2 mt-5">

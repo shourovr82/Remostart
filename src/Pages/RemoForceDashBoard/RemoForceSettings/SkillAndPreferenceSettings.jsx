@@ -65,19 +65,14 @@ function SkillAndPreferenceSettings() {
         setLevel(true);
     };
     const [softSkills, setSoftSkills] = useState([]);
+    const [softSkillValue, setSoftSkillValue] = useState('');
 
     const handleGetSoftSkill = (e) => {
-        if (softSkills.length >= 5) {
-            toast.error('You can  add 5 soft Skills only');
-        } else if (!softSkills?.length < 5) {
-            console.log(softSkills.length);
-            if (softSkills.includes(e.target.value)) {
-                toast.error(`Your have already added ${e.target.value}`);
-            }
-            if (!softSkills.includes(e.target.value)) {
-                setSoftSkills([...softSkills, e.target.value]);
-                console.log(softSkills);
-            }
+        setSoftSkillValue(e.target.value);
+        if (softSkills.includes(e.target.value)) {
+            toast.error(`Your have already added ${e.target.value}`);
+        } else if (!softSkills.includes(e.target.value)) {
+            setSoftSkills([...softSkills, e.target.value]);
         }
     };
 
@@ -306,27 +301,28 @@ function SkillAndPreferenceSettings() {
                                 <div className="lg:w-[45%] w-full ">
                                     <label htmlFor="selected skill">Selected Skill</label>
                                     <div className="w-90%  h-auto rounded-md bg-white mt-[1rem] flex flex-wrap gap-2 lg:gap-3 items-start   p-2 lg:p-[.5rem]">
-                                        {selectedSkills?.length &&
-                                            selectedSkills.map((item) => (
-                                                <button
-                                                    type="button"
-                                                    key={Math.random()}
-                                                    name={item.skillName}
-                                                    className="lg:w-[30%] px-1.5 text-sm py-0.5 2xl:py-1.5  flex rounded-full justify-evenly
+                                        {selectedSkills?.length
+                                            ? selectedSkills.map((item) => (
+                                                  <button
+                                                      type="button"
+                                                      key={Math.random()}
+                                                      name={item.skillName}
+                                                      className="lg:w-[30%] px-1.5 text-sm py-0.5 2xl:py-1.5  flex rounded-full justify-evenly
                                                      items-center bg-[#19A5FF] text-white"
-                                                    onClick={() => {
-                                                        const unremoved = selectedSkills.filter(
-                                                            (val) =>
-                                                                val.skillName !== item.skillName
-                                                        );
-                                                        setSelectedSkills(unremoved);
-                                                        // console.log("this", item.name, unremoved)
-                                                    }}
-                                                >
-                                                    {item.skillName}
-                                                    <CgClose className=" text-xl font-semibold text-white" />
-                                                </button>
-                                            ))}
+                                                      onClick={() => {
+                                                          const unremoved = selectedSkills.filter(
+                                                              (val) =>
+                                                                  val.skillName !== item.skillName
+                                                          );
+                                                          setSelectedSkills(unremoved);
+                                                          // console.log("this", item.name, unremoved)
+                                                      }}
+                                                  >
+                                                      {item.skillName}
+                                                      <CgClose className=" text-xl font-semibold text-white" />
+                                                  </button>
+                                              ))
+                                            : ''}
                                     </div>
                                 </div>
                             </div>
@@ -362,6 +358,7 @@ function SkillAndPreferenceSettings() {
                                             className="select w-full select-bordered focus:outline-none "
                                             onChange={handleGetSoftSkill}
                                             required
+                                            value={softSkillValue && softSkillValue}
                                         >
                                             <option value="" className="hidden">
                                                 Skills
@@ -382,25 +379,28 @@ function SkillAndPreferenceSettings() {
                                 <div className="lg:w-[45%] w-full ">
                                     <label htmlFor="selected  skill">Selected Soft Skills</label>
                                     <div className="w-90%  h-auto rounded-md bg-white mt-[1rem] grid grid-cols-2 gap-2 lg:gap-3 items-start   p-2 lg:p-[.5rem]">
-                                        {softSkills?.length &&
-                                            softSkills.map((item) => (
-                                                <button
-                                                    type="button"
-                                                    key={Math.random()}
-                                                    name={item}
-                                                    className=" col-span-1 px-2 text-xs lg:text-sm py-0.5 2xl:py-1.5  flex rounded-full justify-between 
-                                                     items-center bg-[#19A5FF] text-white"
-                                                    onClick={() => {
-                                                        const unremoved = softSkills.filter(
-                                                            (val) => val !== item
-                                                        );
-                                                        setSoftSkills(unremoved);
-                                                    }}
-                                                >
-                                                    {item}
-                                                    <CgClose className=" text-xl font-semibold text-white" />
-                                                </button>
-                                            ))}
+                                        {softSkills?.length
+                                            ? softSkills.map((item) => (
+                                                  <button
+                                                      type="button"
+                                                      key={Math.random()}
+                                                      name={item}
+                                                      className=" col-span-1 px-2 text-center text-xs lg:text-sm py-0.5 2xl:py-1.5  flex rounded-full 
+                                                     items-center justify-between bg-[#19A5FF] text-white"
+                                                      onClick={() => {
+                                                          const unremoved = softSkills.filter(
+                                                              (val) => val !== item
+                                                          );
+                                                          setSoftSkills(unremoved);
+                                                      }}
+                                                  >
+                                                      {item}
+                                                      <span className="">
+                                                          <CgClose className=" text-xl font-semibold text-white" />
+                                                      </span>
+                                                  </button>
+                                              ))
+                                            : ''}
                                     </div>
                                 </div>
                             </div>

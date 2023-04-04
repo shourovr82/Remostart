@@ -132,7 +132,7 @@ const DashboardNavbar = () => {
                                     </NavLink>
                                 </li>
                             )}
-                            {/* {(role === 'startup' || serviceUser?.role === 'startup') && (
+                            {(role === 'startup' || serviceUser?.role === 'startup') && (
                                 <li>
                                     <NavLink
                                         to="/dashboard/talent-request"
@@ -143,7 +143,7 @@ const DashboardNavbar = () => {
                                         Talent Request
                                     </NavLink>
                                 </li>
-                            )} */}
+                            )}
                             {(role === 'startup' || serviceUser?.role === 'startup') && (
                                 <li>
                                     <NavLink
