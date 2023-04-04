@@ -78,6 +78,7 @@ const ShadowingJob = () => {
             categoryName,
             mentorsInfo: { mentorsBio, mentorsName, mentorsLinkedInURL },
             apiPath: jobName,
+            jobStatus:"active",
             email: user?.user.email,
         };
         console.log(shadowingJobData);
@@ -254,10 +255,10 @@ const ShadowingJob = () => {
                                 <option
                                     onClick={handleClick}
                                     disabled={disableOption}
-                                    value={D.label}
+                                    value={D}
                                     key={Math.random()}
                                 >
-                                    {D.label}
+                                    {D}
                                 </option>
                             ))}
                         </select>

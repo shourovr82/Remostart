@@ -73,6 +73,8 @@ import RemoForceRoute from './RemoforceRoute';
 import DashboardHome from './Roots/DashboardHome';
 import RemoForceDashboardRoot from './Roots/RemoForceDashBoardRoot';
 import StartupRoute from './StartupRoute';
+import ClosedJobs from '../Pages/StartupDashboard/DashboardPages/ClosedJobs';
+import UsersAllShadowing from '../Pages/StartupDashboard/DashboardPages/UsersAllShadowing';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -102,7 +104,10 @@ const router = createBrowserRouter(
                 <Route path="/dashboard/talent-request" element={<TalentRequest />} />
                 <Route path="/dashboard/manage-teams" element={<ManageTeams />} />
                 <Route path="/dashboard/all-jobs" element={<DashBoard />} />
-                <Route path="/dashboard/active_jobs" element={<ActiveJobs />} />
+                <Route path="/dashboard/active-jobs" element={<ActiveJobs />} />
+                <Route path="/dashboard/closed-jobs" element={<ClosedJobs />} />
+                <Route path="/dashboard/closed-jobs" element={<ClosedJobs />} />
+                <Route path="/dashboard/users-shadowing" element={<UsersAllShadowing />} />
                 <Route path="/dashboard/profile" element={<Profile />} />
                 {/* settings route */}
                 <Route path="/dashboard/settings" element={<Settings />} />

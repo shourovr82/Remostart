@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useContext } from 'react';
-import { BsEnvelope, BsThreeDots } from 'react-icons/bs';
-
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
+import { BsEnvelope, BsThreeDots } from 'react-icons/bs';
 import { GrDocumentUser } from 'react-icons/gr';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -15,20 +14,30 @@ import AuthContext from '../../../Context/AuthContext';
 import DashBoardItems from '../../../Routes/Roots/DashBoardItems';
 import NoJob from './NoJob';
 
-const AllJobs = () => {
+const UsersAllShadowing = () => {
     const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
     const { user } = useSelector((state) => state.auth);
     const navigate = useNavigate();
 
-    const { data: items, refetch } = useQuery(['items'], () =>
+    const { data: shadowingJobs, refetch } = useQuery(['shadowingJobs'], () =>
         axios
             .get(
-                `${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${
+                `${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/shadowing/${
                     user?.user?.email || serviceUser?.email
                 }`
             )
             .then((res) => res.data)
     );
+    //     const { data: items, refetch } = useQuery(['items'], () =>
+    //     axios
+    //         .get(
+    //             `${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${
+    //                 user?.user?.email || serviceUser?.email
+    //             }`
+    //         )
+    //         .then((res) => res.data)
+    // );
+    console.log(shadowingJobs);
 
     const handleDelete = (id) => {
         axios
@@ -36,23 +45,6 @@ const AllJobs = () => {
             .then((response) => {
                 refetch();
                 toast.success(`${response.data.title} deleted successfully`);
-            })
-            .catch((error) => {
-                console.error('Error deleting data:', error);
-            });
-        refetch();
-    };
-    const handleClose = async(id) => {
-        console.log(id);
-
-      await axios
-            .put(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/close/${id}`)
-            .then((response) => {
-                console.log(response);
-                
-
-                // refetch();
-                // toast.success(`${response.data.title} closed successfully`);
             })
             .catch((error) => {
                 console.error('Error deleting data:', error);
@@ -82,58 +74,11 @@ const AllJobs = () => {
 
     return (
         <DashBoardItems>
-            {/* <section className="grid grid-cols-3 -ml-8">
-                {items.length ? (
-                    items.map((item) => (
-                        <div
-                            key={item.id}
-                            className="flex flex-col mx-6 shadow-2xl mt-10 px-10 py-12 space-y-4 rounded-lg"
-                        >
-                            <div className="flex justify-between">
-                                <div className="flex flex-col">
-                                    <div className="flex space-x-2">
-                                        <img src={item.img} alt="" />
-                                        <h5 className="font-semibold text-lg">{item.tile}</h5>
-                                    </div>
-                                    <span className="text-base font-normal pl-10 mb-2">
-                                        {item.substile}
-                                    </span>
-                                </div>
-                                <div className="">
-                                    <BsThreeDots />
-                                </div>
-                            </div>
-
-                            <div>
-                                <p className="font-normal text-sm">{item.pTag}</p>
-                            </div>
-                            <div className="justify-between flex">
-                                <div className="flex space-x-2 text-sm font-semibold">
-                                    <span className="bg-[#D4C0FF] px-2 py-3 rounded-full">
-                                        14hh
-                                    </span>
-                                    <span className="bg-[#D4C0FF] px-2 py-3 rounded-full">
-                                        view
-                                    </span>
-                                </div>
-                                <div className="flex justify-center items-center space-x-2">
-                                    <BsEnvelope />
-                                    <span>5</span>
-                                </div>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <div className="grid place-items-center min-h-screen">
-                        <NoJob />
-                    </div>
-                )}
-            </section> */}
             <section className="">
                 {/* card section */}
-                {items?.length ? (
+                {shadowingJobs?.length ? (
                     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-8 flex-1">
-                        {items?.map((item) => (
+                        {shadowingJobs?.map((item) => (
                             <div
                                 key={Math.random()}
                                 className="flex flex-col  px-2  jobPostCardShaddow py-6 justify-between items-stretch border space-y-2 space-x-5 rounded-lg"
@@ -151,7 +96,6 @@ const AllJobs = () => {
                                         <div className="dropdown dropdown-bottom dropdown-end">
                                             <button type="button" className="p-1">
                                                 <label tabIndex={0} className="cursor-pointer">
-                                                    {' '}
                                                     <BsThreeDots />
                                                 </label>
                                             </button>
@@ -170,7 +114,6 @@ const AllJobs = () => {
                                                 </li>
                                                 <li>
                                                     <button
-                                                        onClick={() => handleClose(item.jobId)}
                                                         className="font-medium text-sm"
                                                         type="button"
                                                     >
@@ -195,11 +138,7 @@ const AllJobs = () => {
                                 </div>
 
                                 <div>
-                                    <p className="font-normal text-sm">
-                                        {item.description
-                                            ? item?.description?.slice(0, 100)
-                                            : item?.description}
-                                    </p>
+                                    <p className="font-normal text-sm">{item.description}</p>
                                 </div>
                                 <div className="flex flex-col space-y-1">
                                     <span className="flex space-x-1">
@@ -243,4 +182,4 @@ const AllJobs = () => {
     );
 };
 
-export default AllJobs;
+export default UsersAllShadowing;

@@ -49,6 +49,7 @@ const PublicJob = () => {
             categoryName,
             skills,
             apiPath: jobName,
+            jobStatus:"active"
         };
         setJob(jobName, jobData);
         navigate('/dashboard/post-job/public-job/review');

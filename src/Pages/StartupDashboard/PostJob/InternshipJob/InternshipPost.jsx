@@ -77,6 +77,7 @@ const InternshipPost = () => {
             skills,
             apiPath: jobName,
             joiningPerks,
+            jobStatus:"active"
         };
 
         setJob(jobName, internshipData);
