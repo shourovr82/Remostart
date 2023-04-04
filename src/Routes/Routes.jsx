@@ -27,6 +27,7 @@ import TermsAndCondition from '../Pages/CommonPages/TermsAndCondition';
 import RemoForceShadowing from '../Pages/RemoForce/RemoForceShadowing';
 import RemoForceDashboard from '../Pages/RemoForceDashBoard/RemoForceDashboard/RemoForceDashboard';
 import ApplyJob from '../Pages/RemoForceDashBoard/RemoforceJobs/ApplyJob';
+import ApplyCategoryJob from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/ApplyCategoryJob';
 import RemoforceContracts from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/RemoforceContracts';
 import RemoforceGigs from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/RemoforceGigs';
 import RemoforceInternship from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/RemoforceInternship';
@@ -72,7 +73,6 @@ import RemoForceRoute from './RemoforceRoute';
 import DashboardHome from './Roots/DashboardHome';
 import RemoForceDashboardRoot from './Roots/RemoForceDashBoardRoot';
 import StartupRoute from './StartupRoute';
-import ApplyCategoryJob from '../Pages/RemoForceDashBoard/RemoforceJobs/JobCategoryPages/ApplyCategoryJob';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -199,7 +199,10 @@ const router = createBrowserRouter(
                 <Route path="/remoforce-dashboard/gigs" element={<RemoforceGigs />} />
                 <Route path="/remoforce-dashboard/contracts" element={<RemoforceContracts />} />
                 <Route path="/remoforce-dashboard/all-jobs/:id" element={<ApplyJob />} />
-                <Route path="/remoforce-dashboard/category-jobs/:id" element={<ApplyCategoryJob />} />
+                <Route
+                    path="/remoforce-dashboard/category-jobs/:id"
+                    element={<ApplyCategoryJob />}
+                />
                 {/* Remoforce Settings route */}
                 <Route path="/remoforce-dashboard/settings" element={<RemoforceSettings />} />
                 <Route
