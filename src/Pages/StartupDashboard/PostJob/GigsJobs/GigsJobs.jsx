@@ -69,6 +69,7 @@ const GigsJobs = () => {
             skills,
             apiPath: jobName,
             joiningPerks: deliverablesItems,
+            jobStatus:"active"
         };
 
         setJob(jobName, gigsData);

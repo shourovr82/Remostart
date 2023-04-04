@@ -114,6 +114,7 @@ const Contracts = () => {
             domains: selectedValues,
             joiningPerks: deliverablesItems,
             apiPath: jobName,
+            jobStatus:"active"
             // contractsPaper: _.cloneDeep(file),
         };
         // const fileDeep = _.cloneDeep(file);

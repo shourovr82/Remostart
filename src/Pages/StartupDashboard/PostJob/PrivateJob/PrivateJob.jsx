@@ -52,6 +52,7 @@ const PrivateJob = () => {
             categoryName,
             skills,
             apiPath: jobName,
+            jobStatus:"active"
         };
 
         setJob(jobName, jobData);
