@@ -345,7 +345,7 @@ const RemoForceProfile = () => {
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <span className="font-semibold whitespace-pre-wrap ">
+                                                    <span className="font-semibold whitespace-pre-wrap">
                                                         {item.projectDescription}
                                                     </span>
                                                 </li>
