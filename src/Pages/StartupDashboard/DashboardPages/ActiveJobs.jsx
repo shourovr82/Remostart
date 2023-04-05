@@ -28,15 +28,22 @@ const ActiveJobs = () => {
             )
             .then((res) => res.data)
     );
-//     const { data: items, refetch } = useQuery(['items'], () =>
-//     axios
-//         .get(
-//             `${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${
-//                 user?.user?.email || serviceUser?.email
-//             }`
-//         )
-//         .then((res) => res.data)
-// );
+    const handleClose = async (id) => {
+        console.log(id);
+
+        await axios
+            .put(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/close/${id}`)
+            .then((response) => {
+                console.log(response);
+
+                refetch();
+                toast.success(`${response.data.title} closed successfully`);
+            })
+            .catch((error) => {
+                console.error('Error deleting data:', error);
+            });
+        refetch();
+    };
 // console.log(activeJobs);
 
 
@@ -113,14 +120,19 @@ const ActiveJobs = () => {
                                                         Delete Post
                                                     </button>
                                                 </li>
-                                                <li>
-                                                    <button
-                                                        className="font-medium text-sm"
-                                                        type="button"
-                                                    >
-                                                        Close Job
-                                                    </button>
-                                                </li>
+                                                {item.jobStatus === 'active' ? (
+                                                    <li>
+                                                        <button
+                                                            onClick={() => handleClose(item.jobId)}
+                                                            className="font-medium text-sm"
+                                                            type="button"
+                                                        >
+                                                            Close Job
+                                                        </button>
+                                                    </li>
+                                                ) : (
+                                                    ''
+                                                )}
 
                                                 {/* dynamic link should be here */}
 
@@ -142,7 +154,7 @@ const ActiveJobs = () => {
                                     <p className="font-normal text-sm">{item.description}</p>
                                 </div>
                                 <div className="flex flex-col space-y-1">
-                                    <span className="flex space-x-1">
+                                    <span className="flex flex-wrap space-x-1">
                                         {item.skills.map((skill, i) => (
                                             <p
                                                 className="text-[12px] p-1 rounded-md font-normal bg-[#F0F9FF]"

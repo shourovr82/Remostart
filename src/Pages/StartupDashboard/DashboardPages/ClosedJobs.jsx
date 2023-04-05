@@ -141,7 +141,7 @@ const ClosedJobs = () => {
                                     <p className="font-normal text-sm">{item.description}</p>
                                 </div>
                                 <div className="flex flex-col space-y-1">
-                                    <span className="flex space-x-1">
+                                    <span className="flex flex-wrap space-x-1">
                                         {item.skills.map((skill, i) => (
                                             <p
                                                 className="text-[12px] p-1 rounded-md font-normal bg-[#F0F9FF]"
