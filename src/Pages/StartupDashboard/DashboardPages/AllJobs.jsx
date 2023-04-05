@@ -42,23 +42,22 @@ const AllJobs = () => {
             });
         refetch();
     };
-    // const handleClose = async(id) => {
-    //     console.log(id);
+    const handleClose = async (id) => {
+        console.log(id);
 
-    //   await axios
-    //         .put(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/close/${id}`)
-    //         .then((response) => {
-    //             console.log(response);
-                
+        await axios
+            .put(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/close/${id}`)
+            .then((response) => {
+                console.log(response);
 
-    //             // refetch();
-    //             // toast.success(`${response.data.title} closed successfully`);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error deleting data:', error);
-    //         });
-    //     refetch();
-    // };
+                refetch();
+                toast.success(`${response.data.title} closed successfully`);
+            })
+            .catch((error) => {
+                console.error('Error deleting data:', error);
+            });
+        refetch();
+    };
 
     // /dashboard/post-job/public-job/:id
     const viewHandler = (item) => {
@@ -168,15 +167,19 @@ const AllJobs = () => {
                                                         Delete Post
                                                     </button>
                                                 </li>
-                                                <li>
-                                                    <button
-                                                        // onClick={() => handleClose(item.jobId)}
-                                                        className="font-medium text-sm"
-                                                        type="button"
-                                                    >
-                                                        Close Job
-                                                    </button>
-                                                </li>
+                                                {item.jobStatus === 'active' ? (
+                                                    <li>
+                                                        <button
+                                                            onClick={() => handleClose(item.jobId)}
+                                                            className="font-medium text-sm"
+                                                            type="button"
+                                                        >
+                                                            Close Job
+                                                        </button>
+                                                    </li>
+                                                ) : (
+                                                    ''
+                                                )}
 
                                                 {/* dynamic link should be here */}
 
@@ -202,7 +205,7 @@ const AllJobs = () => {
                                     </p>
                                 </div>
                                 <div className="flex flex-col space-y-1">
-                                    <span className="flex space-x-1">
+                                    <span className="flex flex-wrap space-x-1">
                                         {item.skills.map((skill, i) => (
                                             <p
                                                 className="text-[12px] p-1 rounded-md font-normal bg-[#F0F9FF]"
