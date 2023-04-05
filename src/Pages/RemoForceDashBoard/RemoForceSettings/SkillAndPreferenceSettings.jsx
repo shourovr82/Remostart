@@ -192,6 +192,9 @@ function SkillAndPreferenceSettings() {
                 setLoading(false);
             });
     };
+    const handleChangeDomain = (e) => {
+        console.log(e);
+    };
     return (
         <RemoForceSettingsItems>
             <section className="w-full lg:mt-4 h-full  bg-white">
@@ -580,6 +583,7 @@ function SkillAndPreferenceSettings() {
                                         Select Domain
                                     </label>
                                     <select
+                                        onChange={(e) => handleChangeDomain(e)}
                                         name=""
                                         id=""
                                         className="select select-bordered focus:outline-none w-full lg:w-[80%] mt-3"

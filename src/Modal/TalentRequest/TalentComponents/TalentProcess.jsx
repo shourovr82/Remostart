@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { BsEmojiWink } from 'react-icons/bs';
-import { FiEdit3, FiMapPin } from 'react-icons/fi';
+import { FiEdit3 } from 'react-icons/fi';
 import { HiLanguage } from 'react-icons/hi2';
+import { IoLocationOutline } from 'react-icons/io5';
 import { RiUser6Line } from 'react-icons/ri';
 import { TbEditCircle } from 'react-icons/tb';
 import tabBlue from '../../../Assets/Dashboard/talentRequest/tabBlue.svg';
 import tabGreen from '../../../Assets/Dashboard/talentRequest/tabGreen.svg';
+import TalentProcessLanguage from './TalentProcessLanguage';
+import TalentProcessLocation from './TalentProcessLocation';
+import TalentProcessPersonality from './TalentProcessPersonality';
 import TalentProcessProficiency from './TalentProcessProficiency';
 import TalentProcessSkills from './TalentProcessSkills';
 
@@ -15,6 +19,9 @@ const TalentProcess = () => {
     const [tabActive, setTabActive] = useState(1);
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [selectedProficiency, setSelectedProficiency] = useState([]);
+    const [selectedLocations, setSelectedLocations] = useState([]);
+    const [selectedLanguages, setSelectedLanguages] = useState([]);
+    const [selectedPersonalities, setSelectedPersonalities] = useState([]);
 
     useEffect(() => {
         setTalentProcessTabs({
@@ -48,42 +55,51 @@ const TalentProcess = () => {
                     {tabActive >= 2 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}
                 </div>
                 <div>
-                    {tabActive >= 2 ? (
-                        <button
-                            type="button"
-                            className="p-3 rounded-full bg-[#65dc7f] border-4 border-white shadow-xl shadow-[#5e59e64b]"
-                        >
-                            <FiEdit3 className="text-white text-3xl" />
-                        </button>
-                    ) : (
-                        <button
-                            type="button"
-                            className="p-3 rounded-full bg-[#fff] border-4 border-white shadow-xl shadow-[#5e59e64b]"
-                        >
-                            <FiEdit3 className="text-black text-3xl" />
-                        </button>
-                    )}
-                </div>
-                <div>
-                    <img src={tabBlue} alt="" />
-                </div>
-                <div>
                     <button
                         type="button"
-                        className="p-3 rounded-full bg-[#65dc7f] border-4 border-white shadow-xl shadow-[#5e59e64b]"
+                        className={`p-3 rounded-full border-4 border-white duration-300 ease-in shadow-xl shadow-[#5e59e64b] ${
+                            tabActive >= 2 ? 'bg-[#65dc7f]' : 'bg-white'
+                        }`}
                     >
-                        <FiMapPin className="text-white text-3xl" />
+                        <FiEdit3
+                            className={`${
+                                tabActive >= 2 ? 'text-white' : 'to-black'
+                            } duration-300 ease-in text-3xl`}
+                        />
                     </button>
                 </div>
                 <div>
-                    <img src={tabBlue} alt="" />
+                    {tabActive >= 3 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}
                 </div>
                 <div>
                     <button
                         type="button"
-                        className="p-3 rounded-full bg-[#65dc7f] border-4 border-white shadow-xl shadow-[#5e59e64b]"
+                        className={`p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
+                            tabActive >= 3 ? 'bg-[#65dc7f]' : 'bg-white'
+                        }`}
                     >
-                        <HiLanguage className="text-white text-3xl" />
+                        <IoLocationOutline
+                            className={`${
+                                tabActive >= 3 ? 'text-white' : 'to-black'
+                            } duration-300 ease-in text-3xl`}
+                        />
+                    </button>
+                </div>
+                <div>
+                    {tabActive >= 4 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}
+                </div>
+                <div>
+                    <button
+                        type="button"
+                        className={`p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
+                            tabActive >= 4 ? 'bg-[#65dc7f]' : 'bg-white'
+                        }`}
+                    >
+                        <HiLanguage
+                            className={`${
+                                tabActive >= 4 ? 'text-white' : 'to-black'
+                            } duration-300 ease-in text-3xl`}
+                        />
                     </button>
                 </div>
                 <div>
@@ -122,6 +138,24 @@ const TalentProcess = () => {
                 <TalentProcessProficiency
                     selectedProficiency={selectedProficiency}
                     setSelectedProficiency={setSelectedProficiency}
+                />
+            )}
+            {tabActive === 3 && (
+                <TalentProcessLocation
+                    selectedLocations={selectedLocations}
+                    setSelectedLocations={setSelectedLocations}
+                />
+            )}
+            {tabActive === 4 && (
+                <TalentProcessLanguage
+                    selectedLanguages={selectedLanguages}
+                    setSelectedLanguages={setSelectedLanguages}
+                />
+            )}
+            {tabActive === 5 && (
+                <TalentProcessPersonality
+                    selectedPersonalities={selectedPersonalities}
+                    setSelectedPersonalities={setSelectedPersonalities}
                 />
             )}
 

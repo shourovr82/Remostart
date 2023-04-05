@@ -49,7 +49,6 @@ const AllJobs = () => {
     //         .put(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/close/${id}`)
     //         .then((response) => {
     //             console.log(response);
-                
 
     //             // refetch();
     //             // toast.success(`${response.data.title} closed successfully`);
@@ -197,13 +196,13 @@ const AllJobs = () => {
                                 <div>
                                     <p className="font-normal text-sm">
                                         {item.description
-                                            ? item?.description?.slice(0, 100)
+                                            ? item?.description?.slice(0, 200)
                                             : item?.description}
                                     </p>
                                 </div>
                                 <div className="flex flex-col space-y-1">
-                                    <span className="flex space-x-1">
-                                        {item.skills.map((skill, i) => (
+                                    <span className="flex flex-wrap gap-2">
+                                        {item.skills.map((skill) => (
                                             <p
                                                 className="text-[12px] p-1 rounded-md font-normal bg-[#F0F9FF]"
                                                 key={Math.random()}

@@ -44,6 +44,8 @@ import AddProject from '../Pages/RemoForceDashBoard/RemoForceSettings/ProjectsSe
 import SkillAndPreferenceSettings from '../Pages/RemoForceDashBoard/RemoForceSettings/SkillAndPreferenceSettings';
 import AddExperience from '../Pages/RemoForceDashBoard/RemoForceSettings/WorkExperienceSettings/AddExperience';
 import RemoForceVerify from '../Pages/RemoForceDashBoard/RemoForceVerify/RemoForceVerify';
+import ClosedJobs from '../Pages/StartupDashboard/DashboardPages/ClosedJobs';
+import UsersAllShadowing from '../Pages/StartupDashboard/DashboardPages/UsersAllShadowing';
 import ManageTeams from '../Pages/StartupDashboard/MangeTeams/ManageTeams';
 import Contracts from '../Pages/StartupDashboard/PostJob/ContractsJob/Contracts';
 import ContractsReview from '../Pages/StartupDashboard/PostJob/ContractsJob/ContractsReview';
@@ -73,8 +75,6 @@ import RemoForceRoute from './RemoforceRoute';
 import DashboardHome from './Roots/DashboardHome';
 import RemoForceDashboardRoot from './Roots/RemoForceDashBoardRoot';
 import StartupRoute from './StartupRoute';
-import ClosedJobs from '../Pages/StartupDashboard/DashboardPages/ClosedJobs';
-import UsersAllShadowing from '../Pages/StartupDashboard/DashboardPages/UsersAllShadowing';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -101,7 +101,7 @@ const router = createBrowserRouter(
                 <Route path="/dashboard" element={<DashBoard />} />
                 <Route path="/dashboard/home" element={<DashBoard />} />
                 <Route path="/dashboard/reviews" element={<ReviewsAndRatings />} />
-                {/* <Route path="/dashboard/talent-request" element={<TalentRequest />} /> */}
+                <Route path="/dashboard/talent-request" element={<TalentRequest />} />
                 <Route path="/dashboard/manage-teams" element={<ManageTeams />} />
                 <Route path="/dashboard/all-jobs" element={<DashBoard />} />
                 <Route path="/dashboard/active-jobs" element={<ActiveJobs />} />

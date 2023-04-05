@@ -533,3 +533,17 @@ input[type=number] {
 background-size: auto;
 background-position: top;
 }
+
+/* talent request */
+.select2-selection__input{
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+.select2-selection__input:focus {
+    box-shadow: none !important;
+    outline: none;
+}
+
+select:focus {
+    outline: none;
+  }

@@ -147,6 +147,416 @@
         "Fuzzy Logic",
         "Decision Trees"
     ],
+    "talentSkills": [
+      {
+        "value": "JavaScript", "label": "JavaScript"
+      },
+      {
+        "value": "Java", "label": "Java"
+      },
+      {
+        "value": "Python", "label": "Python"
+      },
+      {
+        "value": "C#", "label": "C#"
+      },
+      {
+        "value": "PHP", "label": "PHP"
+      },
+      {
+        "value": "Swift", "label": "Swift"
+      },
+      {
+        "value": "Kotlin", "label": "Kotlin"
+      },
+      {
+        "value": "Ruby", "label": "Ruby"
+      },
+      {
+        "value": "Go", "label": "Go"
+      },
+      {
+        "value": "R", "label": "R"
+      },
+      {
+        "value": "Scala", "label": "Scala"
+      },
+      {
+        "value": "Perl", "label": "Perl"
+      },
+      {
+        "value": "Objective-C", "label": "Objective-C"
+      },
+      {
+        "value": "TypeScript", "label": "TypeScript"
+      },
+      {
+        "value": "Shell", "label": "Shell"
+      },
+      {
+        "value": "Lua", "label": "Lua"
+      },
+      {
+        "value": "Haskell", "label": "Haskell"
+      },
+      {
+        "value": "Dart", "label": "Dart"
+      },
+      {
+        "value": "Elixir", "label": "Elixir"
+      },
+      {
+        "value": "Clojure", "label": "Clojure"
+      },
+      {
+        "value": "Groovy", "label": "Groovy"
+      },
+      {
+        "value": "Julia", "label": "Julia"
+      },
+      {
+        "value": "VB.NET", "label": "VB.NET"
+      },
+      {
+        "value": "F#", "label": "F#"
+      },
+      {
+        "value": "Assembly", "label": "Assembly"
+      },
+      {
+        "value": "PowerShell", "label": "PowerShell"
+      },
+      {
+        "value": "Rust", "label": "Rust"
+      },
+      {
+        "value": "MATLAB", "label": "MATLAB"
+      },
+      {
+        "value": "SQL", "label": "SQL"
+      },
+      {
+        "value": "PL/SQL", "label": "PL/SQL"
+      },
+      {
+        "value": "T-SQL", "label": "T-SQL"
+      },
+      {
+        "value": "Prolog", "label": "Prolog"
+      },
+      {
+        "value": "Scheme", "label": "Scheme"
+      },
+      {
+        "value": "HTML", "label": "HTML"
+      },
+      {
+        "value": "HTML", "label": "HTML"
+      },
+      {
+        "value": "CSS", "label": "CSS"
+      },
+      {
+        "value": "React", "label": "React"
+      },
+      {
+        "value": "Angular", "label": "Angular"
+      },
+      {
+        "value": "Vue", "label": "Vue"
+      },
+      {
+        "value": "jQuery", "label": "jQuery"
+      },
+      {
+        "value": "Bootstrap", "label": "Bootstrap"
+      },
+      {
+        "value": "Ember.js", "label": "Ember.js"
+      },
+      {
+        "value": "Backbone.js", "label": "Backbone.js"
+      },
+      {
+        "value": "D3.js", "label": "D3.js"
+      },
+      {
+        "value": "Handlebars.js", "label": "Handlebars.js"
+      },
+      {
+        "value": "Mustache.js", "label": "Mustache.js"
+      },
+      {
+        "value": "Material-UI", "label": "Material-UI"
+      },
+      {
+        "value": "Foundation", "label": "Foundation"
+      },
+      {
+        "value": "Semantic UI", "label": "Semantic UI"
+      },
+      {
+        "value": "Tailwind CSS", "label": "Tailwind CSS"
+      },
+      {
+        "value": "Ant Design", "label": "Ant Design"
+      },
+      {
+        "value": "Chakra UI", "label": "Chakra UI"
+      },
+      {
+        "value": "Node.js", "label": "Node.js"
+      },
+      {
+        "value": "Express", "label": "Express"
+      },
+      {
+        "value": "Django", "label": "Django"
+      },
+      {
+        "value": "Flask", "label": "Flask"
+      },
+      {
+        "value": "Ruby on Rails", "label": "Ruby on Rails"
+      },
+      {
+        "value": "ASP.NET", "label": "ASP.NET"
+      },
+      {
+        "value": "Spring", "label": "Spring"
+      },
+      {
+        "value": "Laravel", "label": "Laravel"
+      },
+      {
+        "value": "Symfony", "label": "Symfony"
+      },
+      {
+        "value": "CodeIgniter", "label": "CodeIgniter"
+      },
+      {
+        "value": "CakePHP", "label": "CakePHP"
+      },
+      {
+        "value": "Zend", "label": "Zend"
+      },
+      {
+        "value": "Slim", "label": "Slim"
+      },
+      {
+        "value": "Koa", "label": "Koa"
+      },
+      {
+        "value": "Nest.js", "label": "Nest.js"
+      },
+      {
+        "value": "FastAPI", "label": "FastAPI"
+      },
+      {
+        "value": "Gin", "label": "Gin"
+      },
+      {
+        "value": "Echo", "label": "Echo"
+      },
+      {
+        "value": "AdonisJS", "label": "AdonisJS"
+      },
+      {
+        "value": "FeathersJS", "label": "FeathersJS"
+      },
+      {
+        "value": "Meteor", "label": "Meteor"
+      },
+      {
+        "value": "MySQL", "label": "MySQL"
+      },
+      {
+        "value": "PostgreSQL", "label": "PostgreSQL"
+      },
+      {
+        "value": "Oracle", "label": "Oracle"
+      },
+      {
+        "value": "MongoDB", "label": "MongoDB"
+      },
+      {
+        "value": "Redis", "label": "Redis"
+      },
+      {
+        "value": "MariaDB", "label": "MariaDB"
+      },
+      {
+        "value": "SQLite", "label": "SQLite"
+      },
+      {
+        "value": "Cassandra", "label": "Cassandra"
+      },
+      {
+        "value": "Couchbase", "label": "Couchbase"
+      },
+      {
+        "value": "DynamoDB", "label": "DynamoDB"
+      },
+      {
+        "value": "Neo4j", "label": "Neo4j"
+      },
+      {
+        "value": "Riak", "label": "Riak"
+      },
+      {
+        "value": "ArangoDB", "label": "ArangoDB"
+      },
+      {
+        "value": "InfluxDB", "label": "InfluxDB"
+      },
+      {
+        "value": "Elasticsearch", "label": "Elasticsearch"
+      },
+      {
+        "value": "AWS", "label": "AWS"
+      },
+      {
+        "value": "Azure", "label": "Azure"
+      },
+      {
+        "value": "Google Cloud Platform", "label": "Google Cloud Platform"
+      },
+      {
+        "value": "Heroku", "label": "Heroku"
+      },
+      {
+        "value": "DigitalOcean", "label": "DigitalOcean"
+      },
+      {
+        "value": "Linode", "label": "Linode"
+      },
+      {
+        "value": "IBM Cloud", "label": "IBM Cloud"
+      },
+      {
+        "value": "Alibaba Cloud", "label": "Alibaba Cloud"
+      },
+      {
+        "value": "Oracle Cloud", "label": "Oracle Cloud"
+      },
+      {
+        "value": "OpenStack", "label": "OpenStack"
+      },
+      {
+        "value": "VMware", "label": "VMware"
+      },
+      {
+        "value": "Kubernetes", "label": "Kubernetes"
+      },
+      {
+        "value": "Docker", "label": "Docker"
+      },
+      {
+        "value": "Jenkins", "label": "Jenkins"
+      },
+      {
+        "value": "Ansible", "label": "Ansible"
+      },
+      {
+        "value": "Terraform", "label": "Terraform"
+      },
+      {
+        "value": "Chef", "label": "Chef"
+      },
+      {
+        "value": "Puppet", "label": "Puppet"
+      },
+      {
+        "value": "Android", "label": "Android"
+      },
+      {
+        "value": "iOS", "label": "iOS"
+      },
+      {
+        "value": "React Native", "label": "React Native"
+      },
+      {
+        "value": "Flutter", "label": "Flutter"
+      },
+      {
+        "value": "Xamarin", "label": "Xamarin"
+      },
+      {
+        "value": "Ionic", "label": "Ionic"
+      },
+      {
+        "value": "PhoneGap", "label": "PhoneGap"
+      },
+      {
+        "value": "Apache Cordova", "label": "Apache Cordova"
+      },
+      {
+        "value": "TensorFlow", "label": "TensorFlow"
+      },
+      {
+        "value": "Keras", "label": "Keras"
+      },
+      {
+        "value": "PyTorch", "label": "PyTorch"
+      },
+      {
+        "value": "Scikit-learn", "label": "Scikit-learn"
+      },
+      {
+        "value": "OpenCV", "label": "OpenCV"
+      },
+      {
+        "value": "Caffe", "label": "Caffe"
+      },
+      {
+        "value": "Apache MXNet", "label": "Apache MXNet"
+      },
+      {
+        "value": "Theano", "label": "Theano"
+      },
+      {
+        "value": "Spark MLlib", "label": "Spark MLlib"
+      },
+      {
+        "value": "H2O.ai", "label": "H2O.ai"
+      },
+      {
+        "value": "Weka", "label": "Weka"
+      },
+      {
+        "value": "RapidMiner", "label": "RapidMiner"
+      },
+      {
+        "value": "KNIME", "label": "KNIME"
+      },
+      {
+        "value": "DataRobot", "label": "DataRobot"
+      },
+      {
+        "value": "Natural Language Processing (NLP)", "label": "Natural Language Processing (NLP)"
+      },
+      {
+        "value": "Computer Vision", "label": "Computer Vision"
+      },
+      {
+        "value": "Speech Recognition", "label": "Speech Recognition"
+      },
+      {
+        "value": "Robotics", "label": "Robotics"
+      },
+      {
+        "value": "Expert Systems", "label": "Expert Systems"
+      },
+      {
+        "value": "Genetic Algorithms", "label": "Genetic Algorithms"
+      },
+      {
+        "value": "Fuzzy Logic", "label": "Fuzzy Logic"
+      },
+      {
+        "value": "Decision Trees", "label": "Decision Trees"
+      }
+    ],
     "languages": [
         "Chinese",
         "Spanish",
@@ -316,5 +726,55 @@
         "Visionary",
         "Work ethic",
         "Writing skills"
-      ]
+      ],
+
+          "talentLanguages": [
+            {
+              "value": "Chinese", "label" : "Chinese"
+            },
+            {
+              "value":"English", "label" : "English"
+            },
+            {
+              "value": "Hindi", "label" : "Hindi"
+            },
+            {
+              "value": "Arabic", "label" : "Arabic"
+            },
+            {
+              "value": "Bengali", "label" : "Bengali"
+            },
+            {
+              "value": "Portuguese", "label" : "Portuguese"
+            },
+            {
+              "value": "Russian", "label" : "Russian"
+            },
+            {
+              "value": "Japanese", "label" : "Japanese"
+            },
+            {
+              "value": "German", "label" : "German"
+            },
+            {
+              "value": "French", "label" : "French"
+            },
+            {
+              "value": "Korean", "label" : "Korean"
+            },
+            {
+              "value": "Turkish", "label" : "Turkish"
+            },
+            {
+              "value": "Italian", "label" : "Italian"
+            },
+            {
+              "value": "Ukrainian", "label" : "Ukrainian"
+            },
+            {
+              "value": "Romanian", "label" : "Romanian"
+            }
+        
+    ]
 }
+
