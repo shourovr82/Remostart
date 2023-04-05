@@ -5,15 +5,15 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { AiFillLike, AiOutlineShareAlt } from 'react-icons/ai';
 import { BiLike } from 'react-icons/bi';
 import { FaRegComments } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import { useSelector } from 'react-redux';
 import {
     FacebookIcon,
     FacebookMessengerIcon,
@@ -42,20 +42,20 @@ const BlogDetails = () => {
     const { data: blog, refetch } = useQuery(['blog'], () =>
         axios.get(`${process.env.REACT_APP_URL}/blogs/${id}`).then((res) => res.data)
     );
-    console.log(user);
+
     
     useEffect(() => {
         fetch(`${process.env.REACT_APP_URL}/comments/${id}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+        
                 setComments(data);
                 refetch();
             });
 
         refetch();
     }, [id, refetch]);
-    console.log(comments);
+  
 
     // const { data: comments} = useQuery(['comments'], () =>
     //     axios.get(`${process.env.REACT_APP_URL}/comments/${id}`).then((res) => res.data)
@@ -66,7 +66,7 @@ const BlogDetails = () => {
             .then((res) => res.json())
             .then((data) => {
                 const status = data?.like?.find((liked) => liked?.email === user?.email);
-                console.log(status);
+            
 
                 if (status) {
                     setLikeStatus(true);
@@ -82,7 +82,7 @@ const BlogDetails = () => {
     // );
     const shareUrl = `https://remostart-daf09.web.app/blog-details/${id}`;
 
-    // console.log(blog?.like.map((element) => element?.email ));
+
 
     const handleClick = () => {
         fetch(`${process.env.REACT_APP_URL}/like?id=${id}&email=${user?.email}`, {
@@ -93,7 +93,7 @@ const BlogDetails = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+              
                 refetch();
                 setLikeStatus(true);
                 setLikeCount(blog?.like);
@@ -145,7 +145,7 @@ const BlogDetails = () => {
             userPhoto: user?.photoURL,
             time: new Date(),
         };
-        console.log(comment);
+  
         mutate(comment);
         //   document.location.reload(true)
         fetch(`${process.env.REACT_APP_URL}/comment/${id}`, {
@@ -157,13 +157,13 @@ const BlogDetails = () => {
         })
             .then((res) => res.json())
             .then((d) => {
-                console.log(d);
+         
             })
             .then(() => {
                 fetch(`${process.env.REACT_APP_URL}/comments/${id}`)
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
+                    
                         setComments(data);
                         refetch();
                     });

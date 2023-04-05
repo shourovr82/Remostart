@@ -16,9 +16,8 @@ const ProtectedRoute = ({ children }) => {
             </div>
         );
     }
-    console.log(loading);
+  
 
-    console.log(user);
 
     if (!user?.user || serviceUser?.email) {
         return <Navigate to="/login" state={{ from: location }} replace />;
