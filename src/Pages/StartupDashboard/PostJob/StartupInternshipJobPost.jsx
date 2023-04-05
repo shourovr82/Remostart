@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { BiChevronLeft } from 'react-icons/bi'
-import { RxCross2 } from 'react-icons/rx'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { BiChevronLeft } from 'react-icons/bi';
+import { RxCross2 } from 'react-icons/rx';
+import { Link } from 'react-router-dom';
 
 const StartupInternshipJobPost = () => {
-  //!!!!! All Functional is ok . You now work with only onSubmit function
+  //! !!!! All Functional is ok . You now work with only onSubmit function
 
-  const NumberOfYears = [1, 2, 3, 4, 5]
-  const Years = [2010, 2020, 2030]
+  const NumberOfYears = [1, 2, 3, 4, 5];
+  const Years = [2010, 2020, 2030];
 
   // Data for skills
   const data = [
@@ -28,24 +28,22 @@ const StartupInternshipJobPost = () => {
       value: 'Node JS',
       label: 'Node JS',
     },
-  ]
+  ];
   // State Of Disable Domains
-  const [disableOption, setDisable] = useState(false)
+  const [disableOption, setDisable] = useState(false);
 
-  //? Domain Function start
+  // ? Domain Function start
 
-  const [selectedValues, setSelectedValues] = useState([])
+  const [selectedValues, setSelectedValues] = useState([]);
 
   const handleChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map(
-      (option) => option.value,
-    )
-    setSelectedValues([...selectedValues, selectedOptions])
-  }
+    const selectedOptions = Array.from(e.target.selectedOptions).map((option) => option.value);
+    setSelectedValues([...selectedValues, selectedOptions]);
+  };
   //! Domain function is ended
   const buttonHandle = () => {
-    setDisable(false)
-  }
+    setDisable(false);
+  };
 
   const {
     register,
@@ -54,16 +52,16 @@ const StartupInternshipJobPost = () => {
     formState: { errors },
   } = useForm({
     mode: 'onChange',
-  })
+  });
 
-  const PostData = (data) => {
-    console.log(data, selectedValues)
-  }
+  const PostData = (d) => {
+
+  };
 
   return (
     <div>
       <div className="flex gap-4 items-center">
-        <Link to={'/'}>
+        <Link to="/">
           {' '}
           <BiChevronLeft className="border p-1 text-4xl rounded border-black" />
         </Link>
@@ -71,9 +69,9 @@ const StartupInternshipJobPost = () => {
       </div>
       <p className="border-[#BCBCBC] bg-[#BCBCBC] border mt-2" />
       <p className="text-gray-400 mt-6 lg:mt-1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
+        interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per
+        conubia nostra, per inceptos himenaeos.
       </p>
 
       {/* Start Form  */}
@@ -94,8 +92,7 @@ const StartupInternshipJobPost = () => {
           <p className="pt-2">
             {errors.JobTitle && (
               <span className="text-red-400 ">
-                {errors.JobTitle?.type === 'required' &&
-                  'Please provide your Job Title'}
+                {errors.JobTitle?.type === 'required' && 'Please provide your Job Title'}
               </span>
             )}
           </p>
@@ -104,9 +101,7 @@ const StartupInternshipJobPost = () => {
         {/* Input Job Description  */}
 
         <div className="space-y-1 mt-5 text-sm">
-          <label className="block font-semibold text-gray-900">
-            Job Description
-          </label>
+          <label className="block font-semibold text-gray-900">Job Description</label>
           <textarea
             type="Text"
             name="JobDescription"
@@ -130,10 +125,8 @@ const StartupInternshipJobPost = () => {
         {/* Section Of Skills Required */}
 
         <div className="mt-5">
-          <label className="block font-semibold text-gray-900">
-            Skills Required
-          </label>
-          <p className="border-[#BCBCBC] lg:w-9/12 bg-[#BCBCBC] border mt-2"></p>
+          <label className="block font-semibold text-gray-900">Skills Required</label>
+          <p className="border-[#BCBCBC] lg:w-9/12 bg-[#BCBCBC] border mt-2" />
         </div>
 
         <div className="mt-5 lg:flex items-start justify-between">
@@ -164,9 +157,7 @@ const StartupInternshipJobPost = () => {
           {/* Experience Year Input Field */}
 
           <div>
-            <label className="block font-semibold text-gray-900">
-              Experience (Optional)
-            </label>
+            <label className="block font-semibold text-gray-900">Experience (Optional)</label>
             <select
               {...register('Experience', {})}
               className="select lg:w-[100px] block  mt-1 w-full font-semibold border 
@@ -183,25 +174,18 @@ const StartupInternshipJobPost = () => {
 
           <div>
             <div className="space-y-1 text-sm w-[300px]">
-              <label className="block font-semibold text-gray-900">
-                Skills Required
-              </label>
+              <label className="block font-semibold text-gray-900">Skills Required</label>
               <div className=" lg:w-[50rm]  pr-2 rounded-md  text-gray-900 justify-between flex items-center">
                 <select
                   onChange={handleChange}
                   className="select lg:w-[300px]  mt-1 w-full font-semibold border 
                      border-gray-400 rounded-md "
                 >
-                  <option value={'Domains'} hidden>
+                  <option value="Domains" hidden>
                     Domains
                   </option>
                   {data.map((D, i) => (
-                    <option
-                      onClick={handleChange}
-                      disabled={disableOption}
-                      value={D.label}
-                      key={i}
-                    >
+                    <option onClick={handleChange} disabled={disableOption} value={D.label} key={Math.random()}>
                       {D.label}
                     </option>
                   ))}
@@ -210,16 +194,14 @@ const StartupInternshipJobPost = () => {
               {selectedValues.length ? (
                 <div className="grid grid-cols-2 px-2 py-4 gap-3 mt-8  w-full border h-auto bg-[#F0F9FF]">
                   {selectedValues.map((value, index) => (
-                    <div key={index}>
+                    <div key={Math.random()}>
                       <div className="bg-[#19A5FF] py-1 px-2 text-white  text-sm text-center rounded-2xl flex gap-2 items-center justify-center  ">
                         <p>{value}</p>
                         <button
                           type="button"
                           onClick={() => {
-                            setSelectedValues(
-                              selectedValues.filter((val) => val !== value),
-                            )
-                            buttonHandle()
+                            setSelectedValues(selectedValues.filter((val) => val !== value));
+                            buttonHandle();
                           }}
                         >
                           <RxCross2 className="font-bold text-sm" />
@@ -234,15 +216,14 @@ const StartupInternshipJobPost = () => {
               <p className="pt-2">
                 {errors.Skills && (
                   <span className="text-red-400 ">
-                    {errors.Skills?.type === 'required' &&
-                      'Please provide your Skills'}
+                    {errors.Skills?.type === 'required' && 'Please provide your Skills'}
                   </span>
                 )}
               </p>
             </div>
           </div>
         </div>
-        <p className="border bg-gray-500 mt-6"></p>
+        <p className="border bg-gray-500 mt-6" />
 
         {/* Input Location  */}
 
@@ -261,8 +242,7 @@ const StartupInternshipJobPost = () => {
           <p className="pt-2">
             {errors.Location && (
               <span className="text-red-400 ">
-                {errors.Location?.type === 'required' &&
-                  'Please provide your Location'}
+                {errors.Location?.type === 'required' && 'Please provide your Location'}
               </span>
             )}
           </p>
@@ -295,9 +275,7 @@ const StartupInternshipJobPost = () => {
 
         <div className="flex justify-between ">
           <div className="space-y-1 mt-5 text-sm">
-            <label className="block font-semibold text-gray-900">
-              Starting Date
-            </label>
+            <label className="block font-semibold text-gray-900">Starting Date</label>
             <input
               type="date"
               name="StartingDate"
@@ -310,16 +288,13 @@ const StartupInternshipJobPost = () => {
             <p className="pt-2">
               {errors.StartingDate && (
                 <span className="text-red-400 ">
-                  {errors.StartingDate?.type === 'required' &&
-                    'Please provide your Starting Date'}
+                  {errors.StartingDate?.type === 'required' && 'Please provide your Starting Date'}
                 </span>
               )}
             </p>
           </div>
           <div className="space-y-1 mt-5 text-sm">
-            <label className="block font-semibold text-gray-900">
-              Ending Date{' '}
-            </label>
+            <label className="block font-semibold text-gray-900">Ending Date </label>
             <input
               type="date"
               name="EndingDate"
@@ -332,8 +307,7 @@ const StartupInternshipJobPost = () => {
             <p className="pt-2">
               {errors.EndingDate && (
                 <span className="text-red-400 ">
-                  {errors.EndingDate?.type === 'required' &&
-                    'Please provide your Ending Date'}
+                  {errors.EndingDate?.type === 'required' && 'Please provide your Ending Date'}
                 </span>
               )}
             </p>
@@ -341,9 +315,7 @@ const StartupInternshipJobPost = () => {
         </div>
 
         <div className="space-y-1 mt-5 text-sm">
-          <label className="block font-semibold text-gray-900">
-            Apply Before
-          </label>
+          <label className="block font-semibold text-gray-900">Apply Before</label>
           <input
             type="date"
             name="ApplyBefore"
@@ -356,8 +328,7 @@ const StartupInternshipJobPost = () => {
           <p className="pt-2">
             {errors.ApplyBefore && (
               <span className="text-red-400 ">
-                {errors.ApplyBefore?.type === 'required' &&
-                  'Please provide your Apply Before'}
+                {errors.ApplyBefore?.type === 'required' && 'Please provide your Apply Before'}
               </span>
             )}
           </p>
@@ -373,7 +344,7 @@ const StartupInternshipJobPost = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default StartupInternshipJobPost
+export default StartupInternshipJobPost;
