@@ -1,138 +1,131 @@
 import React from 'react';
-import img1 from '../../../Assets/Dashboard/ManageTerms/grid-01.png';
 import img2 from '../../../Assets/Dashboard/ManageTerms/Vector.png';
+import img1 from '../../../Assets/Dashboard/ManageTerms/grid-01.png';
 
 const ManageTeams = () => {
-    const teams = [
-        {
-            name: 'Lihov Sergey',
-            startingDate: 'November .14 .2022',
-            project: 'Accounting',
-            status: 'Active',
-        },
-        {
-            name: 'Lihov Sergey',
-            startingDate: 'November .14 .2022',
-            project: 'Mobile App',
-            status: 'Active',
-        },
-        {
-            name: 'Lihov Sergey',
-            startingDate: 'November .14 .2022',
-            project: 'Virtual Device',
-            status: 'Active',
-        },
-        {
-            name: 'Lihov Sergey',
-            startingDate: 'November .14 .2022',
-            project: 'Kikstart Code',
-            status: 'Inactive',
-        },
-    ];
+  const teams = [
+    {
+      name: 'Lihov Sergey',
+      startingDate: 'November .14 .2022',
+      project: 'Accounting',
+      status: 'Active',
+    },
+    {
+      name: 'Lihov Sergey',
+      startingDate: 'November .14 .2022',
+      project: 'Mobile App',
+      status: 'Active',
+    },
+    {
+      name: 'Lihov Sergey',
+      startingDate: 'November .14 .2022',
+      project: 'Virtual Device',
+      status: 'Active',
+    },
+    {
+      name: 'Lihov Sergey',
+      startingDate: 'November .14 .2022',
+      project: 'Kikstart Code',
+      status: 'Inactive',
+    },
+  ];
 
-    return (
-        <section className="flex flex-col w-full">
-            <h1 className="text-4xl font-semibold">Manage Terms</h1>
-            <div className="h-[2px] w-full bg-slate-500 mt-4" />
+  return (
+    <section className="flex flex-col w-full">
+      <h1 className="text-4xl font-semibold">Manage Teams</h1>
+      <div className="h-[2px] w-full bg-slate-500 mt-4" />
 
-            {/* OverView */}
+      {/* OverView */}
 
-            <div className="flex flex-col">
-                <h1 className="text-2xl font-semibold mt-10 ">Overview</h1>
-                <div className="flex flex-col md:flex-row w-full h-full md:h-[300px] xl:h-[433px] jobPostCard justify-center items-center mt-4 space-y-4 md:space-y-0 py-4 md:py-0">
-                    <div className="flex flex-col justify-center items-center w-1/3 space-y-4">
-                        <img src={img1} alt="" />
+      <div className="flex flex-col">
+        <h1 className="text-2xl font-semibold mt-10 ">Overview</h1>
+        <div className="flex flex-col md:flex-row w-full h-full md:h-[300px] xl:h-[433px] jobPostCard justify-center items-center mt-4 space-y-4 md:space-y-0 py-4 md:py-0">
+          <div className="flex flex-col justify-center items-center w-1/3 space-y-4">
+            <img src={img1} alt="" />
 
-                        <span className="font-semibold text-base text-center">Active Projects</span>
+            <span className="font-semibold text-base text-center">Active Projects</span>
 
-                        <span className="py-2 px-3 bg-[#999999] text-white text-sm font-medium rounded-full">
-                            {' '}
-                            18
-                        </span>
-                    </div>
+            <span className="py-2 px-3 bg-[#999999] text-white text-sm font-medium rounded-full">
+              {' '}
+              0
+            </span>
+          </div>
 
-                    <div className="bg-gray-700 hidden md:block w-1 h-5/6" />
-                    <div className="bg-gray-700 block md:hidden w-5/6 h-1" />
+          <div className="bg-gray-700 hidden md:block w-1 h-5/6" />
+          <div className="bg-gray-700 block md:hidden w-5/6 h-1" />
 
-                    <div className="flex flex-col justify-center items-center w-1/3 space-y-4">
-                        <img src={img2} alt="" />
+          <div className="flex flex-col justify-center items-center w-1/3 space-y-4">
+            <img src={img2} alt="" />
 
-                        <span className="font-semibold text-base text-center">
-                            Finished Projects
-                        </span>
+            <span className="font-semibold text-base text-center">Finished Projects</span>
 
-                        <span className="py-2 px-3 bg-[#999999] text-white text-sm font-medium rounded-full">
-                            {' '}
-                            18
-                        </span>
-                    </div>
+            <span className="py-2 px-3 bg-[#999999] text-white text-sm font-medium rounded-full">
+              {' '}
+              0
+            </span>
+          </div>
 
-                    <div className="bg-gray-700 hidden md:block w-1 h-5/6" />
-                    <div className="bg-gray-700 block md:hidden w-5/6 h-1" />
+          <div className="bg-gray-700 hidden md:block w-1 h-5/6" />
+          <div className="bg-gray-700 block md:hidden w-5/6 h-1" />
 
-                    <div className="flex flex-col justify-center items-center w-1/3">
-                        <div className="col-md-3 col-sm-6">
-                            <div className="progress yellow">
-                                <span className="progress-left">
-                                    <span className="progress-bar" />
-                                </span>
-                                <span className="progress-right">
-                                    <span className="progress-bar" />
-                                </span>
-                                <div className="progress-value absolute">
-                                    <div className="flex justify-center items-center flex-col space-y-14 mt-14">
-                                        <span className="font-bold text-xl">70%</span>
-                                        <span className="inline-block text-sm absolute">
-                                            Finished Project
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <div className="flex flex-col justify-center items-center w-1/3">
+            <div className="col-md-3 col-sm-6">
+              <div className="progress yellow">
+                <span className="progress-left">
+                  <span className="progress-bar" />
+                </span>
+                <span className="progress-right">
+                  <span className="progress-bar" />
+                </span>
+                <div className="progress-value absolute">
+                  <div className="flex justify-center items-center flex-col space-y-14 mt-14">
+                    <span className="font-bold text-xl">70%</span>
+                    <span className="inline-block text-sm absolute">Finished Project</span>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            {/* Team */}
-            <div className="flex flex-col w-full">
-                <h1 className="text-2xl font-semibold mt-10">Team</h1>
+      {/* Team */}
+      <div className="flex flex-col w-full">
+        <h1 className="text-2xl font-semibold mt-10">Team</h1>
 
-                {/* team table starts */}
-                <div className="flex flex-col">
-                    <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                            <div className="overflow-hidden">
-                                {/* Manage Team Table Starts */}
-                                <table className="min-w-full">
-                                    <thead className="bg-white border-b">
-                                        <tr>
-                                            <th
-                                                scope="col"
-                                                className="text-lg  font-semibold text-gray-900  px-6 py-4 "
-                                            >
-                                                Employee
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-lg font-semibold text-gray-900 px-6 py-4 text-left"
-                                            >
-                                                Starting Date
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-lg font-semibold text-gray-900 px-6 py-4 text-left"
-                                            >
-                                                Project
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-lg font-semibold text-gray-900 px-6 py-4 text-left"
-                                            >
-                                                Status
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    {/* <tbody>
+        {/* team table starts */}
+        <div className="flex flex-col">
+          <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+            <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+              <div className="overflow-hidden">
+                {/* Manage Team Table Starts */}
+                <table className="min-w-full">
+                  <thead className="bg-white border-b">
+                    <tr>
+                      <th scope="col" className="text-lg  font-semibold text-gray-900  px-6 py-4 ">
+                        Employee
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-lg font-semibold text-gray-900 px-6 py-4 text-left"
+                      >
+                        Starting Date
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-lg font-semibold text-gray-900 px-6 py-4 text-left"
+                      >
+                        Project
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-lg font-semibold text-gray-900 px-6 py-4 text-left"
+                      >
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  {/* <tbody>
                                         {teams &&
                                             teams.map((team, index) => (
                                                 <tr
@@ -197,18 +190,18 @@ const ManageTeams = () => {
                                                 </tr>
                                             ))} 
                                     </tbody> */}
-                                </table>
+                </table>
 
-                                {/* Table Ends */}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* team table ends */}
+                {/* Table Ends */}
+              </div>
             </div>
+          </div>
+        </div>
+        {/* team table ends */}
+      </div>
 
-            {/* pagination if needed */}
-            {/* <div className="flex justify-center mt-10">
+      {/* pagination if needed */}
+      {/* <div className="flex justify-center mt-10">
         <nav aria-label="Page navigation example">
           <ul className="flex list-style-none">
             <li className="page-item disabled"><a
@@ -229,8 +222,8 @@ const ManageTeams = () => {
           </ul>
         </nav>
       </div> */}
-        </section>
-    );
+    </section>
+  );
 };
 
 export default ManageTeams;

@@ -1,33 +1,31 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { HashLink as Link } from 'react-router-hash-link';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import BlogImage from '../../Assets/Images/blog.jpg';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const Blogs = () => {
-    // const [allCategory, setCategoryBlogs] = useState([]);
+  // const [allCategory, setCategoryBlogs] = useState([]);
 
-    // useEffect(() => {
-    //     fetch(`${process.env.REACT_APP_URL}/blog-category`)
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             console.log(data);
-    //             setCategoryBlogs(data);
-    //         });
-    // }, []);
+  // useEffect(() => {
+  //     fetch(`${process.env.REACT_APP_URL}/blog-category`)
+  //         .then((res) => res.json())
+  //         .then((data) => {
 
-    const { data: allCategory } = useQuery(['allCategory'], () =>
-        axios.get(`${process.env.REACT_APP_URL}/blog-category`).then((res) => res.data)
-    );
+  //             setCategoryBlogs(data);
+  //         });
+  // }, []);
 
-    const active = 'px-5 py-1 rounded-3xl text-white bg-[#0B132A]';
-    const inActive = 'border-2 text-black px-5 py-1 rounded-3xl border-black';
+  const { data: allCategory } = useQuery(['allCategory'], () =>
+    axios.get(`${process.env.REACT_APP_URL}/blog-category`).then((res) => res.data)
+  );
 
-    return (
-        <div className="bg-white">
-            {/* <div className="hero min-h-screen " style={{ backgroundImage: `url(${BlogImage})` }}>
+  const active = 'px-5 py-1 rounded-3xl text-white bg-[#0B132A]';
+  const inActive = 'border-2 text-black px-5 py-1 rounded-3xl border-black';
+
+  return (
+    <div className="bg-white">
+      {/* <div className="hero min-h-screen " style={{ backgroundImage: `url(${BlogImage})` }}>
                 <div className="hero-overlay bg-neutral bg-opacity-80" />
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-xl mt-72">
@@ -41,7 +39,7 @@ const Blogs = () => {
                     </div>
                 </div>
             </div> */}
-            {/* <div className="container mt-20 bg-primary p-5 ">
+      {/* <div className="container mt-20 bg-primary p-5 ">
                 <p className=" py-5 text-2xl text-center ">Popular Tags</p>
                 <div className="grid grid-flow-col auto-cols-fr gap-5 ">
                     {allCategory?.map((category) => (
@@ -49,7 +47,7 @@ const Blogs = () => {
                     ))}
                 </div>
             </div> */}
-            {/* <div className="">
+      {/* <div className="">
                 <h1 id="topics" className="text-4xl font-semibold pt-20 text-black">
                     Topic match for you
                 </h1>
@@ -67,9 +65,9 @@ const Blogs = () => {
                 </nav>
             </div> */}
 
-            <Outlet />
-        </div>
-    );
+      <Outlet />
+    </div>
+  );
 };
 
 export default Blogs;

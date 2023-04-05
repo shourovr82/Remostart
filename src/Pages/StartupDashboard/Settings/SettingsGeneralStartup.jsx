@@ -7,18 +7,14 @@ import GeneralSettingsPersonal from './SettingsGeneral/GeneralSettingsPersonal';
 import GeneralSettingsVerification from './SettingsGeneral/GeneralSettingsVerification';
 import GeneralSettingsPassword from './SettingsGeneral/Password';
 
-const SettingsGeneral = () => {
-    console.log('hello');
+const SettingsGeneral = () => (
+  <SettingsItems>
+    <GeneralSettingsPersonal />
 
-    return (
-        <SettingsItems>
-            <GeneralSettingsPersonal />
+    <GeneralSettingsPassword />
 
-            <GeneralSettingsPassword />
-
-            <GeneralSettingsVerification />
-        </SettingsItems>
-    );
-};
+    <GeneralSettingsVerification />
+  </SettingsItems>
+);
 
 export default SettingsGeneral;
