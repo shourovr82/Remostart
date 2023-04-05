@@ -24,7 +24,8 @@ function SkillAndPreferenceSettings() {
   const [preferredJobType, setPreferredType] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [selectedDomain, setSelectedDomain] = useState('');
+  const [selectedIndustryName, setSelectedIndustryName] = useState('');
+  const [openOtherMenu, setOpenOtherMenu] = useState(false);
 
   // set level to value state
   const [value, setValue] = useState();
@@ -151,8 +152,22 @@ function SkillAndPreferenceSettings() {
 
   // submit data And Make API request
 
-  const { industry: industryName } = getValues();
-  console.log(industryName);
+  const handleIndustryChange = (e) => {
+    if (e.target.value === 'Other') {
+      setOpenOtherMenu(true);
+      setSelectedIndustryName(e.target.value);
+    } else {
+      setOpenOtherMenu(false);
+      setSelectedIndustryName(e.target.value);
+    }
+  };
+  const handleOtherMenu = (e) => {
+    setSelectedIndustryName(e.target.value);
+  };
+  const handleBlur = () => {
+    console.log('test click');
+  };
+  console.log(selectedIndustryName);
 
   const Submit = async (data) => {
     if (preferredJobType === '') {
@@ -167,14 +182,13 @@ function SkillAndPreferenceSettings() {
 
     const { workPreference, industry, domain } = data;
 
-   
-    
+    console.log(industry);
 
     const bodyData = {
       jobPreference: {
         jobType: preferredJobType,
         locationPreference: workPreference,
-        jobIndustry: industry,
+        jobIndustry: selectedIndustryName,
         jobLevel: domain,
       },
       selectedSkills,
@@ -529,19 +543,19 @@ function SkillAndPreferenceSettings() {
               {/* select industry */}
               <div className="flex flex-col md:flex-row items-start mt-10">
                 <div className="lg:w-[43%] w-full flex flex-col">
-                  <label htmlFor="Industry" className="text-base font-medium">
+                  <label htmlFor="industry" className="text-base font-medium">
                     Select Domain
                   </label>
                   <select
-                    name=""
-                    id=""
+                    name="industry"
+                    id="industry"
+                    onChange={handleIndustryChange}
                     className="select select-bordered focus:outline-none w-full lg:w-[80%] mt-3"
-                    {...register('industry', { required: true })}
-                    required
+                    // {...register('industry', { required: true })}
+                    // required
                   >
-                 
                     <option value="" className="hidden" hidden>
-                      Choose
+                      {selectedIndustryName || ' Choose'}
                     </option>
                     {jData?.domains?.map((item) => (
                       <option value={item} key={Math.random()} className="text-[18px]">
@@ -594,6 +608,15 @@ function SkillAndPreferenceSettings() {
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            {openOtherMenu && (
+              <input
+                onBlur={() => setOpenOtherMenu(false)}
+                type="text"
+                onChange={handleOtherMenu}
+              />
+            )}
           </div>
           <button
             type="submit"
