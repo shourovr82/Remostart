@@ -39,7 +39,7 @@ const TalentRequestModal = ({ setIsOpen, isOpen }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full  h-[95vh] transform overflow-hidden rounded-2xl bg-[#f0f9ff] p-6 text-left align-middle shadow-xl transition-all relative">
+              <Dialog.Panel className="w-full  h-[95vh] transform overflow-hidden rounded-2xl bg-[#f0f9ff] p-3 lg:p-6 text-left align-middle shadow-xl transition-all relative">
                 {/* cross button for close modal */}
                 <div className="absolute right-4 top-4">
                   <button
@@ -51,7 +51,7 @@ const TalentRequestModal = ({ setIsOpen, isOpen }) => {
                   </button>
                 </div>
                 {/* modal design */}
-                <div className="absolute right-0 flex  gap-4 top-20">
+                <div className="absolute max-md:-z-30 right-0 flex  gap-4 top-20">
                   <img src={modalSvg1} alt="" />
                   <img src={modalSvg2} alt="" />
                 </div>

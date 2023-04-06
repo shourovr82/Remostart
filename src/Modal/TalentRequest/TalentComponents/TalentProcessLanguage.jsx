@@ -50,7 +50,7 @@ const TalentProcessLanguage = ({ selectedLanguages, setSelectedLanguages }) => {
     fetchData();
   }, []);
   return (
-    <div className="ml-20">
+    <div className="lg:ml-20">
       <div>
         <h1 className="font-bold text-3xl">Language</h1>
         <p
@@ -61,18 +61,18 @@ const TalentProcessLanguage = ({ selectedLanguages, setSelectedLanguages }) => {
         </p>
       </div>
       {/* select option */}
-      <div className="mt-10">
+      <div className="mt-5 lg:mt-10">
         <div>
-          <div className="lg:flex  gap-10  justify-center ">
-            <div className="group border-2  relative rounded-md px-3 py-2 inline-block border-dashed border-[#0ea5e9] lg:pr-10">
+          <div className="flex max-md:flex-col gap-3  lg:gap-10  justify-center ">
+            <div className="group border-2 max-md:w-full  relative rounded-md px-3 py-2 inline-block border-dashed border-[#0ea5e9] lg:pr-10">
               <div className=" mt-2">
                 <Select
                   options={jData?.talentLanguages}
                   styles={customStyles}
                   value={selectedOption}
                   onChange={handleSelectChange}
-                  placeholder="Choose language"
-                  className="w-[250px] "
+                  placeholder="Choose"
+                  className=" w-full lg:w-[250px] "
                   classNamePrefix="select2-selection"
                   components={{
                     DropdownIndicator: () => null,
