@@ -105,6 +105,8 @@ const ShadowingJob = () => {
       apiPath: jobName,
       jobStatus: 'active',
       email: user?.user.email,
+      startupsProfilePhoto: user?.user?.profilePhoto,
+      startupsName: user?.user?.fullName,
     };
 
     if (shadowingJobData) {
