@@ -29,7 +29,7 @@ const RemoForceBenefit = () => {
                 'Most of our projects are as revolutionary as you are, you have the opportunity to be at the instance of something new and amazing, and work on projects with similar ideals like you',
             Logo: three,
         },
-    ]
+    ];
     return (
         <section className="w-full md:w-full lg:h-[420px] h-full flex flex-col rounded-xl items-center mt-4 lg:mt-5 mx-auto ">
             <div className="hidden lg:flex justify-between w-full">
@@ -69,9 +69,10 @@ const RemoForceBenefit = () => {
                 showThumbs={false}
                 showArrows={false}
                 swipeable={true}
-                showStatus={true}
+                showStatus={false}
                 autoPlay={true}
                 infiniteLoop={true}
+                showIndicators={false}
             >
                 {benefitsItems?.map((item, i) => (
                     <div key={Math.random()}>
@@ -88,9 +89,11 @@ const RemoForceBenefit = () => {
                                 </p>
                             </div>
                             <div className="">
-                                <button type="button" className="text-[#B18CFF] py-3 pr-0 lg:pr-12 font-medium text-xs">
-                                    Know More{' '}
-                                    <HiArrowLongRight className="inline-block text-xl" />
+                                <button
+                                    type="button"
+                                    className="text-[#B18CFF] py-3 pr-0 lg:pr-12 font-medium text-xs"
+                                >
+                                    Know More <HiArrowLongRight className="inline-block text-xl" />
                                 </button>
                             </div>
                         </div>
