@@ -21,7 +21,7 @@ const TalentGetStarted = ({ setGetStartedOpen }) => (
       <div>
         <button
           onClick={() => setGetStartedOpen(false)}
-          className="bg-[#f8f1ff] hover:shadow-xl hover:shadow-[#d4cef2] hover:text-white duration-300 ease-in hover:bg-[#61c1ff] px-7 py-3 rounded-xl shadow-inner text-[#61c1ff] text-3xl"
+          className="bg-[#f8f1ff] hover:shadow-lg hover:shadow-[#d4cef2] hover:text-white duration-500 ease-in hover:bg-[#61c1ff] px-7 py-3 rounded-xl shadow-inner text-[#61c1ff] text-3xl"
           type="button"
         >
           Get Started Now !

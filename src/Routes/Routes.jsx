@@ -64,6 +64,7 @@ import Settings from '../Pages/StartupDashboard/Settings/Settings';
 import SettingsGeneral from '../Pages/StartupDashboard/Settings/SettingsGeneral';
 import GeneralSettingsVerification from '../Pages/StartupDashboard/Settings/SettingsGeneral/GeneralSettingsVerification';
 import SettingsProfile from '../Pages/StartupDashboard/Settings/SettingsProfile';
+import TalentRequest from '../Pages/StartupDashboard/TalentRequest/TalentRequest';
 import StartupHome from '../Pages/StartupPages/StartupHome';
 import StartupSignUp from '../Pages/StartupPages/StartupSignUp';
 import StartupWelcomePage from '../Pages/StartupPages/StartupWelcomePage';
@@ -100,7 +101,7 @@ const router = createBrowserRouter(
         <Route path="/dashboard" element={<DashBoard />} />
         <Route path="/dashboard/home" element={<DashBoard />} />
         <Route path="/dashboard/reviews" element={<ReviewsAndRatings />} />
-        {/* <Route path="/dashboard/talent-request" element={<TalentRequest />} /> */}
+        <Route path="/dashboard/talent-request" element={<TalentRequest />} />
         <Route path="/dashboard/manage-teams" element={<ManageTeams />} />
         <Route path="/dashboard/all-jobs" element={<DashBoard />} />
         <Route path="/dashboard/active-jobs" element={<ActiveJobs />} />

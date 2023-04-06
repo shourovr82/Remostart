@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { RiUser3Line } from 'react-icons/ri';
@@ -60,19 +60,39 @@ const SettingsProfile = () => {
 
   const [selectedValues, setSelectedValues] = useState([]);
   const [domainError, setDomainError] = useState('');
+  const [openOtherMenu, setOpenOtherMenu] = useState(false);
+
+  const selectRefTo = useRef(null);
   const handleChange = (e) => {
+    if (e.target.value === 'Other') {
+      setOpenOtherMenu(true);
+      setTimeout(() => {
+        if (selectRefTo.current) {
+          selectRefTo.current.focus();
+        }
+      }, 0);
+      return;
+    }
+    setOpenOtherMenu(false);
     setDomainError('');
-    const selectedOptions = e.target.selectedOptions[0].innerHTML;
-
+    const selectedOptions = e.target.value;
     const arr = selectedValues.filter((ar) => selectedOptions === ar);
-
     if (arr.length) {
-   
-      setDomainError(`Already added ${selectedOptions} !!`);
-      // toast.error('Already added');
+      toast.error(`Already added ${selectedOptions} !!`);
     } else if (!arr.length) {
       setDomainError('');
       setSelectedValues([...selectedValues, selectedOptions]);
+    }
+  };
+  const [otherDomainValue, setOtherDomainValue] = useState('');
+  const handleOtherMenu = (e) => {
+    setOtherDomainValue(e.target.value);
+  };
+  const handleAddOtherDomain = () => {
+    if (otherDomainValue) {
+      setSelectedValues([...selectedValues, otherDomainValue]);
+      setOpenOtherMenu(false);
+      setOtherDomainValue('');
     }
   };
   //! Domain function is ended
@@ -85,7 +105,6 @@ const SettingsProfile = () => {
   const [socialMedia, setSocialMedia] = useState();
   const [socialLinks, setSocialLinks] = useState({});
   const navigate = useNavigate();
-
 
   // ? Link Function Start
 
@@ -162,7 +181,6 @@ const SettingsProfile = () => {
       socialLinks,
       startupSlogan,
     };
-  
 
     formData.append('obj', JSON.stringify(obj));
 
@@ -170,7 +188,6 @@ const SettingsProfile = () => {
     for (let i = 0; i < newArr.length; i++) {
       formData.append('homePageImages', newArr[i]);
     }
- 
 
     await axios
       .put(`${process.env.REACT_APP_URL_STARTUP}/api/startup/settings-profile`, formData)
@@ -180,12 +197,9 @@ const SettingsProfile = () => {
           setLoading(false);
           navigate('/dashboard/settings/general');
         }
-
-
       })
       .catch((err) => {
         setLoading(false);
-  
       });
   };
 
@@ -330,23 +344,53 @@ const SettingsProfile = () => {
               <div>
                 <div className="lg:flex justify-center ">
                   <div className="group w-full inline-block mt-6  lg:pr-10">
-                    <label htmlFor="bio" className="text-sm block font-medium">
-                      Select Domains
-                    </label>
-                    <select
-                      onChange={handleChange}
-                      className="select lg:w-[140px]  mt-1 w-full font-semibold border 
-                                             border-gray-400 rounded-md "
-                    >
-                      <option value="Domains" hidden>
-                        Domains
-                      </option>
-                      {jData?.domains?.map((D, i) => (
-                        <option onClick={handleClick} disabled={disableOption} value={D} key={i}>
-                          {D}
+                    <div>
+                      <label htmlFor="bio" className="text-sm block font-medium">
+                        Select Domains
+                      </label>
+                      <select
+                        onChange={handleChange}
+                        className="select  mt-1 w-full font-semibold border 
+                                             border-[#d6d6d6] rounded-md"
+                      >
+                        <option value="Domains" hidden>
+                          Domains
                         </option>
-                      ))}
-                    </select>
+                        {jData?.domains?.map((D, i) => (
+                          <option onClick={handleClick} disabled={disableOption} value={D} key={i}>
+                            {D}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      {openOtherMenu && (
+                        <>
+                          <label htmlFor="industryName" className="text-sm mt-2 font-medium">
+                            Write your other domain
+                          </label>
+                          <div className="flex flex-col items-start gap-2">
+                            <input
+                              id="industryName"
+                              ref={selectRefTo}
+                              className=" rounded-md py-2.5 border-[#d6d6d6]  focus:outline-none  mt-2"
+                              // onBlur={() => setOpenOtherMenu(false)}
+                              type="text"
+                              placeholder="Other Domain..."
+                              onChange={handleOtherMenu}
+                              required
+                            />
+                            <button
+                              onClick={handleAddOtherDomain}
+                              className="border py-1.5 bg-[#19A5FF] text-white px-4 rounded-md"
+                              type="button"
+                            >
+                              Add
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                   {selectedValues.length ? (
                     <div className="grid grid-cols-2 px-2 py-4 gap-3 mt-8 lg:w-[630px] w-full border h-auto bg-[#F0F9FF]">
@@ -446,72 +490,12 @@ const SettingsProfile = () => {
             </div>
           </div>
 
-          {/* Image Upload Section start  */}
-
-          {/* <Dropzone
-                        className="lg:w-[515px] lg:mt-0 mt-10 mx-auto"
-                        onDrop={(acceptedFiles) => setFile(acceptedFiles)}
-                    >
-                        {({ getRootProps, getInputProps }) => (
-                            <section className="container">
-                                <div {...getRootProps({ className: 'dropzone' })}>
-                                    <input {...getInputProps()} />
-                                    <section
-                                        htmlFor="dropzone-file"
-                                        className="mx-auto justify-center cursor-pointer lg:mt-0 mt-10  flex lg:w-[515px]  flex-col items-center rounded-xl h-[329px] border-2 border-dashed border-blue-400 bg-white text-center"
-                                    >
-                                        {!file?.[0]?.size ? (
-                                            <>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    className="h-10 w-10 text-blue-500"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                    strokeWidth="2"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                                                    />
-                                                </svg>
-
-                                                <h2 className="mt-4 text-xl font-medium tracking-wide">
-                                                    Drop your files here or{' '}
-                                                    <span className="text-blue-600 font-medium">
-                                                        Browse
-                                                    </span>
-                                                </h2>
-                                                <span className="text-xs font-medium">
-                                                    Maximum size: 50MB
-                                                </span>
-                                            </>
-                                        ) : (
-                                            <div>
-                                                <p className="text-2xl text-blue-500">
-                                                    {file?.[0]?.path}
-                                                </p>
-                                                <p>size: {file?.[0]?.size}</p>
-                                            </div>
-                                        )}
-                                    </section>
-                                </div>
-                            </section>
-                        )}
-                    </Dropzone> */}
           <div>
             <h1 className="text-xl ml-5 font-semibold ">Homepage Images</h1>
             <Dropzone
               className="lg:w-[550px]  lg:mt-5 h-[213px] mt-10 mx-auto"
               onDrop={(acceptedFiles) => {
-            
-                // set error to empty strings if files are accepted
-                // setError('');
-
-                // setFile2(...acceptedFiles);
                 setNewArr([...newArr, ...acceptedFiles]);
-                // display dropdown
               }}
             >
               {({ getRootProps, getInputProps }) => (
