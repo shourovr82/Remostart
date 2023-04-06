@@ -19,10 +19,10 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../../Context/AuthContext';
 import {
-    CalculatedAge,
-    FormattedDate,
-    getDuration,
-    getEducationDuration,
+  CalculatedAge,
+  FormattedDate,
+  getDuration,
+  getEducationDuration,
 } from '../../../Utilities/DateFormater';
 import { convertProjectDate, getProjectDuration } from '../../../Utilities/projectDateFormater';
 

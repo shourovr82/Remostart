@@ -19,13 +19,25 @@ const StartUpSection1 = () => (
                     You are where you <br className="hidden lg:block" /> needed to be!
                 </span>
             </div>
-            <div className="grid grid-cols-3 gap-6">
-                <img src={one} alt="" />
-                <img src={two} alt="" />
-                <img src={three} alt="" />
-                <img src={four} alt="" />
-                <img src={five} alt="" />
-                <img src={six} alt="" />
+            <div className="grid grid-cols-3 md:gap-6 gap-10  space-x-2	content-around">
+                <div>
+                    <img src={one} alt="" />
+                </div>
+                <div>
+                    <img src={two} alt="" />
+                </div>
+                <div>
+                    <img src={three} alt="" />
+                </div>
+                <div>
+                    <img src={four} alt="" />
+                </div>
+                <div>
+                    <img src={five} alt="" />
+                </div>
+                <div>
+                    <img src={six} alt="" />
+                </div>
             </div>
         </div>
 
