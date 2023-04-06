@@ -26,7 +26,7 @@ const TalentRequest = () => {
           <TalentRequestBanner />
         </div>
         {/* Try Free or view plan option */}
-        <div className="flex items-center mt-5 justify-between pr-5 rounded-md bg-[#f0f9ff]">
+        <div className="lg:flex max-md:p-2 max-md:pb-4 items-center mt-5 justify-between pr-5 rounded-md bg-[#f0f9ff]">
           <div className="flex gap-2 px-2 py-3">
             <span className="mt-1">
               <BsStarFill />
@@ -40,7 +40,7 @@ const TalentRequest = () => {
               </p>
             </div>
           </div>
-          <div>
+          <div className="max-md:flex max-md:justify-center">
             <div className="flex gap-3">
               <button
                 onClick={() => setIsOpen(true)}
