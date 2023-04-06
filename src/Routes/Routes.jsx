@@ -3,27 +3,20 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 
 import Root from './Roots/Root';
 
+import AddBlogs from '../AdminPages/AddBlog';
+import AdminDashboard from '../AdminPages/AdminDashboard';
+import AdminRoot from '../AdminPages/AdminRoot';
+import AllBlogsList from '../AdminPages/AllBlogsList';
+import UpdateBlog from '../AdminPages/UpdateBlog';
 import AllBlogs from '../Pages/Blogs/AllBlogs';
 import BlogDetails from '../Pages/Blogs/BlogDetails';
 import Blogs from '../Pages/Blogs/Blogs';
 import CategorizedBlogs from '../Pages/Blogs/CategorizedBlogs';
 import ErrorPage from '../Pages/CommonPages/ErrorPage';
+import TermsAndCondition from '../Pages/CommonPages/TermsAndCondition';
 import LandingPage from '../Pages/LandingPage/LandingPage';
 import LoginPage from '../Pages/LoginAndSignup/LoginPage';
 import RegistrationPage from '../Pages/LoginAndSignup/RegistrationPage';
-
-import ActiveJobs from '../Pages/StartupDashboard/DashboardPages/ActiveJobs';
-import DashBoard from '../Pages/StartupDashboard/DashboardPages/DashBoard';
-import PostJob from '../Pages/StartupDashboard/PostJob/PostJob';
-
-import InternshipPost from '../Pages/StartupDashboard/PostJob/InternshipJob/InternshipPost';
-
-import AddBlogs from '../AdminPages/AddBlog';
-import AdminDashboard from '../AdminPages/AdminDashboard';
-import AdminRoot from '../AdminPages/AdminRoot';
-import AllBlogsList from '../AdminPages/AlllBlogsList';
-import UpdateBlog from '../AdminPages/UpdateBlog';
-import TermsAndCondition from '../Pages/CommonPages/TermsAndCondition';
 import RemoForceShadowing from '../Pages/RemoForce/RemoForceShadowing';
 import RemoForceDashboard from '../Pages/RemoForceDashBoard/RemoForceDashboard/RemoForceDashboard';
 import ApplyJob from '../Pages/RemoForceDashBoard/RemoforceJobs/ApplyJob';
@@ -44,14 +37,18 @@ import AddProject from '../Pages/RemoForceDashBoard/RemoForceSettings/ProjectsSe
 import SkillAndPreferenceSettings from '../Pages/RemoForceDashBoard/RemoForceSettings/SkillAndPreferenceSettings';
 import AddExperience from '../Pages/RemoForceDashBoard/RemoForceSettings/WorkExperienceSettings/AddExperience';
 import RemoForceVerify from '../Pages/RemoForceDashBoard/RemoForceVerify/RemoForceVerify';
+import ActiveJobs from '../Pages/StartupDashboard/DashboardPages/ActiveJobs';
 import ClosedJobs from '../Pages/StartupDashboard/DashboardPages/ClosedJobs';
+import DashBoard from '../Pages/StartupDashboard/DashboardPages/DashBoard';
 import UsersAllShadowing from '../Pages/StartupDashboard/DashboardPages/UsersAllShadowing';
 import ManageTeams from '../Pages/StartupDashboard/MangeTeams/ManageTeams';
 import Contracts from '../Pages/StartupDashboard/PostJob/ContractsJob/Contracts';
 import ContractsReview from '../Pages/StartupDashboard/PostJob/ContractsJob/ContractsReview';
 import GigsJobs from '../Pages/StartupDashboard/PostJob/GigsJobs/GigsJobs';
 import GigsJobsReview from '../Pages/StartupDashboard/PostJob/GigsJobs/GigsJobsReview';
+import InternshipPost from '../Pages/StartupDashboard/PostJob/InternshipJob/InternshipPost';
 import InternshipReview from '../Pages/StartupDashboard/PostJob/InternshipJob/InternshipReview';
+import PostJob from '../Pages/StartupDashboard/PostJob/PostJob';
 import PrivateJob from '../Pages/StartupDashboard/PostJob/PrivateJob/PrivateJob';
 import PrivateJobReview from '../Pages/StartupDashboard/PostJob/PrivateJob/PrivateJobReview';
 import PublicJob from '../Pages/StartupDashboard/PostJob/PublicJob/PublicJob';
