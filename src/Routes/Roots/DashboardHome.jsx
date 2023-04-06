@@ -37,7 +37,7 @@ const DashboardHome = () => {
                         <AiOutlineFileAdd className="text-xl" />
                         <span className="font-normal text-sm">Post Job</span>
                     </NavLink>
-                    {/* <NavLink
+                    <NavLink
                         to="/dashboard/talent-request"
                         className={({ isActive }) => (isActive ? active : notActive)}
                     >
@@ -45,7 +45,7 @@ const DashboardHome = () => {
                         <span className="font-normal text-sm leading-4">
                             Talent <br /> Request
                         </span>
-                    </NavLink> */}
+                    </NavLink>
                     <NavLink
                         to="/dashboard/reviews"
                         className={({ isActive }) => (isActive ? active : notActive)}
