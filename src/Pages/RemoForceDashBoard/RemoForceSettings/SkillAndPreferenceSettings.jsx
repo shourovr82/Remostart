@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { AiOutlineInbox } from 'react-icons/ai';
@@ -152,10 +152,16 @@ function SkillAndPreferenceSettings() {
 
   // submit data And Make API request
 
+  const selectRefTo = useRef(null);
   const handleIndustryChange = (e) => {
     if (e.target.value === 'Other') {
       setOpenOtherMenu(true);
       setSelectedIndustryName(e.target.value);
+      setTimeout(() => {
+        if (selectRefTo.current) {
+          selectRefTo.current.focus();
+        }
+      }, 0);
     } else {
       setOpenOtherMenu(false);
       setSelectedIndustryName(e.target.value);
@@ -164,12 +170,12 @@ function SkillAndPreferenceSettings() {
   const handleOtherMenu = (e) => {
     setSelectedIndustryName(e.target.value);
   };
-  const handleBlur = () => {
-    console.log('test click');
-  };
-  console.log(selectedIndustryName);
 
   const Submit = async (data) => {
+    if (selectedIndustryName === 'Other') {
+      toast.error('Please write your other domain name !!');
+      return;
+    }
     if (preferredJobType === '') {
       toast.error('preferredType is required');
       return;
@@ -608,16 +614,27 @@ function SkillAndPreferenceSettings() {
                 </div>
               </div>
             </div>
+            <div className="mt-3 flex flex-col gap-2">
+              {openOtherMenu && (
+                <>
+                  <label htmlFor="industryName" className="text-base font-medium">
+                    Write your other domain
+                  </label>
+                  <input
+                    id="industryName"
+                    ref={selectRefTo}
+                    className=" rounded-md py-2.5 border-[#d6d6d6]  focus:outline-none w-full lg:w-[27%] mt-2"
+                    onBlur={() => setOpenOtherMenu(false)}
+                    type="text"
+                    placeholder="Other Domain..."
+                    onChange={handleOtherMenu}
+                    required
+                  />
+                </>
+              )}
+            </div>
           </div>
-          <div>
-            {openOtherMenu && (
-              <input
-                onBlur={() => setOpenOtherMenu(false)}
-                type="text"
-                onChange={handleOtherMenu}
-              />
-            )}
-          </div>
+
           <button
             type="submit"
             className="px-8 py-4 bg-black rounded-lg text-white flex items-center gap-2"
