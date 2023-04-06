@@ -46,6 +46,8 @@ const PublicJob = () => {
     const jobData = {
       ...data,
       email: user?.user.email,
+      startupsProfilePhoto: user?.user?.profilePhoto,
+      startupsName: user?.user?.fullName,
       categoryName,
       skills,
       apiPath: jobName,
@@ -76,6 +78,8 @@ const PublicJob = () => {
   });
 
   const hanlleChangeSelect = (e) => {};
+
+  console.log(user);
 
   // const skillsValue = ['react', 'javascript', 'mongodb', 'express js'];
   return (

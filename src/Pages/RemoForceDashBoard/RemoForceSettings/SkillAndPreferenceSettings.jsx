@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { AiOutlineInbox } from 'react-icons/ai';
@@ -24,7 +24,8 @@ function SkillAndPreferenceSettings() {
   const [preferredJobType, setPreferredType] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [selectedDomain, setSelectedDomain] = useState('');
+  const [selectedIndustryName, setSelectedIndustryName] = useState('');
+  const [openOtherMenu, setOpenOtherMenu] = useState(false);
 
   // set level to value state
   const [value, setValue] = useState();
@@ -151,10 +152,30 @@ function SkillAndPreferenceSettings() {
 
   // submit data And Make API request
 
-  const { industry: industryName } = getValues();
-  console.log(industryName);
+  const selectRefTo = useRef(null);
+  const handleIndustryChange = (e) => {
+    if (e.target.value === 'Other') {
+      setOpenOtherMenu(true);
+      setSelectedIndustryName(e.target.value);
+      setTimeout(() => {
+        if (selectRefTo.current) {
+          selectRefTo.current.focus();
+        }
+      }, 0);
+    } else {
+      setOpenOtherMenu(false);
+      setSelectedIndustryName(e.target.value);
+    }
+  };
+  const handleOtherMenu = (e) => {
+    setSelectedIndustryName(e.target.value);
+  };
 
   const Submit = async (data) => {
+    if (selectedIndustryName === 'Other') {
+      toast.error('Please write your other domain name !!');
+      return;
+    }
     if (preferredJobType === '') {
       toast.error('preferredType is required');
       return;
@@ -167,14 +188,13 @@ function SkillAndPreferenceSettings() {
 
     const { workPreference, industry, domain } = data;
 
-   
-    
+    console.log(industry);
 
     const bodyData = {
       jobPreference: {
         jobType: preferredJobType,
         locationPreference: workPreference,
-        jobIndustry: industry,
+        jobIndustry: selectedIndustryName,
         jobLevel: domain,
       },
       selectedSkills,
@@ -529,19 +549,19 @@ function SkillAndPreferenceSettings() {
               {/* select industry */}
               <div className="flex flex-col md:flex-row items-start mt-10">
                 <div className="lg:w-[43%] w-full flex flex-col">
-                  <label htmlFor="Industry" className="text-base font-medium">
+                  <label htmlFor="industry" className="text-base font-medium">
                     Select Domain
                   </label>
                   <select
-                    name=""
-                    id=""
+                    name="industry"
+                    id="industry"
+                    onChange={handleIndustryChange}
                     className="select select-bordered focus:outline-none w-full lg:w-[80%] mt-3"
-                    {...register('industry', { required: true })}
-                    required
+                    // {...register('industry', { required: true })}
+                    // required
                   >
-                 
                     <option value="" className="hidden" hidden>
-                      Choose
+                      {selectedIndustryName || ' Choose'}
                     </option>
                     {jData?.domains?.map((item) => (
                       <option value={item} key={Math.random()} className="text-[18px]">
@@ -594,7 +614,27 @@ function SkillAndPreferenceSettings() {
                 </div>
               </div>
             </div>
+            <div className="mt-3 flex flex-col gap-2">
+              {openOtherMenu && (
+                <>
+                  <label htmlFor="industryName" className="text-base font-medium">
+                    Write your other domain
+                  </label>
+                  <input
+                    id="industryName"
+                    ref={selectRefTo}
+                    className=" rounded-md py-2.5 border-[#d6d6d6]  focus:outline-none w-full lg:w-[27%] mt-2"
+                    onBlur={() => setOpenOtherMenu(false)}
+                    type="text"
+                    placeholder="Other Domain..."
+                    onChange={handleOtherMenu}
+                    required
+                  />
+                </>
+              )}
+            </div>
           </div>
+
           <button
             type="submit"
             className="px-8 py-4 bg-black rounded-lg text-white flex items-center gap-2"

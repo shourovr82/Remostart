@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -79,13 +79,37 @@ const Contracts = () => {
   // ?Domain Function start
 
   const [selectedValues, setSelectedValues] = useState(storedJob?.domains || []);
+  const [domainValue, setDomainValue] = useState('');
+  const [openOtherMenu, setOpenOtherMenu] = useState(false);
+  const [otherDomainValue, setOtherDomainValue] = useState('');
+  const selectRefTo = useRef(null);
 
   const handleChange = (e) => {
-    const selectedOptions = e.target.selectedOptions[0].innerHTML;
+    const selectedOptions = e.target.value;
+    setDomainValue(e.target.value);
+    if (selectedOptions === 'Other') {
+      setOpenOtherMenu(true);
+      setTimeout(() => {
+        if (selectRefTo.current) {
+          selectRefTo.current.focus();
+        }
+      }, 0);
+      return;
+    }
     setSelectedValues([...selectedValues, selectedOptions]);
   };
   const handleClick = () => {
     setDisable(true);
+  };
+  const handleOtherMenu = (e) => {
+    setOtherDomainValue(e.target.value);
+  };
+  const handleAddOtherDomain = () => {
+    if (otherDomainValue) {
+      setSelectedValues([...selectedValues, otherDomainValue]);
+      setOpenOtherMenu(false);
+      setOtherDomainValue('');
+    }
   };
 
   const {
@@ -108,6 +132,8 @@ const Contracts = () => {
     const jobData = {
       ...data,
       email: user?.user.email,
+      startupsProfilePhoto: user?.user?.profilePhoto,
+      startupsName: user?.user?.fullName,
       categoryName,
       skills,
       domains: selectedValues,
@@ -117,7 +143,7 @@ const Contracts = () => {
       // contractsPaper: _.cloneDeep(file),
     };
     // const fileDeep = _.cloneDeep(file);
- 
+
     setJob(jobName, jobData);
     const formData = new FormData();
 
@@ -125,8 +151,6 @@ const Contracts = () => {
     const contractsFile = file && file[0];
 
     formData.append('contractsPaper', contractsFile);
-
-
 
     if (isEdit) {
       await axios
@@ -139,12 +163,9 @@ const Contracts = () => {
               state: { data: res.data },
             });
           }
-
-   
         })
         .catch((err) => {
           setLoading(false);
-      
         });
     } else {
       await axios
@@ -157,12 +178,9 @@ const Contracts = () => {
               state: { data: res.data },
             });
           }
-
-     
         })
         .catch((err) => {
           setLoading(false);
-      
         });
     }
 
@@ -350,28 +368,60 @@ const Contracts = () => {
         {/* domains */}
         <div className="lg:flex justify-center ">
           <div className="group w-full inline-block mt-6  lg:pr-10">
-            <label htmlFor="bio" className="text-sm block font-medium">
-              Select Domains
-            </label>
-            <select
-              onChange={handleChange}
-              className="select lg:w-[120px]  mt-1 w-full font-semibold border 
+            <div>
+              <label htmlFor="bio" className="text-sm block font-medium">
+                Select Domains
+              </label>
+              <select
+                onChange={handleChange}
+                className="select lg:w-[220px]  mt-1 w-full font-semibold border 
                      border-[#e5e7eb] rounded-md "
-            >
-              <option value="Domains" hidden>
-                Domains
-              </option>
-              {jData?.domains?.map((D, i) => (
-                <option
-                  onClick={handleClick}
-                  disabled={disableOption}
-                  value={D.label}
-                  key={Math.random()}
-                >
-                  {D.label}
+                value={domainValue}
+              >
+                <option value="" hidden>
+                  Domains
                 </option>
-              ))}
-            </select>
+                {jData?.domains?.map((D, i) => (
+                  <option
+                    onClick={handleClick}
+                    disabled={disableOption}
+                    value={D}
+                    key={Math.random()}
+                  >
+                    {D}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              {openOtherMenu && (
+                <>
+                  <label htmlFor="industryName" className="text-sm mt-2 font-medium">
+                    Write your other domain
+                  </label>
+                  <div className="flex flex-col items-start gap-2">
+                    <input
+                      id="industryName"
+                      ref={selectRefTo}
+                      className=" rounded-md py-2.5 border-[#d6d6d6]  focus:outline-none  mt-2"
+                      // onBlur={() => setOpenOtherMenu(false)}
+                      type="text"
+                      placeholder="Other Domain..."
+                      onChange={handleOtherMenu}
+                      required
+                    />
+                    <button
+                      onClick={handleAddOtherDomain}
+                      className="border py-1.5 bg-[#19A5FF] text-white px-4 rounded-md"
+                      type="button"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
           {selectedValues.length ? (
             <div className="flex flex-wrap rounded-md px-2 py-4 gap-3 mt-8 lg:w-[630px] w-full border h-auto bg-[#F0F9FF]">

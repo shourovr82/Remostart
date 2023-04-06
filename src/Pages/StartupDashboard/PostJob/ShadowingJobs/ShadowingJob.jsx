@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft } from 'react-icons/bi';
@@ -45,9 +45,35 @@ const ShadowingJob = () => {
     fetchData();
   }, []);
 
+  const [domainValue, setDomainValue] = useState('');
+  const [openOtherMenu, setOpenOtherMenu] = useState(false);
+  const [otherDomainValue, setOtherDomainValue] = useState('');
+  const selectRefTo = useRef(null);
+
+  // handleChangeDomain
   const handleChange = (e) => {
-    const selectedOptions = e.target.selectedOptions[0].innerHTML;
+    const selectedOptions = e.target.value;
+    setDomainValue(e.target.value);
+    if (selectedOptions === 'Other') {
+      setOpenOtherMenu(true);
+      setTimeout(() => {
+        if (selectRefTo.current) {
+          selectRefTo.current.focus();
+        }
+      }, 0);
+      return;
+    }
     setSelectedValues([...selectedValues, selectedOptions]);
+  };
+  const handleOtherMenu = (e) => {
+    setOtherDomainValue(e.target.value);
+  };
+  const handleAddOtherDomain = () => {
+    if (otherDomainValue) {
+      setSelectedValues([...selectedValues, otherDomainValue]);
+      setOpenOtherMenu(false);
+      setOtherDomainValue('');
+    }
   };
 
   // Disable  Domains
@@ -79,6 +105,8 @@ const ShadowingJob = () => {
       apiPath: jobName,
       jobStatus: 'active',
       email: user?.user.email,
+      startupsProfilePhoto: user?.user?.profilePhoto,
+      startupsName: user?.user?.fullName,
     };
 
     if (shadowingJobData) {
@@ -235,10 +263,10 @@ const ShadowingJob = () => {
             </label>
             <select
               onChange={handleChange}
-              className="p-2 lg:w-[120px]  mt-1 w-full font-semibold border border-gray-400 rounded-md "
+              className="p-2 lg:w-[250px]  mt-1 w-full font-semibold border border-[#d6d6d6] rounded-md "
             >
-              <option value="Domains" hidden className="px-2">
-                Choose
+              <option value="" hidden className="px-2">
+                {domainValue || ' Choose'}
               </option>
               {jData?.domains?.map((D, i) => (
                 <option
@@ -251,6 +279,34 @@ const ShadowingJob = () => {
                 </option>
               ))}
             </select>
+            <div>
+              {openOtherMenu && (
+                <>
+                  <label htmlFor="industryName" className="text-sm mt-2 font-medium">
+                    Write your other domain
+                  </label>
+                  <div className="flex flex-col items-start gap-2">
+                    <input
+                      id="industryName"
+                      ref={selectRefTo}
+                      className=" rounded-md py-2.5 border-[#d6d6d6]  focus:outline-none  mt-2"
+                      // onBlur={() => setOpenOtherMenu(false)}
+                      type="text"
+                      placeholder="Other Domain..."
+                      onChange={handleOtherMenu}
+                      required
+                    />
+                    <button
+                      onClick={handleAddOtherDomain}
+                      className="border py-1.5 bg-[#19A5FF] text-white px-4 rounded-md"
+                      type="button"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
 
           {selectedValues.length ? (

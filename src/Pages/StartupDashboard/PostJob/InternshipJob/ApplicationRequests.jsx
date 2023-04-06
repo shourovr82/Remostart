@@ -1,14 +1,29 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { toast } from 'react-hot-toast';
 import { BiCheck } from 'react-icons/bi';
 import { CiMail } from 'react-icons/ci';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const ApplicationRequests = ({ jobData }) => {
   const { user } = useSelector((state) => state.auth);
-  const applicationRequests = jobData?.applicationRequest;
+  // const applicationRequests = jobData?.applicationRequest;
+  const [refresh, setRefresh] = useState(false);
+  const { id } = useParams();
+  console.log(id);
+  
+
+  const { data: applicationRequests, refetch } = useQuery(['applicationRequests'], () =>
+    axios
+      .get(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/allApplicationRequests/${id}`)
+      .then((res) => res.data)
+  );
+console.log(applicationRequests);
+
 
   const acceptHandler = (item) => {
     const acceptData = {
@@ -22,6 +37,8 @@ const ApplicationRequests = ({ jobData }) => {
     axios
       .put(url, acceptData)
       .then((response) => {
+        refetch()
+     
         toast.success(response.data);
       })
       .catch((error) => {
@@ -40,6 +57,7 @@ const ApplicationRequests = ({ jobData }) => {
     axios
       .put(url, acceptData)
       .then((response) => {
+        refetch()
         toast.success(response.data);
       })
       .catch((error) => {
@@ -147,7 +165,7 @@ const ApplicationRequests = ({ jobData }) => {
 
               <tfoot>
                 <tr className="">
-                  {applicationRequests.length > 7 && (
+                  {applicationRequests?.length > 7 && (
                     <td colSpan="5" className="text-right pr-6 text-[#19A5FF] font-semibold">
                       show more...
                     </td>

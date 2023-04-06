@@ -20,6 +20,7 @@ const RemoForceRoute = ({ children }) => {
       </div>
     );
   }
+console.log(serviceUser);
 
   if (user) {
     if (user?.user?.role !== 'remoforce') {
