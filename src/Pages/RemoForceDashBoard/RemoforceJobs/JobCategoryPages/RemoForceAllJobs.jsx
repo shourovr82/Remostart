@@ -17,6 +17,7 @@ const RemoForceAllJobs = () => {
   const handleApplyNow = (item) => {
     navigate(`/remoforce-dashboard/all-jobs/${item._id}`, { state: { data: item } });
   };
+  console.log(allJobs);
 
   return (
     <RemoForceDashBoardItems>
@@ -31,7 +32,17 @@ const RemoForceAllJobs = () => {
               >
                 <div className="flex justify-between  items-center">
                   <div className="flex items-center gap-5">
-                    {item?.img && <img className="!w-10" src={item?.img} alt="" />}
+                    {item?.startupsProfilePhoto ? (
+                      <img
+                        className="w-8 h-8 rounded-full"
+                        src={item.startupsProfilePhoto}
+                        alt=""
+                      />
+                    ) : (
+                      <p className="w-8 h-8 grid place-items-center  text-white rounded-full bg-black">
+                        {item?.startupsName?.charAt(0).toUpperCase()}
+                      </p>
+                    )}
                     <h2 className="text-[20px] font-semibold">{item?.title}</h2>
                   </div>
 
@@ -81,7 +92,8 @@ const RemoForceAllJobs = () => {
                 </div>
                 <div>
                   <p className="text-start  text-sm ">
-                    {item?.description ? `${item?.description?.slice(0, 100)}` : item?.description}...
+                    {item?.description ? `${item?.description?.slice(0, 100)}` : item?.description}
+                    ...
                   </p>
                 </div>
                 {/* description, skills */}
