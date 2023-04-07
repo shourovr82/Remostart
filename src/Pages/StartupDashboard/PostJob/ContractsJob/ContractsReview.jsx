@@ -42,8 +42,6 @@ const ContractsReview = () => {
     navigate('/dashboard/post-job/edit/contracts', { state: { data: storedJob } });
   };
 
-
-
   return (
     <div className="w-full">
       {/* Banner Section start */}
@@ -85,10 +83,10 @@ const ContractsReview = () => {
           <p>2 Day ago</p>
         </div>
 
-        <div className="grid grid-cols-4 mt-3 ">
+        <div className="grid lg:grid-cols-4 mt-3 ">
           <div className=" col-span-3 lg:mx-4">
             {/* Paragraph   start */}
-            <p>{storedJob?.description}</p>
+            <p className="whitespace-pre-wrap">{storedJob?.description}</p>
 
             {/* Paragraph   end --------------------------*/}
 
@@ -174,7 +172,7 @@ const ContractsReview = () => {
 
           {/* skills required ------------------------------------- */}
 
-          <div className="col-span-1 lg:border-l-2  pl-4  md:border-t-2  lg:border-t-0">
+          <div className="col-span-1 lg:border-l-2  lg:pl-4  md:border-t-2  lg:border-t-0">
             <div>
               <h1 className="font-semibold text-2xl mb-3">Skills Required:</h1>
               <div className="flex flex-wrap gap-2">

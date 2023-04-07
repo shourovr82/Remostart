@@ -36,6 +36,8 @@ const ShadowingJobReview = () => {
   if (!storedJob) {
     navigate('/dashboard/post-job/shadowing-job');
   }
+  console.log(storedJob);
+
   return (
     <div className="w-full">
       {/* Banner Section start */}
@@ -108,7 +110,7 @@ const ShadowingJobReview = () => {
                   <span>
                     <FaRegClock className="text-[#F60C36] text-lg" />
                   </span>
-                  <span>{storedJob?.EndingDate}</span>
+                  <span>{storedJob?.endingDate?.slice(0, 10)}</span>
                 </p>
               </div>
             </div>
@@ -119,14 +121,21 @@ const ShadowingJobReview = () => {
           <h1 className=" mt-[30px] font-semibold text-2xl">Mentor:</h1>
           <hr className="h-[3px] bg-[#19A5FF]  w-2/5" />
           <div className="mt-[30px] relative w-[90%] mb-4 p-3 border rounded-md border-[#ffee55] bg-gradient-to-r from-[#ffee55]  to-[#fffef4]">
-            <h2 className="font-semibold"> Mentor Name: {storedJob?.MentorName} </h2>
-            <p className="mt-[9px]  py-2 rounded-md font-semibold">{storedJob?.AddMentorBio}</p>
+            <h2 className="font-semibold"> Mentor Name: {storedJob?.mentorsInfo?.mentorsName} </h2>
+            <p className="mt-[9px]  py-2 rounded-md font-semibold">
+              {storedJob?.mentorsInfo?.mentorsBio}
+            </p>
 
             <button
               className="absolute bg-[#1275b1] p-1.5 rounded-full right-2 bottom-2"
               type="button"
             >
-              <a href={storedJob?.LinkedInURL} target="_blank" className="  " rel="noreferrer">
+              <a
+                href={storedJob?.mentorsInfo?.mentorsLinkedInURL}
+                target="_blank"
+                className="  "
+                rel="noreferrer"
+              >
                 <TfiLinkedin className=" text-white" />
               </a>
             </button>
@@ -134,7 +143,7 @@ const ShadowingJobReview = () => {
         </div>
 
         {/* all Skills section starts------------ */}
-        <div className="lg:col-span-1 lg:border-l-2 pl-4  md:border-t-2  lg:border-t-0">
+        <div className="lg:col-span-1 lg:border-l-2 lg:pl-4  md:border-t-2  lg:border-t-0">
           <div>
             <div>
               <h1 className="font-semibold text-2xl mb-3">Skills Required:</h1>
@@ -162,7 +171,7 @@ const ShadowingJobReview = () => {
             <div className="">
               <div className="bg-[#F0F9FF] mt-3 w-[122px] flex items-center gap-3 rounded-md ">
                 <p className="text-sm pl-[25px] py-[8px] ">
-                  {storedJob?.Salary} <span className="text-xl ml-2">₳</span>
+                  {storedJob?.salary} <span className="text-xl ml-2">₳</span>
                 </p>
               </div>
             </div>
@@ -174,7 +183,7 @@ const ShadowingJobReview = () => {
                 <p className="text-sm pl-[15px] py-[8px] ">
                   <GoLocation />
                 </p>
-                <p className="pr-[15px] ">{storedJob?.Location}</p>
+                <p className="pr-[15px] ">{storedJob?.location}</p>
               </div>
             </div>
           </div>
@@ -196,7 +205,7 @@ const ShadowingJobReview = () => {
                 <p className="text-sm pl-[15px] py-[8px] ">
                   <GiSandsOfTime className="text-red-500" />
                 </p>
-                <p className="pr-[15px] font-bold ">{storedJob?.ApplyBefore?.slice(0, 10)}</p>
+                <p className="pr-[15px] font-bold ">{storedJob?.applyBefore?.slice(0, 10)}</p>
               </div>
             </div>
           </div>
