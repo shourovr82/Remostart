@@ -134,8 +134,8 @@ const PublicJob = () => {
             })}
             defaultValue={storedJob?.description}
             id="description"
-            placeholder="description"
-            className="lg:w-3/4 h-16 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+            placeholder="Description..."
+            className="lg:w-3/4 h-40 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
           />
           <p className="pt-2">
             {errors.description && (
@@ -148,9 +148,9 @@ const PublicJob = () => {
 
         {/* Section Of Skills Required */}
 
-        <div className="mt-5">
+        <div className="mt-5 ">
           <label className="block font-semibold text-gray-900">Skills Required</label>
-          <p className="border-[#BCBCBC] lg:w-9/12 bg-[#BCBCBC] border mt-2" />
+          <p className="border-[#BCBCBC]  lg:w-9/12 bg-[#BCBCBC] border mt-2" />
         </div>
 
         <div className="mt-5 lg:flex items-start justify-between">
@@ -198,9 +198,9 @@ const PublicJob = () => {
           {/* Skill required input filed */}
 
           <div>
-            <div className="space-y-1 text-sm w-[300px]">
+            <div className="space-y-1 text-sm w-full  lg:w-[300px]">
               <label className="block font-semibold text-gray-900">Skills Required</label>
-              <div className=" lg:w-[50rm]  pr-2 rounded-md border border-[#BCBCBC]  text-gray-900 justify-between flex items-center">
+              <div className="border lg:w-[50rm]  pr-2 rounded-md  border-[#BCBCBC]  text-gray-900 justify-between flex items-center">
                 {/* <CreatableSelect
                                     onChange={hanlleChangeSelect}
                                     isMulti
@@ -217,34 +217,38 @@ const PublicJob = () => {
                   value={tag}
                   onChange={changeHandler}
                   placeholder="Eg. remostarts"
-                  className="px-4 py-3 border-transparent border rounded-md focus:outline-none"
+                  className="px-4  py-3 w-full focus:border-transparent focus:ring-0 border-transparent border rounded-md focus:outline-none"
                 />
                 <button onClick={handleTags} type="button">
                   <BiPlus className="border p-1 text-xl" />
                 </button>
               </div>
 
-              {skills.length ? (
-                <div className="flex flex-wrap px-2 py-4 gap-3 mt-8 w-[300px] border h-auto bg-[#F0F9FF]">
-                  {skills.map((value) => (
-                    <div key={Math.random()}>
-                      <div className="bg-[#19A5FF] py-1 px-2 text-white  text-sm text-center rounded-2xl flex gap-2 items-center justify-center  ">
-                        <p>{value}</p>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setSkills(skills.filter((val) => val !== value));
-                          }}
-                        >
-                          <RxCross2 className="font-bold text-sm" />
-                        </button>
+              <div>
+                {skills.length ? (
+                  <div className="flex flex-wrap px-2 py-4 gap-3  mt-5 rounded-md lg:w-[300px] border h-auto bg-[#F0F9FF]">
+                    {skills.map((value) => (
+                      <div key={Math.random()}>
+                        <div className="bg-[#19A5FF] py-1 px-2 text-white  text-sm text-center rounded-2xl flex gap-2 items-center justify-center  ">
+                          <p>{value}</p>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSkills(skills.filter((val) => val !== value));
+                            }}
+                          >
+                            <RxCross2 className="font-bold text-sm" />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                ''
-              )}
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap px-2 py-4 gap-3 mt-8 rounded-md lg:w-[300px] border h-auto bg-[#F0F9FF]">
+                    <p>No skill Selected yet</p>
+                  </div>
+                )}
+              </div>
 
               <p className="pt-2">
                 {errors.Skills && (

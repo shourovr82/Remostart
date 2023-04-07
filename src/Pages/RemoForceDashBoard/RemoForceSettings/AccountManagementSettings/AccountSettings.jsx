@@ -121,7 +121,7 @@ function AccountSettings() {
       <hr className="w-full bg-hr my-3" />
 
       {/* Change Password */}
-      <ChangePasswordForm />
+      {user?.user?.email && <ChangePasswordForm />}
     </RemoForceSettingsItems>
   );
 }
