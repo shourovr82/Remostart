@@ -2,7 +2,7 @@
 /* eslint-disable no-shadow */
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
@@ -17,9 +17,11 @@ import image from '../../../Assets/Verification/Image.png';
 import { getFileSize } from '../../../Utilities/FileSize';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import AuthContext from '../../../Context/AuthContext';
 
 const GeneralSettingsForNonRegistered = () => {
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
 
   const [error, setError] = useState();
   const [domain, setDomain] = useState(null);
@@ -45,7 +47,7 @@ const GeneralSettingsForNonRegistered = () => {
 
   const { data: startupData } = useQuery(['startupData'], () =>
     axios
-      .get(`${process.env.REACT_APP_URL_STARTUP}/api/startup/startup-preview/${user?.user.email}`)
+      .get(`${process.env.REACT_APP_URL_STARTUP}/api/startup/startup-preview/${user?.user?.email || serviceUser?.email}`)
       .then((res) => res.data)
   );
   const [allFiles, setAllFiles] = useState(
@@ -116,7 +118,7 @@ const GeneralSettingsForNonRegistered = () => {
           registeredName: data.RegisteredName,
           registered: false,
         },
-        email: user?.user.email,
+        email: user?.user?.email || serviceUser?.email,
         startupName: data.startupName,
         startupCIN: data.ComanyCINNumber,
         foundersDetail: {

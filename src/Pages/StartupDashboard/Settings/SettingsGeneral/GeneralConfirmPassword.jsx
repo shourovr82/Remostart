@@ -1,12 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
+import AuthContext from '../../../../Context/AuthContext';
 
 const GeneralConfirmPassword = () => {
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -39,7 +41,7 @@ const GeneralConfirmPassword = () => {
       return;
     }
 
-    const bodyData = { email: user?.user.email, password: data.Confirmnewpassword };
+    const bodyData = { email: user?.user?.email || serviceUser?.email, password: data.Confirmnewpassword };
 
     mutate(bodyData);
   };

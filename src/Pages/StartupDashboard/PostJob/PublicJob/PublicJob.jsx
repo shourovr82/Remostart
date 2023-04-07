@@ -1,11 +1,12 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft, BiPlus } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import AuthContext from '../../../../Context/AuthContext';
 import { setJob } from '../../../../Hooks/useLocalStorage';
 
 const PublicJob = () => {
@@ -18,6 +19,7 @@ const PublicJob = () => {
   const categoryName = jobName.replace(/-/g, ' ').replace(/\b[a-z]/g, (c) => c.toUpperCase());
 
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const experiences = [1, 2, 3, 4, 5];
 
   // handle
@@ -45,7 +47,7 @@ const PublicJob = () => {
   const onSubmit = (data) => {
     const jobData = {
       ...data,
-      email: user?.user.email,
+      email: user?.user?.email || serviceUser?.email,
       startupsProfilePhoto: user?.user?.profilePhoto,
       startupsName: user?.user?.fullName,
       categoryName,

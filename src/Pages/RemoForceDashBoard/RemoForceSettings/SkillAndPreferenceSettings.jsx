@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { AiOutlineInbox } from 'react-icons/ai';
@@ -12,8 +12,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import RemoForceSettingsItems from '../../../Routes/Roots/RemoforceSettingItems';
 
+import AuthContext from '../../../Context/AuthContext';
+
 function SkillAndPreferenceSettings() {
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -201,7 +204,7 @@ function SkillAndPreferenceSettings() {
       selectedLanguages,
       softSkills,
 
-      email: user.user.email,
+      email: user?.user?.email || serviceUser?.email,
     };
 
     await axios

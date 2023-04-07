@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable prefer-destructuring */
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { FiUpload } from 'react-icons/fi';
@@ -17,7 +17,10 @@ import { toast } from 'react-toastify';
 import profile from '../../../Assets/RemoForceDashboard/ProfileSettings/personalprofile.png';
 import RemoForceSettingsItems from '../../../Routes/Roots/RemoforceSettingItems';
 
+import AuthContext from '../../../Context/AuthContext';
+
 function RemoforceProfileSettings() {
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -153,7 +156,7 @@ function RemoforceProfileSettings() {
         alternativeEmail: email,
         alternativePhone: alternative,
       },
-      email: user.user.email,
+      email: user?.user?.email || serviceUser?.email,
       socialLinks,
       personalPhone: contact,
       fullName,

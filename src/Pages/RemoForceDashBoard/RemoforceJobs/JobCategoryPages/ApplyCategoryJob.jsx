@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { BiBookmarks, BiUser } from 'react-icons/bi';
 import { FaRegClock } from 'react-icons/fa';
@@ -13,15 +13,20 @@ import { useLocation } from 'react-router-dom';
 import initialLogo from '../../../../Assets/RemoForceDashboard/RemoForceAllJobs/InitialLogo.png';
 import RecommendedJobs from '../../RecommendedJobs';
 
+import AuthContext from '../../../../Context/AuthContext';
+
 const ApplyCategoryJob = () => {
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const location = useLocation();
   const data = location.state && location.state.data;
 
   const { data: job, refetch } = useQuery(['job'], () =>
     axios
       .get(
-        `${process.env.REACT_APP_URL_STARTUP}/api/job/apply-status?id=${data.jobId}&email=${user?.user.email}`
+        `${process.env.REACT_APP_URL_STARTUP}/api/job/apply-status?id=${data.jobId}&email=${
+          user?.user?.email || serviceUser?.email
+        }`
       )
       .then((res) => res.data)
   );
@@ -41,7 +46,7 @@ const ApplyCategoryJob = () => {
     const url = `${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${data.jobId}`;
     const applicantsData = {
       applicantsName: user?.user.fullName,
-      applicantsEmail: user?.user.email,
+      applicantsEmail: user?.user?.email || serviceUser?.email,
       applicationStatus: 'pending',
       email: data.email,
     };

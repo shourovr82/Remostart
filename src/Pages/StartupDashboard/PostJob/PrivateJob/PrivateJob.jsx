@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft, BiPlus } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import AuthContext from '../../../../Context/AuthContext';
 import { getStoredJob, setJob } from '../../../../Hooks/useLocalStorage';
 
 const PrivateJob = () => {
@@ -15,6 +16,7 @@ const PrivateJob = () => {
   const categoryName = jobName.replace(/-/g, ' ').replace(/\b[a-z]/g, (c) => c.toUpperCase());
 
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const experiences = [1, 2, 3, 4, 5];
   // get storedvalues
   const storedJob = getStoredJob(jobName);
@@ -44,24 +46,17 @@ const PrivateJob = () => {
   //     setSkills(alreadyStored?.skills || []);
   // }, [jobName]);
 
-
-
-    // data posting to ls
-    const onSubmit = (data) => {
-        const jobData = {
-            ...data,
-            email: user?.user.email,
-            startupsProfilePhoto: user?.user?.profilePhoto,
+  // data posting to ls
+  const onSubmit = (data) => {
+    const jobData = {
+      ...data,
+      email: user?.user?.email || serviceUser?.email,
+      startupsProfilePhoto: user?.user?.profilePhoto,
       startupsName: user?.user?.fullName,
-            categoryName,
-            skills,
-            apiPath: jobName,
-            jobStatus:"active"
-        };
-
-        setJob(jobName, jobData);
-        navigate('/dashboard/post-job/private-job/review');
-
+      categoryName,
+      skills,
+      apiPath: jobName,
+      jobStatus: 'active',
     };
 
     setJob(jobName, jobData);
@@ -119,7 +114,7 @@ const PrivateJob = () => {
             defaultValue={storedJob?.description}
             id="description"
             placeholder="Description..."
-            className="lg:w-3/4 h-40 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+            className="lg:w-3/4 h-16 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
           />
           <p className="pt-2">
             {errors.description && (
@@ -192,7 +187,7 @@ const PrivateJob = () => {
                   value={tag}
                   onChange={changeHandler}
                   placeholder="Eg. remostarts"
-                  className="px-4 w-full focus:ring-0 py-3 border border-transparent  rounded-md focus:outline-none"
+                  className="px-4 py-3 border border-transparent  rounded-md focus:outline-none"
                 />
                 <button onClick={handleTags} type="button">
                   <BiPlus className="border p-1 text-xl" />

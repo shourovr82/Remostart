@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft, BiPlus } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+import currencyIcon from '../../../../Assets/Dashboard/currency.png';
+import AuthContext from '../../../../Context/AuthContext';
+
+
 import { getStoredJob, setJob } from '../../../../Hooks/useLocalStorage';
 
 const GigsJobs = () => {
@@ -11,6 +16,7 @@ const GigsJobs = () => {
   // const [storedJob, setStoredJob] = useState({});
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   // get stored values
   const location = useLocation();
   const path = location.pathname.split('/');
@@ -63,7 +69,7 @@ const GigsJobs = () => {
   const onSubmit = (data) => {
     const gigsData = {
       ...data,
-      email: user?.user.email,
+      email: user?.user?.email || serviceUser?.email,
       startupsProfilePhoto: user?.user?.profilePhoto,
       startupsName: user?.user?.fullName,
       categoryName,
