@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { toast } from 'react-hot-toast';
 import { BiCheck } from 'react-icons/bi';
@@ -8,9 +8,11 @@ import { CiMail } from 'react-icons/ci';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import AuthContext from '../../../../Context/AuthContext';
 
 const ApplicationRequests = ({ jobData }) => {
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   // const applicationRequests = jobData?.applicationRequest;
   const [refresh, setRefresh] = useState(false);
   const { id } = useParams();
@@ -28,7 +30,7 @@ console.log(applicationRequests);
   const acceptHandler = (item) => {
     const acceptData = {
       status: 'accepted',
-      email: user?.user.email,
+      email: user?.user?.email || serviceUser?.email,
       jobId: jobData?.jobId,
       applicantsEmail: item?.applicantsEmail,
     };
@@ -48,7 +50,7 @@ console.log(applicationRequests);
   const rejectHandler = (item) => {
     const acceptData = {
       status: 'rejected',
-      email: user?.user.email,
+      email: user?.user?.email || serviceUser?.email,
       jobId: jobData.jobId,
       applicantsEmail: item.applicantsEmail,
     };

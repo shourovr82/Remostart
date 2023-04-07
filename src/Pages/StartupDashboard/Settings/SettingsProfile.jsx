@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { RiUser3Line } from 'react-icons/ri';
@@ -15,9 +15,11 @@ import { useNavigate } from 'react-router-dom';
 import image from '../../../Assets/Verification/Image.png';
 import SettingsItems from '../../../Routes/Roots/SettingsItems';
 import './Input.CSS';
+import AuthContext from '../../../Context/AuthContext';
 
 const SettingsProfile = () => {
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const [newArr, setNewArr] = useState([]);
   const [loading, setLoading] = useState(false);
   const [jData, setJData] = useState({});
@@ -173,7 +175,7 @@ const SettingsProfile = () => {
     const formData = new FormData();
 
     const obj = {
-      email: user?.user.email,
+      email: user?.user?.email || serviceUser?.email,
       startupName,
       startupDescription,
       worksIn,

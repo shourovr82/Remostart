@@ -143,7 +143,7 @@ const Navbar = () => {
 
                 <ul
                   tabIndex={0}
-                  className="menu bg-white dropdown-content  shadow rounded-box w-[280px] mt-4 "
+                  className="menu bg-white dropdown-content  shadow rounded-xl overflow-hidden w-[280px] mt-4 "
                 >
                   {/* conditional rendering  */}
                   {(token || serviceUser?.role) && (
@@ -256,7 +256,7 @@ const Navbar = () => {
                       </li>
                     </>
                   ) : (
-                    <div className="flex flex-col justify-center rounded-md items-center gap-2">
+                    <div className="flex flex-col justify-center  rounded-md items-center gap-2">
                       <li className="w-full text-center">
                         <Link
                           to="/login"
@@ -402,7 +402,7 @@ const Navbar = () => {
                           {isMenuOpen && (
                             <ul
                               tabIndex={0}
-                              className="menu dropdown-content  shadow rounded-box w-[280px] mt-4 bg-white"
+                              className="menu dropdown-content overflow-hidden shadow rounded-xl w-[280px] mt-4 bg-white"
                             >
                               {token && (
                                 <li className="bg-[#f3f4f6]">
@@ -433,8 +433,8 @@ const Navbar = () => {
                                       <Link
                                         // onClick={handleClick}
                                         to="/dashboard/profile"
-                                        aria-label="login"
-                                        title="login"
+                                        aria-label="profile"
+                                        title="profile"
                                         className="font-normal text-xs tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                       >
                                         Profile
@@ -520,10 +520,10 @@ const Navbar = () => {
                                 </>
                               ) : (
                                 <div className="flex flex-col justify-center items-center gap-2">
-                                  <li className="w-full text-center">
+                                  <li className="w-full    rounded-xl  text-center">
                                     <Link
                                       to="/login"
-                                      className="font-normal text-xs tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400 "
+                                      className="font-normal  text-xs tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400 "
                                     >
                                       <button
                                         className="w-full text-start"
@@ -534,6 +534,7 @@ const Navbar = () => {
                                       </button>
                                     </Link>
                                   </li>
+
                                   <li className="w-full ">
                                     <Link
                                       to="/signup"

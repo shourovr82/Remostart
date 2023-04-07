@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FiEdit } from 'react-icons/fi';
 import { GoDiffAdded } from 'react-icons/go';
@@ -11,8 +11,11 @@ import RemoForceSettingsItems from '../../../../Routes/Roots/RemoforceSettingIte
 import AddExperienceForm from './AddExperienceForm';
 import EditExperience from './EditExperience';
 
+import AuthContext from '../../../../Context/AuthContext';
+
 function AddExperience() {
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -36,7 +39,7 @@ function AddExperience() {
 
     const bodyData = {
       experienceDetails: workExperienceLists,
-      email: user.user.email,
+      email: user?.user?.email || serviceUser?.email,
     };
 
     await axios

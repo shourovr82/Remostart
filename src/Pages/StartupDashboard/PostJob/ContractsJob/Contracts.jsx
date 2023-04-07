@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import currencyIcon from '../../../../Assets/Dashboard/currency.png';
 import { setJob } from '../../../../Hooks/useLocalStorage';
+import AuthContext from '../../../../Context/AuthContext';
 
 const Contracts = () => {
   // const [storedJob, setStoredJob] = useState({});
@@ -27,6 +28,7 @@ const Contracts = () => {
   // const storedJob = getStoredJob(jobName);
   const storedJob = location?.state && location?.state?.data;
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const [skills, setSkills] = useState(storedJob?.skills || []);
 
   // File State
@@ -131,7 +133,7 @@ const Contracts = () => {
     setLoading(true);
     const jobData = {
       ...data,
-      email: user?.user.email,
+      email: user?.user?.email || serviceUser?.email,
       startupsProfilePhoto: user?.user?.profilePhoto,
       startupsName: user?.user?.fullName,
       categoryName,

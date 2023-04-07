@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft } from 'react-icons/bi';
@@ -8,6 +8,7 @@ import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setJob } from '../../../../Hooks/useLocalStorage';
+import AuthContext from '../../../../Context/AuthContext';
 
 const ShadowingJob = () => {
   // handle skill input
@@ -24,6 +25,7 @@ const ShadowingJob = () => {
   // get values
 
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname.split('/');
@@ -104,7 +106,7 @@ const ShadowingJob = () => {
       mentorsInfo: { mentorsBio, mentorsName, mentorsLinkedInURL },
       apiPath: jobName,
       jobStatus: 'active',
-      email: user?.user.email,
+      email: user?.user?.email || serviceUser?.email,
       startupsProfilePhoto: user?.user?.profilePhoto,
       startupsName: user?.user?.fullName,
     };
@@ -200,14 +202,14 @@ const ShadowingJob = () => {
           <div className="space-y-1 text-sm w-[600px]  ">
             <div className=" mb-5">
               <label className="block font-semibold text-gray-900">Skills Required</label>
-              <div className=" lg:w-[50rm] gap-3 pr-3 border-2 mt-2 rounded-md border-[#e5e5e5]  text-gray-900 justify-between flex items-center">
+              <div className=" lg:w-[50rm] gap-3  pr-3 border-2 mt-2 rounded-md border-[#e5e5e5]  text-gray-900 justify-between flex items-center">
                 <input
                   type="text"
                   name="inputSkill"
                   value={tag}
                   onChange={changeHandler}
                   placeholder="Add Skills"
-                  className="px-4 py-4 focus:outline-none border-transparent rounded-md outline-none w-full focus:bg-transparent"
+                  className="px-4 py-4 focus:outline-none focus:border-transparent focus:ring-0 border-transparent rounded-md outline-none w-full focus:bg-transparent"
                 />
                 <button onClick={handleTags} type="button">
                   <GoPlus className="border-[3px] rounded-md border-[#999999] p-1 text-3xl text-[#999999]" />
@@ -539,8 +541,11 @@ const ShadowingJob = () => {
             name="mentorsLinkedInURL"
             {...register('mentorsLinkedInURL', {
               required: true,
-              pattern:
-                /^(http(s):\/\/.)[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/,
+              pattern: {
+                value:
+                  /^(http(s):\/\/.)[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/,
+                message: 'Linkedin url is not valid',
+              },
             })}
             id="mentorsLinkedInURL"
             defaultValue={storedJob?.mentorsLinkedInURL}
@@ -548,11 +553,8 @@ const ShadowingJob = () => {
             className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
           />
           <p className="pt-2">
-            {errors.mentorsLinkedInURL && (
-              <span className="text-red-400 ">
-                {errors.mentorsLinkedInURL?.type === 'required' &&
-                  'Please provide a valid Linkedin URL'}
-              </span>
+            {errors?.mentorsLinkedInURL && (
+              <span className="text-red-400 ">{errors.mentorsLinkedInURL?.message}</span>
             )}
           </p>
         </div>

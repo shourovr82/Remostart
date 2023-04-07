@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FcOrgUnit } from 'react-icons/fc';
 import { FiEdit } from 'react-icons/fi';
@@ -11,8 +11,11 @@ import RemoForceSettingsItems from '../../../../Routes/Roots/RemoforceSettingIte
 import AddEducationForm from './AddEducationForm';
 import EditEducation from './EditEducation';
 
+import AuthContext from '../../../../Context/AuthContext';
+
 function AddEducation() {
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -37,7 +40,7 @@ function AddEducation() {
     const bodyData = {
       educationDetails: allEducationLists,
 
-      email: user.user.email,
+      email: user?.user?.email || serviceUser?.email,
     };
 
     await axios

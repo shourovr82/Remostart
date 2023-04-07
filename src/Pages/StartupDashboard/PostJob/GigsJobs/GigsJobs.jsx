@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft, BiPlus } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+
 import currencyIcon from '../../../../Assets/Dashboard/currency.png';
+import AuthContext from '../../../../Context/AuthContext';
+
+
 import { getStoredJob, setJob } from '../../../../Hooks/useLocalStorage';
 
 const GigsJobs = () => {
@@ -12,6 +16,7 @@ const GigsJobs = () => {
   // const [storedJob, setStoredJob] = useState({});
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   // get stored values
   const location = useLocation();
   const path = location.pathname.split('/');
@@ -64,7 +69,7 @@ const GigsJobs = () => {
   const onSubmit = (data) => {
     const gigsData = {
       ...data,
-      email: user?.user.email,
+      email: user?.user?.email || serviceUser?.email,
       startupsProfilePhoto: user?.user?.profilePhoto,
       startupsName: user?.user?.fullName,
       categoryName,
@@ -130,7 +135,9 @@ const GigsJobs = () => {
             id="description"
             defaultValue={storedData?.description}
             placeholder="Write your description"
-            className="lg:w-3/4 h-16 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+
+            className="lg:w-3/4 h-40 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+
           />
           <p className="pt-2">
             {errors.description && (
@@ -196,7 +203,9 @@ const GigsJobs = () => {
                   value={tag}
                   onChange={changeHandler}
                   placeholder="node js"
-                  className="px-4 py-3 focus:outline-none border border-transparent rounded-md outline-none w-full focus:bg-transparent"
+
+                  className="px-4 py-3 focus:ring-0 focus:outline-none border border-transparent rounded-md outline-none w-full focus:bg-transparent"
+
                 />
                 <button onClick={handleTags} type="button">
                   <BiPlus className="border p-1 text-xl" />
@@ -243,7 +252,9 @@ const GigsJobs = () => {
 
         <div className="space-y-1 mt-5 text-sm">
           <label className="block font-semibold text-gray-900">Compensation</label>
-          <div className="flex justify-between items-center w-full md:w-1/2  rounded-md border border-[#BCBCBC focus:outline-none] px-4 py-3">
+
+          <div className="flex justify-between items-center w-full md:w-[30%]  rounded-md border border-[#BCBCBC focus:outline-none]">
+
             <input
               type="number"
               name="salary"
@@ -253,9 +264,16 @@ const GigsJobs = () => {
               id="salary"
               defaultValue={storedData?.salary}
               placeholder="Compensation Range"
-              className="w-full border border-transparent rounded-md  text-gray-900 focus:outline-none "
+
+              className="w-full  px-4 py-3 focus:ring-0 border border-transparent rounded-md  text-gray-900 focus:outline-none "
             />
-            <img src={currencyIcon} alt="" />
+            <p
+              className="text-xl pr-3 font-semibol
+                      "
+            >
+              ₳
+            </p>
+
           </div>
           <p className="pt-2">
             {errors.salary && (
@@ -345,7 +363,9 @@ const GigsJobs = () => {
                   value={deliverables}
                   onChange={changeDeliverableskHandler}
                   placeholder="Add Deliverables"
-                  className="px-4 py-3 focus:outline-none border  rounded-md border-transparent outline-none w-full focus:bg-transparent"
+
+                  className="px-4 py-3 focus:ring-0 focus:outline-none border  rounded-md border-transparent outline-none w-full focus:bg-transparent"
+
                 />
                 <button onClick={handleDeliverables} type="button">
                   <BiPlus className="border p-1 text-3xl" />

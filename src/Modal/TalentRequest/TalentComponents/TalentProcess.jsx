@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { BsEmojiWink } from 'react-icons/bs';
 import { FiEdit3 } from 'react-icons/fi';
 import { HiLanguage } from 'react-icons/hi2';
@@ -13,9 +14,11 @@ import TalentProcessNoOfTalents from './TalentProcessNoOfTalents';
 import TalentProcessPersonality from './TalentProcessPersonality';
 import TalentProcessProficiency from './TalentProcessProficiency';
 import TalentProcessSkills from './TalentProcessSkills';
+import TalentProcessSkillsAndDescription from './TalentProcessTitlesAndDescription';
 
 const TalentProcess = () => {
   const [tabActive, setTabActive] = useState(1);
+  const [selectedDetails, setSelectedDetails] = useState({});
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [selectedProficiency, setSelectedProficiency] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
@@ -31,9 +34,56 @@ const TalentProcess = () => {
       selectedLanguages,
       selectedPersonalities,
       totalTalentsValue,
+      selectedDetails,
     };
     console.log(allData);
   };
+
+  const handleTabActive = () => {
+    if (tabActive === 1) {
+      if (!selectedDetails?.title && !selectedDetails?.description) {
+        toast.error('title and description is required');
+      } else if (selectedDetails?.title && selectedDetails?.description) {
+        setTabActive(2);
+      }
+    }
+    if (tabActive === 2) {
+      if (!selectedSkills?.length) {
+        toast.error('Skills is required');
+      } else if (selectedSkills?.length) {
+        setTabActive(3);
+      }
+    }
+    if (tabActive === 3) {
+      if (!selectedProficiency?.length) {
+        toast.error('Proficiency is required');
+      } else if (selectedProficiency?.length) {
+        setTabActive(4);
+      }
+    }
+    if (tabActive === 4) {
+      if (!selectedLocations?.length) {
+        toast.error('Locations is required');
+      } else if (selectedLocations?.length) {
+        setTabActive(5);
+      }
+    }
+    if (tabActive === 5) {
+      if (!selectedLanguages?.length) {
+        toast.error('Languages is required');
+      } else if (selectedLanguages?.length) {
+        setTabActive(6);
+      }
+    }
+    if (tabActive === 6) {
+      if (!selectedPersonalities?.length) {
+        toast.error('Personalities is required');
+      } else if (selectedPersonalities?.length) {
+        setTabActive(7);
+      }
+    }
+  };
+  console.log(tabActive);
   return (
     <div className="h-[100%] flex  justify-around flex-col">
       <div className="flex items-center  gap-1 lg:gap-3">
@@ -52,32 +102,16 @@ const TalentProcess = () => {
 
         {/* tab two */}
 
-        <div>{tabActive >= 2 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
+        <div>{tabActive >= 3 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
         <div>
           <button
             onClick={() => setTabActive(2)}
             type="button"
             className={`p-2 lg:p-3 rounded-full border-4 border-white duration-300 ease-in shadow-xl shadow-[#5e59e64b] ${
-              tabActive >= 2 ? 'bg-[#65dc7f]' : 'bg-white'
-            }`}
-          >
-            <FiEdit3
-              className={`${
-                tabActive >= 2 ? 'text-white' : 'to-black'
-              } duration-300 ease-in text-2xl lg:text-3xl`}
-            />
-          </button>
-        </div>
-        <div>{tabActive >= 3 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
-        <div>
-          <button
-            onClick={() => setTabActive(3)}
-            type="button"
-            className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
               tabActive >= 3 ? 'bg-[#65dc7f]' : 'bg-white'
             }`}
           >
-            <IoLocationOutline
+            <FiEdit3
               className={`${
                 tabActive >= 3 ? 'text-white' : 'to-black'
               } duration-300 ease-in text-2xl lg:text-3xl`}
@@ -87,13 +121,13 @@ const TalentProcess = () => {
         <div>{tabActive >= 4 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
         <div>
           <button
-            onClick={() => setTabActive(4)}
+            onClick={() => setTabActive(3)}
             type="button"
             className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
               tabActive >= 4 ? 'bg-[#65dc7f]' : 'bg-white'
             }`}
           >
-            <HiLanguage
+            <IoLocationOutline
               className={`${
                 tabActive >= 4 ? 'text-white' : 'to-black'
               } duration-300 ease-in text-2xl lg:text-3xl`}
@@ -101,16 +135,15 @@ const TalentProcess = () => {
           </button>
         </div>
         <div>{tabActive >= 5 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
-
         <div>
           <button
-            onClick={() => setTabActive(5)}
+            onClick={() => setTabActive(4)}
             type="button"
             className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
               tabActive >= 5 ? 'bg-[#65dc7f]' : 'bg-white'
             }`}
           >
-            <BsEmojiWink
+            <HiLanguage
               className={`${
                 tabActive >= 5 ? 'text-white' : 'to-black'
               } duration-300 ease-in text-2xl lg:text-3xl`}
@@ -121,15 +154,32 @@ const TalentProcess = () => {
 
         <div>
           <button
-            onClick={() => setTabActive(6)}
+            onClick={() => setTabActive(5)}
             type="button"
             className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
               tabActive >= 6 ? 'bg-[#65dc7f]' : 'bg-white'
             }`}
           >
-            <RiUser6Line
+            <BsEmojiWink
               className={`${
                 tabActive >= 6 ? 'text-white' : 'to-black'
+              } duration-300 ease-in text-2xl lg:text-3xl`}
+            />
+          </button>
+        </div>
+        <div>{tabActive >= 7 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
+
+        <div>
+          <button
+            onClick={() => setTabActive(6)}
+            type="button"
+            className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
+              tabActive >= 7 ? 'bg-[#65dc7f]' : 'bg-white'
+            }`}
+          >
+            <RiUser6Line
+              className={`${
+                tabActive >= 7 ? 'text-white' : 'to-black'
               } duration-300 ease-in text-2xl lg:text-3xl`}
             />
           </button>
@@ -139,36 +189,42 @@ const TalentProcess = () => {
       {/* tab content */}
 
       {tabActive === 1 && (
+        <TalentProcessSkillsAndDescription
+          selectedDetails={selectedDetails}
+          setSelectedDetails={setSelectedDetails}
+        />
+      )}
+      {tabActive === 2 && (
         <TalentProcessSkills
           selectedSkills={selectedSkills}
           setSelectedSkills={setSelectedSkills}
         />
       )}
-      {tabActive === 2 && (
+      {tabActive === 3 && (
         <TalentProcessProficiency
           selectedProficiency={selectedProficiency}
           setSelectedProficiency={setSelectedProficiency}
         />
       )}
-      {tabActive === 3 && (
+      {tabActive === 4 && (
         <TalentProcessLocation
           selectedLocations={selectedLocations}
           setSelectedLocations={setSelectedLocations}
         />
       )}
-      {tabActive === 4 && (
+      {tabActive === 5 && (
         <TalentProcessLanguage
           selectedLanguages={selectedLanguages}
           setSelectedLanguages={setSelectedLanguages}
         />
       )}
-      {tabActive === 5 && (
+      {tabActive === 6 && (
         <TalentProcessPersonality
           selectedPersonalities={selectedPersonalities}
           setSelectedPersonalities={setSelectedPersonalities}
         />
       )}
-      {tabActive === 6 && (
+      {tabActive === 7 && (
         <TalentProcessNoOfTalents
           totalTalentsValue={totalTalentsValue}
           setTotalTalentsValue={setTotalTalentsValue}
@@ -185,16 +241,16 @@ const TalentProcess = () => {
             Prev{' '}
           </button>
         )}
-        {tabActive <= 5 && (
+        {tabActive <= 6 && (
           <button
-            onClick={() => setTabActive(tabActive + 1)}
+            onClick={handleTabActive}
             className="bg-[#f8f1ff] shadow-inner px-5 py-2.5 hover:shadow-lg hover:shadow-[#d7d4f4] hover:bg-[#13d1ff] hover:text-white duration-300 ease-in rounded-lg text-[#61c1ff] text-lg"
             type="button"
           >
             Next{' '}
           </button>
         )}
-        {tabActive >= 6 && (
+        {tabActive >= 7 && (
           <button
             onClick={handleSubmit}
             className="bg-[#f8f1ff] shadow-inner px-5 py-2.5 hover:shadow-lg hover:shadow-[#d7d4f4] hover:bg-[#13d1ff] hover:text-white duration-300 ease-in rounded-lg text-[#61c1ff] text-lg"
