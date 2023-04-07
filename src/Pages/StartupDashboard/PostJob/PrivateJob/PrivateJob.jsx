@@ -44,15 +44,24 @@ const PrivateJob = () => {
   //     setSkills(alreadyStored?.skills || []);
   // }, [jobName]);
 
-  // data posting to ls
-  const onSubmit = (data) => {
-    const jobData = {
-      ...data,
-      email: user?.user.email,
-      categoryName,
-      skills,
-      apiPath: jobName,
-      jobStatus: 'active',
+
+
+    // data posting to ls
+    const onSubmit = (data) => {
+        const jobData = {
+            ...data,
+            email: user?.user.email,
+            startupsProfilePhoto: user?.user?.profilePhoto,
+      startupsName: user?.user?.fullName,
+            categoryName,
+            skills,
+            apiPath: jobName,
+            jobStatus:"active"
+        };
+
+        setJob(jobName, jobData);
+        navigate('/dashboard/post-job/private-job/review');
+
     };
 
     setJob(jobName, jobData);

@@ -79,7 +79,7 @@ const ManageTeams = () => {
                 </span>
                 <div className="progress-value absolute">
                   <div className="flex justify-center items-center flex-col space-y-14 mt-14">
-                    <span className="font-bold text-xl">70%</span>
+                    <span className="font-bold text-xl">0%</span>
                     <span className="inline-block text-sm absolute">Finished Project</span>
                   </div>
                 </div>

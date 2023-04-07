@@ -1,6 +1,6 @@
 {
     // Theme
-    "workbench.colorTheme": "Learn with Sumit Official Theme",
+    "workbench.colorTheme": "One Dark Pro",
     // config related to code formatting
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
@@ -19,7 +19,10 @@
         "source.organizeImports": true
     },
     "eslint.alwaysShowStatus": true,
-    "eslint.validate": ["javascript", "javascriptreact"],
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact"
+    ],
     // emmet
     "emmet.triggerExpansionOnTab": true,
     "emmet.includeLanguages": {
@@ -35,5 +38,6 @@
         "remostarts",
         "remowelcome",
         "swiper"
-    ]
+    ],
+    "terminal.explorerKind": "integrated"
 }

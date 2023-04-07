@@ -10,7 +10,6 @@ import { GrDocumentUser } from 'react-icons/gr';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import currency from '../../../Assets/Dashboard/currency.png';
-import cardLogo from '../../../Assets/Dashboard/tech_crunch.png';
 import AuthContext from '../../../Context/AuthContext';
 import DashBoardItems from '../../../Routes/Roots/DashBoardItems';
 import NoJob from './NoJob';
@@ -72,6 +71,7 @@ const AllJobs = () => {
       navigate(`/dashboard/shadowing/${item.jobId}`, { state: { data: item } });
     path === 'gigs' && navigate(`/dashboard/gigs/${item.jobId}`, { state: { data: item } });
   };
+  console.log(user);
 
   return (
     <DashBoardItems>
@@ -134,7 +134,17 @@ const AllJobs = () => {
                 <div className="flex justify-between">
                   <div className="flex flex-col">
                     <div className="flex space-x-2">
-                      <img src={cardLogo} alt="" />
+                    {item?.startupsProfilePhoto ? (
+                      <img
+                        className="w-8 h-8 rounded-full"
+                        src={item.startupsProfilePhoto}
+                        alt=""
+                      />
+                    ) : (
+                      <p className="w-8 h-8 grid place-items-center  text-white rounded-full bg-black">
+                        {item?.startupsName?.charAt(0).toUpperCase()}
+                      </p>
+                    )}
                       <h5 className="font-semibold text-lg">{item.title}</h5>
                     </div>
                   </div>
