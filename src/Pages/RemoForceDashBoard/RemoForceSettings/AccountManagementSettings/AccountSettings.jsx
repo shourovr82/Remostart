@@ -19,7 +19,7 @@ function AccountSettings() {
   const { data: remoProfile, refetch } = useQuery(['remoProfile'], () =>
     axios
       .get(
-        `${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-profile/${user.user.email}`
+        `${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-profile/${user?.user?.email || serviceUser?.email}`
       )
       .then((res) => res.data)
   );
@@ -42,7 +42,7 @@ function AccountSettings() {
 
     const bodyData = {
       alternativeEmail: data.alternativeEmail,
-      email: user.user.email,
+      email: user?.user?.email || serviceUser?.email,
     };
 
     await axios
