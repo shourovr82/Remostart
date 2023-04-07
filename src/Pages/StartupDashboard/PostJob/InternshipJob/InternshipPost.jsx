@@ -4,7 +4,6 @@ import { BiChevronLeft, BiPlus } from 'react-icons/bi';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import currencyIcon from '../../../../Assets/Dashboard/currency.png';
 import { getStoredJob, setJob } from '../../../../Hooks/useLocalStorage';
 
 const InternshipPost = () => {
@@ -137,7 +136,7 @@ const InternshipPost = () => {
             id="description"
             defaultValue={storedData?.description}
             placeholder="Write your description"
-            className="lg:w-3/4 h-16 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+            className="lg:w-3/4 h-40 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
           />
           <p className="pt-2">
             {errors.description && (
@@ -250,26 +249,22 @@ const InternshipPost = () => {
 
         <div className="space-y-1 mt-5 text-sm">
           <label className="block font-semibold text-gray-900">Stipend</label>
-          <div className="flex justify-between items-center w-full md:w-1/2  rounded-md border border-[#BCBCBC focus:outline-none] px-4 py-3">
+          <div className="flex justify-between items-center w-full md:w-1/2  rounded-md border border-[#b5bac3 focus:outline-none">
             <input
               type="number"
               name="salary"
               {...register('salary', {
-                required: true,
+                required: 'Salary is required',
               })}
               id="salary"
               defaultValue={storedData?.salary}
               placeholder="write salary"
-              className="w-full border border-transparent rounded-md  text-gray-900 focus:outline-none "
+              className="w-full border border-transparent   mr-3  py-3 focus:ring-0 rounded-md  text-gray-900  "
             />
-            <img src={currencyIcon} alt="" />
+            <p className="text-xl font-semibold pr-3">₳</p>
           </div>
-          <p className="pt-2">
-            {errors.salary && (
-              <span className="text-red-400 ">
-                {errors.salary?.type === 'required' && 'Please provide  Salary'}
-              </span>
-            )}
+          <p className="pt-2 ">
+            {errors.salary && <span className="text-red-400 ">{errors.salary?.message}</span>}
           </p>
         </div>
 
@@ -351,10 +346,10 @@ const InternshipPost = () => {
                 value={perks}
                 onChange={changePerkHandler}
                 placeholder="Sample input"
-                className="px-4 py-3 focus:outline-none border  rounded-md border-transparent outline-none w-full focus:bg-transparent"
+                className="px-4 py-3 focus:ring-0 focus:outline-none border  rounded-md border-transparent outline-none w-full focus:bg-transparent"
               />
               <button onClick={handlePerk} type="button">
-                <BiPlus className="border p-1 text-xl" />
+                <BiPlus className="border p-1 text-2xl" />
               </button>
             </div>
 
