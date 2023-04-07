@@ -20,10 +20,14 @@ const RemoForceRoute = ({ children }) => {
       </div>
     );
   }
-console.log(serviceUser);
+  console.log(serviceUser);
+
+  if (!user || !serviceUser) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
   if (user?.user?.role) {
-    if (user?.user?.role !== 'remoforce' ) {
+    if (user?.user?.role !== 'remoforce') {
       return <Navigate to="/login" state={{ from: location }} replace />;
     }
     if (user?.user?.role === 'startup') {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft } from 'react-icons/bi';
@@ -8,6 +8,7 @@ import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setJob } from '../../../../Hooks/useLocalStorage';
+import AuthContext from '../../../../Context/AuthContext';
 
 const ShadowingJob = () => {
   // handle skill input
@@ -24,6 +25,7 @@ const ShadowingJob = () => {
   // get values
 
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname.split('/');
@@ -104,7 +106,7 @@ const ShadowingJob = () => {
       mentorsInfo: { mentorsBio, mentorsName, mentorsLinkedInURL },
       apiPath: jobName,
       jobStatus: 'active',
-      email: user?.user.email,
+      email: user?.user?.email || serviceUser?.email,
       startupsProfilePhoto: user?.user?.profilePhoto,
       startupsName: user?.user?.fullName,
     };

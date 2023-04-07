@@ -1,13 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
+
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../../../Context/AuthContext';
 
 const AccountUpdatePassForm = () => {
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const {
     register,
@@ -42,7 +45,7 @@ const AccountUpdatePassForm = () => {
       return;
     }
 
-    const bodyData = { email: user?.user.email, password: data.confirmNewPass };
+    const bodyData = { email: user?.user?.email || serviceUser?.email, password: data.confirmNewPass };
 
     mutate(bodyData);
   };
