@@ -51,8 +51,8 @@ const PrivateJob = () => {
     const jobData = {
       ...data,
       email: user?.user?.email || serviceUser?.email,
-      startupsProfilePhoto: user?.user?.profilePhoto,
-      startupsName: user?.user?.fullName,
+      startupsProfilePhoto: user?.user?.profilePhoto || '',
+      startupsName: user?.user?.fullName || serviceUser?.fullName,
       categoryName,
       skills,
       apiPath: jobName,
