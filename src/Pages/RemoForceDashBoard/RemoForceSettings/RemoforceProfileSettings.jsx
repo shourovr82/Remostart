@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable prefer-destructuring */
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import Dropzone from 'react-dropzone';
@@ -33,6 +34,15 @@ function RemoforceProfileSettings() {
   const [contact, setContact] = useState(null);
   const [alternative, setAlternative] = useState(null);
 
+  const { data: remoProfile, refetch } = useQuery(['remoProfile'], () =>
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-profile/${
+          user?.user?.email || serviceUser?.email
+        }`
+      )
+      .then((res) => res.data)
+  );
   // set progressBar
   function ProgressBar(data) {
     const newUrl = data?.[0];
@@ -57,21 +67,6 @@ function RemoforceProfileSettings() {
   function handleChange(event) {
     setSelectedGender(event.target.value);
   }
-
-  // handle On Change or select Gender
-  // const handleLinks = (e) => {
-  //     const { value } = e.target;
-  //     const newObj = {};
-  //     newObj.gender = value;
-  //     setSelectLink(newObj);
-  // };
-  // set Profile Image name to Value and State
-  // const imageUrl = (e) => {
-  //     const { name } = e.target;
-  //     const obj = {};
-  //     obj[name] = e.target.files[0];
-  //     setDisplay(obj);
-  // };
 
   const link = [
     {
@@ -185,7 +180,6 @@ function RemoforceProfileSettings() {
         setLoading(false);
       });
   };
-
   return (
     <RemoForceSettingsItems>
       <section className="w-full lg:mt-4 h-full bg-white">
@@ -267,6 +261,7 @@ function RemoforceProfileSettings() {
                       {...register('fullName', {
                         required: true,
                       })}
+                      defaultValue={remoProfile?.fullName}
                       type="text"
                       placeholder="Full Name"
                       className="w-full border p-4 rounded-md border-gray-200 focus:ring focus:ring-opacity-75 focus:ring-violet-400  "
@@ -287,8 +282,9 @@ function RemoforceProfileSettings() {
                       {...register('Bio', {
                         required: true,
                       })}
+                      defaultValue={remoProfile?.personalDetails?.bio}
                       type="text"
-                      placeholder="Sample Name"
+                      placeholder="Sample Bio"
                       className="w-full border p-4 rounded-md border-gray-200 focus:ring focus:ring-opacity-75 focus:ring-violet-400  "
                     />
                     <p className="pt-1">
@@ -306,8 +302,9 @@ function RemoforceProfileSettings() {
                       {...register('about', {
                         required: true,
                       })}
+                      defaultValue={remoProfile?.personalDetails?.aboutMe}
                       id="About_me"
-                      placeholder="Write Something ..."
+                      placeholder="Write Something About you ..."
                       className="w-full h-full p-4 border border-gray-200 rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400  "
                     />
                     <p className="pt-1">
@@ -382,6 +379,7 @@ function RemoforceProfileSettings() {
                   Age
                 </label>
                 <input
+                  defaultValue={remoProfile?.personalDetails?.age}
                   id="age"
                   {...register('age', {
                     required: true,
@@ -401,14 +399,18 @@ function RemoforceProfileSettings() {
                   Gender
                 </label>
                 <select
+                  defaultValue={remoProfile?.personalDetails?.gender}
                   id="gender"
-                  // defaultValue="Select a gender"
                   className="py-3 rounded-md border-gray-200"
                   value={selectedGender}
                   onChange={handleChange}
                 >
                   <option value="" hidden>
-                    Select Gender
+                    {`${
+                      remoProfile?.personalDetails?.gender
+                        ? remoProfile?.personalDetails?.gender
+                        : ' Select Gender'
+                    }`}
                   </option>
                   {gender.map((genderOption) => (
                     <option key={Math.random()} value={genderOption}>
@@ -428,6 +430,7 @@ function RemoforceProfileSettings() {
                   BirthDate
                 </label>
                 <input
+                  defaultValue={remoProfile?.personalDetails?.birthDate?.slice(0, 10)}
                   type="date"
                   name="date"
                   id="date"
@@ -457,6 +460,7 @@ function RemoforceProfileSettings() {
               </label>
               <input
                 id="email"
+                defaultValue={remoProfile?.personalDetails?.alternativeEmail}
                 {...register('email', {
                   required: true,
                 })}

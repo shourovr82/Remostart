@@ -8,17 +8,18 @@ import { useForm } from 'react-hook-form';
 import { RiUser3Line } from 'react-icons/ri';
 import { RxCross2 } from 'react-icons/rx';
 
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import image from '../../../Assets/Verification/Image.png';
+import AuthContext from '../../../Context/AuthContext';
 import SettingsItems from '../../../Routes/Roots/SettingsItems';
 import './Input.CSS';
-import AuthContext from '../../../Context/AuthContext';
 
 const SettingsProfile = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state?.auth);
   const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const [newArr, setNewArr] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -31,6 +32,19 @@ const SettingsProfile = () => {
     }
     fetchData();
   }, []);
+
+  // get profile info
+
+  const { data: startupData } = useQuery(['startupData'], () =>
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_STARTUP}/api/startup/startup-preview/${
+          user?.user?.email || serviceUser?.email
+        }`
+      )
+      .then((res) => res.data)
+  );
+  console.log(startupData);
 
   // File State
   const [file, setFile] = useState();
@@ -60,7 +74,9 @@ const SettingsProfile = () => {
 
   // ?Domain Function start
 
-  const [selectedValues, setSelectedValues] = useState([]);
+  const [selectedValues, setSelectedValues] = useState(
+    (startupData?.domains?.length && startupData?.domains) || []
+  );
   const [domainError, setDomainError] = useState('');
   const [openOtherMenu, setOpenOtherMenu] = useState(false);
 
@@ -236,6 +252,7 @@ const SettingsProfile = () => {
                 </label>
                 <input
                   id="startupName"
+                  defaultValue={startupData?.startupName}
                   {...register('startupName', {
                     maxLength: {
                       value: 100,
@@ -263,6 +280,7 @@ const SettingsProfile = () => {
                 </label>
                 <input
                   id="startupSlogan"
+                  defaultValue={startupData?.startupSlogan}
                   {...register('startupSlogan', {
                     required: 'Startup Slogan is Required',
                     maxLength: {
@@ -290,6 +308,7 @@ const SettingsProfile = () => {
                   Startup Description
                 </label>
                 <textarea
+                  defaultValue={startupData?.startupDescription}
                   {...register('startupDescription', {
                     required: 'Startup Description is Required',
                     maxLength: {
@@ -303,7 +322,7 @@ const SettingsProfile = () => {
                   })}
                   id="startupDescription"
                   placeholder="Description"
-                  className="w-full border p-4 rounded-md focus:border-transparent focus:ring focus:ring-opacity-75 focus:ring-blue-500 border-[#E5E5E5]"
+                  className="w-full border  p-4 rounded-md focus:border-transparent focus:ring focus:ring-opacity-75 focus:ring-blue-500 border-[#E5E5E5]"
                 />
                 <p className="pt-1">
                   <span className="text-red-400  ">
@@ -318,6 +337,7 @@ const SettingsProfile = () => {
                   Industries Work In
                 </label>
                 <textarea
+                  defaultValue={startupData?.worksIn}
                   {...register('worksIn', {
                     required: '  Industries Work In Details is Required',
                     maxLength: {
@@ -394,7 +414,7 @@ const SettingsProfile = () => {
                       )}
                     </div>
                   </div>
-                  {selectedValues.length ? (
+                  {selectedValues?.length ? (
                     <div className="grid grid-cols-2 px-2 py-4 gap-3 mt-8 lg:w-[630px] w-full border h-auto bg-[#F0F9FF]">
                       {selectedValues.map((value, index) => (
                         <div key={index}>
@@ -427,7 +447,7 @@ const SettingsProfile = () => {
                     className="select lg:w-[120px]  mt-1 w-full font-semibold border 
                                           border-gray-200 rounded-md "
                   >
-                    {link.map((D, i) => (
+                    {link?.map((D, i) => (
                       <option onClick={handleClick} value={D.name} key={i}>
                         {D.name}
                       </option>
