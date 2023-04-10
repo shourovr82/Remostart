@@ -24,7 +24,9 @@ const ApplyJob = () => {
   const { data: job, refetch } = useQuery(['job'], () =>
     axios
       .get(
-        `${process.env.REACT_APP_URL_STARTUP}/api/job/apply-status?id=${data._id}&email=${user?.user?.email || serviceUser?.email}`
+        `${process.env.REACT_APP_URL_STARTUP}/api/job/apply-status?id=${data._id}&email=${
+          user?.user?.email || serviceUser?.email
+        }`
       )
       .then((res) => res.data)
   );
@@ -46,7 +48,7 @@ const ApplyJob = () => {
       applicantsName: user?.user.fullName || serviceUser?.fullName,
       applicantsEmail: user?.user?.email || serviceUser?.email,
       applicationStatus: 'pending',
-      email: data.email 
+      email: data.email,
     };
 
     // Send the PUT request using axios
@@ -116,7 +118,7 @@ const ApplyJob = () => {
           <div className="mt-5 lg:grid lg:grid-cols-6 ">
             {/* job details  */}
             <div className="lg:col-span-4">
-              <p className="lg:w-[95%]">{description}</p>
+              <p className="lg:w-[95%] whitespace-pre-wrap">{description}</p>
 
               {/* Internship Duration Details if available */}
               {data?.categoryName === 'Internship' && (

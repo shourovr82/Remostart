@@ -28,7 +28,6 @@ const AllJobs = () => {
       )
       .then((res) => res.data)
   );
-
   const handleDelete = (id) => {
     axios
       .delete(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${id}`)
@@ -134,17 +133,17 @@ const AllJobs = () => {
                 <div className="flex justify-between">
                   <div className="flex flex-col">
                     <div className="flex space-x-2">
-                    {item?.startupsProfilePhoto ? (
-                      <img
-                        className="w-8 h-8 rounded-full"
-                        src={item.startupsProfilePhoto}
-                        alt=""
-                      />
-                    ) : (
-                      <p className="w-8 h-8 grid place-items-center  text-white rounded-full bg-black">
-                        {item?.startupsName?.charAt(0).toUpperCase()}
-                      </p>
-                    )}
+                      {item?.startupsProfilePhoto ? (
+                        <img
+                          className="w-8 h-8 rounded-full"
+                          src={item.startupsProfilePhoto}
+                          alt=""
+                        />
+                      ) : (
+                        <p className="w-8 h-8 grid place-items-center  text-white rounded-full bg-black">
+                          {item?.startupsName?.charAt(0).toUpperCase()}
+                        </p>
+                      )}
                       <h5 className="font-semibold text-lg">{item.title}</h5>
                     </div>
                   </div>

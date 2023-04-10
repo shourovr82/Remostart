@@ -75,7 +75,7 @@ const RemoforceInternship = () => {
                 </div>
                 <div>
                   <p className="text-start  text-sm ">
-                    {item?.description ? `${item?.description?.slice(0, 100)}` : item?.description}
+                    {item?.description ? `${item?.description?.slice(0, 100)}` : item?.description}{' '}
                   </p>
                 </div>
                 {/* description, skills */}
