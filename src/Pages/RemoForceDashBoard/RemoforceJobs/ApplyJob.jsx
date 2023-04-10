@@ -43,10 +43,10 @@ const ApplyJob = () => {
   const applyJobHandler = () => {
     const url = `${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${data._id}`;
     const applicantsData = {
-      applicantsName: user?.user.fullName,
+      applicantsName: user?.user.fullName || serviceUser?.fullName,
       applicantsEmail: user?.user?.email || serviceUser?.email,
       applicationStatus: 'pending',
-      email: data.email,
+      email: data.email 
     };
 
     // Send the PUT request using axios
