@@ -47,43 +47,6 @@ const RemoForceAllJobs = () => {
                   </div>
 
                   {/* three dot option button */}
-                  {/* <div>
-                                        <div className="dropdown dropdown-bottom dropdown-end">
-                                            <button type="button" className="p-1">
-                                                <label tabIndex={0} className="cursor-pointer">
-                                                    {' '}
-                                                    <BsThreeDots className="text-xl" />
-                                                </label>
-                                            </button>
-                                            <ul
-                                                tabIndex={0}
-                                                className="dropdown-content menu p-2 shadow-xl shadow-[#4e00b42d]  bg-base-100 rounded-box w-52"
-                                            >
-                                                <li>
-                                                    <button
-                                                        type="button"
-                                                        className="font-medium text-sm"
-                                                    >
-                                                        View Applicants
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button
-                                                        className="font-medium text-sm"
-                                                        type="button"
-                                                    >
-                                                        Hide Post
-                                                    </button>
-                                                </li>
-
-                                                <li>
-                                                    <Link to="#" className="font-medium text-sm">
-                                                        Details
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div> */}
                 </div>
                 <div className="py-2">
                   <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
@@ -99,7 +62,7 @@ const RemoForceAllJobs = () => {
                 {/* description, skills */}
                 <div className="mt-1">
                   {/* skills */}
-                  <div className="flex mt-[7px] flex-wrap  w-full lg:gap-1 xl:gap-2">
+                  <div className="flex mt-[7px] flex-wrap  w-full gap-2 xl:gap-2">
                     {item &&
                       item?.skills.map((skill) => (
                         <div key={Math.random()} className="bg-[#F0F9FF]  rounded-md ">

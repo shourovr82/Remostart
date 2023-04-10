@@ -82,7 +82,7 @@ const RemoforceShadowing = () => {
                 {/* description, skills */}
                 <div className="mt-1">
                   {/* skills */}
-                  <div className="flex mt-[7px] flex-wrap  w-full lg:gap-1 xl:gap-2">
+                  <div className="flex mt-[7px] flex-wrap  w-full gap-1.5 xl:gap-2">
                     {item &&
                       item?.skills.map((skill) => (
                         <div key={Math.random()} className="bg-[#F0F9FF]  rounded-md ">
