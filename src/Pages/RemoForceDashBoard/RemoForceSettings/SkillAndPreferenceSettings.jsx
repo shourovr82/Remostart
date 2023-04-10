@@ -58,7 +58,6 @@ function SkillAndPreferenceSettings() {
   });
   // skill list
 
-  // const industries = ['Blockchain', 'Health', 'Front-End', 'MERN Stack'];
   const domainLists = ['Beginner', 'Intermediate', 'Advance', 'Professional'];
   const workingPreferences = ['Work from Home', 'Remote', 'Hybrid', 'Full Time'];
   // const languages = ['English', 'Hindi', ' German'];
@@ -190,8 +189,6 @@ function SkillAndPreferenceSettings() {
     }
 
     const { workPreference, industry, domain } = data;
-
-    console.log(industry);
 
     const bodyData = {
       jobPreference: {

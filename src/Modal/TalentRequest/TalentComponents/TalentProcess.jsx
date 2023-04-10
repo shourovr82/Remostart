@@ -12,7 +12,6 @@ import TalentProcessLanguage from './TalentProcessLanguage';
 import TalentProcessLocation from './TalentProcessLocation';
 import TalentProcessNoOfTalents from './TalentProcessNoOfTalents';
 import TalentProcessPersonality from './TalentProcessPersonality';
-import TalentProcessProficiency from './TalentProcessProficiency';
 import TalentProcessSkills from './TalentProcessSkills';
 import TalentProcessSkillsAndDescription from './TalentProcessTitlesAndDescription';
 
@@ -20,7 +19,6 @@ const TalentProcess = () => {
   const [tabActive, setTabActive] = useState(1);
   const [selectedDetails, setSelectedDetails] = useState({});
   const [selectedSkills, setSelectedSkills] = useState([]);
-  const [selectedProficiency, setSelectedProficiency] = useState('');
   const [selectedLocations, setSelectedLocations] = useState('');
   const [selectedLanguages, setSelectedLanguages] = useState([]);
   const [selectedPersonalities, setSelectedPersonalities] = useState([]);
@@ -29,7 +27,6 @@ const TalentProcess = () => {
   const handleSubmit = () => {
     const allData = {
       selectedSkills,
-      selectedProficiency,
       selectedLocations,
       selectedLanguages,
       selectedPersonalities,
@@ -54,32 +51,26 @@ const TalentProcess = () => {
         setTabActive(3);
       }
     }
+
     if (tabActive === 3) {
-      if (!selectedProficiency) {
-        toast.error('Proficiency is required');
-      } else if (selectedProficiency) {
+      if (!selectedLocations) {
+        toast.error('Locations is required');
+      } else if (selectedLocations) {
         setTabActive(4);
       }
     }
     if (tabActive === 4) {
-      if (!selectedLocations) {
-        toast.error('Locations is required');
-      } else if (selectedLocations) {
+      if (!selectedLanguages?.length) {
+        toast.error('Languages is required');
+      } else if (selectedLanguages?.length) {
         setTabActive(5);
       }
     }
     if (tabActive === 5) {
-      if (!selectedLanguages?.length) {
-        toast.error('Languages is required');
-      } else if (selectedLanguages?.length) {
-        setTabActive(6);
-      }
-    }
-    if (tabActive === 6) {
       if (!selectedPersonalities?.length) {
         toast.error('Personalities is required');
       } else if (selectedPersonalities?.length) {
-        setTabActive(7);
+        setTabActive(6);
       }
     }
   };
@@ -101,15 +92,30 @@ const TalentProcess = () => {
 
         {/* tab two */}
 
-        <div>{tabActive >= 3 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
+        <div>{tabActive >= 2 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
         <div>
           <button
             type="button"
             className={`p-2 lg:p-3 rounded-full border-4 border-white duration-300 ease-in shadow-xl shadow-[#5e59e64b] ${
-              tabActive >= 3 ? 'bg-[#65dc7f]' : 'bg-white'
+              tabActive >= 2 ? 'bg-[#65dc7f]' : 'bg-white'
             }`}
           >
             <FiEdit3
+              className={`${
+                tabActive >= 2 ? 'text-white' : 'to-black'
+              } duration-300 ease-in text-2xl lg:text-3xl`}
+            />
+          </button>
+        </div>
+        <div>{tabActive >= 3 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
+        <div>
+          <button
+            type="button"
+            className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
+              tabActive >= 3 ? 'bg-[#65dc7f]' : 'bg-white'
+            }`}
+          >
+            <IoLocationOutline
               className={`${
                 tabActive >= 3 ? 'text-white' : 'to-black'
               } duration-300 ease-in text-2xl lg:text-3xl`}
@@ -124,7 +130,7 @@ const TalentProcess = () => {
               tabActive >= 4 ? 'bg-[#65dc7f]' : 'bg-white'
             }`}
           >
-            <IoLocationOutline
+            <HiLanguage
               className={`${
                 tabActive >= 4 ? 'text-white' : 'to-black'
               } duration-300 ease-in text-2xl lg:text-3xl`}
@@ -132,6 +138,7 @@ const TalentProcess = () => {
           </button>
         </div>
         <div>{tabActive >= 5 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
+
         <div>
           <button
             type="button"
@@ -139,7 +146,7 @@ const TalentProcess = () => {
               tabActive >= 5 ? 'bg-[#65dc7f]' : 'bg-white'
             }`}
           >
-            <HiLanguage
+            <BsEmojiWink
               className={`${
                 tabActive >= 5 ? 'text-white' : 'to-black'
               } duration-300 ease-in text-2xl lg:text-3xl`}
@@ -155,25 +162,9 @@ const TalentProcess = () => {
               tabActive >= 6 ? 'bg-[#65dc7f]' : 'bg-white'
             }`}
           >
-            <BsEmojiWink
-              className={`${
-                tabActive >= 6 ? 'text-white' : 'to-black'
-              } duration-300 ease-in text-2xl lg:text-3xl`}
-            />
-          </button>
-        </div>
-        <div>{tabActive >= 7 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
-
-        <div>
-          <button
-            type="button"
-            className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
-              tabActive >= 7 ? 'bg-[#65dc7f]' : 'bg-white'
-            }`}
-          >
             <RiUser6Line
               className={`${
-                tabActive >= 7 ? 'text-white' : 'to-black'
+                tabActive >= 6 ? 'text-white' : 'to-black'
               } duration-300 ease-in text-2xl lg:text-3xl`}
             />
           </button>
@@ -194,31 +185,26 @@ const TalentProcess = () => {
           setSelectedSkills={setSelectedSkills}
         />
       )}
+
       {tabActive === 3 && (
-        <TalentProcessProficiency
-          selectedProficiency={selectedProficiency}
-          setSelectedProficiency={setSelectedProficiency}
-        />
-      )}
-      {tabActive === 4 && (
         <TalentProcessLocation
           selectedLocations={selectedLocations}
           setSelectedLocations={setSelectedLocations}
         />
       )}
-      {tabActive === 5 && (
+      {tabActive === 4 && (
         <TalentProcessLanguage
           selectedLanguages={selectedLanguages}
           setSelectedLanguages={setSelectedLanguages}
         />
       )}
-      {tabActive === 6 && (
+      {tabActive === 5 && (
         <TalentProcessPersonality
           selectedPersonalities={selectedPersonalities}
           setSelectedPersonalities={setSelectedPersonalities}
         />
       )}
-      {tabActive === 7 && (
+      {tabActive === 6 && (
         <TalentProcessNoOfTalents
           totalTalentsValue={totalTalentsValue}
           setTotalTalentsValue={setTotalTalentsValue}
@@ -235,7 +221,7 @@ const TalentProcess = () => {
             Prev{' '}
           </button>
         )}
-        {tabActive <= 6 && (
+        {tabActive <= 5 && (
           <button
             onClick={handleTabActive}
             className="bg-[#f8f1ff] shadow-inner px-5 py-2.5 hover:shadow-lg hover:shadow-[#d7d4f4] hover:bg-[#13d1ff] hover:text-white duration-300 ease-in rounded-lg text-[#61c1ff] text-lg"
@@ -244,7 +230,7 @@ const TalentProcess = () => {
             Next{' '}
           </button>
         )}
-        {tabActive >= 7 && (
+        {tabActive === 6 && (
           <button
             onClick={handleSubmit}
             className="bg-[#f8f1ff] shadow-inner px-5 py-2.5 hover:shadow-lg hover:shadow-[#d7d4f4] hover:bg-[#13d1ff] hover:text-white duration-300 ease-in rounded-lg text-[#61c1ff] text-lg"
