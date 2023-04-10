@@ -11,7 +11,7 @@ const ShadowingFaqs = () => {
     },
     {
       faqTitle: 'What is the Job Shadowing all about?',
-      faqContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.'
+      faqContent: ''
     },
     {
       faqTitle: 'What Payment methods do you use?',
@@ -19,11 +19,11 @@ const ShadowingFaqs = () => {
     },
     {
       faqTitle: 'Does Remostart offer non-technical jobs?',
-      faqContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.'
+      faqContent: ''
     },
     {
       faqTitle: 'What knd of projects can I work on?',
-      faqContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.'
+      faqContent: ''
     },
   ]
   return (
