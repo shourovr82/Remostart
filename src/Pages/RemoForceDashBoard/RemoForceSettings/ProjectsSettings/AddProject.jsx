@@ -1,5 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { GoDiffAdded } from 'react-icons/go';
 import { SiWorkplace } from 'react-icons/si';
@@ -11,13 +12,25 @@ import { convertProjectDate, getProjectDuration } from '../../../../Utilities/pr
 import AddProjectForm from './AddProjectForm';
 import EditProject from './EditProject';
 
+import AuthContext from '../../../../Context/AuthContext';
+
 function AddProject() {
   const { user } = useSelector((state) => state.auth);
+  const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const { data: remoProfile, refetch } = useQuery(['remoProfile'], () =>
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-profile/${
+          user?.user?.email || serviceUser?.email
+        }`
+      )
+      .then((res) => res.data)
+  );
   const [loading, setLoading] = useState(false);
   const [bool, setBool] = useState(false);
-  const [projectsLists, setProjectsLists] = useState([]);
+  const [projectsLists, setProjectsLists] = useState(remoProfile?.projectDetails || []);
   const [editMode, setEditMode] = useState(false);
   const [editData, setEditData] = useState({});
 
