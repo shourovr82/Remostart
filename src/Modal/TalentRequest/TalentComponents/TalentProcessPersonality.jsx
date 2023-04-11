@@ -40,11 +40,7 @@ const TalentProcessPersonality = ({ setSelectedPersonalities, selectedPersonalit
       setSelectedPersonalities([...selectedPersonalities, selectedPersonality]);
     }
   };
-  const personalitiesData = [
-    { value: 'Leader', label: 'Leader' },
-    { value: 'Teamplayer', label: 'Teamplayer' },
-    { value: 'Well Spoken', label: 'Well Spoken' },
-  ];
+
   useEffect(() => {
     async function fetchData() {
       const response = await fetch('/data.json');
@@ -71,7 +67,7 @@ const TalentProcessPersonality = ({ setSelectedPersonalities, selectedPersonalit
             <div className="group border-2  relative rounded-md px-3 py-2 inline-block border-dashed border-[#0ea5e9] ">
               <div className=" mt-2">
                 <Select
-                  options={personalitiesData}
+                  options={jData?.soft_skills}
                   styles={customStyles}
                   value={selectedOption}
                   onChange={handleSelectChange}

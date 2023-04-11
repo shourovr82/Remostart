@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const TalentProcessProficiency = ({ selectedProficiency, setSelectedProficiency }) => {
   const [disableOption, setDisable] = useState(false);
-
   const handleChange = (e) => {
     setSelectedProficiency(e.target.value);
   };
@@ -12,6 +11,7 @@ const TalentProcessProficiency = ({ selectedProficiency, setSelectedProficiency 
   };
 
   const proficiencyLists = ['Beginner', 'Intermediate', 'Advance', 'Professional'];
+
 
   return (
     <div className="lg:ml-20">
