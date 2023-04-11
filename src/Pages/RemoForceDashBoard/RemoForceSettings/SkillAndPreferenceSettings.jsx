@@ -69,7 +69,7 @@ function SkillAndPreferenceSettings() {
   // skill list
 
   const domainLists = ['Beginner', 'Intermediate', 'Advance', 'Professional'];
-  const workingPreferences = ['Work from Home', 'Remote', 'Hybrid', 'Full Time'];
+  const workingPreferences = ['Remote', 'Hybrid', 'Full Time'];
   // const languages = ['English', 'Hindi', ' German'];
   const languageLevel = ['Native Language', 'Advance', 'Intermediate'];
 

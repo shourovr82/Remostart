@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const TalentProcessLocation = ({ selectedLocations, setSelectedLocations }) => {
   const [disableOption, setDisable] = useState(false);
-  const locationsData = ['India', 'Germany', 'France'];
+  const locationsData = ['Remote', 'Hybrid', 'Full Time'];
   const handleChange = (e) => {
     setSelectedLocations(e.target.value);
   };
