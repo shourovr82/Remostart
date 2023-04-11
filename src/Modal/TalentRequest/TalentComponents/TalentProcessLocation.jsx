@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-const TalentProcessLocation = ({ selectedLocations, setSelectedLocations }) => {
+const TalentProcessLocation = ({ locationPreference, setLocationPreference }) => {
   const [disableOption, setDisable] = useState(false);
   const locationsData = ['Remote', 'Hybrid', 'Full Time'];
   const handleChange = (e) => {
-    setSelectedLocations(e.target.value);
+    setLocationPreference(e.target.value);
   };
   const handleClick = () => {
     setDisable(true);
@@ -32,7 +32,7 @@ const TalentProcessLocation = ({ selectedLocations, setSelectedLocations }) => {
                                               rounded-md "
               >
                 <option value="" hidden>
-                  {selectedLocations || 'Choose'}
+                  {locationPreference || 'Choose'}
                 </option>
                 {locationsData?.map((D) => (
                   <option

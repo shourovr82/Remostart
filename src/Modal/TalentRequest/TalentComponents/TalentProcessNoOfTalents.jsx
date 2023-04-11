@@ -1,7 +1,7 @@
 import React from 'react';
 import RangeInput from './RangeInput';
 
-const TalentProcessNoOfTalents = ({ totalTalentsValue, setTotalTalentsValue }) => {
+const TalentProcessNoOfTalents = ({ requiredTalents, setRequiredTalents }) => {
   console.log('');
 
   return (
@@ -18,10 +18,7 @@ const TalentProcessNoOfTalents = ({ totalTalentsValue, setTotalTalentsValue }) =
       </div>
       {/* select option */}
       <div className="lg:mx-auto mt-1 lg:w-[50%]">
-        <RangeInput
-          setTotalTalentsValue={setTotalTalentsValue}
-          totalTalentsValue={totalTalentsValue}
-        />
+        <RangeInput setRequiredTalents={setRequiredTalents} requiredTalents={requiredTalents} />
       </div>
     </div>
   );

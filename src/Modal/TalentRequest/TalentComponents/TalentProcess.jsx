@@ -19,18 +19,18 @@ const TalentProcess = () => {
   const [tabActive, setTabActive] = useState(1);
   const [selectedDetails, setSelectedDetails] = useState({});
   const [selectedSkills, setSelectedSkills] = useState([]);
-  const [selectedLocations, setSelectedLocations] = useState('');
+  const [locationPreference, setLocationPreference] = useState('');
   const [selectedLanguages, setSelectedLanguages] = useState([]);
   const [selectedPersonalities, setSelectedPersonalities] = useState([]);
-  const [totalTalentsValue, setTotalTalentsValue] = useState(50);
+  const [requiredTalents, setRequiredTalents] = useState(10);
 
   const handleSubmit = () => {
     const allData = {
       selectedSkills,
-      selectedLocations,
+      locationPreference,
       selectedLanguages,
       selectedPersonalities,
-      totalTalentsValue,
+      requiredTalents,
       selectedDetails,
     };
     console.log(allData);
@@ -53,9 +53,9 @@ const TalentProcess = () => {
     }
 
     if (tabActive === 3) {
-      if (!selectedLocations) {
+      if (!locationPreference) {
         toast.error('Locations is required');
-      } else if (selectedLocations) {
+      } else if (locationPreference) {
         setTabActive(4);
       }
     }
@@ -74,7 +74,6 @@ const TalentProcess = () => {
       }
     }
   };
-  console.log(tabActive);
   return (
     <div className="h-[100%] flex  justify-around flex-col">
       <div className="flex items-center  gap-1 lg:gap-3">
@@ -188,8 +187,8 @@ const TalentProcess = () => {
 
       {tabActive === 3 && (
         <TalentProcessLocation
-          selectedLocations={selectedLocations}
-          setSelectedLocations={setSelectedLocations}
+          locationPreference={locationPreference}
+          setLocationPreference={setLocationPreference}
         />
       )}
       {tabActive === 4 && (
@@ -206,8 +205,8 @@ const TalentProcess = () => {
       )}
       {tabActive === 6 && (
         <TalentProcessNoOfTalents
-          totalTalentsValue={totalTalentsValue}
-          setTotalTalentsValue={setTotalTalentsValue}
+          requiredTalents={requiredTalents}
+          setRequiredTalents={setRequiredTalents}
         />
       )}
 
