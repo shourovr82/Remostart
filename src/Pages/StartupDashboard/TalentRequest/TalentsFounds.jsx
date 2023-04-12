@@ -17,10 +17,12 @@ const TalentsFounds = () => (
             </p>
           </div>
           <div className="space-y-1.5">
-            <h5 className="text-sm text-[#acacac]">Total Talents Found</h5>
-            <h2 className="text-2xl 2xl:text-3xl font-bold text-[#333333]">5,423</h2>
+            <h5 className="text-sm text-[#acacac]">Talent Requests</h5>
+            <h2 className="text-2xl 2xl:text-3xl font-bold text-[#333333]">
+              2/2 <span className="text-base">Searches</span>
+            </h2>
             <p className="font-semibold  text-xs 2xl:text-sm">
-              <span className=" font-bold text-[#00ac4f]">16%</span> Accurate Match{' '}
+              <span className=" font-bold text-[#00ac4f]">First 2 Searches Free !! </span>
             </p>
           </div>
         </div>
