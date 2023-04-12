@@ -1,6 +1,7 @@
 import React from 'react';
 import { HiOutlineUsers } from 'react-icons/hi2';
 import { RiUserFollowLine } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 import libraryBookIcon from '../../../Assets/RemoForceDashboard/dashboard/librarybook.svg';
 import TalentsFoundTable from './TalentsFoundTable';
 
@@ -39,17 +40,19 @@ const TalentsFounds = () => (
       </div>
 
       {/* my request */}
-      <div className="col-span-1 flex justify-evenly items-center  py-8 2xl:py-10 rounded-3xl bg-[#d3ffe7] shadow-xl shadow-[#f4f8fc]">
-        <div className=" p-4 2xl:p-6 rounded-full bg-white">
-          <img src={libraryBookIcon} alt="" />
+      <Link to="/talent-request-history">
+        <div className="col-span-1 flex justify-evenly items-center  py-8 2xl:py-10 rounded-3xl bg-[#d3ffe7] shadow-xl shadow-[#f4f8fc]">
+          <div className=" p-4 2xl:p-6 rounded-full bg-white">
+            <img src={libraryBookIcon} alt="" />
+          </div>
+          <div className="space-y-1.5">
+            <h2 className="text-2xl 2xl:text-2xl font-bold text-[#333333]">My Request</h2>
+            <p className="font-semibold text-[#acacac]  text-xs 2xl:text-base">
+              Your Searches & <br /> History
+            </p>
+          </div>
         </div>
-        <div className="space-y-1.5">
-          <h2 className="text-2xl 2xl:text-2xl font-bold text-[#333333]">My Request</h2>
-          <p className="font-semibold text-[#acacac]  text-xs 2xl:text-base">
-            Your Searches & <br /> History
-          </p>
-        </div>
-      </div>
+      </Link>
     </div>
     {/* talents found table */}
     <div>

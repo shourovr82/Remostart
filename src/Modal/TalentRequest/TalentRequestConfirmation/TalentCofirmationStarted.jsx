@@ -3,7 +3,7 @@ import React from 'react';
 const TalentConfirmationStarted = () => {
   console.log('object');
   return (
-    <div className="mt-20 h-[40vh] flex flex-col justify-between  pl-10">
+    <div className=" h-[40vh] flex flex-col justify-between  pl-10">
       <div>
         <h1 className="text-3xl font-bold">
           You have currently selected 17 Talent’s for <br /> interview ! Are you sure you want to{' '}

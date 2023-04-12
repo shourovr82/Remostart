@@ -1,13 +1,12 @@
 /* eslint-disable react/jsx-no-bind */
 import { Dialog, Transition } from '@headlessui/react';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { CgClose } from 'react-icons/cg';
 import modalSvg1 from '../../../Assets/Dashboard/talentRequest/talentRequestModalSvg1.svg';
 import modalSvg2 from '../../../Assets/Dashboard/talentRequest/talentRequestModalSvg2.svg';
 import TalentConfirmationProcess from './TalentConfirmationProcess';
 
 const TalentRequestConfirmationModal = ({ setIsOpen, isOpen }) => {
-  const [getStartedOpen, setGetStartedOpen] = useState(true);
   function closeModal() {
     setIsOpen(false);
   }
@@ -38,7 +37,7 @@ const TalentRequestConfirmationModal = ({ setIsOpen, isOpen }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className=" w-full lg:w-[90%] h-[85vh] transform overflow-hidden rounded-2xl bg-[#f0f9ff] p-3 lg:p-6 text-left align-middle shadow-xl transition-all relative">
+              <Dialog.Panel className=" w-full lg:w-[90%] h-[85vh]  transform overflow-hidden rounded-2xl bg-[#f0f9ff] p-3 lg:p-6 text-left align-middle shadow-xl transition-all relative">
                 {/* cross button for close modal */}
                 <div className="absolute right-4 top-4">
                   <button
@@ -56,7 +55,7 @@ const TalentRequestConfirmationModal = ({ setIsOpen, isOpen }) => {
                 </div>
                 {/* modal content */}
 
-                <TalentConfirmationProcess />
+                <TalentConfirmationProcess setIsOpen={setIsOpen} />
               </Dialog.Panel>
             </Transition.Child>
           </div>
