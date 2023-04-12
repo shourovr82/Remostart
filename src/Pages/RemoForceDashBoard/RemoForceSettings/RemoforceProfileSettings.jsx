@@ -2,7 +2,7 @@
 /* eslint-disable prefer-destructuring */
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { FiUpload } from 'react-icons/fi';
@@ -14,11 +14,35 @@ import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 import { toast } from 'react-toastify';
 import profile from '../../../Assets/RemoForceDashboard/ProfileSettings/personalprofile.png';
 import RemoForceSettingsItems from '../../../Routes/Roots/RemoforceSettingItems';
 
 import AuthContext from '../../../Context/AuthContext';
+
+// style for select
+const customStyles = {
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected ? '#d6edf7' : 'white',
+    color: state.isSelected ? 'white' : 'black',
+    outline: 'none !important',
+    boxShadow: 'rgba(192, 37, 37, 0.24) 0px 3px 8px;',
+    ':hover': {
+      backgroundColor: 'lightblue',
+      borderColor: '#cccccc',
+    },
+  }),
+  control: (base, state) => ({
+    ...base,
+    border: '1px solid #e5e7eb !important',
+    ':hover': {
+      outline: 'none !important',
+      border: 'none',
+    },
+  }),
+};
 
 function RemoforceProfileSettings() {
   const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
@@ -105,7 +129,10 @@ function RemoforceProfileSettings() {
   const [url, setUrl] = useState('');
   const [selectUrl, setSelectUrl] = useState();
   const [displayUrl, setDisplayUrl] = useState([]);
-
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [jData, setJData] = useState({});
+  const [selectedCounty, setSelectedCountry] = useState('');
+  //
   const handleLink = (e) => {
     setSelectUrl(Array.from(e.target.selectedOptions).map((option) => option.value));
     setSocialMedia(e.target.selectedOptions[0].innerHTML);
@@ -180,6 +207,23 @@ function RemoforceProfileSettings() {
         setLoading(false);
       });
   };
+
+  const handleSelectChange = (selectedOptions) => {
+    setSelectedOption(selectedOptions);
+    const selectedValue = selectedOptions?.value;
+    setSelectedCountry(selectedValue);
+    console.log(selectedCounty);
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('/data.json');
+      const jsonData = await response.json();
+      setJData(jsonData);
+    }
+    fetchData();
+  }, []);
+
   return (
     <RemoForceSettingsItems>
       <section className="w-full lg:mt-4 h-full bg-white">
@@ -197,36 +241,7 @@ function RemoforceProfileSettings() {
             <div className="flex w-full items-center justify-between p-0 lg:p-4">
               <div className="w-full p-2 mb-3">
                 <span className="text-base font-medium my-4">Profile Photo</span>
-                {/* <div className="flex justify-start items-center space-x-4">
-                                    <span className="p-4 rounded-full border inline-block bg-">
-                                        <RiUser3Line className="text-4xl text-[#6B7280] " />
-                                    </span>
-                                    <div>
-                            
-                                        <label className="block">
-                                            <button
-                                                type="button"
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    fileInput.current.click();
-                                                }}
-                                                className="sr-only"
-                                            >
-                                                Upload Picture
-                                            </button>
-                                            <input
-                                                type="file"
-                                                className="block w-full text-sm text-slate-500
-                     file:mr-4 file:py-2 file:px-4
-                     file:rounded-full file:border-0
-                     file:text-sm file:font-semibold
-                     file:bg-violet-50 file:text-violet-700
-                     hover:file:bg-violet-100
-                      "
-                                            />
-                                        </label>
-                                    </div>
-                                </div> */}
+
                 <div className="lg:flex justify-start items-center lg:space-x-4">
                   <span className="p-4 rounded-full border inline-block bg-[#6B7280]">
                     <RiUser3Line className="text-4xl text-white" />
@@ -315,64 +330,8 @@ function RemoforceProfileSettings() {
                   </div>
                 </div>
               </div>
-              <div className="hidden lg:block w-[45%] ">
-                {/* <Dropzone
-                  onDrop={(acceptedFiles) => {
-                    setFile(acceptedFiles)
-                    setProgressBar(acceptedFiles)
-                    setError('')
-                  }}
-                >
-                  {({ getRootProps, getInputProps }) => (
-                    <section className="container">
-                      <div {...getRootProps({ className: 'dropzone' })}>
-                        <input {...getInputProps()} />
-                        <section
-                          htmlFor="dropzone-file"
-                          className="mx-auto justify-center cursor-pointer lg:mt-0 mt-10 flex flex-col items-center rounded-xl h-[410px] border-2 border-dashed border-blue-400 bg-white text-center"
-                        >
-                          {!files?.[0]?.size ? (
-                            <>
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-10 w-10 text-blue-500"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                                />
-                              </svg>
-
-                              <h2 className="mt-4 text-xl font-medium tracking-wide">
-                                Drop your files here or{' '}
-                                <span className="text-blue-600 font-medium">
-                                  Browse
-                                </span>
-                              </h2>
-                              <span className="text-xs font-medium">
-                                Maximum size: 50MB
-                              </span>
-                            </>
-                          ) : (
-                            <div>
-                              <p className="text-2xl text-blue-500">
-                                {files?.[0]?.path}
-                              </p>
-                              <p>size: {files?.[0]?.size}</p>
-                            </div>
-                          )}
-                        </section>
-                      </div>
-                    </section>
-                  )}
-                </Dropzone> */}
-              </div>
             </div>
+            {/* age birth year */}
             <div className="flex justify-between   items-center flex-wrap lg:flex-nowrap mt-2 space-y-2 p-2 lg:p-6">
               <div className="w-[45%] lg:w-[20%] space-y-1">
                 <label htmlFor="age" className="text-sm font-medium">
@@ -444,6 +403,28 @@ function RemoforceProfileSettings() {
                     {errors.date && <span>Please Input Birth Date</span>}
                   </span>
                 </p>
+              </div>
+            </div>
+            {/* country ---------------------- */}
+
+            <div className=" flex justify-between   items-center flex-wrap lg:flex-nowrap mt-2 space-y-2 p-2 lg:p-6">
+              <div>
+                <label htmlFor="age" className="text-sm font-medium">
+                  Country
+                </label>
+                <Select
+                  options={jData?.countries}
+                  styles={customStyles}
+                  value={selectedOption}
+                  onChange={handleSelectChange}
+                  placeholder="Choose Country"
+                  className="mt-1 w-full lg:w-[280px] "
+                  classNamePrefix="select2-selection"
+                  components={{
+                    DropdownIndicator: () => null,
+                    IndicatorSeparator: () => null,
+                  }}
+                />
               </div>
             </div>
           </div>
