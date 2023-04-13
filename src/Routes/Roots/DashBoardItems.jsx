@@ -46,7 +46,11 @@ const DashBoardItems = ({ children }) => {
           <li className="space-x-1 font-semibold text-xs sm:text-sm">
             <NavLink
               to="/dashboard/closed-jobs"
-              className={`border-b-[3px] flex items-center gap-2 px-3 pb-3 font-medium `}
+              className={({ isActive }) =>
+                `border-b-[3px] flex items-center gap-2 px-3 pb-3 font-medium  ${
+                  isActive && categoryActive
+                }`
+              }
             >
               <AiOutlineCloseSquare className="xs:hidden inline-block text-xs md:text-xl mb-px" />{' '}
               Closed jobs
@@ -55,7 +59,11 @@ const DashBoardItems = ({ children }) => {
           <li className="space-x-1 font-semibold text-xs sm:text-sm">
             <NavLink
               to="/dashboard/users-shadowing"
-              className={`border-b-[3px] flex items-center gap-2 px-3 pb-3 font-medium  `}
+              className={({ isActive }) =>
+                `border-b-[3px] flex items-center gap-2 px-3 pb-3 font-medium  ${
+                  isActive && categoryActive
+                }`
+              }
             >
               <RxShadow className="xs:hidden inline-block text-xs md:text-xl mb-px" /> Shadowing
             </NavLink>
