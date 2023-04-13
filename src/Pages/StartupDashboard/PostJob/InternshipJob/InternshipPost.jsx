@@ -5,7 +5,6 @@ import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import currencyIcon from '../../../../Assets/Dashboard/currency.png';
 import AuthContext from '../../../../Context/AuthContext';
 
 import { getStoredJob, setJob } from '../../../../Hooks/useLocalStorage';
@@ -89,7 +88,7 @@ const InternshipPost = () => {
     setJob(jobName, internshipData);
     navigate('/dashboard/post-job/internship/review');
   };
-
+  const [experienceYear, setExperienceYear] = useState('');
   return (
     <div>
       <div className="flex gap-4 items-center">
@@ -169,6 +168,8 @@ const InternshipPost = () => {
               {...register('experience', {
                 required: true,
               })}
+              value={experienceYear}
+              onChange={(e) => setExperienceYear(e.target.value)}
               className="select  mt-1 w-full block font-semibold border 
                        border-gray-400 rounded-md "
             >
@@ -176,7 +177,9 @@ const InternshipPost = () => {
                 {storedData?.experience || 'select a year'}
               </option>
               {experience.map((D) => (
-                <option key={Math.random()}>{D}</option>
+                <option key={Math.random()} value={D}>
+                  {D}
+                </option>
               ))}
             </select>
             <p className="pt-2">

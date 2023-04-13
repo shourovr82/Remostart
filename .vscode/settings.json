@@ -29,5 +29,8 @@
     "javascript": "javascriptreact"
   },
   "css.validate": false,
-  "tailwindCSS.emmetCompletions": true
+  "tailwindCSS.emmetCompletions": true,
+  "cSpell.words": [
+    "Remo"
+  ]
 }

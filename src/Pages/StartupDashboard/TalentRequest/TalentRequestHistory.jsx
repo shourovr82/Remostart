@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { IoChevronBackSharp } from 'react-icons/io5';
 import { RiHandCoinLine } from 'react-icons/ri';
@@ -27,6 +28,7 @@ const TalentRequestHistory = () => {
           per conubia nostra, per inceptos himenaeos.
         </h2>
       </div>
+
       {/* talent request history  */}
       <TalentRequestsHistories />
     </div>

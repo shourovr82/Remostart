@@ -54,9 +54,7 @@ const StartupInternshipJobPost = () => {
     mode: 'onChange',
   });
 
-  const PostData = (d) => {
-
-  };
+  const PostData = (d) => {};
 
   return (
     <div>
@@ -185,7 +183,12 @@ const StartupInternshipJobPost = () => {
                     Domains
                   </option>
                   {data.map((D, i) => (
-                    <option onClick={handleChange} disabled={disableOption} value={D.label} key={Math.random()}>
+                    <option
+                      onClick={handleChange}
+                      disabled={disableOption}
+                      value={D.label}
+                      key={Math.random()}
+                    >
                       {D.label}
                     </option>
                   ))}
