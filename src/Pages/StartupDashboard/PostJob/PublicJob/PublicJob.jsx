@@ -1,8 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import React, { useContext, useState } from 'react';
-
+import DatePicker from 'react-datepicker';
 import { useForm } from 'react-hook-form';
 import { BiChevronLeft, BiPlus } from 'react-icons/bi';
+import { BsCalendarRange } from 'react-icons/bs';
 import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -25,6 +26,7 @@ const PublicJob = () => {
   // handle
   const [tag, setTag] = useState('');
   const [skills, setSkills] = useState(storedJob?.skills || []);
+  const [applyBeforeDate, setApplyBeforeDate] = useState(new Date());
 
   const {
     register,
@@ -47,6 +49,7 @@ const PublicJob = () => {
   const onSubmit = (data) => {
     const jobData = {
       ...data,
+      applyBefore: applyBeforeDate?.toLocaleDateString(),
       email: user?.user?.email || serviceUser?.email,
       startupsProfilePhoto: user?.user?.profilePhoto || '',
       startupsName: user?.user?.fullName || serviceUser?.fullName,
@@ -58,28 +61,6 @@ const PublicJob = () => {
     setJob(jobName, jobData);
     navigate('/dashboard/post-job/public-job/review');
   };
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
-
-  const customStyles = (color = '#f4f') => ({
-    alignItems: 'center',
-    display: 'flex',
-    ':before': {
-      backgroundColor: color,
-      borderRadius: 10,
-      content: '" "',
-      display: 'grid',
-      marginRight: 10,
-      height: 10,
-      width: '100%',
-      border: '2px solid red',
-    },
-  });
-
-  const hanlleChangeSelect = (e) => {};
 
   console.log(user);
 
@@ -201,15 +182,6 @@ const PublicJob = () => {
             <div className="space-y-1 text-sm w-full  lg:w-[300px]">
               <label className="block font-semibold text-gray-900">Skills Required</label>
               <div className="border lg:w-[50rm]  pr-2 rounded-md  border-[#BCBCBC]  text-gray-900 justify-between flex items-center">
-                {/* <CreatableSelect
-                                    onChange={hanlleChangeSelect}
-                                    isMulti
-                                    name="color"
-                                    styles={customStyles}
-                                    placeholder="Select Skills"
-                                    options={options}
-                                /> */}
-
                 <input
                   id="skills"
                   type="text"
@@ -313,8 +285,25 @@ const PublicJob = () => {
         {/* Input Apply Before  */}
 
         <div className="space-y-1 mt-5 text-sm">
-          <label className="block font-semibold text-gray-900">Apply Before</label>
-          <input
+          <label htmlFor="applyBefore" className="block font-semibold text-gray-900">
+            Apply Before
+          </label>
+
+          <div className="lg:w-[362px] w-full px-4 py-3 rounded-md border  border-[#E5E7EB] flex items-center text-gray-900">
+            <div>
+              <BsCalendarRange />
+            </div>
+
+            <DatePicker
+              className="border-transparent border focus:ring-transparent"
+              showIcon
+              id="applyBefore"
+              selected={applyBeforeDate}
+              onChange={(date) => setApplyBeforeDate(date)}
+            />
+          </div>
+
+          {/* <input
             type="date"
             name="applyBefore"
             {...register('applyBefore', {
@@ -324,7 +313,7 @@ const PublicJob = () => {
             id="applyBefore"
             placeholder="Eg. remostarts"
             className="lg:w-[330px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
-          />
+          /> */}
           <p className="pt-2">
             {errors.applyBefore && (
               <span className="text-red-400 ">
