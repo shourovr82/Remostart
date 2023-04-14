@@ -4,12 +4,13 @@ import React from 'react';
 import { HiOutlineUsers } from 'react-icons/hi2';
 import { RiUserFollowLine } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import libraryBookIcon from '../../../Assets/RemoForceDashboard/dashboard/librarybook.svg';
 import TalentsFoundTable from './TalentsFoundTable';
 
 const TalentsFounds = () => {
   const tier = 'tierFree';
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const { data: myRequests, refetch } = useQuery(['myRequests'], () =>
     axios
@@ -19,6 +20,10 @@ const TalentsFounds = () => {
       .then((res) => res.data)
   );
   console.log(myRequests);
+  const handleMyRequest = () => {
+    navigate('/talent-request-history', { state: { data: myRequests?.myRequests } });
+  };
+
   return (
     <section className="mt-20 max-md:p-2 ">
       {/* total talents found heading card */}
@@ -33,7 +38,8 @@ const TalentsFounds = () => {
             <div className="space-y-1.5">
               <h5 className="text-sm text-[#acacac]">Talent Requests</h5>
               <h2 className="text-2xl 2xl:text-3xl font-bold text-[#333333]">
-                2/2 <span className="text-base">Searches</span>
+                {myRequests?.myRequests?.searchHistory?.length || 0} /2
+                <span className="text-base"> Searches</span>
               </h2>
               <p className="font-semibold  text-xs 2xl:text-sm">
                 <span className=" font-bold text-[#00ac4f]">First 2 Searches Free !! </span>
@@ -49,14 +55,16 @@ const TalentsFounds = () => {
             </div>
             <div className="space-y-1.5">
               <h5 className="text-sm text-[#acacac]">Skills Matched</h5>
-              <h2 className="text-2xl 2xl:text-3xl font-bold text-[#333333]">17+</h2>
+              <h2 className="text-2xl 2xl:text-3xl font-bold text-[#333333]">
+                {myRequests?.totalMatch}+
+              </h2>
               <p className="font-semibold text-sm">Overall</p>
             </div>
           </div>
         </div>
 
         {/* my request */}
-        <Link to="/talent-request-history">
+        <button type="button" onClick={handleMyRequest}>
           <div className="col-span-1 flex justify-evenly items-center  py-8 2xl:py-10 rounded-3xl bg-[#d3ffe7] shadow-xl shadow-[#f4f8fc]">
             <div className=" p-4 2xl:p-6 rounded-full bg-white">
               <img src={libraryBookIcon} alt="" />
@@ -68,7 +76,7 @@ const TalentsFounds = () => {
               </p>
             </div>
           </div>
-        </Link>
+        </button>
       </div>
       {/* talents found table */}
       <div>

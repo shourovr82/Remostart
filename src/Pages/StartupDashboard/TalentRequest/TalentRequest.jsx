@@ -14,7 +14,6 @@ const TalentRequest = () => {
 
   useEffect(() => {
     console.log('hello');
-    
   }, [refresh]);
 
   return (
@@ -77,7 +76,12 @@ const TalentRequest = () => {
         </div>
       </section>
       {/* talent Modal */}
-      <TalentRequestModal refresh={refresh} setRefresh={setRefresh} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <TalentRequestModal
+        refresh={refresh}
+        setRefresh={setRefresh}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
     </>
   );
 };

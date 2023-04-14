@@ -1,15 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { HiChevronUpDown } from 'react-icons/hi2';
 import { useSelector } from 'react-redux';
+import AuthContext from '../../../Context/AuthContext';
 import TalentRequestConfirmationModal from '../../../Modal/TalentRequest/TalentRequestConfirmation/TalentRequestConfirmationModal';
 
 const TalentsFoundTable = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // const { searchResults } = useContext(AuthContext);
-  // console.log(searchResults);
+  const { searchResults } = useContext(AuthContext);
+
+  console.log('searchResults', searchResults);
   const tier = 'tierFree';
   const { user } = useSelector((state) => state.auth);
 
@@ -20,8 +22,16 @@ const TalentsFoundTable = () => {
       )
       .then((res) => res.data)
   );
+  const [results, setResults] = useState([]);
   console.log(lastSearchResult.requiredTalentsInHistory);
-
+  console.log(results);
+  useEffect(() => {
+    if (searchResults?.length) {
+      setResults(searchResults);
+    } else {
+      setResults(lastSearchResult?.requiredTalentsInHistory);
+    }
+  }, [searchResults, lastSearchResult]);
   return (
     <>
       <section className="mt-10">
@@ -77,7 +87,7 @@ const TalentsFoundTable = () => {
             </div>
             {/* tables started ========================================================= */}
             <div className=" py-4 overflow-x-auto">
-              <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+              <div className="inline-block min-w-full  rounded-lg overflow-hidden">
                 <table className="min-w-full  leading-normal">
                   <thead>
                     <tr>
@@ -124,34 +134,45 @@ const TalentsFoundTable = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="hover:bg-[#e3d5ff]">
-                      <td className="px-5 py-5 border-b border-gray-200 text-sm">
-                        <div className="">
-                          <p className="text-gray-900 font-semibold whitespace-no-wrap">
-                            Vera Carpenter
-                          </p>
-                        </div>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 text-sm">
-                        <p className="text-gray-900 font-semibold whitespace-no-wrap">Souvenir</p>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 text-sm">
-                        <input id="select" type="checkbox" className="checkbox focus:ring-0" />
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200  text-sm">
-                        <p className="text-gray-900 font-semibold whitespace-no-wrap">
-                          United States
-                        </p>
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200  text-sm">
-                        <div
-                          className="radial-progress ml-3  text-[#00c42b]"
-                          style={{ '--value': 85, '--size': '2.5rem' }}
-                        >
-                          85%
-                        </div>
-                      </td>
-                    </tr>
+                    {results?.length &&
+                      results?.map((result) => (
+                        <tr className="hover:bg-[#e3d5ff]">
+                          <td className="px-5 py-5 border-b border-gray-200 text-sm">
+                            <div className="">
+                              <p className="text-gray-900 font-semibold whitespace-no-wrap">
+                                {result?.fullName}
+                              </p>
+                            </div>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 text-sm">
+                            <p className="text-gray-900 font-semibold whitespace-no-wrap">
+                              {result?.skillLevel}
+                            </p>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 text-sm">
+                            <input id="select" type="checkbox" className="checkbox focus:ring-0" />
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200  text-sm">
+                            <p className="text-gray-900 font-semibold whitespace-no-wrap">
+                              {result?.country}
+                            </p>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200  text-sm">
+                            <div
+                              className={`radial-progress ml-3  ${
+                                result?.scorePercentage >= 80 && 'text-[#00c42b]'
+                              }
+                               ${result?.scorePercentage >= 40 && 'text-[#19a5ff]'}
+${result?.scorePercentage < 40 && 'text-[#ff9900]'}
+${result?.scorePercentage <= 20 && 'text-[#13d1ff]'}
+                               `}
+                              style={{ '--value': result?.scorePercentage, '--size': '2.5rem' }}
+                            >
+                              {result?.scorePercentage}%
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
                 {/* <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
