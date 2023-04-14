@@ -76,7 +76,7 @@ const RemoForceDashboard = () => (
             <h4 className="text-black text-sm font-bold w-[100%]">
               {`  Let's Start Your Journey Now!`}
             </h4>
-            <p className="w-[80%] text-xs text-[#CCCCCC] mt-1">
+            <p className="w-[80%] text-xs text-[#999999] mt-1">
               <span className="font-semibold">(Get Started)</span> Scroll down the page for more
               recommendations. Below you will find a variety of products from all categories on
               Steam that may be of interest to you.
@@ -84,7 +84,7 @@ const RemoForceDashboard = () => (
             </p>
           </div>
           <div className=" w-full flex justify-end">
-            <button type="button" className="w-[40%] text-xs  text-[#CCCCCC] m-4 flex no-wrap">
+            <button type="button" className="w-[40%] text-xs  text-[#999999] m-4 flex no-wrap">
               Know More <span className="w-[20px]">&rarr;</span>
             </button>
           </div>
@@ -99,7 +99,7 @@ const RemoForceDashboard = () => (
             <h4 className="text-black text-sm font-bold w-[100%]">
               {`  Let's Start Your Journey Now!`}
             </h4>
-            <p className="w-[80%] text-xs text-[#CCCCCC] mt-1">
+            <p className="w-[80%] text-xs text-[#999999] mt-1">
               <span className="font-semibold">(Get Started)</span> Scroll down the page for more
               recommendations. Below you will find a variety of products from all categories on
               Steam that may be of interest to you.
@@ -107,7 +107,7 @@ const RemoForceDashboard = () => (
             </p>
           </div>
           <div className=" w-full flex justify-end">
-            <button type="button" className="w-[40%] text-xs  text-[#CCCCCC] m-4 flex no-wrap">
+            <button type="button" className="w-[40%] text-xs  text-[#999999] m-4 flex no-wrap">
               Know More <span className="w-[20px]">&rarr;</span>
             </button>
           </div>
