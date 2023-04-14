@@ -153,7 +153,6 @@ const router = createBrowserRouter(
 
       <Route path="/remoforce" element={<RemoForceHome />} />
 
-      <Route path="/remoforce/shadowing" element={<RemoForceShadowing />} />
       {/* Remoforce Dashboard */}
       <Route
         path="/remoforce-dashboard"
@@ -176,7 +175,8 @@ const router = createBrowserRouter(
         {/* Remoforce Dashboard settings */}
         <Route path="/remoforce-dashboard/setting" element={<RemoForceMyJob />} />
         {/* Remoforce Dashboard shadowing */}
-        <Route path="/remoforce-dashboard/shadowing" element={<RemoForceMyJob />} />
+        <Route path="/remoforce-dashboard/shadowing" element={<RemoForceShadowing />} />
+        {/* <Route path="/remoforce/shadowing" element={<RemoForceShadowing />} /> */}
         {/* Remoforce Dashboard job pages */}
         <Route path="/remoforce-dashboard/all-jobs" element={<RemoForceDashBoard />} />
         <Route path="/remoforce-dashboard/shadowing-jobs" element={<RemoforceShadowing />} />

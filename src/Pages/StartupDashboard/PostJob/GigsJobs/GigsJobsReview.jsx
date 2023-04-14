@@ -61,7 +61,7 @@ const GigsJobsReview = () => {
           <div className="font-bold text-[14px] mt-10  lg:mt-0 flex flex-col">
             <h3>Gig</h3>
             <div className="flex text-xs text-[#999999] md:hidden">
-              <p>Kickstart.</p>
+              <p>Posted</p>
               <p>2 Day ago</p>
             </div>
           </div>
@@ -70,7 +70,7 @@ const GigsJobsReview = () => {
 
       <div className=" lg:mt-[125px] ml-5">
         <div className="md:flex gap-4 text-[#999999] font-semibold mt-[8px] hidden">
-          <p>Kickstart.</p>
+          <p>Posted</p>
           <p>2 Day ago</p>
         </div>
         {/* Paragraph   */}

@@ -36,9 +36,7 @@ const PublicJobReview = () => {
       {/* Banner Section start */}
       <div className="flex publicJobReview justify-between absolute w-full md:w-[85%] lg:w-[65%] max-w-6xl">
         <h1 className="text-2xl md:text-3xl lg:text-5xl pt-2 md:pt-[15px] md:pl-7 pl-2 font-normal text-white">
-
           {storedJob.title}
-
         </h1>
         <div className="flex justify-end items-end mt-[34px] gap-[10px] my-6 ">
           <a href="share">
@@ -58,17 +56,16 @@ const PublicJobReview = () => {
             <img src={internshipLogo} alt="" />
           </div>
           <div className="font-bold text-[14px] mt-12 lg:mt-0 flex flex-col">
-
             <h3>{storedJob.categoryName}</h3>
 
             <div className="flex text-xs text-[#999999] md:hidden">
-              <p>Kickstart.</p>
+              <p>Posted</p>
               <p>2 Day ago</p>
             </div>
           </div>
         </div>
         <div className="md:flex gap-4 text-[#999999] font-semibold mt-[8px] hidden">
-          <p>Kickstart.</p>
+          <p>Posted</p>
           <p>2 Day ago</p>
         </div>
       </div>
@@ -108,9 +105,7 @@ const PublicJobReview = () => {
             <h1 className="font-semibold text-[16px] mt-3 mb-3">Salary Offered:</h1>
             <div className="">
               <div className="bg-[#F0F9FF] mt-3 w-[122px] flex items-center gap-3 rounded-md ">
-
                 <p className="text-sm pl-[25px] py-[8px] ">{storedJob?.salary} </p>
-
               </div>
             </div>
           </div>
@@ -123,7 +118,6 @@ const PublicJobReview = () => {
                 </p>
 
                 <p className="pr-[15px] ">{storedJob?.location}</p>
-
               </div>
             </div>
           </div>
@@ -178,9 +172,7 @@ const PublicJobReview = () => {
 
       {publicJob && <FinalConfirmation storedJob={storedJob} setConfirmPost={setPublicJob} />}
 
-
       {review !== 'review' && data?.applicationRequest?.length > 0 && (
-
         <ApplicationRequests jobData={data} />
       )}
     </div>

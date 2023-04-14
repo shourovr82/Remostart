@@ -9,7 +9,6 @@ import { GrDocumentUser } from 'react-icons/gr';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import currency from '../../../Assets/Dashboard/currency.png';
-import cardLogo from '../../../Assets/Dashboard/tech_crunch.png';
 import AuthContext from '../../../Context/AuthContext';
 import DashBoardItems from '../../../Routes/Roots/DashBoardItems';
 import NoJob from './NoJob';
@@ -41,7 +40,6 @@ const ActiveJobs = () => {
     refetch();
   };
 
-
   const handleDelete = (id) => {
     axios
       .delete(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${id}`)
@@ -57,7 +55,6 @@ const ActiveJobs = () => {
 
   // /dashboard/post-job/public-job/:id
   const viewHandler = (item) => {
-
     const path = item?.categoryName?.toLowerCase().replace(/\s+/g, '-');
 
     path === 'public-job' && navigate(`/dashboard/public/${item.jobId}`, { state: { data: item } });
@@ -88,17 +85,17 @@ const ActiveJobs = () => {
                 <div className="flex justify-between">
                   <div className="flex flex-col">
                     <div className="flex space-x-2">
-                    {item?.startupsProfilePhoto ? (
-                      <img
-                        className="w-8 h-8 rounded-full"
-                        src={item.startupsProfilePhoto}
-                        alt=""
-                      />
-                    ) : (
-                      <p className="w-8 h-8 grid place-items-center  text-white rounded-full bg-black">
-                        {item?.startupsName?.charAt(0).toUpperCase()}
-                      </p>
-                    )}
+                      {item?.startupsProfilePhoto ? (
+                        <img
+                          className="w-8 h-8 rounded-full"
+                          src={item.startupsProfilePhoto}
+                          alt=""
+                        />
+                      ) : (
+                        <p className="w-8 h-8 grid place-items-center  text-white rounded-full bg-black">
+                          {item?.startupsName?.charAt(0).toUpperCase()}
+                        </p>
+                      )}
                       <h5 className="font-semibold text-lg">{item.title}</h5>
                     </div>
                   </div>
@@ -155,7 +152,7 @@ const ActiveJobs = () => {
                 </div>
 
                 <div>
-                <p className="font-normal text-sm">
+                  <p className="font-normal text-sm">
                     {item.description ? item?.description?.slice(0, 100) : item?.description}...
                   </p>
                 </div>

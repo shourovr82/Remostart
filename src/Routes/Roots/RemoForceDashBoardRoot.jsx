@@ -50,7 +50,7 @@ const RemoForceDashboardRoot = () => {
           <span className="font-normal text-sm leading-4 text-[#00c42b]">Get Verified</span>
         </NavLink>
         <NavLink
-          to="/remoforce/shadowing"
+          to="/remoforce-dashboard/shadowing"
           className={({ isActive }) => (isActive ? active : notActive)}
         >
           <TbUsers className="text-xl text-[#ff9900]" />
