@@ -12,8 +12,38 @@ const UserContext = ({ children }) => {
 
   const [loading, setLoading] = useState(false);
   const [serviceUser, setServiceUser] = useState(null);
+  const [searchResults, setSearchResults] = useState([])
 
+const handleSearch = async(allData,  setIsOpen) => {
+  await axios
+  .post(`${process.env.REACT_APP_URL_STARTUP}/api/talent/talent-request`, allData)
+  .then((res) => {
+    console.log(res);
+    if (res.status === 200) {
+      if (res.data.length) {
+        setSearchResults(res.data)
+        setIsOpen(false);
+     
+      }
+      if (!res.data.length) {
+        toast.error('no result found. search again');
+      }
+    } else {
+      toast.error('There is an error');
+    }
 
+    setLoading(false);
+
+    // if (res.data._id) {
+    //   toast.success('Contracts job data edited successfully');
+
+    // }
+  })
+  .catch((err) => {
+    setLoading(false);
+  });
+
+    };
 
 
 
@@ -59,6 +89,8 @@ const UserContext = ({ children }) => {
       value={{
         loading,
         serviceUser,
+        handleSearch,
+        searchResults
       
   
       }}

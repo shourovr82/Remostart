@@ -33,6 +33,8 @@ const TalentProcess = ({ setIsOpen, setRefresh,refresh }) => {
   const [selectedLanguages, setSelectedLanguages] = useState([]);
   const [selectedPersonalities, setSelectedPersonalities] = useState([]);
   const [requiredTalents, setRequiredTalents] = useState(10);
+  const {handleSearch} = useContext(AuthContext);
+  
 
   const navigate = useNavigate();
 
@@ -50,33 +52,7 @@ const TalentProcess = ({ setIsOpen, setRefresh,refresh }) => {
       requiredTalents,
       details: selectedDetails,
     };
-    await axios
-      .post(`${process.env.REACT_APP_URL_STARTUP}/api/talent/talent-request`, allData)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          if (res.data.length) {
-            navigate('/dashboard/talent-request')
-            setIsOpen(false);
-            setRefresh(!refresh)
-          }
-          if (!res.data.length) {
-            toast.error('no result found. search again');
-          }
-        } else {
-          toast.error('There is an error');
-        }
-
-        setLoading(false);
-
-        // if (res.data._id) {
-        //   toast.success('Contracts job data edited successfully');
-
-        // }
-      })
-      .catch((err) => {
-        setLoading(false);
-      });
+    handleSearch(allData, setIsOpen)
   };
 
   const handleTabActive = () => {
