@@ -19,7 +19,6 @@ const TalentsFounds = () => {
       )
       .then((res) => res.data)
   );
-  console.log(myRequests);
   const handleMyRequest = () => {
     navigate('/talent-request-history', { state: { data: myRequests?.myRequests } });
   };
