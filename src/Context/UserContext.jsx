@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import loadingAnimation from '../Assets/Images/LoadingAnimation.svg';
 import AuthContext from './AuthContext';
 
@@ -10,6 +12,11 @@ const UserContext = ({ children }) => {
 
   const [loading, setLoading] = useState(false);
   const [serviceUser, setServiceUser] = useState(null);
+
+
+
+
+
 
   useEffect(() => {
     setLoading(true);
@@ -52,6 +59,8 @@ const UserContext = ({ children }) => {
       value={{
         loading,
         serviceUser,
+      
+  
       }}
     >
       {children}

@@ -1,10 +1,26 @@
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { HiChevronUpDown } from 'react-icons/hi2';
+import { useSelector } from 'react-redux';
 import TalentRequestConfirmationModal from '../../../Modal/TalentRequest/TalentRequestConfirmation/TalentRequestConfirmationModal';
 
 const TalentsFoundTable = () => {
   const [isOpen, setIsOpen] = useState(false);
+  // const { searchResults } = useContext(AuthContext);
+  // console.log(searchResults);
+  const tier = 'tierFree';
+  const { user } = useSelector((state) => state.auth);
+
+  const { data: lastSearchResult, refetch } = useQuery(['lastSearchResult'], () =>
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_STARTUP}/api/talent/last-results?email=${user?.user.email}&tier=${tier}`
+      )
+      .then((res) => res.data)
+  );
+  console.log(lastSearchResult.requiredTalentsInHistory);
 
   return (
     <>

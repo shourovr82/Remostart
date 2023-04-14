@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { BsEmojiWink } from 'react-icons/bs';
 import { FiEdit3 } from 'react-icons/fi';
@@ -6,6 +7,8 @@ import { HiLanguage } from 'react-icons/hi2';
 import { IoLocationOutline } from 'react-icons/io5';
 import { RiUser6Line } from 'react-icons/ri';
 import { TbEditCircle } from 'react-icons/tb';
+import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import tabBlue from '../../../Assets/Dashboard/talentRequest/tabBlue.svg';
 import tabGreen from '../../../Assets/Dashboard/talentRequest/tabGreen.svg';
 import TalentProcessLanguage from './TalentProcessLanguage';
@@ -15,7 +18,14 @@ import TalentProcessPersonality from './TalentProcessPersonality';
 import TalentProcessSkills from './TalentProcessSkills';
 import TalentProcessSkillsAndDescription from './TalentProcessTitlesAndDescription';
 
-const TalentProcess = () => {
+import AuthContext from '../../../Context/AuthContext';
+
+
+const TalentProcess = ({ setIsOpen, setRefresh,refresh }) => {
+  const [loading, setLoading] = useState(false);
+
+  const location = useLocation();
+  const { user } = useSelector((state) => state.auth);
   const [tabActive, setTabActive] = useState(1);
   const [selectedDetails, setSelectedDetails] = useState({});
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -24,16 +34,49 @@ const TalentProcess = () => {
   const [selectedPersonalities, setSelectedPersonalities] = useState([]);
   const [requiredTalents, setRequiredTalents] = useState(10);
 
-  const handleSubmit = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+   
+    setLoading(true);
     const allData = {
+      email: user?.user.email,
+      tier: 'Free',
+      transactionId: null,
       selectedSkills,
       locationPreference,
       selectedLanguages,
-      selectedPersonalities,
+      softSkills: selectedPersonalities,
       requiredTalents,
-      selectedDetails,
+      details: selectedDetails,
     };
-    console.log(allData);
+    await axios
+      .post(`${process.env.REACT_APP_URL_STARTUP}/api/talent/talent-request`, allData)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          if (res.data.length) {
+            navigate('/dashboard/talent-request')
+            setIsOpen(false);
+            setRefresh(!refresh)
+          }
+          if (!res.data.length) {
+            toast.error('no result found. search again');
+          }
+        } else {
+          toast.error('There is an error');
+        }
+
+        setLoading(false);
+
+        // if (res.data._id) {
+        //   toast.success('Contracts job data edited successfully');
+
+        // }
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
   };
 
   const handleTabActive = () => {
@@ -248,7 +291,7 @@ const TalentProcess = () => {
             className="bg-[#f8f1ff] shadow-inner px-5 py-2.5 hover:shadow-lg hover:shadow-[#d7d4f4] hover:bg-[#13d1ff] hover:text-white duration-300 ease-in rounded-lg text-[#61c1ff] text-lg"
             type="button"
           >
-            Find{' '}
+            Find
           </button>
         )}
       </div>
