@@ -69,7 +69,7 @@ const ContractsReview = () => {
           <div className="font-bold text-[14px] mt-12 lg:mt-0 flex flex-col">
             <h3>Contract</h3>
             <div className="flex text-xs text-[#999999] md:hidden">
-              <p>Kickstart.</p>
+              <p>Posted</p>
               <p>2 Day ago</p>
             </div>
           </div>
@@ -79,7 +79,7 @@ const ContractsReview = () => {
       <div className="mt-[125px] ">
         {/* post date */}
         <div className="md:flex mx-4 gap-4 text-[#999999] font-semibold mt-[8px] hidden">
-          <p>Kickstart.</p>
+          <p>Posted</p>
           <p>2 Day ago</p>
         </div>
 

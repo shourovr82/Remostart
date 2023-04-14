@@ -65,13 +65,13 @@ const ShadowingJobReview = () => {
           <div className="font-bold text-[14px] mt-12 lg:mt-0 flex flex-col">
             <h3>{storedJob?.categoryName}</h3>
             <div className="flex text-xs text-[#999999] md:hidden">
-              <p>Kickstart.</p>
+              <p>Posted</p>
               <p>2 Day ago</p>
             </div>
           </div>
         </div>
         <div className="md:flex gap-4 text-[#999999] font-semibold mt-[8px] hidden">
-          <p>Kickstart.</p>
+          <p>Posted</p>
           <p>2 Day ago</p>
         </div>
       </div>
