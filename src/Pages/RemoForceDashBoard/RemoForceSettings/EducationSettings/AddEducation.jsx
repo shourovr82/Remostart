@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -14,13 +15,21 @@ import EditEducation from './EditEducation';
 import AuthContext from '../../../../Context/AuthContext';
 
 function AddEducation() {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state?.auth);
   const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const { data: remoProfile, refetch } = useQuery(['remoProfile'], () =>
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-profile/${
+          user?.user?.email || serviceUser?.email
+        }`
+      )
+      .then((res) => res.data)
+  );
   const [loading, setLoading] = useState(false);
   const [bool, setBool] = useState(false);
-  const [allEducationLists, setAllEducationLists] = useState([]);
+  const [allEducationLists, setAllEducationLists] = useState(remoProfile?.educationDetails || []);
   const [editEducationItem, setEditEducationItem] = useState({});
   const [editEducationMode, setEditEducationMode] = useState(false);
 
@@ -31,6 +40,9 @@ function AddEducation() {
     setBool(false);
   };
 
+  console.log(remoProfile);
+
+  // submit education
   const submitEducation = async () => {
     setLoading(true);
     if (!allEducationLists.length) {
@@ -94,9 +106,9 @@ function AddEducation() {
                     <div className="w-full flex gap-2 items-center mt-3">
                       <p className="text-[#999999] no-wrap text-sm">{item.fieldOfStudy}</p>
                       <span className="text-[#999999] font-extrabold ">∙</span>
-                      <p className="text-[#999999]  text-sm">{item.startingDate}</p>
+                      <p className="text-[#999999]  text-sm">{item?.startingDate?.slice(0, 10)}</p>
                       <span className="text-[#999999]">-</span>
-                      <p className="text-[#999999]  text-sm">{item.endingDate}</p>
+                      <p className="text-[#999999]  text-sm">{item?.endingDate?.slice(0, 10)}</p>
                     </div>
                   </div>
                 </div>

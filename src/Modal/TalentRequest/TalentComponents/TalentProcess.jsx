@@ -20,21 +20,21 @@ const TalentProcess = () => {
   const [tabActive, setTabActive] = useState(1);
   const [selectedDetails, setSelectedDetails] = useState({});
   const [selectedSkills, setSelectedSkills] = useState([]);
-  const [selectedProficiency, setSelectedProficiency] = useState([]);
-  const [selectedLocations, setSelectedLocations] = useState([]);
+  const [locationPreference, setLocationPreference] = useState([]);
   const [selectedLanguages, setSelectedLanguages] = useState([]);
   const [selectedPersonalities, setSelectedPersonalities] = useState([]);
-  const [totalTalentsValue, setTotalTalentsValue] = useState(50);
+  const [requiredTalents, setRequiredTalents] = useState(10);
+  const [selectedProficiency, setSelectedProficiency] = useState([]);
 
   const handleSubmit = () => {
     const allData = {
       selectedSkills,
-      selectedProficiency,
-      selectedLocations,
+      locationPreference,
       selectedLanguages,
       selectedPersonalities,
-      totalTalentsValue,
+      requiredTalents,
       selectedDetails,
+      selectedProficiency,
     };
     console.log(allData);
   };
@@ -62,12 +62,13 @@ const TalentProcess = () => {
       }
     }
     if (tabActive === 4) {
-      if (!selectedLocations?.length) {
+      if (!locationPreference?.length) {
         toast.error('Locations is required');
-      } else if (selectedLocations?.length) {
+      } else if (locationPreference?.length) {
         setTabActive(5);
       }
     }
+
     if (tabActive === 5) {
       if (!selectedLanguages?.length) {
         toast.error('Languages is required');
@@ -83,7 +84,6 @@ const TalentProcess = () => {
       }
     }
   };
-  console.log(tabActive);
   return (
     <div className="h-[100%] flex  justify-around flex-col">
       <div className="flex items-center  gap-1 lg:gap-3">
@@ -92,7 +92,6 @@ const TalentProcess = () => {
         </div>
         <div>
           <button
-            onClick={() => setTabActive(1)}
             type="button"
             className="p-2 lg:p-3 rounded-full bg-[#65dc7f] border-4 border-white shadow-xl shadow-[#5e59e64b]"
           >
@@ -105,7 +104,6 @@ const TalentProcess = () => {
         <div>{tabActive >= 3 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
         <div>
           <button
-            onClick={() => setTabActive(2)}
             type="button"
             className={`p-2 lg:p-3 rounded-full border-4 border-white duration-300 ease-in shadow-xl shadow-[#5e59e64b] ${
               tabActive >= 3 ? 'bg-[#65dc7f]' : 'bg-white'
@@ -113,7 +111,7 @@ const TalentProcess = () => {
           >
             <FiEdit3
               className={`${
-                tabActive >= 3 ? 'text-white' : 'to-black'
+                tabActive >= 3 ? 'text-white' : 'text-black'
               } duration-300 ease-in text-2xl lg:text-3xl`}
             />
           </button>
@@ -121,7 +119,6 @@ const TalentProcess = () => {
         <div>{tabActive >= 4 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
         <div>
           <button
-            onClick={() => setTabActive(3)}
             type="button"
             className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
               tabActive >= 4 ? 'bg-[#65dc7f]' : 'bg-white'
@@ -137,7 +134,6 @@ const TalentProcess = () => {
         <div>{tabActive >= 5 ? <img src={tabGreen} alt="" /> : <img src={tabBlue} alt="" />}</div>
         <div>
           <button
-            onClick={() => setTabActive(4)}
             type="button"
             className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
               tabActive >= 5 ? 'bg-[#65dc7f]' : 'bg-white'
@@ -154,7 +150,6 @@ const TalentProcess = () => {
 
         <div>
           <button
-            onClick={() => setTabActive(5)}
             type="button"
             className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
               tabActive >= 6 ? 'bg-[#65dc7f]' : 'bg-white'
@@ -171,7 +166,6 @@ const TalentProcess = () => {
 
         <div>
           <button
-            onClick={() => setTabActive(6)}
             type="button"
             className={`p-2 lg:p-3 rounded-full duration-300 ease-in border-4 border-white shadow-xl shadow-[#5e59e64b] ${
               tabActive >= 7 ? 'bg-[#65dc7f]' : 'bg-white'
@@ -200,6 +194,7 @@ const TalentProcess = () => {
           setSelectedSkills={setSelectedSkills}
         />
       )}
+
       {tabActive === 3 && (
         <TalentProcessProficiency
           selectedProficiency={selectedProficiency}
@@ -208,8 +203,8 @@ const TalentProcess = () => {
       )}
       {tabActive === 4 && (
         <TalentProcessLocation
-          selectedLocations={selectedLocations}
-          setSelectedLocations={setSelectedLocations}
+          locationPreference={locationPreference}
+          setLocationPreference={setLocationPreference}
         />
       )}
       {tabActive === 5 && (
@@ -226,8 +221,8 @@ const TalentProcess = () => {
       )}
       {tabActive === 7 && (
         <TalentProcessNoOfTalents
-          totalTalentsValue={totalTalentsValue}
-          setTotalTalentsValue={setTotalTalentsValue}
+          requiredTalents={requiredTalents}
+          setRequiredTalents={setRequiredTalents}
         />
       )}
 
@@ -250,7 +245,7 @@ const TalentProcess = () => {
             Next{' '}
           </button>
         )}
-        {tabActive >= 7 && (
+        {tabActive === 7 && (
           <button
             onClick={handleSubmit}
             className="bg-[#f8f1ff] shadow-inner px-5 py-2.5 hover:shadow-lg hover:shadow-[#d7d4f4] hover:bg-[#13d1ff] hover:text-white duration-300 ease-in rounded-lg text-[#61c1ff] text-lg"

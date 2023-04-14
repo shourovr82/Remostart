@@ -34,13 +34,13 @@ const InternshipReview = () => {
   const handlePost = () => {
     setInternship(true);
   };
-
+  console.log(storedJob);
   return (
     <div className="w-full">
       {/* Banner Section start */}
       <div className="flex internshipBannerImg justify-between absolute w-full md:w-[80%] lg:w-[63%] max-w-6xl">
         <h1 className="text-2xl md:text-3xl lg:text-5xl pt-2 md:pt-[15px] md:pl-7 pl-2 font-normal text-white">
-          Senior Software Engineer
+          {storedJob?.title}
         </h1>
         <div className="flex justify-end items-end mt-[34px] gap-[10px] my-6 ">
           <a href="share">

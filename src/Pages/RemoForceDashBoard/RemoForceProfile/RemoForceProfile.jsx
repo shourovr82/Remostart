@@ -12,7 +12,7 @@ import axios from 'axios';
 import { GiSkills } from 'react-icons/gi';
 import { IoLanguage } from 'react-icons/io5';
 import { MdCastForEducation, MdOutlinePersonPin } from 'react-icons/md';
-import { RiPagesLine, RiShareForward2Fill } from 'react-icons/ri';
+import { RiPagesLine, RiShareForwardLine } from 'react-icons/ri';
 import { SiGmail } from 'react-icons/si';
 import { TfiTwitter } from 'react-icons/tfi';
 import { useSelector } from 'react-redux';
@@ -84,7 +84,7 @@ const RemoForceProfile = () => {
   return (
     <div className="w-full">
       {/* Banner Section start */}
-      <div className="flex border remoforceDashboardProfileBg mx-2 lg:mx-0 justify-between absolute w-full md:w-[80%] lg:w-[63%] max-w-6xl" />
+      <div className="flex border remoforceDashboardProfileBg shadow-lg shadow-[#ddb6ff49] mx-2 lg:mx-0 justify-between absolute w-full md:w-[80%] lg:w-[63%] max-w-6xl" />
       {/* Banner End  */}
 
       {/* User name and image  */}
@@ -97,27 +97,44 @@ const RemoForceProfile = () => {
                   ? remoProfile?.remoforceProfilePhoto
                   : 'https://static.vecteezy.com/system/resources/previews/002/387/693/original/user-profile-icon-free-vector.jpg'
               }
-              className="bg-white w-20 lg:w-32 lg:h-28 md:block bg-red  shadow-2xl shadow-[#DDB6FF] rounded-full"
+              className="bg-white w-20 lg:w-32 lg:h-28 md:block bg-red  shadow-xl shadow-[#ddb6ff93] rounded-full"
               alt=""
             />
           </div>
-          <div className="font-bold text-[14px] mt-[49px] md:mt-14 lg:mt-4 xl:mt-6 flex justify-between w-full md:pr-12">
+          <div className="font-bold text-[14px] mt-[49px] md:mt-14 lg:mt-4 xl:mt-10 flex justify-between w-full md:pr-12">
             <div>
-              <h3 className="text-xl lg:text-2xl font-bold">
-                {remoProfile?.fullName}{' '}
-                {remoProfile?.personalDetails?.age ? `(${remoProfile?.personalDetails?.age})` : ''}
-              </h3>
+              <div className="flex gap-5 items-center">
+                <h3 className="text-xl lg:text-2xl font-bold">
+                  {remoProfile?.fullName}{' '}
+                  {remoProfile?.personalDetails?.age
+                    ? `(${remoProfile?.personalDetails?.age})`
+                    : ''}
+                </h3>
+                <button type="button">
+                  <Link
+                    title="Edit Profile"
+                    className="flex justify-center items-center gap-2"
+                    to="/remoforce-dashboard/settings"
+                  >
+                    <FiEdit className="cursor-pointer text-[#999999] text-2xl " />
+                    <span className="text-[#999999] mt-1 text-lg ">Edit</span>
+                  </Link>
+                </button>
+              </div>
               <div className="flex text-xs text-[#999999]">
                 <p>{remoProfile?.personalDetails?.bio}</p>
               </div>
             </div>
             {/* share and edit button */}
-            <div className="pr-4 lg:pr-10 flex text-md md:text-xl space-x-3">
-              <Link title="Edit Profile" to="/remoforce-dashboard/settings">
-                <FiEdit className="cursor-pointer text-red-600" />
-              </Link>
-              <RiShareForward2Fill className="cursor-pointer" />
-            </div>
+            <button
+              type="button"
+              className="pr-4 text-[#999999] items-center cursor-pointer   lg:pr-10 flex text-md md:text-lg space-x-2"
+            >
+              <span>
+                <RiShareForwardLine className=" text-2xl " />
+              </span>
+              <span>Share</span>
+            </button>
           </div>
         </div>
       </div>
@@ -126,17 +143,23 @@ const RemoForceProfile = () => {
       {/* about me */}
       <div className="mt-[140px] flex flex-col lg:grid grid-cols-7 pl-0 lg:pl-6">
         <div className="col-span-5 pr-0 lg:pr-2">
-          <div className="rounded-lg bg-[#F0F9FFBF] p-2">
+          <div className="rounded-lg relative bg-[#F0F9FFBF] p-2">
             <div className="space-x-2 flex items-center">
               <FcAbout className="text-2xl mt-1" />
               <span className="text-2xl font-semibold">About Me</span>
             </div>
             <p className="text-sm font-semibold mt-2">{remoProfile?.personalDetails?.aboutMe}</p>
+            {/* edit button */}
+            <button className="absolute top-2 right-2" type="button">
+              <Link title="Edit Profile" to="/remoforce-dashboard/settings">
+                <FiEdit className="cursor-pointer text-[#999999] text-xl " />
+              </Link>
+            </button>
           </div>
-          <hr className="h-px my-2 bg-[#E5E5E5]" />
+          <hr className="h-px my-3 bg-[#E5E5E5]" />
 
           {/* Personal Information */}
-          <div className="rounded-lg bg-[#F0F9FFBF] p-2">
+          <div className="rounded-lg relative bg-[#F0F9FFBF] p-2">
             <div className="space-x-2 flex items-center">
               <MdOutlinePersonPin className="text-2xl mt-1" />
               <span className="text-2xl font-semibold">Personal Information</span>
@@ -155,10 +178,16 @@ const RemoForceProfile = () => {
                 </div>
               ))}
             </div>
+            {/* edit button */}
+            <button className="absolute top-2 right-2" type="button">
+              <Link title="Edit Profile" to="/remoforce-dashboard/settings">
+                <FiEdit className="cursor-pointer text-[#999999] text-xl " />
+              </Link>
+            </button>
           </div>
 
           {/* Skills */}
-          <div className="rounded-lg bg-[#F0F9FFBF] p-2 pb-4 mt-4">
+          <div className="rounded-lg  relative bg-[#F0F9FFBF] p-2 pb-4 mt-4">
             <div className="space-x-2 flex items-center">
               <BiHash className="text-2xl mt-1" />
               <span className="text-2xl font-semibold">Skills</span>
@@ -175,9 +204,15 @@ const RemoForceProfile = () => {
                   ))
                 : `You haven't added any skills! complete your profile first `}
             </div>
+            {/* edit button */}
+            <button className="absolute top-2 right-2" type="button">
+              <Link title="Edit Profile" to="/remoforce-dashboard/skill-preference">
+                <FiEdit className="cursor-pointer text-[#999999] text-xl " />
+              </Link>
+            </button>
           </div>
           {/*  soft Skills ---------------- */}
-          <div className="rounded-lg bg-[#F0F9FFBF] p-2 pb-4 mt-4">
+          <div className="rounded-lg relative bg-[#F0F9FFBF] p-2 pb-4 mt-4">
             <div className="space-x-2 flex items-center">
               <GiSkills className="text-2xl mt-1" />
               <span className="text-2xl font-semibold"> Soft Skills</span>
@@ -192,13 +227,19 @@ const RemoForceProfile = () => {
                       {item}
                     </p>
                   ))
-                : `You haven't added any skills! complete your profile first `}
+                : `You haven't added any soft skills! complete your profile first `}
             </div>
+            {/* edit button */}
+            <button className="absolute top-2 right-2" type="button">
+              <Link title="Edit Profile" to="/remoforce-dashboard/skill-preference">
+                <FiEdit className="cursor-pointer text-[#999999] text-xl " />
+              </Link>
+            </button>
           </div>
           {/*  soft Skills end ---------------- */}
 
           {/* Experience */}
-          <div className="rounded-lg bg-[#F0F9FFBF] p-2 mt-5">
+          <div className="rounded-lg relative bg-[#F0F9FFBF] p-2 mt-5">
             <div className="space-x-2 flex items-center">
               <AiOutlineFileDone className="text-2xl mt-1" />
               <span className="text-2xl font-semibold">Experience</span>
@@ -232,10 +273,16 @@ const RemoForceProfile = () => {
                   ))
                 : `You haven't added any experience`}
             </div>
+            {/* edit button */}
+            <button className="absolute top-2 right-2" type="button">
+              <Link title="Edit Profile" to="/remoforce-dashboard/add-work-experience">
+                <FiEdit className="cursor-pointer text-[#999999] text-xl " />
+              </Link>
+            </button>
           </div>
 
           {/* Education */}
-          <div className="rounded-lg bg-[#F0F9FFBF] p-2 mt-2">
+          <div className="rounded-lg  relative bg-[#F0F9FFBF] p-2 mt-2">
             <div className="space-x-2 flex items-center">
               <MdCastForEducation className="text-2xl mt-1" />
               <span className="text-2xl font-semibold">Education</span>
@@ -275,10 +322,16 @@ const RemoForceProfile = () => {
                   ))
                 : 'No education Details added!'}
             </div>
+            {/* edit button */}
+            <button className="absolute top-2 right-2" type="button">
+              <Link title="Edit Profile" to="/remoforce-dashboard/add-education">
+                <FiEdit className="cursor-pointer text-[#999999] text-xl " />
+              </Link>
+            </button>
           </div>
 
           {/* Projects */}
-          <div className="rounded-lg bg-[#F0F9FFBF] p-2 mt-2">
+          <div className="rounded-lg relative bg-[#F0F9FFBF] p-2 mt-2">
             <div className="space-x-2 flex items-center">
               <FaProjectDiagram className="text-2xl mt-1" />
               <span className="text-2xl font-semibold">Projects</span>
@@ -329,9 +382,15 @@ const RemoForceProfile = () => {
                 <p>No Projects Added</p>
               )}
             </div>
+            {/* edit button */}
+            <button className="absolute top-2 right-2" type="button">
+              <Link title="Edit Profile" to="/remoforce-dashboard/add-project">
+                <FiEdit className="cursor-pointer text-[#999999] text-xl " />
+              </Link>
+            </button>
           </div>
           {/* Language */}
-          <div className="rounded-lg bg-[#F0F9FFBF] p-2 pb-4 mt-4">
+          <div className="rounded-lg relative bg-[#F0F9FFBF] p-2 pb-4 mt-4">
             <div className="space-x-2 flex items-center">
               <IoLanguage className="text-2xl mt-1" />
               <span className="text-2xl font-semibold">Language</span>
@@ -357,6 +416,12 @@ const RemoForceProfile = () => {
                   ))
                 : `You haven't added any language! please complete your profile first`}
             </div>
+            {/* edit button */}
+            <button className="absolute top-2 right-2" type="button">
+              <Link title="Edit Profile" to="/remoforce-dashboard/skill-preference">
+                <FiEdit className="cursor-pointer text-[#999999] text-xl " />
+              </Link>
+            </button>
           </div>
         </div>
 

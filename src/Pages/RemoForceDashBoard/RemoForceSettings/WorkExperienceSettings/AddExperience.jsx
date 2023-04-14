@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -17,10 +18,20 @@ function AddExperience() {
   const { user } = useSelector((state) => state.auth);
   const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const { data: remoProfile, refetch } = useQuery(['remoProfile'], () =>
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-profile/${
+          user?.user?.email || serviceUser?.email
+        }`
+      )
+      .then((res) => res.data)
+  );
   const [loading, setLoading] = useState(false);
   const [bool, setBool] = useState(false);
-  const [workExperienceLists, setWorkExperienceLists] = useState([]);
+  const [workExperienceLists, setWorkExperienceLists] = useState(
+    remoProfile?.experienceDetails || []
+  );
   const [editMode, setEditMode] = useState(false);
   const [editData, setEditData] = useState({});
 
@@ -103,9 +114,11 @@ function AddExperience() {
                     <div className="w-full flex gap-2.5 items-center mt-3">
                       <p className="text-[#999999]  no-wrap text-sm">{item.position}</p>
                       <span className="text-[#999999]">∙</span>
-                      <p className="text-[#999999]  text-sm">{item.startingDate}</p>
+                      <p className="text-[#999999]  text-sm">{item.startingDate?.slice(0, 10)}</p>
                       <span className="text-[#999999] font-semibold ">∙</span>
-                      <p className="text-[#999999]  text-sm">{item.endDate}</p>
+                      <p className="text-[#999999]  text-sm">
+                        {item?.endingDate?.slice(0, 10) || item?.endDate}
+                      </p>
                     </div>
                   </div>
                 </div>

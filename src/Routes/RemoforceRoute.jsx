@@ -21,31 +21,49 @@ const RemoForceRoute = ({ children }) => {
     );
   }
   console.log(serviceUser);
+  console.log(user);
 
-  if (!user || !serviceUser) {
+  if (!user?.user?.role) {
+    if (serviceUser?.role === 'remoforce') {
+      console.log('hello2');
+      return children;
+    }
+    console.log('hello3');
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
+  if (!serviceUser) {
+    if (user?.user?.role === 'remoforce') {
+      console.log('hello4');
+      return children;
+    }
 
+    console.log('hello14');
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
   if (user?.user?.role) {
     if (user?.user?.role !== 'remoforce') {
+      console.log('hello6');
       return <Navigate to="/login" state={{ from: location }} replace />;
     }
-    if (user?.user?.role === 'startup') {
-      return <Navigate to="/login" state={{ from: location }} replace />;
-    }
-    if (user?.user?.role === 'admin') {
-      return <Navigate to="/login" state={{ from: location }} replace />;
-    }
+    // if (user?.user?.role === 'startup') {
+    //   console.log('hello7');
+    //   return <Navigate to="/login" state={{ from: location }} replace />;
+    // }
+    // if (user?.user?.role === 'admin') {
+    //   console.log('hello8');
+    //   return <Navigate to="/login" state={{ from: location }} replace />;
+    // }
+    return children;
   }
   if (serviceUser) {
+    console.log('hello9');
     if (serviceUser?.role !== 'remoforce') {
       return <Navigate to="/login" state={{ from: location }} replace />;
     }
-    if (serviceUser?.role === 'remoforce') {
-      return children;
-    }
-  }
 
+    return children;
+  }
+  console.log('hello11');
   return children;
 };
 

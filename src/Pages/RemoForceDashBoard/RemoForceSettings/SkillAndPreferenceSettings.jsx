@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -18,24 +19,33 @@ function SkillAndPreferenceSettings() {
   const { user } = useSelector((state) => state.auth);
   const { serviceUser, loading: serviceLoading } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const { data: remoProfile, refetch } = useQuery(['remoProfile'], () =>
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-profile/${
+          user?.user?.email || serviceUser?.email
+        }`
+      )
+      .then((res) => res.data)
+  );
   const [loading, setLoading] = useState(false);
   const [level, setLevel] = useState(null);
   const [language, setLanguage] = useState(null);
-  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState(
+    (remoProfile?.selectedSkills?.length && remoProfile?.selectedSkills) || []
+  );
   const [selectedSkill, setSelectedSkill] = useState('');
-  const [preferredJobType, setPreferredType] = useState('');
+  const [preferredJobType, setPreferredType] = useState(remoProfile?.jobPreference?.jobType || '');
   const [selectedLanguage, setSelectedLanguage] = useState('');
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [selectedIndustryName, setSelectedIndustryName] = useState('');
+  const [selectedLanguages, setSelectedLanguages] = useState(remoProfile?.selectedLanguages || []);
+  const [selectedIndustryName, setSelectedIndustryName] = useState(
+    remoProfile?.jobPreference?.jobIndustry || []
+  );
   const [openOtherMenu, setOpenOtherMenu] = useState(false);
 
   // set level to value state
-  const [value, setValue] = useState();
+  const [value, setValue] = useState(remoProfile?.jobPreference?.jobLevel || []);
   const [languageValue, setLanguageValue] = useState();
-
-  const [name, setName] = useState();
-  const [error, setError] = useState('');
 
   const [jData, setJData] = useState({});
   useEffect(() => {
@@ -58,9 +68,8 @@ function SkillAndPreferenceSettings() {
   });
   // skill list
 
-  // const industries = ['Blockchain', 'Health', 'Front-End', 'MERN Stack'];
   const domainLists = ['Beginner', 'Intermediate', 'Advance', 'Professional'];
-  const workingPreferences = ['Work from Home', 'Remote', 'Hybrid', 'Full Time'];
+  const workingPreferences = ['Remote', 'Hybrid', 'Full Time'];
   // const languages = ['English', 'Hindi', ' German'];
   const languageLevel = ['Native Language', 'Advance', 'Intermediate'];
 
@@ -70,7 +79,7 @@ function SkillAndPreferenceSettings() {
     setSelectedSkill(e.target.value);
     setLevel(true);
   };
-  const [softSkills, setSoftSkills] = useState([]);
+  const [softSkills, setSoftSkills] = useState(remoProfile?.softSkills || []);
   const [softSkillValue, setSoftSkillValue] = useState('');
 
   const handleGetSoftSkill = (e) => {
@@ -191,8 +200,6 @@ function SkillAndPreferenceSettings() {
 
     const { workPreference, industry, domain } = data;
 
-    console.log(industry);
-
     const bodyData = {
       jobPreference: {
         jobType: preferredJobType,
@@ -279,7 +286,7 @@ function SkillAndPreferenceSettings() {
                             value={value}
                             required
                           >
-                            <option value="level" className="hidden">
+                            <option value="" className="hidden">
                               Level
                             </option>
                             {level !== null ? (
@@ -560,8 +567,6 @@ function SkillAndPreferenceSettings() {
                     id="industry"
                     onChange={handleIndustryChange}
                     className="select select-bordered focus:outline-none w-full lg:w-[80%] mt-3"
-                    // {...register('industry', { required: true })}
-                    // required
                   >
                     <option value="" className="hidden" hidden>
                       {selectedIndustryName || ' Choose'}
@@ -578,14 +583,14 @@ function SkillAndPreferenceSettings() {
                     Select Level
                   </label>
                   <select
-                    name=""
-                    id=""
+                    name="domain"
+                    id="domain"
                     className="select w-full  select-bordered focus:outline-none   lg:w-[80%]   mt-3"
                     {...register('domain', { required: true })}
                     required
                   >
                     <option value="" className="hidden" hidden>
-                      Choose
+                      {value || ' Choose'}
                     </option>
                     {domainLists?.map((item) => (
                       <option value={item} key={Math.random()} className="text-[18px]">
@@ -599,16 +604,17 @@ function SkillAndPreferenceSettings() {
                     Working Preference
                   </label>
                   <select
-                    name=""
-                    id=""
+                    name="workPreference"
+                    defaultValue={remoProfile?.jobPreference?.locationPreference}
+                    id="workPreference"
                     className="select select-bordered focus:outline-none lg:w-[80%]  mt-3 "
                     {...register('workPreference', { required: true })}
                     required
                   >
                     <option value="" className="hidden">
-                      Choose
+                      {remoProfile?.jobPreference?.locationPreference || 'Choose'}
                     </option>
-                    {workingPreferences.map((item) => (
+                    {workingPreferences?.map((item) => (
                       <option value={item} key={Math.random()} className="text-[18px]">
                         {item}
                       </option>

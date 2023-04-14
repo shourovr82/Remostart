@@ -1,17 +1,17 @@
 import React from 'react';
 
-function RangeInput({ totalTalentsValue, setTotalTalentsValue }) {
+function RangeInput({ requiredTalents, setRequiredTalents }) {
   function handleChange(event) {
-    setTotalTalentsValue(event.target.value);
+    setRequiredTalents(event.target.value);
   }
 
   return (
     <>
       <div className="py-6 mx-auto flex justify-center">
-        <p className="text-white py-1 px-2 rounded-full bg-[#13d1ff]">{totalTalentsValue}</p>
+        <p className="text-white py-1 px-2 rounded-full bg-[#13d1ff]">{requiredTalents}</p>
       </div>
       <div className="range-input-container !w-full">
-        <input type="range" min="1" max="100" value={totalTalentsValue} onChange={handleChange} />
+        <input type="range" min="1" max="100" value={requiredTalents} onChange={handleChange} />
         <div className="range-input-indicators ">
           <div className="range-input-indicator range-input-indicator-0">
             <p className="top-14 font-semibold text-[#aedfff] text-2xl -left-0.5 absolute">1</p>
