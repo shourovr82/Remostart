@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsStarFill } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 import headingIcon from '../../../Assets/Dashboard/talentRequest/headingIcon.svg';
 import TalentRequestModal from '../../../Modal/TalentRequest/TalentRequestModal';
 import TalentCards from './TalentCards';
@@ -7,7 +8,14 @@ import TalentRequestBanner from './TalentRequestBanner';
 import TalentsFounds from './TalentsFounds';
 
 const TalentRequest = () => {
+  const { user } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
+  useEffect(() => {
+    console.log('hello');
+    
+  }, [refresh]);
 
   return (
     <>
@@ -69,7 +77,7 @@ const TalentRequest = () => {
         </div>
       </section>
       {/* talent Modal */}
-      <TalentRequestModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <TalentRequestModal refresh={refresh} setRefresh={setRefresh} isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

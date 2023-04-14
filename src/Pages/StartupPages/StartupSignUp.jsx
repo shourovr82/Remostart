@@ -89,10 +89,15 @@ const StartupSignUp = () => {
       return;
     }
 
-    const userInfo = { ...data, personalPhone, officePhone, role: 'startup' };
+    const userInfo = {
+      ...data,
+      personalPhone,
+      officePhone,
+      role: 'startup',
+      talentRequestPaymentDetails: { tier: 'Free', transactionId: null },
+    };
 
     mutate(userInfo);
-  
 
     reset();
   };
