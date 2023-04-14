@@ -29,7 +29,6 @@ const TalentRequestsHistories = () => {
   //   ];
 
   const data = pageLocation?.state && pageLocation?.state?.data;
-  console.log(data);
 
   const { searchHistory } = data || {};
 
