@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
-import { BiBookmarks, BiUser } from 'react-icons/bi';
+import { BiBookmarks } from 'react-icons/bi';
 import { FaRegClock } from 'react-icons/fa';
 import { FiChevronLeft } from 'react-icons/fi';
 import { GiSandsOfTime } from 'react-icons/gi';
@@ -10,7 +10,6 @@ import { GoLocation } from 'react-icons/go';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import initialLogo from '../../../Assets/RemoForceDashboard/RemoForceAllJobs/InitialLogo.png';
 import RecommendedJobs from '../RecommendedJobs';
 
 import AuthContext from '../../../Context/AuthContext';
@@ -39,9 +38,10 @@ const ApplyJob = () => {
     salary,
     applyBefore,
     applicationRequest,
+    startupsProfilePhoto,
     categoryName,
-  } = data;
-
+    startupsName,
+  } = data || {};
   const applyJobHandler = () => {
     const url = `${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/${data._id}`;
     const applicantsData = {
@@ -97,12 +97,19 @@ const ApplyJob = () => {
         <div className="relative right-[-6px]  md:right-[-36px] top-[123px] md:top-[117px] lg:top-[110px]">
           <div className="flex gap-[10px] items-center">
             <div className="bg-[#F0F9FF] w-[85px] md:w-[131px] bg-red rounded-full shadow-2xl shadow-[#DDB6FF] p-4 md:p-10">
-              <img src={initialLogo} alt="" />
+              {/* <img src={initialLogo} alt="" /> */}
+              {startupsProfilePhoto ? (
+                <img className="h-12 rounded-full" src={startupsProfilePhoto} alt="" />
+              ) : (
+                <p className="text-2xl h-12 grid place-items-center font-semibold  text-black rounded-full ">
+                  {startupsName?.charAt(0).toUpperCase()}
+                </p>
+              )}
             </div>
             <div className="font-bold text-[14px] mt-6 lg:mt-0 flex flex-col">
               <h3>{categoryName}(Type)</h3>
-              <div className="flex text-xs text-[#999999] md:hidden">
-                <p>Kickstart2</p>
+              <div className="flex gap-2  text-xs text-[#999999] md:hidden">
+                <p>Posted</p>
                 <p>2 days ago</p>
               </div>
             </div>
@@ -111,7 +118,7 @@ const ApplyJob = () => {
 
         <div className="mt-[130px] lg:mt-[125px] lg:ml-5">
           <div className="md:flex gap-4 text-[#999999] font-semibold mt-[8px] hidden">
-            <p>Kickstart2</p>
+            <p>Posted</p>
             <p>2 days ago</p>
           </div>
 
@@ -215,18 +222,6 @@ const ApplyJob = () => {
                       <GoLocation />
                     </p>
                     <p className="pr-[15px] ">{data?.location ? data?.location : 'Remote'}</p>
-                  </div>
-                </div>
-              </div>
-              {/* number of applicants */}
-              <div>
-                <h1 className="font-semibold text-[16px] mt-3 mb-3">Number of Applicants:</h1>
-                <div className="">
-                  <div className="bg-[#F0F9FF] mt-3 w-[90px] flex items-center gap-3 rounded-md ">
-                    <p className="text-sm pl-[20px] py-[8px] ">
-                      <BiUser />
-                    </p>
-                    <p className="pr-[25px] ">34</p>
                   </div>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { HiOutlineUser, HiOutlineUsers } from 'react-icons/hi2';
 import { NavLink } from 'react-router-dom';
-import set from '../../Assets/RemoForceDashboard/ProfileSettings/settings.png';
+import settingIcon from '../../Assets/RemoForceDashboard/dashboard/Setting icon.svg';
 
 // Array of settings Items Tabs
 const data = [
@@ -40,7 +40,7 @@ function RemoForceSettingsItems({ children }) {
   return (
     <section className="flex flex-col  w-full">
       <div className="flex w-full h-1/2 items-center justify-evenly flex-nowrap">
-        <img src={set} alt="settings-icon" width="30px" />
+        <img src={settingIcon} alt="settings-icon" width="30px" />
         <h1 className="text-4xl font-semibold w-11/12">Settings</h1>
       </div>
       <div className="h-[2px] w-full bg-slate-500 mt-4 mb-1" />

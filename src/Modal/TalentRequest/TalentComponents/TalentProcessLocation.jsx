@@ -67,7 +67,7 @@ const TalentProcessLocation = ({ locationPreference, setLocationPreference }) =>
             <div className="group border-2  rounded-md px-3 py-2 inline-block border-dashed max-md:w-full border-[#0ea5e9] ">
               <div className=" mt-2">
                 <Select
-                  options={jData?.countries}
+                  options={jData?.talentCountries}
                   styles={customStyles}
                   value={selectedOption}
                   onChange={handleSelectChange}

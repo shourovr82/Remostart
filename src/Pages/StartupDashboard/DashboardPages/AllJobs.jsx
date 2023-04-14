@@ -184,7 +184,7 @@ const AllJobs = () => {
                   <div className="justify-between border-t mt-1 flex">
                     <div className="flex space-x-2 text-sm font-semibold mt-4">
                       <span className="bg-[#D4C0FF] px-2 py-2 rounded-full gap-2 flex items-start justify-start">
-                        14
+                        {item?.applicationRequest?.length}
                         <GrDocumentUser className="inline-block mt-1" />
                       </span>
                     </div>

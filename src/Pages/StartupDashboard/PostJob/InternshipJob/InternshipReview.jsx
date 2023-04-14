@@ -62,7 +62,7 @@ const InternshipReview = () => {
           <div className="font-bold text-[14px] mt-6 lg:mt-0 flex flex-col">
             <h3>Internship(Type)</h3>
             <div className="flex text-xs text-[#999999] md:hidden">
-              <p>Kickstart.</p>
+              <p>Posted</p>
               <p>2 Day ago</p>
             </div>
           </div>
@@ -71,7 +71,7 @@ const InternshipReview = () => {
 
       <div className="mt-[125px] ml-5">
         <div className="md:flex gap-4 text-[#999999] font-semibold mt-[8px] hidden">
-          <p>Kickstart.</p>
+          <p>Posted</p>
           <p>2 Day ago</p>
         </div>
         {/* Paragraph   */}
@@ -179,7 +179,7 @@ const InternshipReview = () => {
                   <p className="text-sm pl-[20px] py-[8px] ">
                     <BiUser />
                   </p>
-                  <p className="pr-[25px] ">34</p>
+                  <p className="pr-[25px] ">{data?.applicationRequest?.length}</p>
                 </div>
               </div>
             </div>
