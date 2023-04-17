@@ -83,16 +83,16 @@ const RemoForceMyJobRequest = () => {
                       <span>
                         <FiMapPin className=" text-[#ff9900] lg:text-[10px] 2xl:text-sm" />
                       </span>
-                      <p className="text-white lg:text-[10px] 2xl:text-sm">{location}</p>
+                      <p className="text-[#ff9900] lg:text-[10px] 2xl:text-sm">{location}</p>
                     </div>
                   ))}
 
                   {talentHistory?.languages?.map((language) => (
                     <div className="bg-[#ffadbb] rounded-md flex gap-1.5 px-1.5 2xl:px-2 py-0.5 items-center">
                       <span>
-                        <IoLanguageSharp className="text-[#ff1023] lg:text-[10px]" />
+                        <IoLanguageSharp className="text-red-700 lg:text-[10px]" />
                       </span>
-                      <p className="text-white lg:text-[10px] 2xl:text-sm">{language}</p>
+                      <p className="text-red-600 lg:text-[10px] 2xl:text-sm">{language}</p>
                     </div>
                   ))}
                 </div>
@@ -173,9 +173,9 @@ const RemoForceMyJobRequest = () => {
               <button
                 onClick={() => handleExpand(talentHistory?.id)}
                 type="button"
-                className="text-[13px] text-[#b2b2b2]"
+                className="text-sm text-gray-400 "
               >
-                Show More
+                {expanded.includes(talentHistory?.id) ? `Show less` : `Show more`}
               </button>
             </div>
           </div>
