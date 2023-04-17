@@ -50,14 +50,14 @@ const RemoForceProfile = () => {
     {
       id: 1,
       icon: <SiGmail />,
-      name: remoProfile?.email,
-      data: 'Mail Address',
+      name: 'Mail Address',
+      data: remoProfile?.email,
     },
     {
       id: 2,
       icon: <ImMobile />,
-      name: remoProfile?.personalPhone,
-      data: 'Personal Number',
+      name: 'Personal Number',
+      data: remoProfile?.personalPhone,
     },
     {
       id: 3,
@@ -72,10 +72,10 @@ const RemoForceProfile = () => {
     {
       id: 4,
       icon: <FcGlobe />,
-      name: 'location',
+      name: 'Location',
       data: `${
-        remoProfile?.jobPreference?.locationPreference
-          ? remoProfile?.jobPreference?.locationPreference
+        remoProfile?.personalDetails?.country
+          ? remoProfile?.personalDetails?.country
           : 'Location not given'
       }`,
     },
@@ -121,7 +121,7 @@ const RemoForceProfile = () => {
                   </Link>
                 </button>
               </div>
-              <div className="flex text-xs text-[#999999]">
+              <div className="flex text-xs text-black/50">
                 <p>{remoProfile?.personalDetails?.bio}</p>
               </div>
             </div>
@@ -563,7 +563,8 @@ const RemoForceProfile = () => {
                       </span>
 
                       <span className="text-md  text-start  font-semibold">
-                        {remoProfile?.resume?.split('/').pop()}
+                        {/* {remoProfile?.resume?.split('/').pop()} */}
+                        Your Resume
                       </span>
                     </button>
                     <Link title="Edit" to="/remoforce-dashboard/settings">
