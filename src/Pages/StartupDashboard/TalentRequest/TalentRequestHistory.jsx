@@ -12,7 +12,7 @@ const TalentRequestHistory = () => {
       {/* title and back button */}
       <div className="border-b-[2px] pb-3 border-[#A5DBFF]">
         <Link className="flex gap-2 lg:gap-3 items-center" to="/dashboard/talent-request">
-          <span className="border-2 border-black p-0.5 lg:p-1.5 rounded-md">
+          <span className="border-2 hover:bg-black hover:text-white duration-300 ease-in border-black p-0.5 lg:p-1.5 rounded-md">
             <IoChevronBackSharp className="text-lg lg:text-xl" />
           </span>
           <h3 className=" text-xl lg:text-3xl flex gap-2 items-center text-[#13d1ff] font-semibold">

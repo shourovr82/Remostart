@@ -44,13 +44,13 @@ const RemoForceDashboard = () => (
     <div className="grid grid-cols-1 lg:grid-cols-1">
       {/* card with background image container start */}
       <div className="col-span-3 w-full h-[60vh] lg:h-full sm:w-full shadow-xl rounded-xl shadow-[rgba(77, 0, 180, 0.25)]  mt-6 flex flex-col justify-center items-center pt-8 lg:pt-4 md:mt-0 relative">
-        <img src={bg1} alt="slides" className="w-full h-full rounded-xl   " />
-        <div className="  bg-white opacity-70 absolute shadow-xl rounded-xl w-[85%] lg:w-[90%] lg:h-[60%] z-0 mx-auto grid place-items-center p-4 md:p-4 lg:p-6 xl:p-10">
+        <img src={bg1} alt="slides" className="w-full h-full rounded-xl object  " />
+        <div className=" bg-white opacity-90 absolute shadow-xl rounded-xl w-[85%] lg:w-[90%] lg:h-[60%] z-0 mx-auto grid place-items-center p-4 md:p-4 lg:p-6 xl:p-10">
           <div className="w-full m-4 mb-1 flex flex-col items-start ">
-            <h4 className="text-black text-sm font-bold w-[100%]">
+            <h4 className="text-black text-md font-bold w-[100%]">
               {`    Let's Start Your Journey Now!`}
             </h4>
-            <p className="w-full lg:w-[80%] text-xs text-[#0c0909] mt-1">
+            <p className="w-full lg:w-[80%] text-sm text-black mt-1">
               Scroll down the page for more recommendations. Below you will find a variety of
               products from all categories on Steam that may be of interest to you.
               <br /> Looking for recommendations?
@@ -59,7 +59,7 @@ const RemoForceDashboard = () => (
           <div className=" w-full flex justify-end">
             <button
               type="button"
-              className="w-[40%] text-xs text-blue-500 font-semibold  m-4 flex no-wrap"
+              className="w-[40%] text-sm text-white font-semibold  m-4 flex no-wrap"
             >
               Know More <span className="w-[20px]">&rarr;</span>
             </button>
@@ -69,14 +69,18 @@ const RemoForceDashboard = () => (
 
       <div className="col-span-3 grid grid-cols-1 lg:grid-cols-2 mt-3">
         <div className="shadow-xl rounded-xl hover:shadow-[rgba(77, 0, 180, 0.25)] cursor-pointer m-3  flex flex-col justify-start items-start">
-          <div className="rounded-xl w-[4rem] p-4 border border-[#FFC46B] bg-[#FFC46B] flex justify-center m-4 mb-1">
+          <div className="rounded-xl w-[4rem] p-4 border border-[#FFC46B] bg-[#ffc46b73] flex justify-center m-4 mb-1">
             <RiTeamFill className="inline-block text-xl text-orange-700" />
           </div>
           <div className="w-full m-4 mb-1 flex flex-col items-start">
             <h4 className="text-black text-sm font-bold w-[100%]">
               {`  Let's Start Your Journey Now!`}
             </h4>
-            <p className="w-[80%] text-xs text-[#CCCCCC] mt-1">
+<<<<<<< HEAD
+            <p className="w-[80%] text-xs text-gray-400 mt-1">
+=======
+            <p className="w-[80%] text-xs text-[#999999] mt-1">
+>>>>>>> aeb9b5e9a98948ce0508725446a4500bcbf097d0
               <span className="font-semibold">(Get Started)</span> Scroll down the page for more
               recommendations. Below you will find a variety of products from all categories on
               Steam that may be of interest to you.
@@ -84,7 +88,11 @@ const RemoForceDashboard = () => (
             </p>
           </div>
           <div className=" w-full flex justify-end">
-            <button type="button" className="w-[40%] text-xs  text-[#CCCCCC] m-4 flex no-wrap">
+<<<<<<< HEAD
+            <button type="button" className="w-[40%] text-xs  text-gray-400 m-4 flex no-wrap">
+=======
+            <button type="button" className="w-[40%] text-xs  text-[#999999] m-4 flex no-wrap">
+>>>>>>> aeb9b5e9a98948ce0508725446a4500bcbf097d0
               Know More <span className="w-[20px]">&rarr;</span>
             </button>
           </div>
@@ -93,13 +101,17 @@ const RemoForceDashboard = () => (
         {/* cards with icons container start */}
         <div className="shadow-xl rounded-xl hover:shadow-[rgba(77, 0, 180, 0.25)] cursor-pointer m-3  flex flex-col justify-start items-start">
           <div className="rounded-xl w-[4rem] p-4 border border-[#13D1FF] bg-[#DAF0FF] flex justify-center m-4 mb-1">
-            <GoMailRead className="inline-block text-xl " />
+            <GoMailRead className="inline-block text-xl text-[#13D1FF] " />
           </div>
           <div className="w-full m-4 mb-1 flex flex-col items-start">
             <h4 className="text-black text-sm font-bold w-[100%]">
               {`  Let's Start Your Journey Now!`}
             </h4>
-            <p className="w-[80%] text-xs text-[#CCCCCC] mt-1">
+<<<<<<< HEAD
+            <p className="w-[80%] text-xs  text-gray-400 mt-1">
+=======
+            <p className="w-[80%] text-xs text-[#999999] mt-1">
+>>>>>>> aeb9b5e9a98948ce0508725446a4500bcbf097d0
               <span className="font-semibold">(Get Started)</span> Scroll down the page for more
               recommendations. Below you will find a variety of products from all categories on
               Steam that may be of interest to you.
@@ -107,7 +119,11 @@ const RemoForceDashboard = () => (
             </p>
           </div>
           <div className=" w-full flex justify-end">
-            <button type="button" className="w-[40%] text-xs  text-[#CCCCCC] m-4 flex no-wrap">
+<<<<<<< HEAD
+            <button type="button" className="w-[40%] text-xs  text-gray-400 m-4 flex no-wrap">
+=======
+            <button type="button" className="w-[40%] text-xs  text-[#999999] m-4 flex no-wrap">
+>>>>>>> aeb9b5e9a98948ce0508725446a4500bcbf097d0
               Know More <span className="w-[20px]">&rarr;</span>
             </button>
           </div>
@@ -131,7 +147,7 @@ const RemoForceDashboard = () => (
             <span className="text-3xl font-medium">
               You are <strong>exactly</strong> where you <strong>need</strong> to be!
             </span>
-            <p className="text-xs text-[#CCCCCC] mt-2 mb-4">
+            <p className="text-sm text-gray-400 mt-2 mb-4">
               {` We at remostart want's to provide you with World full of
                                 opportunities for your skill excluding all the resource barriers !`}
             </p>
@@ -152,7 +168,7 @@ const RemoForceDashboard = () => (
           <h1 className="w-full text-black text-xl font-bold">
             Connect to the world of Opportunities
           </h1>
-          <p className="w-[80%] text-xs text-[#CCCCCC] mt-1">
+          <p className="w-[80%] text-sm text-gray-400 mt-1">
             {' '}
             Scroll down the page for more recommendations. Below you will find a variety of products
             from all categories on Steam that may be of interest to you.Looking for recommendations?

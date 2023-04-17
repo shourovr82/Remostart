@@ -1,7 +1,6 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { AiOutlineLeft } from 'react-icons/ai';
 import { IoPlayOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import shadowingImg from '../../Assets/UserComponentImages/remoforceShadowing.png';
@@ -9,10 +8,7 @@ import shadowingImg from '../../Assets/UserComponentImages/remoforceShadowing.pn
 const RemoShadowingBanner = () => {
   return (
     <section>
-      <div>
-        <Link to='/remoforce-dashboard' type='button' className='flex items-center gap-3'>< AiOutlineLeft className='text-xl mt-0.5' /> <span className='text-2xl font-semibold'> Back</span></Link>
-        <hr className=' lg:w-[85%]' />
-      </div>
+     
       {/* shadowing banner contents */}
       <div className='lg:grid flex flex-col-reverse lg:grid-cols-5 items-center pt-5 lg:py-32 bg-[#FFF1E6] mt-1.5 rounded-[10px] '>
         <div className='col-span-3 lg:pl-20 px-5  lg:py-8'>

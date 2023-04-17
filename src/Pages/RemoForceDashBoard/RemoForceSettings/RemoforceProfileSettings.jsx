@@ -175,6 +175,7 @@ function RemoforceProfileSettings() {
         age,
         gender: selectedGender,
         birthDate: date,
+        country: selectedCounty,
         alternativeEmail: email,
         alternativePhone: alternative,
       },
@@ -358,10 +359,9 @@ function RemoforceProfileSettings() {
                   Gender
                 </label>
                 <select
-                  defaultValue={remoProfile?.personalDetails?.gender}
                   id="gender"
                   className="py-3 rounded-md border-gray-200"
-                  value={selectedGender}
+                  value={remoProfile?.personalDetails?.gender || selectedGender}
                   onChange={handleChange}
                 >
                   <option value="" hidden>
@@ -415,7 +415,7 @@ function RemoforceProfileSettings() {
                 <Select
                   options={jData?.countries}
                   styles={customStyles}
-                  value={selectedOption}
+                  defaultValue={selectedOption}
                   onChange={handleSelectChange}
                   placeholder="Choose Country"
                   className="mt-1 w-full lg:w-[280px] "

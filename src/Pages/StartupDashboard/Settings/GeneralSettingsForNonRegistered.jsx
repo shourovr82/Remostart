@@ -47,7 +47,11 @@ const GeneralSettingsForNonRegistered = () => {
 
   const { data: startupData } = useQuery(['startupData'], () =>
     axios
-      .get(`${process.env.REACT_APP_URL_STARTUP}/api/startup/startup-preview/${user?.user?.email || serviceUser?.email}`)
+      .get(
+        `${process.env.REACT_APP_URL_STARTUP}/api/startup/startup-preview/${
+          user?.user?.email || serviceUser?.email
+        }`
+      )
       .then((res) => res.data)
   );
   const [allFiles, setAllFiles] = useState(
