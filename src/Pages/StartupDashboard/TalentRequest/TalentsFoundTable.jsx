@@ -58,15 +58,6 @@ const TalentsFoundTable = () => {
 
   return (
     <>
-      {console.log(isAllSelected)}
-      <button
-        onClick={() => setIsAllSelected(!isAllSelected)}
-        type="button"
-        className="text-black border"
-      >
-        {isAllSelected === true && 'shafin'} Lorem, ipsum dolor sit amet consectetur adipisicing
-        elit. Consectetur
-      </button>
       {results?.length && (
         <section className="mt-10">
           <div className="container  bg-white shadow-lg shadow-slate-300 rounded-3xl mx-auto px-4 sm:px-8">
