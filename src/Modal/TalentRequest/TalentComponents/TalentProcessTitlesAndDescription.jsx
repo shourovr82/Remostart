@@ -11,7 +11,6 @@ const TalentProcessSkillsAndDescription = ({ selectedDetails, setSelectedDetails
     mode: 'onChange',
   });
   const handleSubmitDetails = (data) => {
-    console.log(data);
     setSelectedDetails({ ...selectedDetails, ...data });
   };
   return (

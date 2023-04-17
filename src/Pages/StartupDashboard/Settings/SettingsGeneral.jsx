@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
+import DatePicker from 'react-datepicker';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { BsCalendarRange } from 'react-icons/bs';
@@ -29,6 +30,8 @@ const SettingsGeneral = () => {
   const [files, setFile] = useState();
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState();
+  const [registerDate, setRegisterDate] = useState(new Date());
+
   const navigate = useNavigate();
 
   // get storedValues for startup
@@ -110,7 +113,7 @@ const SettingsGeneral = () => {
           state: data.State,
           country: data.Country,
           PIN: data.pinCode,
-          registrationDate: data.SelectDate,
+          registrationDate: registerDate?.toLocaleDateString(),
           registeredName: data.RegisteredName,
         },
         registered: true,
@@ -174,7 +177,7 @@ const SettingsGeneral = () => {
 
       <GeneralSettingsPersonal />
       <br />
-      {/* UPDATE PASSWORD FORM STARTS IF Start-up is Registered */}
+      {/* UP`DATE `PASSWORD FORM STARTS IF Start-up is Registered */}
       <br />
 
       <Password />
@@ -338,7 +341,15 @@ const SettingsGeneral = () => {
                       <div>
                         <BsCalendarRange />
                       </div>
-                      <input
+
+                      <DatePicker
+                        className="border-transparent border focus:ring-transparent"
+                        showIcon
+                        selected={registerDate}
+                        onChange={(date) => setRegisterDate(date)}
+                      />
+
+                      {/* <input
                         type="date"
                         name="SelectDate"
                         {...register('SelectDate', {
@@ -351,7 +362,7 @@ const SettingsGeneral = () => {
                         id="SelectDate"
                         placeholder="Select date"
                         className=" w-full outline-none border-0 focus:border-0 px-4 rounded-md selection:outline-none   !focus:outline-none  text-gray-900 "
-                      />
+                      /> */}
                     </div>
                     {/* Registration Date ERRORS STARTs */}
 
@@ -367,19 +378,6 @@ const SettingsGeneral = () => {
                 {/* Registered Region STARTs */}
                 <div className="text-center">
                   {/* <p className="mt-2">Registered Region</p> */}
-
-                  {/* <select
-                                        {...register('regions', {
-                                            required: true,
-                                        })}
-                                        className="select lg:w-[116px] w-full mt-2 max-w-xs font-semibold border  border-[#E5E7EB] rounded-md "
-                                    >
-                                        <option hidden>Country</option>
-                                        {Regions.map((country, i) => (
-                                            <option key={i}>{country} </option>
-                                        ))}
-                                    </select> */}
-                  {/* Registered Region Errors STARTs */}
 
                   <p className="pt-2">
                     {errors.regions && (

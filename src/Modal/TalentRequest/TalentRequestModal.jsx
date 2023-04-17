@@ -7,7 +7,7 @@ import modalSvg2 from '../../Assets/Dashboard/talentRequest/talentRequestModalSv
 import TalentGetStarted from './TalentComponents/TalentGetStarted';
 import TalentProcess from './TalentComponents/TalentProcess';
 
-const TalentRequestModal = ({ setIsOpen, isOpen }) => {
+const TalentRequestModal = ({ setIsOpen, isOpen, setRefresh, refresh }) => {
   const [getStartedOpen, setGetStartedOpen] = useState(true);
   function closeModal() {
     setIsOpen(false);
@@ -59,7 +59,7 @@ const TalentRequestModal = ({ setIsOpen, isOpen }) => {
                 {getStartedOpen ? (
                   <TalentGetStarted setGetStartedOpen={setGetStartedOpen} />
                 ) : (
-                  <TalentProcess />
+                  <TalentProcess refresh={refresh} setRefresh={setRefresh} setIsOpen={setIsOpen} />
                 )}
               </Dialog.Panel>
             </Transition.Child>

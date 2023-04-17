@@ -22,7 +22,7 @@ const ShadowingFaqs = () => {
       faqContent: ''
     },
     {
-      faqTitle: 'What knd of projects can I work on?',
+      faqTitle: 'What Kind of projects can I work on?',
       faqContent: ''
     },
   ]
