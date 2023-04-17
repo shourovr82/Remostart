@@ -34,13 +34,13 @@ const cardItems = [
     btnColor: 'text-[#09ff00]',
   },
   {
-    icon: <SlEnvelopeOpen className="inline-block text-xl  text-[#94e6ff]" />,
+    icon: <SlEnvelopeOpen className="inline-block text-xl  text-[#318cb6]" />,
     shadow: 'hover:shadow-blue-300',
-    border: 'border-[#94e6ff]',
+    border: 'border-[#318cb6]',
     title: `3. Let's Start your journey now!`,
     text: ' down the page for more recommendations. Below you will find a variety of products from all categories on Steam that may be of interest to you.<br /> Looking for recommendations?',
     background: 'bg-[#daf0ff] ',
-    btnColor: 'text-[#94e6ff]',
+    btnColor: 'text-[#318cb6]',
   },
   {
     icon: <RxDashboard className="inline-block text-xl text-[#fe3e4d]" />,
