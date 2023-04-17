@@ -19,33 +19,37 @@ const cardItems = [
     icon: <HiOutlineUsers className="inline-block text-xl text-[#FF9900]" />,
     shadow: 'hover:shadow-amber-300',
     border: 'border-amber-300',
-    title: 'A feature that engages the visitors',
+    title: '1. A feature that engages the visitors',
     text: ' down the page for more recommendations. Below you will find a variety of products from all categories on Steam that may be of interest to you.<br /> Looking for recommendations?',
     background: 'bg-[#FFF3E1] ',
+    btnColor: 'text-[#FF9900]',
   },
   {
-    icon: <HiOutlineUsers className="inline-block text-xl text-[#FF9900]" />,
-    shadow: 'hover:shadow-amber-300',
-    border: 'border-amber-300',
-    title: 'A feature that engages the visitors',
+    icon: <HiOutlineUsers className="inline-block text-xl text-[#09ff00]" />,
+    shadow: 'hover:shadow-green-300',
+    border: 'border-[#09ff00]',
+    title: '2. A feature that engages the visitors',
     text: ' down the page for more recommendations. Below you will find a variety of products from all categories on Steam that may be of interest to you.<br /> Looking for recommendations?',
-    background: 'bg-[#FFF3E1] ',
+    background: 'bg-[#09ff0050] ',
+    btnColor: 'text-[#09ff00]',
   },
   {
-    icon: <SlEnvelopeOpen className="inline-block text-xl " />,
-    shadow: 'hover:shadow-[#e2d6f2]',
+    icon: <SlEnvelopeOpen className="inline-block text-xl  text-[#94e6ff]" />,
+    shadow: 'hover:shadow-blue-300',
     border: 'border-[#94e6ff]',
-    title: `Let's Start your journey now!`,
+    title: `3. Let's Start your journey now!`,
     text: ' down the page for more recommendations. Below you will find a variety of products from all categories on Steam that may be of interest to you.<br /> Looking for recommendations?',
     background: 'bg-[#daf0ff] ',
+    btnColor: 'text-[#94e6ff]',
   },
   {
     icon: <RxDashboard className="inline-block text-xl text-[#fe3e4d]" />,
-    shadow: 'hover:shadow-[#e2d6f2]',
+    shadow: 'hover:shadow-[#fe3e4d]',
     border: 'border-[#fe3e4d]',
-    title: 'Want to apply in same job',
+    title: '4. Want to apply in same job',
     text: ' down the page for more recommendations. Below you will find a variety of products from all categories on Steam that may be of interest to you.<br /> Looking for recommendations?',
     background: 'bg-[#Fbc2c5] ',
+    btnColor: 'text-[#fe3e4d]',
   },
 ];
 
@@ -75,16 +79,17 @@ function RemoForceMyJob() {
             <Swiper
               slidesPerView={slidesToShow}
               spaceBetween={isDesktop ? 10 : 10}
+              autoplay
               loop
               className="mySwiper !p-2 !pb-5 "
             >
-              {cardItems.map((item, idx) => (
+              {cardItems.map((item) => (
                 <SwiperSlide
                   key={Math.random()}
-                  className="border shadow-lg hover:shadow-[#f3dcaa]  rounded-[20px] "
+                  className={`border shadow-lg ${item.shadow} rounded-[20px] `}
                 >
                   <div
-                    className={` cursor-pointer ${item.shadow} flex text-start flex-col justify-start items-start  `}
+                    className={` cursor-pointer  flex text-start flex-col justify-start items-start  `}
                   >
                     <div
                       className={`rounded-[20px] w-[4rem] p-[18px]  border ${item.border} flex justify-center m-3 mb-1 ${item.background} `}
@@ -100,7 +105,7 @@ function RemoForceMyJob() {
                     <div className="  w-full flex justify-end">
                       <button
                         type="button"
-                        className="text-[#B18CFF]   text-xs m-4 mt-2 flex gap-2 hover:gap-3 ease-in duration-300 items-center no-wrap"
+                        className={`text-sm font-semibold m-4 mt-2 flex gap-2 hover:gap-3 ease-in duration-300 items-center no-wrap ${item.btnColor}`}
                       >
                         Know More{' '}
                         <span className="mt-0.5">

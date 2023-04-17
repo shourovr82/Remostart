@@ -3,7 +3,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
-import { AiOutlineFileDone } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import RemoForceDashBoardItems from '../../../../Routes/Roots/RemoForceDashBoardItems';
 import NoJob from '../../../StartupDashboard/DashboardPages/NoJob';
@@ -76,7 +75,7 @@ const RemoForceAllJobs = () => {
                   </div>
                   {/* applied and apply now button */}
                   <div className="mt-4 flex justify-between">
-                    <button
+                    {/* <button
                       type="button"
                       className="flex items-center font-semibold px-4 rounded-full py-2  gap-2 bg-[#19A5FF80]"
                     >
@@ -84,7 +83,7 @@ const RemoForceAllJobs = () => {
                       <span>
                         <AiOutlineFileDone className="text-xl" />
                       </span>
-                    </button>
+                    </button> */}
                     {/* <Link to={`/remoforce-dashboard/all-jobs/${item._id}`}> */}
                     <button
                       onClick={() => handleApplyNow(item)}
