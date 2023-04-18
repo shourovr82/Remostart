@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 import loadingAnimation from '../Assets/Images/LoadingAnimation.svg';
 import AuthContext from './AuthContext';
 
@@ -20,11 +22,11 @@ const UserContext = ({ children }) => {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
-          if (res.data.length) {
+          if (res.data.requiredTalentsInHistory.length) {
             setSearchResults(res.data);
             setIsOpen(false);
           }
-          if (!res.data.length) {
+          if (!res.data.requiredTalentsInHistory.length) {
             toast.error('no result found. search again');
           }
         } else {
@@ -42,6 +44,47 @@ const UserContext = ({ children }) => {
         setLoading(false);
       });
   };
+  const { user } = useSelector((state) => state.auth);
+ 
+  
+
+ const tier = 'tierFree';
+  // const { data: lastSearchResult, refetch } = useQuery(['lastSearchResult'], () =>
+  //   axios
+  //     .get(
+  //       `${process.env.REACT_APP_URL_STARTUP}/api/talent/last-results?email=${user?.user?.email}&tier=${tier}`
+  //     )
+  //     .then((res) => res.data)
+  // );
+  // console.log(lastSearchResult);
+  const [lastSearchResult, setLastSearchResult] = useState(null);
+  useEffect(() => {
+
+    const fetchData = async () => {
+      try{
+      if (user?.user?.email ) {
+        const result = await axios.get(`${process.env.REACT_APP_URL_STARTUP}/api/talent/last-results?email=${user?.user?.email}&tier=${tier}`);
+        setLastSearchResult(result.data);
+        
+      }}catch(error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [user,]);
+
+  const [results, setResults] = useState([]);
+  useEffect(() => {
+    if (searchResults?.requiredTalentsInHistory?.length) {
+      setResults(searchResults);
+    } else {
+      setResults(lastSearchResult);
+    }
+  }, [searchResults, lastSearchResult]);
+
+
+  console.log(results);
 
   useEffect(() => {
     setLoading(true);
@@ -86,6 +129,7 @@ const UserContext = ({ children }) => {
         serviceUser,
         handleSearch,
         searchResults,
+        results
       }}
     >
       {children}
