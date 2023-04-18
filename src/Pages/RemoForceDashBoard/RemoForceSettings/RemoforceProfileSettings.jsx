@@ -426,11 +426,12 @@ function RemoforceProfileSettings() {
                   Country
                 </label>
                 <Select
+                  // defaultValue={remoProfile?.personalDetails?.country}
                   options={jData?.countries}
                   styles={customStyles}
                   defaultValue={selectedOption}
                   onChange={handleSelectChange}
-                  placeholder="Choose Country"
+                  placeholder={remoProfile?.personalDetails?.country}
                   className="mt-1 w-full lg:w-[280px] "
                   classNamePrefix="select2-selection"
                   components={{
