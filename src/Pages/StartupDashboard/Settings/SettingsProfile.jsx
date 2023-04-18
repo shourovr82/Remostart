@@ -228,9 +228,14 @@ const SettingsProfile = () => {
           <div className="lg:flex flex-col lg:pr-4">
             <span className="text-base font-medium my-4">Startup Icon</span>
             <div className="lg:flex justify-start items-center lg:space-x-4">
-              <span className="p-4 rounded-full border inline-block bg-[#6B7280]">
-                <RiUser3Line className="text-4xl text-white" />
-              </span>
+              {startupData?.startupIcon ? (
+                <img className="w-20 rounded-full" src={startupData?.startupIcon} alt="" />
+              ) : (
+                <span className="p-4 rounded-full border inline-block bg-[#6B7280]">
+                  <RiUser3Line className="text-4xl text-white" />
+                </span>
+              )}
+
               <div>
                 <input
                   {...register('startupIcon', { required: true })}

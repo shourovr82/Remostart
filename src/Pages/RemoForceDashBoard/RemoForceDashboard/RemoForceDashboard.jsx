@@ -5,20 +5,28 @@ import { FaBriefcase, FaFileContract } from 'react-icons/fa';
 import { GoMailRead } from 'react-icons/go';
 import { HiOutlineUsers } from 'react-icons/hi';
 import { RiTeamFill, RiTodoLine } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 import bg1 from '../../../Assets/RemoForceDashboard/dashboard/cardwithouticonbackground.png';
 import atlas from '../../../Assets/RemoForceDashboard/dashboard/worldmap.png';
 
 const buttons = [
-  { icon: <BsBoundingBox className="text-md " />, name: 'Gigs', color: 'text-black' },
+  {
+    icon: <BsBoundingBox className="text-md " />,
+    name: 'Gigs',
+    color: 'text-black',
+    link: '/remoforce-dashboard/gigs',
+  },
   {
     icon: <FaFileContract className="text-md " />,
     name: 'Contract',
     color: 'text-black',
+    link: '/remoforce-dashboard/contracts',
   },
   {
     icon: <AiOutlineInbox className="text-md " />,
     name: 'Internship',
     color: 'text-black',
+    link: '/remoforce-dashboard/internship',
   },
 ];
 const button = [
@@ -26,16 +34,19 @@ const button = [
     icon: <HiOutlineUsers className="text-md " />,
     name: 'Shadowing',
     color: 'text-black',
+    link: '/remoforce-dashboard/shadowing-jobs',
   },
   {
     icon: <FaBriefcase className="text-md " />,
     name: 'Public Job',
     color: 'text-black',
+    link: '/remoforce-dashboard/public-jobs',
   },
   {
     icon: <RiTodoLine className="text-md " />,
     name: 'Private Jos',
     color: 'text-black',
+    link: '/remoforce-dashboard/private-jobs',
   },
 ];
 
@@ -43,8 +54,12 @@ const RemoForceDashboard = () => (
   <section className="w-full flex flex-col justify-center items-center ">
     <div className="grid grid-cols-1 lg:grid-cols-1">
       {/* card with background image container start */}
-      <div className="col-span-3 w-full h-[60vh] lg:h-full sm:w-full shadow-xl rounded-xl shadow-[rgba(77, 0, 180, 0.25)]  mt-6 flex flex-col justify-center items-center pt-8 lg:pt-4 md:mt-0 relative">
-        <img src={bg1} alt="slides" className="w-full h-full rounded-xl   " />
+      <div className="col-span-3 w-full  lg:h-full sm:w-full shadow-xl rounded-xl shadow-[rgba(77, 0, 180, 0.25)]  mt-6 flex flex-col justify-center items-center pt-8 lg:pt-4 md:mt-0 relative">
+        <img
+          src={bg1}
+          alt="slides"
+          className="object-cover w-full max-md:h-[320px] lg:h-full rounded-xl   "
+        />
         <div className=" bg-white opacity-90 absolute shadow-xl rounded-xl w-[85%] lg:w-[90%] lg:h-[60%] z-0 mx-auto grid place-items-center p-4 md:p-4 lg:p-6 xl:p-10">
           <div className="w-full m-4 mb-1 flex flex-col items-start ">
             <h4 className="text-black text-md font-bold w-[100%]">
@@ -167,25 +182,25 @@ const RemoForceDashboard = () => (
           <div className="w-[80%] lg:w-full bg-[#f2faff] lg:mt-1 flex flex-col justify-center items-center rounded-md lg:flex-row no-wrap lg:justify-evenly lg:p-[2rem]">
             {/* button with icons */}
             {button.map((item) => (
-              <button
-                type="button"
+              <Link
+                to={item?.link}
                 className={`flex border rounded-md justify-center items-center shadow-lg lg:text-sm font-medium ${item.color} hover:text-amber-500 bg-white m-[1rem] lg:m-0 p-2 w-[80%] lg:w-[30%]`}
               >
                 <span className="mr-1 hover:text-amber-500  ">{item.icon}</span>
                 {item.name}
-              </button>
+              </Link>
             ))}
           </div>
           <div className="w-[80%] lg:w-full bg-[#f2faff] lg:mt-[2rem] flex flex-col justify-center items-center rounded-md lg:flex-row no-wrap lg:justify-evenly lg:p-[2rem]">
             {/* button with icons */}
-            {buttons.map((item) => (
-              <button
-                type="button"
+            {buttons?.map((item) => (
+              <Link
+                to={item?.link}
                 className={`flex border rounded-md shadow-lg justify-center items-center lg:text-sm font-medium ${item.color} hover:text-amber-500 bg-white m-[1rem] lg:m-0 p-2 w-[80%] lg:w-[30%]`}
               >
                 <span className="mr-1 hover:text-amber-500">{item.icon}</span>
                 {item.name}
-              </button>
+              </Link>
             ))}
           </div>
         </div>

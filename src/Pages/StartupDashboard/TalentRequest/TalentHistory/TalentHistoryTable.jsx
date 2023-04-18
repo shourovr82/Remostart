@@ -126,7 +126,7 @@ const TalentHistoryTable = ({ talentRequests }) => {
                               <circle
                                 className="progress-ring__circle--progress"
                                 stroke={
-                                  (talent?.scorePercentage > 80 &&
+                                  (talent?.scorePercentage >= 80 &&
                                     talent?.scorePercentage <= 100 &&
                                     '#00c42b') ||
                                   (talent?.scorePercentage >= 40 &&

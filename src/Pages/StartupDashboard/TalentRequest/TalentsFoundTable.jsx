@@ -206,7 +206,7 @@ const TalentsFoundTable = () => {
                                 <circle
                                   className="progress-ring__circle--progress"
                                   stroke={
-                                    (result?.scorePercentage > 80 &&
+                                    (result?.scorePercentage >= 80 &&
                                       result?.scorePercentage <= 100 &&
                                       '#00c42b') ||
                                     (result?.scorePercentage >= 40 &&
