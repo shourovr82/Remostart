@@ -333,10 +333,10 @@ const DashboardNavbar = () => {
                     {(token || serviceUser?.role) && (
                       <li className="bg-[#f3f4f6]">
                         <div className="flex  py-1.5 flex-row justify-center items-center text-center">
-                          <div className="w-1/3 pl-4">
+                          <div className="w-1/3 ">
                             <img
                               src={user?.user?.profilePhoto || avatarLogo}
-                              className="rounded-full w-10 h-10"
+                              className="rounded-full w-full h-full"
                               alt=""
                             />
                           </div>
