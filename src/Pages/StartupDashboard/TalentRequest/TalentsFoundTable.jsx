@@ -9,9 +9,9 @@ import TalentRequestConfirmationModal from '../../../Modal/TalentRequest/TalentR
 
 const TalentsFoundTable = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const { searchResults } = useContext(AuthContext);
 
-  console.log('searchResults', searchResults);
   const tier = 'tierFree';
   const { user } = useSelector((state) => state.auth);
 
@@ -30,6 +30,32 @@ const TalentsFoundTable = () => {
       setResults(lastSearchResult?.requiredTalentsInHistory);
     }
   }, [searchResults, lastSearchResult]);
+
+  const [selectedTalent, setSelectedTalent] = useState([]);
+  const [isAllSelected, setIsAllSelected] = useState(false);
+
+  const handleSelectTalent = (data) => {
+    if (data?.isSelected === true) {
+      setSelectedTalent([...selectedTalent, data]);
+    }
+    if (data?.isSelected === false) {
+      const datas = selectedTalent.filter((sel) => sel.id !== data.id);
+
+      setSelectedTalent(datas);
+    }
+  };
+
+  const handleSelectAllTalent = (data) => {
+    if (data === true) {
+      setSelectedTalent(results);
+      setIsAllSelected(true);
+    }
+    if (data === false) {
+      setSelectedTalent([]);
+      setIsAllSelected(false);
+    }
+  };
+
   return (
     <>
       {results?.length && (
@@ -109,7 +135,12 @@ const TalentsFoundTable = () => {
                         </th>
                         <th className="px-5 py-3 border-b-2 border-gray-200  text-left text-sm font-semibold text-gray-600  tracking-wider">
                           <div className="form-control flex gap-3 flex-row items-center">
-                            <input id="select" type="checkbox" className="checkbox focus:ring-0" />
+                            <input
+                              onChange={(e) => handleSelectAllTalent(e.target.checked)}
+                              id="select"
+                              type="checkbox"
+                              className="checkbox focus:ring-0"
+                            />
                             <label htmlFor="select" className="text-[#b5b7c0]">
                               Select
                             </label>
@@ -151,9 +182,17 @@ const TalentsFoundTable = () => {
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200 text-sm">
                               <input
+                                onChange={(e) =>
+                                  handleSelectTalent({
+                                    result,
+                                    isSelected: e.target.checked,
+                                    id: result?._id,
+                                  })
+                                }
                                 id="select"
                                 type="checkbox"
-                                className="checkbox focus:ring-0"
+                                disabled={isAllSelected}
+                                className="checkbox  focus:ring-0"
                               />
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200  text-sm">
@@ -162,18 +201,38 @@ const TalentsFoundTable = () => {
                               </p>
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200  text-sm">
-                              <div
-                                className={`radial-progress ml-3  ${
-                                  result?.scorePercentage >= 80 && 'text-[#00c42b]'
-                                }
-                               ${result?.scorePercentage >= 40 && 'text-[#19a5ff]'}
-${result?.scorePercentage < 40 && 'text-[#ff9900]'}
-${result?.scorePercentage <= 20 && 'text-[#13d1ff]'}
-                               `}
-                                style={{ '--value': result?.scorePercentage, '--size': '2.5rem' }}
-                              >
-                                {result?.scorePercentage}%
-                              </div>
+                              <svg className="progress-ring" viewBox="0 0 120 120">
+                                <circle className="progress-ring__circle" cx="60" cy="60" r="50" />
+                                <circle
+                                  className="progress-ring__circle--progress"
+                                  stroke={
+                                    (result?.scorePercentage > 80 &&
+                                      result?.scorePercentage <= 100 &&
+                                      '#00c42b') ||
+                                    (result?.scorePercentage >= 40 &&
+                                      result?.scorePercentage <= 75 &&
+                                      '#19a5ff') ||
+                                    (result?.scorePercentage >= 20 &&
+                                      result?.scorePercentage <= 39 &&
+                                      '#ff9900') ||
+                                    (result?.scorePercentage >= 0 &&
+                                      result?.scorePercentage <= 19 &&
+                                      '#13d1ff')
+                                  }
+                                  cx="60"
+                                  cy="60"
+                                  r="50"
+                                  style={{ '--value': result?.scorePercentage }}
+                                />
+                                <text
+                                  className="text-3xl font-bold"
+                                  x="55%"
+                                  y="60%"
+                                  textAnchor="middle"
+                                >
+                                  {result?.scorePercentage}%
+                                </text>
+                              </svg>
                             </td>
                           </tr>
                         ))}

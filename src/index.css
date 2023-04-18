@@ -624,3 +624,41 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 
+/* talent table */
+.progress-ring {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}
+
+.progress-ring__circle {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transform: translate(5px, 5px);
+}
+
+.progress-ring__circle--progress {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform: translate(5px, 5px);
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: progress-ring 1s ease-out forwards;
+}
+
+@keyframes progress-ring {
+  from {
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dashoffset: calc(300 - (300 * var(--value)) / 100);
+  }
+}
+
+.talentTable{
+  box-shadow: #edf4fd 0px 0px 16px;
+}
