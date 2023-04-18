@@ -12,10 +12,10 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <UserContext>
+       
             <App />
             <ToastContainer autoClose={1000} />
-        </UserContext>
+   
     </React.StrictMode>
 );
 

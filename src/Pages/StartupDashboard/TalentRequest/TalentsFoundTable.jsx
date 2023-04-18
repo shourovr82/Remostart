@@ -10,26 +10,28 @@ import TalentRequestConfirmationModal from '../../../Modal/TalentRequest/TalentR
 const TalentsFoundTable = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { searchResults } = useContext(AuthContext);
+  const { searchResults,results } = useContext(AuthContext);
 
   const tier = 'tierFree';
   const { user } = useSelector((state) => state.auth);
 
-  const { data: lastSearchResult, refetch } = useQuery(['lastSearchResult'], () =>
-    axios
-      .get(
-        `${process.env.REACT_APP_URL_STARTUP}/api/talent/last-results?email=${user?.user.email}&tier=${tier}`
-      )
-      .then((res) => res.data)
-  );
-  const [results, setResults] = useState([]);
-  useEffect(() => {
-    if (searchResults?.length) {
-      setResults(searchResults);
-    } else {
-      setResults(lastSearchResult?.requiredTalentsInHistory);
-    }
-  }, [searchResults, lastSearchResult]);
+  // const { data: lastSearchResult, refetch } = useQuery(['lastSearchResult'], () =>
+  //   axios
+  //     .get(
+  //       `${process.env.REACT_APP_URL_STARTUP}/api/talent/last-results?email=${user?.user.email}&tier=${tier}`
+  //     )
+  //     .then((res) => res.data)
+  // );
+  // console.log(lastSearchResult);
+  
+  // const [results, setResults] = useState([]);
+  // useEffect(() => {
+  //   if (searchResults.requiredTalentsInHistory?.length) {
+  //     setResults(searchResults.requiredTalentsInHistory);
+  //   } else {
+  //     setResults(lastSearchResult?.lastSearchResult.requiredTalentsInHistory);
+  //   }
+  // }, [searchResults, lastSearchResult]);
 
   const [selectedTalent, setSelectedTalent] = useState([]);
   const [isAllSelected, setIsAllSelected] = useState(false);
@@ -47,7 +49,7 @@ const TalentsFoundTable = () => {
 
   const handleSelectAllTalent = (data) => {
     if (data === true) {
-      setSelectedTalent(results);
+      setSelectedTalent(results.requiredTalentsInHistory);
       setIsAllSelected(true);
     }
     if (data === false) {
@@ -58,7 +60,7 @@ const TalentsFoundTable = () => {
 
   return (
     <>
-      {results?.length && (
+      {results?.lastSearchResult.requiredTalentsInHistory.length && (
         <section className="mt-10">
           <div className="container  bg-white shadow-lg shadow-slate-300 rounded-3xl mx-auto px-4 sm:px-8">
             <div className="py-8">
@@ -165,8 +167,8 @@ const TalentsFoundTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {results?.length &&
-                        results?.map((result) => (
+                      {results?.lastSearchResult.requiredTalentsInHistory.length &&
+                        results?.lastSearchResult.requiredTalentsInHistory.map((result) => (
                           <tr className="hover:bg-[#e3d5ff]">
                             <td className="px-5 py-5 border-b border-gray-200 text-sm">
                               <div className="">
