@@ -128,7 +128,12 @@ function RemoforceProfileSettings() {
   // input Link State
   const [url, setUrl] = useState('');
   const [selectUrl, setSelectUrl] = useState();
-  const [displayUrl, setDisplayUrl] = useState([]);
+  const [displayUrl, setDisplayUrl] = useState(
+    remoProfile?.socialLinks
+      ? Object.entries(remoProfile?.socialLinks).map(([key, value]) => ({ name: key, link: value }))
+      : []
+  );
+
   const [selectedOption, setSelectedOption] = useState(null);
   const [jData, setJData] = useState({});
   const [selectedCounty, setSelectedCountry] = useState('');
@@ -213,7 +218,6 @@ function RemoforceProfileSettings() {
     setSelectedOption(selectedOptions);
     const selectedValue = selectedOptions?.value;
     setSelectedCountry(selectedValue);
-    console.log(selectedCounty);
   };
 
   useEffect(() => {
@@ -244,9 +248,18 @@ function RemoforceProfileSettings() {
                 <span className="text-base font-medium my-4">Profile Photo</span>
 
                 <div className="lg:flex justify-start items-center lg:space-x-4">
-                  <span className="p-4 rounded-full border inline-block bg-[#6B7280]">
-                    <RiUser3Line className="text-4xl text-white" />
-                  </span>
+                  {remoProfile?.remoforceProfilePhoto ? (
+                    <img
+                      className="w-20 rounded-full"
+                      src={remoProfile?.remoforceProfilePhoto}
+                      alt=""
+                    />
+                  ) : (
+                    <span className="p-4 rounded-full border inline-block bg-[#6B7280]">
+                      <RiUser3Line className="text-4xl text-white" />
+                    </span>
+                  )}
+
                   <div>
                     <input
                       {...register('remoforceProfilePhoto', {

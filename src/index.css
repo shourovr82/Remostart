@@ -662,3 +662,6 @@ input[type="range"]::-webkit-slider-thumb {
 .talentTable{
   box-shadow: #edf4fd 0px 0px 16px;
 }
+.designationCard{
+  box-shadow: #dfcdf8 0px 0px 20px;
+}
