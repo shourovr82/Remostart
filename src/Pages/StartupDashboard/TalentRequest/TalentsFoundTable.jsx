@@ -1,16 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { HiChevronUpDown } from 'react-icons/hi2';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import AuthContext from '../../../Context/AuthContext';
 import TalentRequestConfirmationModal from '../../../Modal/TalentRequest/TalentRequestConfirmation/TalentRequestConfirmationModal';
 
 const TalentsFoundTable = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { searchResults,results } = useContext(AuthContext);
+  const { searchResults, results } = useContext(AuthContext);
 
   const tier = 'tierFree';
   const { user } = useSelector((state) => state.auth);
@@ -23,7 +22,7 @@ const TalentsFoundTable = () => {
   //     .then((res) => res.data)
   // );
   // console.log(lastSearchResult);
-  
+
   // const [results, setResults] = useState([]);
   // useEffect(() => {
   //   if (searchResults.requiredTalentsInHistory?.length) {
@@ -60,7 +59,7 @@ const TalentsFoundTable = () => {
 
   return (
     <>
-      {results?.lastSearchResult.requiredTalentsInHistory.length && (
+      {results?.lastSearchResult?.requiredTalentsInHistory?.length && (
         <section className="mt-10">
           <div className="container  bg-white shadow-lg shadow-slate-300 rounded-3xl mx-auto px-4 sm:px-8">
             <div className="py-8">
@@ -167,14 +166,17 @@ const TalentsFoundTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {results?.lastSearchResult.requiredTalentsInHistory.length &&
-                        results?.lastSearchResult.requiredTalentsInHistory.map((result) => (
+                      {results?.lastSearchResult?.requiredTalentsInHistory?.length &&
+                        results?.lastSearchResult?.requiredTalentsInHistory?.map((result) => (
                           <tr className="hover:bg-[#e3d5ff]">
                             <td className="px-5 py-5 border-b border-gray-200 text-sm">
                               <div className="">
-                                <p className="text-gray-900 font-semibold whitespace-no-wrap">
+                                <Link
+                                  to={`/remoforce/profile/${result.email}`}
+                                  className="text-gray-900 font-semibold whitespace-no-wrap"
+                                >
                                   {result?.fullName}
-                                </p>
+                                </Link>
                               </div>
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200 text-sm">
