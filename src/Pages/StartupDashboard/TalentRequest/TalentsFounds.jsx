@@ -28,9 +28,11 @@ console.log(myRequests);
   return (
     <section className="mt-20 max-md:p-2 ">
       {/* total talents found heading card */}
+
       <div className="lg:grid grid-cols-3 gap-3">
         <div className="col-span-2 lg:bg-white flex lg:flex-row flex-col gap-10  max-md:gap-3  items-center rounded-3xl shadow-xl shadow-[#f4f8fc]">
           <div className="flex max-lg:bg-white w-full  py-5 2xl:gap-10 max-lg:rounded-2xl max-lg:shadow-xl max-lg:shadow-[#f5f8fd] justify-evenly lg:justify-center items-center">
+
             <div>
               <p className="p-4 2xl:p-6 rounded-full bg-[#dcffec]">
                 <HiOutlineUsers className="text-2xl 2xl:text-3xl text-[#00ac4f]" />

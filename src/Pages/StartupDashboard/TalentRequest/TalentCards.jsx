@@ -6,33 +6,34 @@ const TalentCards = () => {
   const talentsCardsItems = [
     {
       itemType: 'STARTER',
-      price: 19,
+      price: 10,
       itemColor: '#19a5ff',
       borderColor: 'border-[#30d7ff]',
       description: {
-        searches: '5 Searches',
-        fullDescription: `sloe posuere enim id nec. Molestie neque, sed fusce faucibus.`,
+        searches: '7 Searches',
+        fullDescription: `is counted as number
+        of independent search you can make`,
       },
       featuresLists: [
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Basic filtering options based on location, skill set, and experience level',
         },
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Access to all your search histories and results',
         },
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Send interview requests to matched talents, manage interviews in one place',
         },
         {
           availability: false,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Access to only  a pool of pre-vetted and highly skilled talents',
         },
         {
           availability: false,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Customized matching algorithms that take into account company culture and preferences',
         },
       ],
     },
@@ -42,29 +43,30 @@ const TalentCards = () => {
       itemColor: '#ff9900',
       borderColor: 'border-[#fcbc5c]',
       description: {
-        searches: '25 Searches',
-        fullDescription: `sloe posuere enim id nec. Molestie neque, sed fusce faucibus.`,
+        searches: '50 Searches',
+        fullDescription: `is counted as number
+        of independent search you can make`,
       },
       featuresLists: [
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Basic filtering options based on location, skill set, and experience level',
         },
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Access to all your search histories and results',
         },
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Send interview requests to matched talents, manage interviews in one place',
         },
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Access to only  a pool of pre-vetted and highly skilled talents',
         },
         {
           availability: false,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Customized matching algorithms that take into account company culture and preferences',
         },
       ],
     },
@@ -74,29 +76,30 @@ const TalentCards = () => {
       borderColor: 'border-[#fee719]',
       price: 39,
       description: {
-        searches: '50 Searches',
-        fullDescription: `sloe posuere enim id nec. Molestie neque, sed fusce faucibus.`,
+        searches: '100 Searches',
+        fullDescription: `is counted as number
+        of independent search you can make`,
       },
       featuresLists: [
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Basic filtering options based on location, skill set, and experience level',
         },
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Access to all your search histories and results',
         },
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Send interview requests to matched talents, manage interviews in one place',
         },
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Access to only  a pool of pre-vetted and highly skilled talents',
         },
         {
           availability: true,
-          name: 'Is a sales copy really omnipotent? Is there a universal formula for writing copy that will definitely lead to a sale?',
+          name: 'Customized matching algorithms that take into account company culture and preferences',
         },
       ],
     },
@@ -105,7 +108,7 @@ const TalentCards = () => {
     <div className="flex flex-col  lg:grid lg:grid-cols-6 mt-10 2xl:mt-5 gap-6 2xl:gap-10 max-md:px-3">
       {talentsCardsItems?.map((item) => (
         <div
-          className={`border col-span-2 py-6 shadow-sm duration-300 ease-in-out hover:shadow-2xl hover:shadow-[#dfdcdc] shadow-[#f7f7f7] px-5 rounded-lg ${item?.borderColor}`}
+          className={`border col-span-2 py-6 shadow-sm duration-300 ease-in-out hover:shadow-2xl hover:shadow-[${item?.itemColor}] shadow-[${item?.itemColor}] px-5 rounded-lg ${item?.borderColor}`}
         >
           {/* heading  */}
           <div>
@@ -114,7 +117,7 @@ const TalentCards = () => {
           <div className="flex items-end justify-between">
             <div className="flex items-end gap-2">
               <h2 className="text-3xl font-bold">${item?.price} </h2>
-              <span className={`text-[${item?.itemColor}]`}>user/month</span>
+              <span className={`text-[${item?.itemColor}]`}>user/validity</span>
             </div>
             <div>
               <button
@@ -123,11 +126,11 @@ const TalentCards = () => {
                   `bg-[${item?.itemColor}] hover:bg-white hover:text-[#19a5ff] hover:border-[#19a5ff] border border-transparent text-white`
                 }      ${
                   item?.itemType === 'TEAM' &&
-                  `hover:bg-[#ff9900] bg-white text-[#ff9900] border-[#ffc46b] border hover:border-transparent hover:text-white`
+                  `hover:bg-white bg-[#ff9900] text-white hover:border-[#ffc46b] border border-transparent hover:text-[#ff9900]`
                 }
                                     ${
                                       item?.itemType === 'BUSINESS' &&
-                                      `hover:bg-[#ff3449] bg-white text-[#ff3449] border-[#ff3449] border hover:border-transparent hover:text-white`
+                                      `hover:bg-white bg-[#ff3449] text-white hover:border-[#ff3449] border border-transparent hover:text-[#ff3449]`
                                     }
                                 rounded-lg py-1.5 2xl:px-8 px-5 duration-300 ease-in-out `}
                 type="button"
@@ -146,10 +149,10 @@ const TalentCards = () => {
           </div>
           {/* border */}
           <div className="my-5">
-            <hr className="border border-[#bcbcbc71] " />
+            <hr className={`border ${item?.borderColor} `} />
           </div>
           <div>
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-5">
               {item?.featuresLists?.map((feature) => (
                 <li className="flex gap-2  2xl:gap-3 items-start">
                   <span
@@ -161,7 +164,7 @@ const TalentCards = () => {
                   >
                     {feature?.availability === true ? <BsCheckLg /> : <MdOutlineClear />}
                   </span>
-                  <p className="text-sm">{feature?.name}</p>
+                  <p className={`text-sm `}>{feature?.name}</p>
                 </li>
               ))}
             </ul>

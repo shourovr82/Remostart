@@ -1,5 +1,4 @@
-{
-    // Theme
+
     "workbench.colorTheme": "Learn with Sumit Official Theme",
     // config related to code formatting
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -29,3 +28,4 @@
     "tailwindCSS.emmetCompletions": true,
     "cSpell.words": ["Remo", "remoforce"]
 }
+
