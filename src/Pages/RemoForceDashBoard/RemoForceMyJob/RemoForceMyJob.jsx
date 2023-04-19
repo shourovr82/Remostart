@@ -97,7 +97,7 @@ function RemoForceMyJob() {
                       {item.icon}
                     </div>
                     <div className="w-full m-3 mb-1 flex flex-col items-start">
-                      <h4 className="text-black text-sm lg:text-xs 2xl:text-sm font-semibold  ">
+                      <h4 className="text-black text-sm lg:text-[11px] 2xl:text-sm font-semibold  ">
                         {item.title}
                       </h4>
                       <p className="w-[90%] text-xs text-[#CCCCCC] my-1"> {item.text}</p>
