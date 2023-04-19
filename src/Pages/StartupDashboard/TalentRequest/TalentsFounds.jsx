@@ -22,15 +22,19 @@ const TalentsFounds = () => {
   const handleMyRequest = () => {
     navigate('/talent-request-history', { state: { data: myRequests?.myRequests } });
   };
+console.log(myRequests);
+
 
   return (
     <section className="mt-20 max-md:p-2 ">
       {/* total talents found heading card */}
-      <div className="grid grid-cols-3 gap-3">
-        <div className="col-span-2 bg-white flex items-center rounded-3xl shadow-2xl shadow-[#b3cfeb86]">
-          <div className="flex  w-full gap-10 justify-center items-center">
+
+      <div className="lg:grid grid-cols-3 gap-3">
+        <div className="col-span-2 lg:bg-white flex lg:flex-row flex-col gap-10  max-md:gap-3  items-center rounded-3xl shadow-xl shadow-[#f4f8fc]">
+          <div className="flex max-lg:bg-white w-full  py-5 2xl:gap-10 max-lg:rounded-2xl max-lg:shadow-xl max-lg:shadow-[#f5f8fd] justify-evenly lg:justify-center items-center">
+
             <div>
-              <p className="p-3 2xl:p-6 rounded-full bg-[#dcffec]">
+              <p className="p-4 2xl:p-6 rounded-full bg-[#dcffec]">
                 <HiOutlineUsers className="text-2xl 2xl:text-3xl text-[#00ac4f]" />
               </p>
             </div>
@@ -46,9 +50,9 @@ const TalentsFounds = () => {
             </div>
           </div>
           <div className="lg:h-[100px] hidden  lg:block 2xl:p-5 p-2 border-l border-[#ececec] " />
-          <div className="flex w-full max-md:pt-2  gap-10 items-center">
+          <div className="flex  max-lg:bg-white w-full  py-5 2xl:gap-10 max-lg:rounded-2xl max-lg:shadow-xl max-lg:shadow-[#f5f8fd] justify-evenly lg:justify-center items-center">
             <div>
-              <p className="p-3 2xl:p-6 rounded-full bg-[#dcffec]">
+              <p className="p-4 2xl:p-6 rounded-full bg-[#dcffec]">
                 <RiUserFollowLine className="text-3xl 2xl:text-3xl text-[#00ac4f]" />
               </p>
             </div>
@@ -63,13 +67,13 @@ const TalentsFounds = () => {
         </div>
 
         {/* my request */}
-        <button type="button" onClick={handleMyRequest}>
-          <div className="col-span-1 flex justify-evenly items-center  py-8 2xl:py-10 rounded-3xl bg-[#d3ffe7] shadow-xl shadow-[#f4f8fc]">
+        <button type="button" className="max-md:w-full" onClick={handleMyRequest}>
+          <div className="col-span-1 flex justify-evenly items-center  py-8 2xl:py-10 max-lg:px-10 max-lg:mt-5 rounded-3xl bg-[#d3ffe7] shadow-xl max-md:gap-3 gap-2 shadow-[#f4f8fc]">
             <div className=" p-4 2xl:p-6 rounded-full bg-white">
               <img src={libraryBookIcon} alt="" />
             </div>
             <div className="space-y-1.5">
-              <h2 className="text-2xl 2xl:text-2xl font-bold text-[#333333]">My Request</h2>
+              <h2 className="text-xl 2xl:text-2xl font-bold text-[#333333]">My Request</h2>
               <p className="font-semibold text-[#acacac]  text-xs 2xl:text-base">
                 Your Searches & <br /> History
               </p>

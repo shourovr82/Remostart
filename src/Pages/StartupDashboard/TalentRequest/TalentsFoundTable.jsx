@@ -1,16 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { HiChevronUpDown } from 'react-icons/hi2';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import AuthContext from '../../../Context/AuthContext';
 import TalentRequestConfirmationModal from '../../../Modal/TalentRequest/TalentRequestConfirmation/TalentRequestConfirmationModal';
 
 const TalentsFoundTable = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { searchResults,results } = useContext(AuthContext);
+  const { searchResults, results } = useContext(AuthContext);
 
   const tier = 'tierFree';
   const { user } = useSelector((state) => state.auth);
@@ -23,7 +22,7 @@ const TalentsFoundTable = () => {
   //     .then((res) => res.data)
   // );
   // console.log(lastSearchResult);
-  
+
   // const [results, setResults] = useState([]);
   // useEffect(() => {
   //   if (searchResults.requiredTalentsInHistory?.length) {
@@ -60,16 +59,16 @@ const TalentsFoundTable = () => {
 
   return (
     <>
-      {results?.lastSearchResult.requiredTalentsInHistory.length && (
+      {results?.lastSearchResult?.requiredTalentsInHistory?.length && (
         <section className="mt-10">
           <div className="container  bg-white shadow-lg shadow-slate-300 rounded-3xl mx-auto px-4 sm:px-8">
             <div className="py-8">
-              <div className=" flex justify-between items-center">
+              <div className=" sm:flex justify-between items-center">
                 <div>
                   <h2 className="text-2xl font-semibold leading-tight">Talents Found</h2>
                   <p className="font-medium text-[#16c098]">Best Match</p>
                 </div>
-                <div className="flex items-center gap-5 ">
+                <div className="lg:flex items-center gap-5 ">
                   <div className="my-2 flex sm:flex-row flex-col">
                     <div className="flex  flex-row mb-1 sm:mb-0">
                       <form className="flex bg-[#f9fbff] items-center">
@@ -95,7 +94,7 @@ const TalentsFoundTable = () => {
                   </div>
 
                   <div className="group">
-                    <div className="flex  focus:ring-blue-500 focus:ring  group-hover:border-[3px] group-hover:border-[#e3d5ff]   rounded-lg bg-[#f9fbff] px-2 gap-2 relative items-center justify-center w-[220px] ">
+                    <div className="flex  focus:ring-blue-500 focus:ring  group-hover:border-[3px] group-hover:border-[#e3d5ff] border-transparent border-[3px]   rounded-lg bg-[#f9fbff] px-2 gap-2 relative items-center justify-center w-[220px] ">
                       <label htmlFor="sort" className="text-sm ">
                         Sort by :
                       </label>
@@ -167,14 +166,17 @@ const TalentsFoundTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {results?.lastSearchResult.requiredTalentsInHistory.length &&
-                        results?.lastSearchResult.requiredTalentsInHistory.map((result) => (
+                      {results?.lastSearchResult?.requiredTalentsInHistory?.length &&
+                        results?.lastSearchResult?.requiredTalentsInHistory?.map((result) => (
                           <tr className="hover:bg-[#e3d5ff]">
                             <td className="px-5 py-5 border-b border-gray-200 text-sm">
                               <div className="">
-                                <p className="text-gray-900 font-semibold whitespace-no-wrap">
+                                <Link
+                                  to={`/remoforce/profile/${result.email}`}
+                                  className="text-gray-900 font-semibold whitespace-no-wrap"
+                                >
                                   {result?.fullName}
-                                </p>
+                                </Link>
                               </div>
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200 text-sm">
