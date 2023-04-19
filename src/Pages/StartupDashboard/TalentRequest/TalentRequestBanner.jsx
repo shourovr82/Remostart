@@ -15,42 +15,51 @@ const TalentRequestBanner = () => {
       name: 'UNMATCHED SKILLS',
       total: 500,
       bgColor: 'bg-[#fffcee]',
+      color: 'border-[#FF9900]',
     },
     {
-      icon: <HiOutlineUser className="text-[#FF9900] text-3xl" />,
+      icon: <HiOutlineUser className="text-[#3cff00] text-3xl" />,
       name: 'VERIFIED TALENTS',
       total: 5000,
-      bgColor: 'bg-[#fafee6]',
+      bgColor: 'bg-[#3cff0030]',
+      color: 'border-[#3cff00]',
     },
     {
       icon: <HiOutlineGlobe className="text-[#26aaff] text-3xl" />,
       name: 'STATES & LANGUAGES',
       total: 47,
       bgColor: 'bg-[#f0f9ff]',
+      color: 'border-[#26aaff]',
     },
   ];
   return (
     <>
       <div className="lg:grid lg:grid-cols-4 flex flex-col-reverse  justify-between h-full">
-        <div className="col-span-2  lg:mt-20">
+        <div className="col-span-2  lg:mt-10">
           <div className="space-y-3">
             <h1 className="text-3xl max-md:hidden font-bold">
-              Lorem ipsum dolor sit amet, consectetur adipiscing?
+              Let our AI algorithm help you get the best and inclusive talent for the job
             </h1>
             <h2 className="mt-3 max-md:ml-10 text-[#FF5A78] text-xl lg:text-3xl font-semibold">
-              How We Do
+              How it works
             </h2>
             <p className="text-[#999999] font-medium lg:font-semibold  lg:text-xl mt-5">
-              Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit. Nunc vulputate libero
-              et velit <br /> interdum, ac aliquet odio mattis.
+              Specify whom you want, our algorithm does the inclusive matching, interview
+              scheduling, acceptance and rejection all in one place
             </p>
           </div>
-          <div className="mt-5 max-md:flex max-md:justify-center">
+          <div className="mt-5 max-md:flex max-md:justify-center space-x-2">
             <button
               type="button"
               className="text-[#61C1FF] shadow-inner px-5 bg-[#f8f1ff] rounded-lg py-2 text-xl font-semibold"
             >
               Find me Talents !
+            </button>
+            <button
+              type="button"
+              className="text-[#61C1FF] shadow-inner px-5 bg-[#f8f1ff] rounded-lg py-2 text-xl font-semibold"
+            >
+              View Plans
             </button>
           </div>
 
@@ -69,7 +78,7 @@ const TalentRequestBanner = () => {
                   <div className={`w-full shadow-inner  rounded-xl   ${item?.bgColor}`}>
                     <div className="flex p-2 items-center gap-2 ">
                       <span>{item?.icon}</span>
-                      <span className="border-t-[1px]  border-[#000000] w-full" />
+                      <span className={`border-t-[1px]  ${item?.color} w-full`} />
                     </div>
                     <div className="flex pb-5 pt-1 text-center flex-col justify-center items-center">
                       <h3 className="font-bold text-xl">{item?.total}+</h3>
@@ -99,7 +108,7 @@ const TalentRequestBanner = () => {
           <div className={`col-span-2 shadow-inner  rounded-xl   ${item?.bgColor}`}>
             <div className="flex p-3 items-center gap-2 ">
               <span>{item?.icon}</span>
-              <span className="border-t-[2px]  border-[#000000] w-full" />
+              <span className={`border-t-[2px]  ${item?.color} w-full`} />
             </div>
             <div className="flex pb-5 pt-1 text-center flex-col justify-center items-center">
               <h3 className="font-bold text-xl 2xl:text-2xl">{item?.total}+</h3>

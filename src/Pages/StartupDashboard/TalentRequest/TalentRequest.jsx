@@ -41,9 +41,8 @@ const TalentRequest = () => {
             <div>
               <h4 className="font-semibold">Try for free</h4>
               <p className="  text-[#999999] text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate{' '}
-                <br className="lg:block 2xl:hidden max-md:hidden" /> libero et velit interdum, ac{' '}
-                <br className="hidden 2xl:block" /> aliquet odio mattis.
+                Our first 2 tries of this feature is free, you dont even need to put in your card,
+                though it has limited functionality
               </p>
             </div>
           </div>

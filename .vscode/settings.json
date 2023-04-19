@@ -1,12 +1,12 @@
 {
   // Theme
-  "workbench.colorTheme": "Learn with Sumit Official Theme",
+  "workbench.colorTheme": "Noctis Viola",
   // config related to code formatting
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "[javascript]": {
     "editor.formatOnSave": false,
-    "editor.defaultFormatter": null
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascriptreact]": {
     "editor.formatOnSave": false,
