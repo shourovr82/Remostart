@@ -1,4 +1,5 @@
-
+{
+    // Theme
     "workbench.colorTheme": "Learn with Sumit Official Theme",
     // config related to code formatting
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -18,14 +19,15 @@
         "source.organizeImports": true
     },
     "eslint.alwaysShowStatus": true,
-    "eslint.validate": ["javascript", "javascriptreact"],
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact"
+    ],
     // emmet
     "emmet.triggerExpansionOnTab": true,
     "emmet.includeLanguages": {
         "javascript": "javascriptreact"
     },
     "css.validate": false,
-    "tailwindCSS.emmetCompletions": true,
-    "cSpell.words": ["Remo", "remoforce"]
+    "tailwindCSS.emmetCompletions": true
 }
-

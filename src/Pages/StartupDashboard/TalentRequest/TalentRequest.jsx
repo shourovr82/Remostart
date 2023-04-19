@@ -4,8 +4,6 @@ import { BsStarFill } from 'react-icons/bs';
 import { HiOutlineGlobe } from 'react-icons/hi';
 import { HiOutlineUser } from 'react-icons/hi2';
 import { useSelector } from 'react-redux';
-import { Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import headingIcon from '../../../Assets/Dashboard/talentRequest/headingIcon.svg';
 import TalentRequestModal from '../../../Modal/TalentRequest/TalentRequestModal';
 import TalentCards from './TalentCards';
@@ -60,10 +58,11 @@ const TalentRequest = () => {
         </div>
 
         {/* Try Free or view plan option */}
-        <div className="lg:flex max-md:p-2 max-md:pb-4 items-center mt-5 justify-between pr-5 rounded-md bg-[#f0f9ff]">
-          <div className="flex gap-2 px-2 py-3">
+        {/* <div className="lg:flex max-md:p-2 max-md:pb-4 items-center mt-5 justify-between pr-5 rounded-md bg-[#f0f9ff]"> */}
+        <div className="max-md:flex max-md:flex-col lg:grid grid-cols-6  items-center justify-between  w-full  gap-2 px-2   mt-5  max-lg:pr-1 2xl:pr-5 rounded-md bg-[#f0f9ff] py-7">
+          <div className="flex gap-2  col-span-4 ">
             <span className="mt-1">
-              <BsStarFill />
+              <BsStarFill className="text-[#ff9900]" />
             </span>
             <div>
               <h4 className="font-semibold">Try for free</h4>
@@ -71,73 +70,26 @@ const TalentRequest = () => {
                 Our first 2 tries of this feature is free, you dont even need to put in your card,
                 though it has limited functionality
               </p>
-
-            </div>
-            <div className="max-md:flex max-md:justify-center">
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setIsOpen(true)}
-                  className="text-white hover:bg-[#00c42b] duration-300 ease-in bg-[#65dc7f] px-10 py-2 border  border-[#00c42b] rounded-lg"
-                  type="button"
-                >
-                  Try Now!
-                </button>
-
-                <button
-                  className="text-[#13d1ff] hover:bg-[#13d1ff] hover:text-white duration-300 ease-in  px-10 py-2 border border-[#13d1ff] rounded-lg"
-                  type="button"
-                >
-                  View Plan
-                </button>
-              </div>
             </div>
           </div>
-        </div>
-        <div>
-          {/* skills , talent , languages cards ==== */}
-          <div className="lg:grid hidden 2xl:w-[70%] w-[70%] grid-cols-6    gap-4 ">
-            {/* card */}
-            {skillTalents?.map((item) => (
-              <div className={`col-span-2 shadow-inner  rounded-xl   ${item?.bgColor}`}>
-                <div className="flex p-3 items-center gap-2 ">
-                  <span>{item?.icon}</span>
-                  <span className="border-t-[2px]  border-[#000000] w-full" />
-                </div>
-                <div className="flex pb-5 pt-1 text-center flex-col justify-center items-center">
-                  <h3 className="font-bold text-xl 2xl:text-2xl">{item?.total}+</h3>
-                  <h5 className="2xl:text-sm text-xs font-bold">{item?.name}</h5>
-                </div>
-              </div>
-            ))}
-          </div>
-          {/* for mobile version */}
-          {/* skills , talent , languages cards ==== */}
-          <div className="lg:hidden mt-10  gap-4 ">
-            <Swiper
-              slidesPerView={2.1}
-              spaceBetween={10}
-              loop
-              modules={[Pagination]}
-              className="mySwiper"
+          <div className="flex col-span-2    w-full justify-around max-lg:gap-5 lg:justify-center gap-3">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="text-white hover:bg-[#00c42b] duration-300 ease-in bg-[#65dc7f] px-7 2xl:px-10  py-2 border  border-[#00c42b] rounded-lg"
+              type="button"
             >
-              {skillTalents?.map((item) => (
-                <SwiperSlide className="w-full">
-                  <div className={`w-full shadow-inner  rounded-xl   ${item?.bgColor}`}>
-                    <div className="flex p-2 items-center gap-2 ">
-                      <span>{item?.icon}</span>
-                      <span className="border-t-[1px]  border-[#000000] w-full" />
-                    </div>
-                    <div className="flex pb-5 pt-1 text-center flex-col justify-center items-center">
-                      <h3 className="font-bold text-xl">{item?.total}+</h3>
-                      <h5 className="text-sm  font-semibold">{item?.name}</h5>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            {/* card */}
+              Try Now!
+            </button>
+
+            <button
+              className="text-[#13d1ff] hover:bg-[#13d1ff] hover:text-white duration-300 ease-in  px-7 2xl:px-10 py-2 border border-[#13d1ff] rounded-lg"
+              type="button"
+            >
+              View Plan
+            </button>
           </div>
         </div>
+        {/* </div> */}
 
         {/* card */}
         <div>

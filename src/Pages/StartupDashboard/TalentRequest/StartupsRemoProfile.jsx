@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { AiOutlineFileDone } from 'react-icons/ai';
 import { BiHash } from 'react-icons/bi';
 import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
@@ -15,9 +15,7 @@ import { MdCastForEducation, MdOutlinePersonPin } from 'react-icons/md';
 import { RiPagesLine, RiShareForwardLine } from 'react-icons/ri';
 import { SiGmail } from 'react-icons/si';
 import { TfiTwitter } from 'react-icons/tfi';
-import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import AuthContext from '../../../Context/AuthContext';
 import {
   CalculatedAge,
   FormattedDate,
@@ -27,18 +25,14 @@ import {
 import { convertProjectDate, getProjectDuration } from '../../../Utilities/projectDateFormater';
 
 const StartupRemoProfile = () => {
-    const location = useLocation();
- 
+  const location = useLocation();
+
   const path = location.pathname.split('/');
   const remoEmail = path[path.length - 1];
 
   const { data: remoProfile, refetch } = useQuery(['remoProfile'], () =>
     axios
-      .get(
-        `${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-profile/${
-            remoEmail
-        }`
-      )
+      .get(`${process.env.REACT_APP_URL_STARTUP}/api/remoforce/remoforce-profile/${remoEmail}`)
       .then((res) => res.data)
   );
 

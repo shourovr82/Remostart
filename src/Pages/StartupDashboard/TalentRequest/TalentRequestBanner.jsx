@@ -4,7 +4,8 @@ import { HiOutlineGlobe, HiOutlineUser } from 'react-icons/hi';
 // Import Swiper React components
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import talentBannerImg from '../../../Assets/Dashboard/talentRequest/bannerPhoto.svg';
+// import talentBannerImg from '../../../Assets/Dashboard/talentRequest/bannerPhoto.svg';
+import talentBannerImg from '../../../Assets/Dashboard/talentRequest/bannerPhoto.png';
 
 // import required modules
 
@@ -37,13 +38,13 @@ const TalentRequestBanner = () => {
       <div className="lg:grid lg:grid-cols-4 flex flex-col-reverse  justify-between h-full">
         <div className="col-span-2  lg:mt-10">
           <div className="space-y-3">
-            <h1 className="text-3xl max-md:hidden font-bold">
+            <h1 className="text-2xl 2xl:text-3xl max-md:hidden font-bold">
               Let our AI algorithm help you get the best and inclusive talent for the job
             </h1>
             <h2 className="mt-3 max-md:ml-10 text-[#FF5A78] text-xl lg:text-3xl font-semibold">
               How it works
             </h2>
-            <p className="text-[#999999] font-medium lg:font-semibold  lg:text-xl mt-5">
+            <p className="text-[#999999] font-medium lg:font-semibold   lg:text-lg mt-5">
               Specify whom you want, our algorithm does the inclusive matching, interview
               scheduling, acceptance and rejection all in one place
             </p>
@@ -90,6 +91,22 @@ const TalentRequestBanner = () => {
             </Swiper>
             {/* card */}
           </div>
+          {/* skills , talent , languages cards ==== */}
+          <div className="lg:grid hidden  mt-10  grid-cols-6    gap-4 ">
+            {/* card */}
+            {skillTalents?.map((item) => (
+              <div className={`col-span-2 shadow-inner  rounded-xl   ${item?.bgColor}`}>
+                <div className="flex p-3 items-center gap-2 ">
+                  <span>{item?.icon}</span>
+                  <span className={`border-t-[2px]  ${item?.color} w-full`} />
+                </div>
+                <div className="flex pb-5 pt-1 text-center flex-col justify-center items-center">
+                  <h3 className="font-bold text-xl 2xl:text-2xl">{item?.total}+</h3>
+                  <h5 className="2xl:text-sm text-[11px] font-bold">{item?.name}</h5>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         {/* right side image */}
         <div className="col-span-2 max-md:mt-5 ">
@@ -102,21 +119,6 @@ const TalentRequestBanner = () => {
         </div>
       </div>
       {/* skills , talent , languages cards ==== */}
-      <div className="lg:grid hidden 2xl:w-[70%] w-[70%] grid-cols-6    gap-4 ">
-        {/* card */}
-        {skillTalents?.map((item) => (
-          <div className={`col-span-2 shadow-inner  rounded-xl   ${item?.bgColor}`}>
-            <div className="flex p-3 items-center gap-2 ">
-              <span>{item?.icon}</span>
-              <span className={`border-t-[2px]  ${item?.color} w-full`} />
-            </div>
-            <div className="flex pb-5 pt-1 text-center flex-col justify-center items-center">
-              <h3 className="font-bold text-xl 2xl:text-2xl">{item?.total}+</h3>
-              <h5 className="2xl:text-sm text-xs font-bold">{item?.name}</h5>
-            </div>
-          </div>
-        ))}
-      </div>
     </>
   );
 };

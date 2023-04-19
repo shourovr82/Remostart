@@ -22,8 +22,6 @@ const TalentsFounds = () => {
   const handleMyRequest = () => {
     navigate('/talent-request-history', { state: { data: myRequests?.myRequests } });
   };
-console.log(myRequests);
-
 
   return (
     <section className="mt-20 max-md:p-2 ">
@@ -49,8 +47,8 @@ console.log(myRequests);
               </p>
             </div>
           </div>
-          <div className="lg:h-[100px] hidden  lg:block 2xl:p-5 p-2 border-l border-[#ececec] " />
-          <div className="flex  max-lg:bg-white w-full  py-5 2xl:gap-10 max-lg:rounded-2xl max-lg:shadow-xl max-lg:shadow-[#f5f8fd] justify-evenly lg:justify-center items-center">
+          {/* <div className="lg:h-[100px] hidden border-4   lg:block 2xl:p-5 p-2 border-l border-[#ececec] " /> */}
+          <div className="flex  max-lg:bg-white w-full  py-5  lg:border-l-2 2xl:gap-10 max-lg:rounded-2xl max-lg:shadow-xl max-lg:shadow-[#f5f8fd] justify-evenly lg:justify-center items-center">
             <div>
               <p className="p-4 2xl:p-6 rounded-full bg-[#dcffec]">
                 <RiUserFollowLine className="text-3xl 2xl:text-3xl text-[#00ac4f]" />
