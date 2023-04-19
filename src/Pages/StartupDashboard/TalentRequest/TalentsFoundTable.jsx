@@ -63,12 +63,12 @@ const TalentsFoundTable = () => {
         <section className="mt-10">
           <div className="container  bg-white shadow-lg shadow-slate-300 rounded-3xl mx-auto px-4 sm:px-8">
             <div className="py-8">
-              <div className=" flex justify-between items-center">
+              <div className=" sm:flex justify-between items-center">
                 <div>
                   <h2 className="text-2xl font-semibold leading-tight">Talents Found</h2>
                   <p className="font-medium text-[#16c098]">Best Match</p>
                 </div>
-                <div className="flex items-center gap-5 ">
+                <div className="lg:flex items-center gap-5 ">
                   <div className="my-2 flex sm:flex-row flex-col">
                     <div className="flex  flex-row mb-1 sm:mb-0">
                       <form className="flex bg-[#f9fbff] items-center">
@@ -94,7 +94,7 @@ const TalentsFoundTable = () => {
                   </div>
 
                   <div className="group">
-                    <div className="flex  focus:ring-blue-500 focus:ring  group-hover:border-[3px] group-hover:border-[#e3d5ff]   rounded-lg bg-[#f9fbff] px-2 gap-2 relative items-center justify-center w-[220px] ">
+                    <div className="flex  focus:ring-blue-500 focus:ring  group-hover:border-[3px] group-hover:border-[#e3d5ff] border-transparent border-[3px]   rounded-lg bg-[#f9fbff] px-2 gap-2 relative items-center justify-center w-[220px] ">
                       <label htmlFor="sort" className="text-sm ">
                         Sort by :
                       </label>

@@ -44,7 +44,6 @@ const SettingsProfile = () => {
       )
       .then((res) => res.data)
   );
-  console.log(startupData);
 
   // File State
   const [file, setFile] = useState();
@@ -229,7 +228,11 @@ const SettingsProfile = () => {
             <span className="text-base font-medium my-4">Startup Icon</span>
             <div className="lg:flex justify-start items-center lg:space-x-4">
               {startupData?.startupIcon ? (
-                <img className="w-20 rounded-full" src={startupData?.startupIcon} alt="" />
+                <img
+                  className="w-20 h-20 object-cover rounded-full"
+                  src={startupData?.startupIcon}
+                  alt=""
+                />
               ) : (
                 <span className="p-4 rounded-full border inline-block bg-[#6B7280]">
                   <RiUser3Line className="text-4xl text-white" />

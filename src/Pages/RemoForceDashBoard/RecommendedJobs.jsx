@@ -6,7 +6,6 @@ import React from 'react';
 import { AiOutlineFileDone } from 'react-icons/ai';
 import { BsArrowRight } from 'react-icons/bs';
 import { useMediaQuery } from 'react-responsive';
-import { Link } from 'react-router-dom';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -17,107 +16,115 @@ import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper";
 // const { Carousel } = require('react-responsive-carousel');
-import recommendLogo from '../../Assets/RemoForceDashboard/RemoForceAllJobs/recommendedJobBg.png';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RecommendedJobs = () => {
-    const recommendedAllJobs = [
-        {
-            title: 'Job Title',
-            logo: recommendLogo,
-            description: '  Is a sales copy really omnipotent?will definitely lead to a sale? and something',
-            skills: [
-                'Front-End Developer',
-                'React',
-                'HTML'
-            ],
-            salary: '50,000',
-            applied: '16'
-        },
-        {
-            title: 'Job Title',
-            logo: recommendLogo,
-            description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
-            skills: [
-                'Front-End Developer',
-                'React',
-                'HTML'
-            ],
-            salary: '50,000',
-            applied: '16'
-        },
-        {
-            title: 'Job Title',
-            logo: recommendLogo,
-            description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
-            skills: [
-                'Front-End Developer',
-                'React',
-                'HTML'
-            ],
-            salary: '50,000',
-            applied: '16'
-        },
-        {
-            title: 'Job Title',
-            logo: recommendLogo,
-            description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
-            skills: [
-                'Front-End Developer',
-                'React',
-                'HTML'
-            ],
-            salary: '50,000',
-            applied: '16'
-        },
-        {
-            title: 'Job Title',
-            logo: recommendLogo,
-            description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
-            skills: [
-                'Front-End Developer',
-                'React',
-                'HTML'
-            ],
-            salary: '50,000',
-            applied: '16'
-        },
-        {
-            title: 'Job Title',
-            logo: recommendLogo,
-            description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
-            skills: [
-                'Front-End Developer',
-                'React',
-                'HTML'
-            ],
-            salary: '50,000',
-            applied: '16'
-        },
-        {
-            title: 'Job Title',
-            logo: recommendLogo,
-            description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
-            skills: [
-                'Front-End Developer',
-                'React',
-                'HTML'
-            ],
-            salary: '50,000',
-            applied: '16'
-        },
-        {
-            title: 'Job Title',
-            logo: recommendLogo,
-            description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
-            skills: [
-                'Front-End Developer',
-                'React',
-                'HTML'
-            ],
-            salary: '50,000',
-            applied: '16'
-        },
-    ]
+    const { data: recommendedAllJobs } = useQuery(['items'], () =>
+        axios.get(`${process.env.REACT_APP_URL_STARTUP}/api/job/all-jobs`).then((res) => res.data)
+    );
+
+    console.log(recommendedAllJobs);
+
+    // const recommendedAllJobs = [
+    //     {
+    //         title: 'Job Title',
+    //         logo: recommendLogo,
+    //         description: '  Is a sales copy really omnipotent?will definitely lead to a sale? and something',
+    //         skills: [
+    //             'Front-End Developer',
+    //             'React',
+    //             'HTML'
+    //         ],
+    //         salary: '50,000',
+    //         applied: '16'
+    //     },
+    //     {
+    //         title: 'Job Title',
+    //         logo: recommendLogo,
+    //         description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
+    //         skills: [
+    //             'Front-End Developer',
+    //             'React',
+    //             'HTML'
+    //         ],
+    //         salary: '50,000',
+    //         applied: '16'
+    //     },
+    //     {
+    //         title: 'Job Title',
+    //         logo: recommendLogo,
+    //         description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
+    //         skills: [
+    //             'Front-End Developer',
+    //             'React',
+    //             'HTML'
+    //         ],
+    //         salary: '50,000',
+    //         applied: '16'
+    //     },
+    //     {
+    //         title: 'Job Title',
+    //         logo: recommendLogo,
+    //         description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
+    //         skills: [
+    //             'Front-End Developer',
+    //             'React',
+    //             'HTML'
+    //         ],
+    //         salary: '50,000',
+    //         applied: '16'
+    //     },
+    //     {
+    //         title: 'Job Title',
+    //         logo: recommendLogo,
+    //         description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
+    //         skills: [
+    //             'Front-End Developer',
+    //             'React',
+    //             'HTML'
+    //         ],
+    //         salary: '50,000',
+    //         applied: '16'
+    //     },
+    //     {
+    //         title: 'Job Title',
+    //         logo: recommendLogo,
+    //         description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
+    //         skills: [
+    //             'Front-End Developer',
+    //             'React',
+    //             'HTML'
+    //         ],
+    //         salary: '50,000',
+    //         applied: '16'
+    //     },
+    //     {
+    //         title: 'Job Title',
+    //         logo: recommendLogo,
+    //         description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
+    //         skills: [
+    //             'Front-End Developer',
+    //             'React',
+    //             'HTML'
+    //         ],
+    //         salary: '50,000',
+    //         applied: '16'
+    //     },
+    //     {
+    //         title: 'Job Title',
+    //         logo: recommendLogo,
+    //         description: 'Is a sales copy really omnipotent?will definitely lead to a sale?',
+    //         skills: [
+    //             'Front-End Developer',
+    //             'React',
+    //             'HTML'
+    //         ],
+    //         salary: '50,000',
+    //         applied: '16'
+    //     },
+    // ]
     const isDesktop = useMediaQuery({ minWidth: 1368 });
     const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1367 });
     const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -129,7 +136,11 @@ const RecommendedJobs = () => {
     } else if (isTablet) {
         slidesToShow = 2;
     }
-
+    const navigate = useNavigate()
+    const handleApplyNow = (item) => {
+        navigate(`/remoforce-dashboard/all-jobs/${item._id}`, { state: { data: item } });
+        window.scroll(0, 0);
+    };
     return (
 
         <section className='border-t pt-2'>
@@ -152,18 +163,28 @@ const RecommendedJobs = () => {
                             slidesPerView={slidesToShow}
                             modules={[Navigation]}
                             className="mySwiper">
-                            {recommendedAllJobs?.map((item, index) => (
+                            {recommendedAllJobs?.slice(0,6)?.map((item) => (
 
                                 <SwiperSlide key={Math.random()}>
                                     <div
 
                                         className=" p-3 m-3 border xl:m-1 shadow-md shadow-[#e5f4ff] bg-white border-[#a5dbff9d] rounded-md"
                                     >
-                                        <div className="flex justify-between items-center">
-                                            <img className="!w-10" src={item?.logo} alt="" />
+                                        <div className="flex gap-3 items-center">
+                                            {item?.startupsProfilePhoto ? (
+                                                <img
+                                                    className="w-8 h-8 rounded-full"
+                                                    src={item.startupsProfilePhoto}
+                                                    alt=""
+                                                />
+                                            ) : (
+                                                <p className="w-8 h-8 grid place-items-center  text-white rounded-full bg-black">
+                                                    {item?.startupsName?.charAt(0).toUpperCase()}
+                                                </p>
+                                            )}
                                             <h2 className="text-[20px] font-semibold">{item?.title}</h2>
                                             {/* three dot option button */}
-                                            <div className="dropdown dropdown-end">
+                                            {/* <div className="dropdown dropdown-end">
                                                 <button type='button'>
                                                     <label tabIndex={0} className=" px-1 py-1 rounded-md cursor-pointer btn-ghost m-1 text-xs">●●●</label>
                                                 </button>
@@ -175,14 +196,14 @@ const RecommendedJobs = () => {
                                                         className='font-medium text-sm'
                                                         type='button'>Hide Post</button></li>
 
-                                                    {/* dynamic link should be here */}
-                                                    <li><Link
+                                                    <li>
+                                                        <Link
                                                         className='font-medium text-sm'
                                                     >Details
                                                     </Link>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> */}
 
                                         </div>
                                         {/* description, skills */}
@@ -194,7 +215,7 @@ const RecommendedJobs = () => {
                                             </p>
                                             <div className="flex mt-[5px] flex-wrap  w-full lg:gap-1 xl:gap-2">
                                                 {item &&
-                                                    item?.skills.map((skill) => (
+                                                    item?.skills?.slice(0,3)?.map((skill) => (
                                                         <div key={Math.random()} className="bg-[#F0F9FF]  rounded-md ">
                                                             <p className="text-xs px-[5px] py-[5px] ">
                                                                 {skill}
@@ -220,6 +241,7 @@ const RecommendedJobs = () => {
                                                     </span>
                                                 </button>
                                                 <button
+                                                    onClick={() => handleApplyNow(item)}
                                                     className="px-6 py-3 lg:px-3 border border-[#00C42B] lg:py-2 bg-[#7DEC96] text-black text-[13px] font-semibold rounded-md"
                                                     type="button"
                                                 >

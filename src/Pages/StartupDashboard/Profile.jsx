@@ -57,8 +57,12 @@ const Profile = () => {
             </div>
             {/* startup logo */}
             <div className=" relative lg:ml-5">
-              <div className="shadow-xl shadow-[#e4d9f4] lg:absolute -top-20 h-[150px] 2xl:h-[160px] bg-[#ebffef] 2xl:w-[160px] w-[150px] rounded-full">
-                <img className="object-contain" src={startupData?.startupIcon} alt="" />
+              <div className="shadow-xl shadow-[#e4d9f4] lg:absolute flex justify-center items-center -top-20 h-[150px] 2xl:h-[160px] bg-[#ebffef] 2xl:w-[160px] w-[150px] rounded-full">
+                <img
+                  className="w-24 object-cover h-24 rounded-full"
+                  src={startupData?.startupIcon}
+                  alt=""
+                />
               </div>
             </div>
             {/* social icons */}
@@ -149,7 +153,7 @@ const Profile = () => {
           <div className="flex flex-wrap gap-2 gap-y-3 mt-3 ">
             {startupData?.domains?.length ? (
               startupData?.domains?.map((domain) => (
-                <p className="border-[#19a5ff]  duration-300 ease-in hover:shadow-xl hover:shadow-[#d3cef2] text-sm font-semibold bg-white  px-2 py-1  border rounded-full">
+                <p className="border-[#19a5ff]  duration-300 ease-in hover:shadow-xl hover:shadow-[#d3cef2] text-sm font-semibold bg-white  px-2 py-0.5  border rounded-full">
                   {domain}
                 </p>
               ))
@@ -166,7 +170,7 @@ const Profile = () => {
       <div className="flex flex-col space-y-8">
         {/* Domins and work */}
 
-        <div className="flex flex-col  space-y-5 border-t">
+        <div className="flex flex-col  space-y-5 ">
           {/* Reviews and ratings */}
           {/* <div className="space-y-8">
                         <h1 className="text-3xl mt-7 font-medium">Reviews and Ratings</h1>
