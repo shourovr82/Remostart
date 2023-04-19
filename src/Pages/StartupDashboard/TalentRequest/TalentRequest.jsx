@@ -58,21 +58,20 @@ const TalentRequest = () => {
         <div>
           <TalentRequestBanner />
         </div>
-        <div>
-          {/* Try Free or view plan option */}
-          <div className="lg:flex max-md:p-2 max-md:pb-4 items-center lg:mt-5 2xl:mt-0 mb-5 justify-between pr-5 rounded-md bg-[#f0f9ff]">
-            <div className="flex gap-2 px-2 py-3">
-              <span className="mt-1">
-                <BsStarFill />
-              </span>
-              <div>
-                <h4 className="font-semibold">Try for free</h4>
-                <p className="  text-[#999999] text-sm">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate{' '}
-                  <br className="lg:block 2xl:hidden max-md:hidden" /> libero et velit interdum, ac{' '}
-                  <br className="hidden 2xl:block" /> aliquet odio mattis.
-                </p>
-              </div>
+
+        {/* Try Free or view plan option */}
+        <div className="lg:flex max-md:p-2 max-md:pb-4 items-center mt-5 justify-between pr-5 rounded-md bg-[#f0f9ff]">
+          <div className="flex gap-2 px-2 py-3">
+            <span className="mt-1">
+              <BsStarFill />
+            </span>
+            <div>
+              <h4 className="font-semibold">Try for free</h4>
+              <p className="  text-[#999999] text-sm">
+                Our first 2 tries of this feature is free, you dont even need to put in your card,
+                though it has limited functionality
+              </p>
+
             </div>
             <div className="max-md:flex max-md:justify-center">
               <div className="flex gap-3">
