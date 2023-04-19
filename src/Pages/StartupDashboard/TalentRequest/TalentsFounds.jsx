@@ -27,7 +27,7 @@ const TalentsFounds = () => {
     <section className="mt-20 max-md:p-2 ">
       {/* total talents found heading card */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="col-span-2 bg-white flex items-center rounded-3xl shadow-xl shadow-[#f4f8fc]">
+        <div className="col-span-2 bg-white flex items-center rounded-3xl shadow-2xl shadow-[#b3cfeb86]">
           <div className="flex  w-full gap-10 justify-center items-center">
             <div>
               <p className="p-3 2xl:p-6 rounded-full bg-[#dcffec]">
