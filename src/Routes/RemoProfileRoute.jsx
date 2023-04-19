@@ -21,7 +21,6 @@ const RemoProfileRoute = ({ children }) => {
   }
 
   return <Navigate to="/login" state={{ from: location }} replace />;
-
 };
 
 export default RemoProfileRoute;
