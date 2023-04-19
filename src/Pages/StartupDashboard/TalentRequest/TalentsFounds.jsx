@@ -22,6 +22,8 @@ const TalentsFounds = () => {
   const handleMyRequest = () => {
     navigate('/talent-request-history', { state: { data: myRequests?.myRequests } });
   };
+console.log(myRequests);
+
 
   return (
     <section className="mt-20 max-md:p-2 ">

@@ -61,6 +61,7 @@ import Settings from '../Pages/StartupDashboard/Settings/Settings';
 import SettingsGeneral from '../Pages/StartupDashboard/Settings/SettingsGeneral';
 import GeneralSettingsVerification from '../Pages/StartupDashboard/Settings/SettingsGeneral/GeneralSettingsVerification';
 import SettingsProfile from '../Pages/StartupDashboard/Settings/SettingsProfile';
+import StartupRemoProfile from '../Pages/StartupDashboard/TalentRequest/StartupsRemoProfile';
 import TalentRequestHistory from '../Pages/StartupDashboard/TalentRequest/TalentHistory/TalentRequestHistory';
 import TalentRequest from '../Pages/StartupDashboard/TalentRequest/TalentRequest';
 import StartupHome from '../Pages/StartupPages/StartupHome';
@@ -70,6 +71,7 @@ import RemoForceHome from '../Pages/UserPages/RemoForceHome';
 import AdminRoute from './AdminRoute';
 import ProtectedRoute from './ProtectedRoute';
 import RemoForceRoute from './RemoforceRoute';
+import RemoProfileRoute from './RemoProfileRoute';
 import DashboardHome from './Roots/DashboardHome';
 import RemoForceDashboardRoot from './Roots/RemoForceDashBoardRoot';
 import StartupRoute from './StartupRoute';
@@ -146,9 +148,18 @@ const router = createBrowserRouter(
         <Route path="/dashboard/post-job/contracts/review" element={<ContractsReview />} />
         <Route path="/dashboard/contracts/:id" element={<ContractsReview />} />
         {/* view application */}
+        {/* Talents Request history  */}
       </Route>
-      {/* Talents Request history  */}
       <Route path="/talent-request-history" element={<TalentRequestHistory />} />
+      <Route
+        path="/remoforce/profile/:email"
+        element={
+          <RemoProfileRoute>
+            <StartupRemoProfile />
+          </RemoProfileRoute>
+        }
+      />
+
       {/* remoforce routes */}
 
       <Route path="/remoforce" element={<RemoForceHome />} />
