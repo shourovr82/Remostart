@@ -149,9 +149,9 @@ const RecommendedJobs = () => {
 
                 {/* recommend job title */}
                 <div className=' col-span-2  p-4'>
-                    <h2 className='text-lg max-md:text-center lg:text-2xl font-semibold'>Recommended Jobs <br />For you to get Started!</h2>
-                    <p className='text-[#999999] mt-2 max-md:text-center text-xs'>Scroll down the page for more recommendations. Below you will find a variety of products from all categories on Steam that may be of interest to you. Looking for recommendations?</p>
-                    <button className='flex mt-3 items-center gap-2 text-xs  text-[#B18CFF]  2xl:w-full 2xl:justify-end'>Explore All Jobs <span><BsArrowRight className='text-lg mt-0.5' /></span></button>
+                    <h2 className='text-lg max-md:text-center lg:text-2xl font-semibold'>Recommended Jobs for you to get Started!</h2>
+                    <p className='text-[#999999] mt-2 max-md:text-center text-xs'>Explore Career Options and Find Your Ideal Job</p>
+                    <button className='flex mt-3 items-center gap-2 text-sm  text-[#B18CFF]  2xl:w-full 2xl:justify-end'>Explore All Jobs <span><BsArrowRight className='text-lg mt-0.5' /></span></button>
                 </div>
 
 
