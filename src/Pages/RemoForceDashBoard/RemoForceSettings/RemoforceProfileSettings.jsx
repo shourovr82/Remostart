@@ -767,7 +767,7 @@ function RemoforceProfileSettings() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="px-8 py-4 bg-black rounded-lg text-white flex items-center gap-2"
+              className="px-8 py-4 bg-black rounded-lg mt-2 text-white flex items-center gap-2"
             >
               Update Profile
               {loading && (

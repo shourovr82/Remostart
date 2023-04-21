@@ -119,7 +119,7 @@ const Profile = () => {
           <hr className="w-[50%] rounded-full border-[2px]" />
 
           <div className="w-[90%] mx-auto">
-            <p className="text-center mt-3 py-10 text-[#999999] font-medium ">
+            <p className="text-center mt-3 py-10 text-black  font-medium ">
               {startupData?.startupDescription
                 ? startupData?.startupDescription
                 : 'Please add the description !'}
@@ -138,7 +138,7 @@ const Profile = () => {
       <div className="lg:grid max-md:space-y-5 grid-cols-6 mt-7  gap-5 justify-between">
         <div className="col-span-4 relative p-5 designationCard rounded-lg ">
           <h1 className="text-2xl font-medium">What we do?</h1>
-          <p className="mt-5 py-10 text-[#999999]  font-medium">
+          <p className="mt-5 py-10 text-black  font-medium">
             {startupData?.worksIn ? startupData?.worksIn : 'We would like to know about you !'}
           </p>
           <Link to="/dashboard/settings/profile" className="absolute right-2 top-2">

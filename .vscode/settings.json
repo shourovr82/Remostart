@@ -1,6 +1,6 @@
 {
     // Theme
-    "workbench.colorTheme": "Noctis Viola",
+    "workbench.colorTheme": "Abyss",
     // config related to code formatting
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,

@@ -23,9 +23,7 @@ const TalentRequestHistory = () => {
       {/* description */}
       <div className="mt-5 lg:ml-12">
         <h2 className="text-[#999999] lg:text-base text-sm font-medium  lg:font-semibold">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-          interdum, ac aliquet odio mattis. Class aptent taciti <br /> sociosqu ad litora torquent
-          per conubia nostra, per inceptos himenaeos.
+          Your all searches are available here
         </h2>
       </div>
 
