@@ -39,9 +39,7 @@ const NoJob = () => (
                 <div>
                     <p className="font-semibold text-center">Complete Your Profile</p>
                     <p className="p-6">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-                        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-                        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                        You profile is incomplete ,Please complete it for job posting
                     </p>
                     <div className="flex justify-center">
                         <button

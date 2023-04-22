@@ -47,25 +47,14 @@ const StartupShowingPostJobReview = () => (
     {/* Paragraph   */}
     <div className="mt-[121px] lg:flex ">
       <div className="lg:w-[850px] lg:px-[66px]">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum
-          est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin
-          lacus, ut interdum tellus elit sed risus.
-          <br />
-          <br />
-          Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad
-          litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
-          enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus
-          nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit
-          amet lacinia. Aliquam in elementum tellus.
-        </p>
+        <p>Description</p>
         <ul className="pl-5" style={{ listStyleType: 'disc' }}>
-          <li>Lorem</li>
-          <li>ipsum</li>
-          <li>dolor</li>
-          <li>sit</li>
-          <li>amet</li>
-          <li>consectetur</li>
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
         </ul>
 
         <h1 className=" mt-[30px] font-semibold text-2xl">Mentor:</h1>
@@ -77,15 +66,8 @@ const StartupShowingPostJobReview = () => (
         </div>
 
         <div className="bg-gradient-to-r w-[734px] mt-4 border border-[#FEE719] from-[#FEE719]  to-white  rounded-2xl ">
-          <h1 className="text-[16px] pt-[15px] px-4 text-[#0B132A] font-semibold">
-            Sample Mentor Name
-          </h1>
-          <p className="px-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie,
-            dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem
-            sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit,
-            sit amet feugiat lectus. Class aptent taciti
-          </p>
+          <h1 className="text-[16px] pt-[15px] px-4 text-[#0B132A] font-semibold">Mentor Name</h1>
+          <p className="px-4">Description</p>
           <div className="flex justify-end p-[4px] ">
             <a href="linkdin">
               <GrLinkedin className="text-[#19A5FF] text-2xl rounded-full text-right" />
@@ -109,7 +91,7 @@ const StartupShowingPostJobReview = () => (
           </div>
           <div className="flex gap-3 mt-3">
             <div className="bg-[#F0F9FF] text-center rounded-md ">
-              <p className="text-sm py-[8px] px-[22px]">lorem manoig ipsone</p>
+              <p className="text-sm py-[8px] px-[22px]">html</p>
             </div>
             <div className="bg-[#F0F9FF]  rounded-md ">
               <p className="text-sm px-[25px] py-[8px] ">React</p>

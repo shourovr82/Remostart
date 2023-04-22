@@ -10,10 +10,7 @@ const TalentConfirmationStarted = () => (
       </h1>
     </div>
     <div className="flex justify-center">
-      <p className="text-[#999999] text-2xl font-semibold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc <br /> vulputate libero et
-        velit interdum, ac aliquet odio mattis.
-      </p>
+      <p className="text-[#999999] text-2xl font-semibold">You have found some searches</p>
     </div>
   </div>
 );

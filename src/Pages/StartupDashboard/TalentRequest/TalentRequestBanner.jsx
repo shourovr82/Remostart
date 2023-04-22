@@ -111,9 +111,7 @@ const TalentRequestBanner = () => {
         {/* right side image */}
         <div className="col-span-2 max-md:mt-5 ">
           <div className=" lg:hidden">
-            <h1 className="text-xl font-bold">
-              Lorem ipsum dolor sit amet, consectetur adipiscing?
-            </h1>
+            <h1 className="text-xl font-bold">Lets find some talent for your organization</h1>
           </div>
           <img className=" lg:object-cover" src={talentBannerImg} alt="" />
         </div>

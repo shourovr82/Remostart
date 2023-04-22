@@ -13,8 +13,7 @@ const TalentGetStarted = ({ setGetStartedOpen }) => (
       {/* section  */}
       <div>
         <p className="text-[#9e9f9f] font-semibold lg:text-2xl">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc <br /> vulputate libero et
-          velit interdum, ac aliquet odio mattis.
+          In less than 5 minuted get the best, vetted and most inclusive talents for whichever role
         </p>
       </div>
       {/* get Started Button */}

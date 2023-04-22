@@ -52,9 +52,7 @@ const StartupPrivateJobPost = () => {
     mode: 'onChange',
   });
 
-  const PostData = (d) => {
-   
-  };
+  const PostData = (d) => {};
 
   return (
     <div>
@@ -66,11 +64,7 @@ const StartupPrivateJobPost = () => {
         <p className="text-2xl font-semibold">Private Job</p>
       </div>
       <p className="border-[#BCBCBC] bg-[#BCBCBC] border mt-2" />
-      <p className="text-gray-400 mt-6 lg:mt-1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-        interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per
-        conubia nostra, per inceptos himenaeos.
-      </p>
+      <p className="text-gray-400 mt-6 lg:mt-1">Description</p>
 
       {/* Start Form  */}
 
@@ -107,8 +101,8 @@ const StartupPrivateJobPost = () => {
               required: true,
             })}
             id="JobDescription"
-            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
             className="lg:w-3/4 h-16 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
+            placeholder="description"
           />
           <p className="pt-2">
             {errors.JobDescription && (
@@ -180,7 +174,12 @@ const StartupPrivateJobPost = () => {
                     Domains
                   </option>
                   {data.map((D, i) => (
-                    <option onClick={handleChange} disabled={disableOption} value={D.label} key={Math.random()}>
+                    <option
+                      onClick={handleChange}
+                      disabled={disableOption}
+                      value={D.label}
+                      key={Math.random()}
+                    >
                       {D.label}
                     </option>
                   ))}

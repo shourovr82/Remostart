@@ -66,11 +66,7 @@ const StartupInternshipJobPost = () => {
         <p className="text-2xl font-semibold">Internship</p>
       </div>
       <p className="border-[#BCBCBC] bg-[#BCBCBC] border mt-2" />
-      <p className="text-gray-400 mt-6 lg:mt-1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-        interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per
-        conubia nostra, per inceptos himenaeos.
-      </p>
+      <p className="text-gray-400 mt-6 lg:mt-1">Description</p>
 
       {/* Start Form  */}
 
@@ -107,7 +103,7 @@ const StartupInternshipJobPost = () => {
               required: true,
             })}
             id="JobDescription"
-            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+            placeholder="Description"
             className="lg:w-3/4 h-16 w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
           />
           <p className="pt-2">
