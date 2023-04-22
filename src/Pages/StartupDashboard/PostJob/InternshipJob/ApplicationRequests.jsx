@@ -16,16 +16,12 @@ const ApplicationRequests = ({ jobData }) => {
   // const applicationRequests = jobData?.applicationRequest;
   const [refresh, setRefresh] = useState(false);
   const { id } = useParams();
-  console.log(id);
-  
 
   const { data: applicationRequests, refetch } = useQuery(['applicationRequests'], () =>
     axios
       .get(`${process.env.REACT_APP_URL_STARTUP}/api/job/user-jobs/allApplicationRequests/${id}`)
       .then((res) => res.data)
   );
-console.log(applicationRequests);
-
 
   const acceptHandler = (item) => {
     const acceptData = {
@@ -39,8 +35,8 @@ console.log(applicationRequests);
     axios
       .put(url, acceptData)
       .then((response) => {
-        refetch()
-     
+        refetch();
+
         toast.success(response.data);
       })
       .catch((error) => {
@@ -59,7 +55,7 @@ console.log(applicationRequests);
     axios
       .put(url, acceptData)
       .then((response) => {
-        refetch()
+        refetch();
         toast.success(response.data);
       })
       .catch((error) => {

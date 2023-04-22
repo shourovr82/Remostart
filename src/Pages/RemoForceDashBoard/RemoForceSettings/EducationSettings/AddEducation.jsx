@@ -40,8 +40,6 @@ function AddEducation() {
     setBool(false);
   };
 
-  console.log(remoProfile);
-
   // submit education
   const submitEducation = async () => {
     setLoading(true);

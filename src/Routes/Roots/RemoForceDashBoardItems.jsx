@@ -5,7 +5,6 @@ import { BsLayoutTextWindowReverse } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
 
 const RemoForceDashBoardItems = ({ children }) => {
-  console.log('object');
   const categoryActive = 'border-[#3b82f6]  text-[#3B82F6]';
   return (
     <section className="flex flex-col w-full">

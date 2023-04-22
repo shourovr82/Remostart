@@ -11,7 +11,7 @@ const ShadowingFaqs = () => {
     },
     {
       faqTitle: 'What is the Job Shadowing all about?',
-      faqContent: ''
+      faqContent: 'Job shadowing provides you with the opportunity to experience the essence of working in a particular field based on your skill set.'
     },
     {
       faqTitle: 'What Payment methods do you use?',
@@ -19,11 +19,11 @@ const ShadowingFaqs = () => {
     },
     {
       faqTitle: 'Does Remostart offer non-technical jobs?',
-      faqContent: ''
+      faqContent: 'Yes, Remostart offers a large pool of non-technical jobs that you can explore based on your skills and interests.'
     },
     {
       faqTitle: 'What Kind of projects can I work on?',
-      faqContent: ''
+      faqContent: 'At our platform, we strive to provide a diverse range of project opportunities that align with your skills and expertise. We understand that everyone has different strengths and interests, so we aim to cater to a variety of job types and industries.'
     },
   ]
   return (

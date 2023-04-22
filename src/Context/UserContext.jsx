@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
@@ -20,7 +19,6 @@ const UserContext = ({ children }) => {
     await axios
       .post(`${process.env.REACT_APP_URL_STARTUP}/api/talent/talent-request`, allData)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           if (res.data.requiredTalentsInHistory.length) {
             setSearchResults(res.data);
@@ -45,10 +43,8 @@ const UserContext = ({ children }) => {
       });
   };
   const { user } = useSelector((state) => state.auth);
- 
-  
 
- const tier = 'tierFree';
+  const tier = 'tierFree';
   // const { data: lastSearchResult, refetch } = useQuery(['lastSearchResult'], () =>
   //   axios
   //     .get(
@@ -56,23 +52,23 @@ const UserContext = ({ children }) => {
   //     )
   //     .then((res) => res.data)
   // );
-  // console.log(lastSearchResult);
   const [lastSearchResult, setLastSearchResult] = useState(null);
   useEffect(() => {
-
     const fetchData = async () => {
-      try{
-      if (user?.user?.email ) {
-        const result = await axios.get(`${process.env.REACT_APP_URL_STARTUP}/api/talent/last-results?email=${user?.user?.email}&tier=${tier}`);
-        setLastSearchResult(result.data);
-        
-      }}catch(error) {
+      try {
+        if (user?.user?.email) {
+          const result = await axios.get(
+            `${process.env.REACT_APP_URL_STARTUP}/api/talent/last-results?email=${user?.user?.email}&tier=${tier}`
+          );
+          setLastSearchResult(result.data);
+        }
+      } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [user,]);
+  }, [user]);
 
   const [results, setResults] = useState([]);
   useEffect(() => {
@@ -82,9 +78,6 @@ const UserContext = ({ children }) => {
       setResults(lastSearchResult);
     }
   }, [searchResults, lastSearchResult]);
-
-
-  console.log(results);
 
   useEffect(() => {
     setLoading(true);
@@ -129,7 +122,7 @@ const UserContext = ({ children }) => {
         serviceUser,
         handleSearch,
         searchResults,
-        results
+        results,
       }}
     >
       {children}

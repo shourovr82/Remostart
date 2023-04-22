@@ -45,25 +45,14 @@ const StartupPostJobJobReview = () => (
     {/* Paragraph   */}
     <div className="mt-[121px] lg:flex ">
       <div className="lg:w-[850px] lg:px-[66px]">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum
-          est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin
-          lacus, ut interdum tellus elit sed risus.
-          <br />
-          <br />
-          Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad
-          litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
-          enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus
-          nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit
-          amet lacinia. Aliquam in elementum tellus.
-        </p>
+        <p>Description</p>
         <ul className="pl-5" style={{ listStyleType: 'disc' }}>
-          <li>Lorem</li>
-          <li>ipsum</li>
-          <li>dolor</li>
-          <li>sit</li>
-          <li>amet</li>
-          <li>consectetur</li>
+          <li>1</li>
+          <li>1</li>
+          <li>2</li>
+          <li>2</li>
+          <li>3</li>
+          <li>3</li>
         </ul>
 
         <h1 className=" mt-[30px] font-semibold text-2xl">Job Requirements:</h1>
@@ -95,7 +84,7 @@ const StartupPostJobJobReview = () => (
           </div>
           <div className="flex gap-3 mt-3">
             <div className="bg-[#F0F9FF] text-center rounded-md ">
-              <p className="text-sm py-[8px] px-[22px]">lorem manoig ipsone</p>
+              <p className="text-sm py-[8px] px-[22px]">Html</p>
             </div>
             <div className="bg-[#F0F9FF]  rounded-md ">
               <p className="text-sm px-[25px] py-[8px] ">React</p>

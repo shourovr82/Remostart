@@ -1,12 +1,9 @@
 import React from 'react';
 
-const RemoForceMyJobInterview = () => {
-  console.log('');
-  return (
-    <div>
-      <div>interview</div>
-    </div>
-  );
-};
+const RemoForceMyJobInterview = () => (
+  <div>
+    <div>interview</div>
+  </div>
+);
 
 export default RemoForceMyJobInterview;

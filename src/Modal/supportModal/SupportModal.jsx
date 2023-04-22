@@ -6,9 +6,7 @@ import { RxCross2 } from 'react-icons/rx';
 const SupportModal = () => {
   const { register, handleSubmit } = useForm();
 
-  const submitToSupport = (data) => {
-    // console.log(data);
-  };
+  const submitToSupport = (data) => {};
 
   return (
     <>

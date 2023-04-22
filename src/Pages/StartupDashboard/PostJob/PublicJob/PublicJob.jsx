@@ -62,8 +62,6 @@ const PublicJob = () => {
     navigate('/dashboard/post-job/public-job/review');
   };
 
-  console.log(user);
-
   // const skillsValue = ['react', 'javascript', 'mongodb', 'express js'];
   return (
     <div>

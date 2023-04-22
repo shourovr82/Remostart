@@ -36,7 +36,6 @@ const ShadowingJobReview = () => {
   if (!storedJob) {
     navigate('/dashboard/post-job/shadowing-job');
   }
-  console.log(storedJob);
 
   return (
     <div className="w-full">

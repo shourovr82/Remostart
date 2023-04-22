@@ -59,9 +59,9 @@ const UserTestimonial = () => {
     return (
         <section className="flex  flex-col ">
             <div className=' w-1/2 mx-auto '>
-                <p className='ml-16 text-xl font-semibold'>            Lorem ipsum dolor</p>
+                <p className='ml-16 text-xl font-semibold'>          A</p>
                 <h1 className="text-2xl mt-5 md:text-3xl lg:text-5xl  font-bold text-center">
-                    Lorem ipsum dolor sit
+                   A
                 </h1>
 
             </div>
