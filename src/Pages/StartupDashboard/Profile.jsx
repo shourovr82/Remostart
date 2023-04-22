@@ -3,17 +3,12 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext } from 'react';
-import { BsLinkedin } from 'react-icons/bs';
-import { CiTwitter } from 'react-icons/ci';
 import { FiEdit } from 'react-icons/fi';
-import { GoMail } from 'react-icons/go';
-import { IoLocationOutline } from 'react-icons/io5';
-import { RxInstagramLogo } from 'react-icons/rx';
 import { TbShare3 } from 'react-icons/tb';
 import { useSelector } from 'react-redux';
-
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Link } from 'react-router-dom';
+import { SocialIcon } from 'react-social-icons';
 import AuthContext from '../../Context/AuthContext';
 
 import startupBanner from '../../Assets/Dashboard/startupBanner.svg';
@@ -31,8 +26,6 @@ const Profile = () => {
       )
       .then((res) => res.data)
   );
-
-  console.log(startupData);
 
   return (
     <section className="flex flex-col">
@@ -67,25 +60,13 @@ const Profile = () => {
             </div>
             {/* social icons */}
             <div className="flex max-md:mt-3  col-span-3 items-center gap-2 ">
-              <button
-                type="button"
-                className="rounded-full bg-white p-2 shadow-xl shadow-[#d5c2f3]"
-              >
-                <GoMail className="text-[#ff5a78] text-3xl" />
-              </button>
-              <button
-                type="button"
-                className="rounded-full bg-white p-2 shadow-xl shadow-[#d5c2f3]"
-              >
-                <IoLocationOutline className="text-[#ffc46b] text-3xl" />
-              </button>
               <a
                 target="_blank"
                 href={startupData?.linkedIn}
                 className="rounded-full bg-white p-2 shadow-xl shadow-[#d5c2f3]"
                 rel="noreferrer"
               >
-                <BsLinkedin className="text-[#42498f] text-3xl" />
+                <SocialIcon style={{ height: 40, width: 40 }} url={startupData?.linkedIn} />
               </a>
               <a
                 target="_blank"
@@ -93,13 +74,13 @@ const Profile = () => {
                 className="rounded-full bg-white p-2 shadow-xl shadow-[#d5c2f3]"
                 rel="noreferrer"
               >
-                <RxInstagramLogo className="text-[#f60c36] text-3xl" />
+                <SocialIcon style={{ height: 40, width: 40 }} url="https://www.instagram.com" />
               </a>
               <button
                 type="button"
                 className="rounded-full bg-white p-2 shadow-xl shadow-[#d5c2f3]"
               >
-                <CiTwitter className="text-[#19a5ff] text-3xl" />
+                <SocialIcon style={{ height: 40, width: 40 }} url="https://twitter.com" />
               </button>
             </div>
           </div>

@@ -17,7 +17,7 @@ const RemoForceAllJobs = () => {
   const handleApplyNow = (item) => {
     navigate(`/remoforce-dashboard/all-jobs/${item._id}`, { state: { data: item } });
   };
-  console.log(allJobs);
+
   return (
     <RemoForceDashBoardItems>
       <section>

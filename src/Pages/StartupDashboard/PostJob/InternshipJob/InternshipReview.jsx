@@ -34,7 +34,6 @@ const InternshipReview = () => {
   const handlePost = () => {
     setInternship(true);
   };
-  console.log(storedJob);
   return (
     <div className="w-full">
       {/* Banner Section start */}

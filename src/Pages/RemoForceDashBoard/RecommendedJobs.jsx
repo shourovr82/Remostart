@@ -25,7 +25,7 @@ const RecommendedJobs = () => {
         axios.get(`${process.env.REACT_APP_URL_STARTUP}/api/job/all-jobs`).then((res) => res.data)
     );
 
-    console.log(recommendedAllJobs);
+  
 
     // const recommendedAllJobs = [
     //     {

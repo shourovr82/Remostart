@@ -12,7 +12,7 @@ const RemoforceContracts = () => {
       .get(`${process.env.REACT_APP_URL_STARTUP}/api/job/remoforce/contracts`)
       .then((res) => res.data)
   );
-  console.log(contracts);
+
   const navigate = useNavigate();
 
   const handleApplyNow = (item) => {

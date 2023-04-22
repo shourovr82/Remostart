@@ -5,7 +5,7 @@ import TalentConfirmationDate from './TalentConfirmationDate';
 const TalentConfirmationProcess = ({ setIsOpen }) => {
   const [tabActive, setTabActive] = useState(1);
   const [selectedDate, setSelectedDate] = useState([]);
-  console.log('object');
+
   const handleBack = () => {
     if (tabActive === 1) {
       setIsOpen(false);
