@@ -19,7 +19,7 @@ const RemoForceMyJobApplied = ({ fullList }) => (
                 </tr>
               </thead>
               <tbody className="  text-[#292d32] text-sm font-light">
-                {fullList?.length &&
+                {'fullList?.length' &&
                   fullList?.map((job, index) => (
                     <tr
                       key={Math.random()}
