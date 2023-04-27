@@ -107,7 +107,7 @@ const ApplyJob = () => {
               )}
             </div>
             <div className="font-bold text-[14px] mt-6 lg:mt-0 flex flex-col">
-              <h3>{categoryName}(Type)</h3>
+              <h3>{categoryName}</h3>
               <div className="flex gap-2  text-xs text-[#999999] md:hidden">
                 <p>Posted</p>
                 <p>2 days ago</p>

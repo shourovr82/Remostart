@@ -100,7 +100,7 @@ const ApplyCategoryJob = () => {
               <img src={initialLogo} alt="" />
             </div>
             <div className="font-bold text-[14px] mt-6 lg:mt-0 flex flex-col">
-              <h3>{categoryName}(Type)</h3>
+              <h3>{categoryName}</h3>
               <div className="flex text-xs text-[#999999] md:hidden">
                 <p>Kickstart2</p>
                 <p>2 days ago</p>
