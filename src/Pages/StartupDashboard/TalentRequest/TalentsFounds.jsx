@@ -30,7 +30,6 @@ const TalentsFounds = () => {
       <div className="lg:grid grid-cols-3 gap-3">
         <div className="col-span-2 lg:bg-white flex lg:flex-row flex-col gap-10  max-md:gap-3  items-center rounded-3xl shadow-xl shadow-[#f4f8fc]">
           <div className="flex max-lg:bg-white w-full  py-5 2xl:gap-10 max-lg:rounded-2xl max-lg:shadow-xl max-lg:shadow-[#f5f8fd] justify-evenly lg:justify-center items-center">
-
             <div>
               <p className="p-4 2xl:p-6 rounded-full bg-[#dcffec]">
                 <HiOutlineUsers className="text-2xl 2xl:text-3xl text-[#00ac4f]" />
@@ -65,7 +64,7 @@ const TalentsFounds = () => {
         </div>
 
         {/* my request */}
-        <button type="button" className="max-md:w-full" onClick={handleMyRequest}>
+        <button type="button" className="w-full " onClick={handleMyRequest}>
           <div className="col-span-1 flex justify-evenly items-center  py-8 2xl:py-10 max-lg:px-10 max-lg:mt-5 rounded-3xl bg-[#d3ffe7] shadow-xl max-md:gap-3 gap-2 shadow-[#f4f8fc]">
             <div className=" p-4 2xl:p-6 rounded-full bg-white">
               <img src={libraryBookIcon} alt="" />

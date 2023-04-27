@@ -65,11 +65,7 @@ const RemoForceDashboard = () => (
             <h4 className="text-black text-md font-bold w-[100%]">
               {`    Let's Start Your Journey Now!`}
             </h4>
-            <p className="w-full lg:w-[80%] text-sm text-black mt-1">
-              Scroll down the page for more recommendations. Below you will find a variety of
-              products from all categories on Steam that may be of interest to you.
-              <br /> Looking for recommendations?
-            </p>
+            {/* <p className="w-full lg:w-[80%] text-sm text-black mt-1"></p> */}
           </div>
           <div className=" w-full flex justify-end">
             <button type="button" className="w-[40%] text-sm text-white  m-4 flex no-wrap">
@@ -88,12 +84,12 @@ const RemoForceDashboard = () => (
             <h4 className="text-black text-sm font-bold w-[100%]">
               {`  Let's Start Your Journey Now!`}
             </h4>
-            <p className="w-[80%] text-xs text-gray-400 mt-1">
+            {/* <p className="w-[80%] text-xs text-gray-400 mt-1">
               <span className="font-semibold">(Get Started)</span> Scroll down the page for more
               recommendations. Below you will find a variety of products from all categories on
               Steam that may be of interest to you.
               <br /> Looking for recommendations?
-            </p>
+            </p> */}
           </div>
           <div className=" w-full flex justify-end">
             <button type="button" className="w-[40%] text-xs  text-[#FFC46B] m-4 flex no-wrap">
@@ -111,12 +107,12 @@ const RemoForceDashboard = () => (
             <h4 className="text-black text-sm font-bold w-[100%]">
               {`  Let's Start Your Journey Now!`}
             </h4>
-            <p className="w-[80%] text-xs  text-gray-400 mt-1">
+            {/* <p className="w-[80%] text-xs  text-gray-400 mt-1">
               <span className="font-semibold">(Get Started)</span> Scroll down the page for more
               recommendations. Below you will find a variety of products from all categories on
               Steam that may be of interest to you.
               <br /> Looking for recommendations?
-            </p>
+            </p> */}
           </div>
           <div className="w-full flex justify-end">
             <button type="button" className="w-[40%] text-xs   text-[#13D1FF] m-4 flex no-wrap">
@@ -165,12 +161,12 @@ const RemoForceDashboard = () => (
           <h1 className="w-full text-black text-xl font-bold">
             Connect to the world of Opportunities
           </h1>
-          <p className="w-[70%] text-sm text-gray-400 mt-1">
+          {/* <p className="w-[70%] text-sm text-gray-400 mt-1">
             {' '}
             Scroll down the page for more recommendations. Below you will find a variety of products
             from all categories on Steam that may be of interest to you.Looking for recommendations?
             <br />
-          </p>
+          </p> */}
           <div className="  text-[#13D1FF] bg-[#DAF0FF] hover:bg-[#DAF0FF] font-bold py-2 px-4 mt-2 mr-16 rounded">
             Explore All jobs &rarr;
           </div>

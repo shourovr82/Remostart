@@ -73,7 +73,7 @@ const TalentCards = () => {
     {
       itemType: 'BUSINESS',
       itemColor: '#ff1830',
-      borderColor: 'border-[#fee719]',
+      borderColor: 'border-[#ff1830]',
       price: 39,
       description: {
         searches: '100 Searches',

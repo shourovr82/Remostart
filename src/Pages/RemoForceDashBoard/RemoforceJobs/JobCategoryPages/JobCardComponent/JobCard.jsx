@@ -9,7 +9,7 @@ const JobCard = ({ items, applyNowBtn }) => (
             {items?.startupsName?.charAt(0).toUpperCase()}
           </p>
         )}
-        <h2 className="text-[20px] font-semibold">{items?.title}</h2>
+        <h2 className="text-md font-semibold">{items?.title}</h2>
       </div>
     </div>
     <div className="py-2">
@@ -19,7 +19,7 @@ const JobCard = ({ items, applyNowBtn }) => (
     </div>
     <div>
       <p className="text-start  text-sm ">
-        {items?.description ? `${items?.description?.slice(0, 100)}` : items?.description}
+        {items?.description ? `${items?.description?.slice(0, 50)}` : items?.description}
         ...
       </p>
     </div>
@@ -28,7 +28,7 @@ const JobCard = ({ items, applyNowBtn }) => (
       {/* skills */}
       <div className="flex mt-[7px] flex-wrap  w-full gap-2 xl:gap-2">
         {items &&
-          items?.skills.map((skill) => (
+          items?.skills.slice(0, 3).map((skill) => (
             <div key={Math.random()} className="bg-[#F0F9FF]  rounded-md ">
               <p className="text-xs px-[5px] py-[5px] bg-green-100 rounded-md ">{skill}</p>
             </div>
