@@ -17,7 +17,9 @@ import { SiGmail } from 'react-icons/si';
 import { TfiTwitter } from 'react-icons/tfi';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import profileStar from '../../../Assets/RemoForceDashboard/dashboard/profileStar.svg';
 import AuthContext from '../../../Context/AuthContext';
+
 import {
   CalculatedAge,
   FormattedDate,
@@ -89,7 +91,7 @@ const RemoForceProfile = () => {
 
       {/* User name and image  */}
       <div className="relative ">
-        <div className="flex absolute gap-5 justify-between -top-10 left-5 items-center ">
+        <div className="lg:flex absolute gap-5 justify-between -top-12 2xl:-top-10 left-5 items-center ">
           <div className="">
             <img
               src={
@@ -97,14 +99,14 @@ const RemoForceProfile = () => {
                   ? remoProfile?.remoforceProfilePhoto
                   : 'https://static.vecteezy.com/system/resources/previews/002/387/693/original/user-profile-icon-free-vector.jpg'
               }
-              className=" bg-white w-20 lg:w-[200px]  lg:h-[150px] object-cover md:block bg-red  shadow-xl shadow-[#ddb6ff93] rounded-full"
+              className=" bg-white w-[100px] lg:w-[200px]  h-[100px] lg:h-[150px]  md:block bg-red  shadow-xl shadow-[#ddb6ff93] rounded-full"
               alt=""
             />
           </div>
-          <div className="font-bold text-[14px]   md:mt-14 lg:mt-4 xl:mt-12  w-full md:pr-12">
-            <div className="flex justify-between ">
+          <div className="font-bold text-[14px]   md:mt-14 lg:mt-4 xl:mt-12   w-full md:pr-12">
+            <div className="lg:flex justify-between ">
               <div>
-                <div className="flex gap-5 items-center">
+                <div className="flex  w-full gap-5 items-center">
                   <h3 className="text-xl lg:text-2xl font-bold">
                     {remoProfile?.fullName}{' '}
                     {remoProfile?.personalDetails?.age
@@ -129,18 +131,18 @@ const RemoForceProfile = () => {
               {/* share and edit button */}
               <button
                 type="button"
-                className="pr-4 text-[#999999] items-center cursor-pointer   lg:pr-10 flex text-md md:text-lg space-x-2"
+                className="pr-4 text-[#999999] items-center cursor-pointer max-md:mt-2   lg:pr-10 flex text-md md:text-lg space-x-2"
               >
                 <span>
-                  <RiShareForwardLine className=" text-2xl " />
+                  <RiShareForwardLine className="text-2xl " />
                 </span>
                 <span>Share</span>
               </button>
             </div>
-            <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus modi voluptatum sed,
-              unde et corrupti rem blanditiis pariatur libero natus obcaecati optio laudantium esse
-              dolore mollitia veritatis maxime cumque tenetur!
+            <div className="flex gap-4">
+              <img src={profileStar} alt="" />
+              <img src={profileStar} alt="" />
+              <img src={profileStar} alt="" />
             </div>
           </div>
         </div>
@@ -148,7 +150,7 @@ const RemoForceProfile = () => {
 
       {/* personal informations starts from here  */}
       {/* about me */}
-      <div className="mt-[150px] flex flex-col lg:grid grid-cols-7 pl-0 lg:pl-6">
+      <div className="mt-[300px] lg:mt-[150px] flex flex-col lg:grid grid-cols-7 pl-0 lg:pl-6">
         <div className="col-span-5 pr-0 lg:pr-2">
           <div className="rounded-lg relative bg-[#F0F9FFBF] p-2">
             <div className="space-x-2 flex items-center">

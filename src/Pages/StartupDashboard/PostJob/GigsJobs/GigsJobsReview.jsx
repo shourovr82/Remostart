@@ -53,14 +53,17 @@ const GigsJobsReview = () => {
       {/* Banner End  */}
 
       {/* Icon For company  */}
-      <div className="relative right-[-5px] md:right-[-36px] top-[120px] md:top-[117px] lg-[top-[126px]]">
+      <div
+        className="relative right-[-5px] md:right-[-36px] top-[120px] md:top-[117px]
+       "
+      >
         <div className="flex gap-[10px] items-center">
           <div className="bg-white w-[85px] md:w-[131px] bg-red rounded-full shadow-2xl shadow-[#DDB6FF] p-4 md:p-10">
             <img src={internshipLogo} alt="" />
           </div>
           <div className="font-bold text-[14px] mt-10  lg:mt-0 flex flex-col">
             <h3>Gig</h3>
-            <div className="flex text-xs text-[#999999] md:hidden">
+            <div className="flex text-xs text-[#999999] lg:hidden">
               <p>Posted</p>
               <p>2 Day ago</p>
             </div>
@@ -69,18 +72,18 @@ const GigsJobsReview = () => {
       </div>
 
       <div className=" lg:mt-[125px] ml-5">
-        <div className="md:flex gap-4 text-[#999999] font-semibold mt-[8px] hidden">
+        <div className="lg:flex gap-4 text-[#999999] font-semibold mt-[8px] hidden">
           <p>Posted</p>
           <p>2 Day ago</p>
         </div>
         {/* Paragraph   */}
         <div className="mt-5 lg:grid lg:grid-cols-4 ">
-          <div className=" lg:col-span-3">
+          <div className=" lg:col-span-3 max-lg:mt-36">
             {/* Job Description   */}
             <p className="whitespace-pre-wrap">{storedJob?.description}</p>
 
             {/* gig Duration Details */}
-            <div>
+            <div className="">
               <h1 className=" mt-[30px] font-semibold text-2xl">Gig Duration:</h1>
               <hr className="h-[3px] bg-[#19A5FF]  w-3/4 lg:w-2/4" />
               <div className=" mb-4 mt-[10px] flex gap-5">

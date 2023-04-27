@@ -43,7 +43,7 @@ const RemoForceDashboardRoot = () => {
           <span className="font-normal text-sm leading-4">My jobs</span>
         </NavLink>
         <NavLink
-          to="/remoforce-dashboard/verify"
+          to="/remoforce/verify"
           className={({ isActive }) => (isActive ? active : notActive)}
         >
           <VscVerified className="text-xl text-[#00c42b]" />

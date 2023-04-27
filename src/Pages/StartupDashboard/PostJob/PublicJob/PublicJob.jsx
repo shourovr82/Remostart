@@ -73,7 +73,7 @@ const PublicJob = () => {
       </div>
       <p className="border-[#BCBCBC] bg-[#BCBCBC] border mt-2" />
       <p className="text-gray-400 mt-6 lg:mt-1">
-        Jobs posted here are ot limited to only our vetted talents. We open it to everyone on the
+        Jobs posted here are not limited to only our vetted talents. We open it to everyone on the
         internet and any and everyone can apply.
       </p>
 
@@ -258,8 +258,10 @@ const PublicJob = () => {
 
         {/* Input Salary  */}
 
-        <div className="space-y-1 mt-5 text-sm">
-          <label className="block font-semibold text-gray-900">Salary</label>
+        <div className="space-y-1 mt-5 ">
+          <label className="block font-semibold text-gray-900">
+            Salary <span className="text-xs">( per Month )</span>
+          </label>
           <input
             type="number"
             name="Salary"
@@ -268,7 +270,7 @@ const PublicJob = () => {
             })}
             defaultValue={storedJob?.salary}
             id="salary"
-            placeholder="Eg. remostarts"
+            placeholder="Salary..."
             className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
           />
           <p className="pt-2">

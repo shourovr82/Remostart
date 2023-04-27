@@ -72,7 +72,7 @@ const TalentRequest = () => {
               </p>
             </div>
           </div>
-          <div className="flex col-span-2    w-full justify-around max-lg:gap-5 lg:justify-center gap-3">
+          <div className="flex col-span-2   max-lg:mt-5  w-full justify-around max-lg:gap-5 lg:justify-center gap-3">
             <button
               onClick={() => setIsOpen(true)}
               className="text-white hover:bg-[#00c42b] duration-300 ease-in bg-[#65dc7f] px-7 2xl:px-10  py-2 border  border-[#00c42b] rounded-lg"

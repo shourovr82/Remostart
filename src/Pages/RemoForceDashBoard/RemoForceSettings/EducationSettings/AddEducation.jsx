@@ -77,7 +77,7 @@ function AddEducation() {
     <RemoForceSettingsItems>
       <section className="w-full mt-8 ">
         {/* Experience section  starts */}
-        <div className="bg-[#F0F9FFBF]  w-[70%] flex flex-col p-[0.5rem] rounded-md">
+        <div className="bg-[#F0F9FFBF]  lg:w-[70%] flex flex-col p-[0.5rem] rounded-md">
           <div className="w-[14rem] p-2 mb-4">
             <h1 className="text-black font-sans font-semibold text-2xl w-[89%]">Education</h1>
           </div>
@@ -86,7 +86,7 @@ function AddEducation() {
             {/* Experience List Display Card */}
             {allEducationLists.length ? (
               allEducationLists?.map((item) => (
-                <div className="border-b-2 flex justify-start  p-[1rem]" key={Math.random()}>
+                <div className="border-b-2 w-full flex justify-start  p-[1rem]" key={Math.random()}>
                   <FcOrgUnit className="text-xl mt-1 mr-4" />
                   <div className="w-5/6">
                     <div className="w-full flex justify-start items-center">
@@ -101,12 +101,16 @@ function AddEducation() {
                         <FiEdit className="text-[#999999] text-xl ml-2" />
                       </div>
                     </div>
-                    <div className="w-full flex gap-2 items-center mt-3">
-                      <p className="text-[#999999] no-wrap text-sm">{item.fieldOfStudy}</p>
-                      <span className="text-[#999999] font-extrabold ">∙</span>
-                      <p className="text-[#999999]  text-sm">{item?.startingDate?.slice(0, 10)}</p>
-                      <span className="text-[#999999]">-</span>
-                      <p className="text-[#999999]  text-sm">{item?.endingDate?.slice(0, 10)}</p>
+                    <div className="w-full flex lg:flex-row flex-col   gap-2 lg:items-center  mt-3">
+                      <div>
+                        <p className="text-[#999999] no-wrap text-sm">{item.fieldOfStudy}</p>
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        <span className="text-[#999999]   max-lg:hidden font-extrabold ">∙</span>
+                        <p className="text-[#999999] text-sm">{item?.startingDate?.slice(0, 10)}</p>
+                        <span className="text-[#999999]">-</span>
+                        <p className="text-[#999999]  text-sm">{item?.endingDate?.slice(0, 10)}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
