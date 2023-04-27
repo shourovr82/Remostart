@@ -91,7 +91,7 @@ const RemoForceProfile = () => {
 
       {/* User name and image  */}
       <div className="relative ">
-        <div className="lg:flex absolute gap-5 justify-between -top-12 2xl:-top-10 left-5 items-center ">
+        <div className="lg:flex absolute w-full  gap-5 justify-between -top-12 2xl:-top-10 left-5 items-center ">
           <div className="">
             <img
               src={
@@ -103,8 +103,8 @@ const RemoForceProfile = () => {
               alt=""
             />
           </div>
-          <div className="font-bold text-[14px]   md:mt-14 lg:mt-4 xl:mt-12   w-full md:pr-12">
-            <div className="lg:flex justify-between ">
+          <div className="font-bold text-[14px]   md:mt-5 lg:mt-12 xl:mt-12   w-full ">
+            <div className="lg:flex justify-between w-full  ">
               <div>
                 <div className="flex  w-full gap-5 items-center">
                   <h3 className="text-xl lg:text-2xl font-bold">
@@ -125,7 +125,7 @@ const RemoForceProfile = () => {
                   </button>
                 </div>
                 <div className="flex text-xs text-black/50">
-                  <p>{remoProfile?.personalDetails?.bio}</p>
+                  <p>{`${remoProfile?.personalDetails?.bio?.slice(0, 200)}...`}</p>
                 </div>
               </div>
               {/* share and edit button */}

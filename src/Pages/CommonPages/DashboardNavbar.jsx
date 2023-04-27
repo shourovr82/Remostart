@@ -106,7 +106,7 @@ const DashboardNavbar = () => {
               {(role === 'remoforce' || serviceUser?.role === 'remoforce') && (
                 <li>
                   <NavLink
-                    to="/remoforce-dashboard"
+                    to="/remoforce-dashboard/dashboard"
                     className={({ isActive }) => (isActive ? active : notActive)}
                   >
                     Dashboard
@@ -176,7 +176,7 @@ const DashboardNavbar = () => {
                   </NavLink>
                 </li>
               )}
-              {(role === 'remoforce' || serviceUser?.role === 'remoforce') && (
+              {/* {(role === 'remoforce' || serviceUser?.role === 'remoforce') && (
                 <li>
                   <NavLink
                     to="/remoforce/verify"
@@ -185,11 +185,21 @@ const DashboardNavbar = () => {
                     Get Verify
                   </NavLink>
                 </li>
+              )} */}
+              {(role === 'remoforce' || serviceUser?.role === 'remoforce') && (
+                <li>
+                  <NavLink
+                    to="/remoforce-dashboard/all-jobs"
+                    className={({ isActive }) => (isActive ? active : notActive)}
+                  >
+                    Jobs
+                  </NavLink>
+                </li>
               )}
               {(role === 'remoforce' || serviceUser?.role === 'remoforce') && (
                 <li>
                   <NavLink
-                    to="/remoforce/shadowing"
+                    to="/remoforce-dashboard/shadowing"
                     className={({ isActive }) => (isActive ? active : notActive)}
                   >
                     Shadowing
