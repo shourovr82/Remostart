@@ -84,12 +84,12 @@ const RemoForceProfile = () => {
   return (
     <div className="w-full">
       {/* Banner Section start */}
-      <div className="flex border remoforceDashboardProfileBg shadow-lg shadow-[#ddb6ff49] mx-2 lg:mx-0 justify-between absolute w-full md:w-[80%] lg:w-[63%] max-w-6xl" />
+      <div className="flex border remoforceDashboardProfileBg shadow-lg shadow-[#ddb6ff49] mx-2 lg:mx-0 justify-between   w-full " />
       {/* Banner End  */}
 
       {/* User name and image  */}
-      <div className="relative right-[-5px] md:right-[-36px] top-[117px] md:top-[110px] lg:top-[120px]">
-        <div className="flex gap-[10px] items-center">
+      <div className="relative ">
+        <div className="flex absolute gap-5 justify-between -top-10 left-5 items-center ">
           <div className="">
             <img
               src={
@@ -97,51 +97,58 @@ const RemoForceProfile = () => {
                   ? remoProfile?.remoforceProfilePhoto
                   : 'https://static.vecteezy.com/system/resources/previews/002/387/693/original/user-profile-icon-free-vector.jpg'
               }
-              className="bg-white w-20 lg:w-32 lg:h-28 md:block bg-red  shadow-xl shadow-[#ddb6ff93] rounded-full"
+              className=" bg-white w-20 lg:w-[200px]  lg:h-[150px] object-cover md:block bg-red  shadow-xl shadow-[#ddb6ff93] rounded-full"
               alt=""
             />
           </div>
-          <div className="font-bold text-[14px] mt-[49px] md:mt-14 lg:mt-4 xl:mt-10 flex justify-between w-full md:pr-12">
-            <div>
-              <div className="flex gap-5 items-center">
-                <h3 className="text-xl lg:text-2xl font-bold">
-                  {remoProfile?.fullName}{' '}
-                  {remoProfile?.personalDetails?.age
-                    ? `(${remoProfile?.personalDetails?.age})`
-                    : ''}
-                </h3>
-                <button type="button">
-                  <Link
-                    title="Edit Profile"
-                    className="flex justify-center items-center gap-2"
-                    to="/remoforce-dashboard/settings"
-                  >
-                    <FiEdit className="cursor-pointer text-[#999999] text-2xl " />
-                    <span className="text-[#999999] mt-1 text-lg ">Edit</span>
-                  </Link>
-                </button>
+          <div className="font-bold text-[14px]   md:mt-14 lg:mt-4 xl:mt-12  w-full md:pr-12">
+            <div className="flex justify-between ">
+              <div>
+                <div className="flex gap-5 items-center">
+                  <h3 className="text-xl lg:text-2xl font-bold">
+                    {remoProfile?.fullName}{' '}
+                    {remoProfile?.personalDetails?.age
+                      ? `(${remoProfile?.personalDetails?.age})`
+                      : ''}
+                  </h3>
+                  <button type="button">
+                    <Link
+                      title="Edit Profile"
+                      className="flex justify-center items-center gap-2"
+                      to="/remoforce-dashboard/settings"
+                    >
+                      <FiEdit className="cursor-pointer text-[#999999] text-2xl " />
+                      <span className="text-[#999999] mt-1 text-lg ">Edit</span>
+                    </Link>
+                  </button>
+                </div>
+                <div className="flex text-xs text-black/50">
+                  <p>{remoProfile?.personalDetails?.bio}</p>
+                </div>
               </div>
-              <div className="flex text-xs text-black/50">
-                <p>{remoProfile?.personalDetails?.bio}</p>
-              </div>
+              {/* share and edit button */}
+              <button
+                type="button"
+                className="pr-4 text-[#999999] items-center cursor-pointer   lg:pr-10 flex text-md md:text-lg space-x-2"
+              >
+                <span>
+                  <RiShareForwardLine className=" text-2xl " />
+                </span>
+                <span>Share</span>
+              </button>
             </div>
-            {/* share and edit button */}
-            <button
-              type="button"
-              className="pr-4 text-[#999999] items-center cursor-pointer   lg:pr-10 flex text-md md:text-lg space-x-2"
-            >
-              <span>
-                <RiShareForwardLine className=" text-2xl " />
-              </span>
-              <span>Share</span>
-            </button>
+            <div>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus modi voluptatum sed,
+              unde et corrupti rem blanditiis pariatur libero natus obcaecati optio laudantium esse
+              dolore mollitia veritatis maxime cumque tenetur!
+            </div>
           </div>
         </div>
       </div>
 
       {/* personal informations starts from here  */}
       {/* about me */}
-      <div className="mt-[140px] flex flex-col lg:grid grid-cols-7 pl-0 lg:pl-6">
+      <div className="mt-[150px] flex flex-col lg:grid grid-cols-7 pl-0 lg:pl-6">
         <div className="col-span-5 pr-0 lg:pr-2">
           <div className="rounded-lg relative bg-[#F0F9FFBF] p-2">
             <div className="space-x-2 flex items-center">

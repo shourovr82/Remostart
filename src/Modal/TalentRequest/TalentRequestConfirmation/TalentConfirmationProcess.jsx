@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TalentConfirmationStarted from './TalentCofirmationStarted';
 import TalentConfirmationDate from './TalentConfirmationDate';
 
-const TalentConfirmationProcess = ({ setIsOpen }) => {
+const TalentConfirmationProcess = ({ setIsOpen, selectedTalent }) => {
   const [tabActive, setTabActive] = useState(1);
   const [selectedDate, setSelectedDate] = useState([]);
 
@@ -19,7 +19,7 @@ const TalentConfirmationProcess = ({ setIsOpen }) => {
   return (
     <div className="h-[100%] flex  justify-around flex-col">
       <div>
-        {tabActive === 1 && <TalentConfirmationStarted />}
+        {tabActive === 1 && <TalentConfirmationStarted selectedTalent={selectedTalent} />}
 
         {tabActive === 2 && (
           <TalentConfirmationDate selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
