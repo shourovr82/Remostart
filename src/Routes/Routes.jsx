@@ -36,7 +36,7 @@ import AddEducation from '../Pages/RemoForceDashBoard/RemoForceSettings/Educatio
 import AddProject from '../Pages/RemoForceDashBoard/RemoForceSettings/ProjectsSettings/AddProject';
 import SkillAndPreferenceSettings from '../Pages/RemoForceDashBoard/RemoForceSettings/SkillAndPreferenceSettings';
 import AddExperience from '../Pages/RemoForceDashBoard/RemoForceSettings/WorkExperienceSettings/AddExperience';
-import RemoForceVerify from '../Pages/RemoForceDashBoard/RemoForceVerify/RemoForceVerify';
+import RemoForceVerifyHome from '../Pages/RemoForceDashBoard/RemoForceVerify/RemoForceVerifyHome';
 import ActiveJobs from '../Pages/StartupDashboard/DashboardPages/ActiveJobs';
 import ClosedJobs from '../Pages/StartupDashboard/DashboardPages/ClosedJobs';
 import DashBoard from '../Pages/StartupDashboard/DashboardPages/DashBoard';
@@ -163,6 +163,9 @@ const router = createBrowserRouter(
       {/* remoforce routes */}
 
       <Route path="/remoforce" element={<RemoForceHome />} />
+      {/* remoforce verify */}
+
+      <Route path="/remoforce/verify" element={<RemoForceVerifyHome />} />
 
       {/* Remoforce Dashboard */}
       <Route
@@ -180,7 +183,7 @@ const router = createBrowserRouter(
         {/* Remoforce Dashboard my job */}
         <Route path="/remoforce-dashboard/my_job" element={<RemoForceMyJob />} />
         {/* Remoforce Dashboard verify */}
-        <Route path="/remoforce-dashboard/verify" element={<RemoForceVerify />} />
+        {/* <Route path="/remoforce-dashboard/verify" element={<RemoForceVerifyHome />} /> */}
         {/* Remoforce Dashboard dashboard */}
         <Route path="/remoforce-dashboard/dashboard" element={<RemoForceDashboard />} />
         {/* Remoforce Dashboard settings */}

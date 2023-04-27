@@ -105,7 +105,7 @@ const TalentCards = () => {
     },
   ];
   return (
-    <div className="flex flex-col  lg:grid lg:grid-cols-6 mt-10 2xl:mt-5 gap-6 2xl:gap-10 max-md:px-3">
+    <div className="flex flex-col  lg:grid lg:grid-cols-4 2xl:grid-cols-6  mt-10 2xl:mt-5 gap-6 2xl:gap-10 max-md:px-3">
       {talentsCardsItems?.map((item) => (
         <div
           className={`border col-span-2 py-6 shadow-sm duration-300 ease-in-out hover:shadow-2xl hover:shadow-[${item?.itemColor}] shadow-[${item?.itemColor}] px-5 rounded-lg ${item?.borderColor}`}

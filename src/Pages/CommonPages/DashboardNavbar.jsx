@@ -124,18 +124,17 @@ const DashboardNavbar = () => {
                   </NavLink>
                 </li>
               )}
-              {/* {(role === 'startup' || serviceUser?.role === 'startup') && (
-                                <li>
-                                    <NavLink
-                                        to="/dashboard/talent-request"
-                                        className={({ isActive }) =>
-                                            isActive ? active : notActive
-                                        }
-                                    >
-                                        Talent Request
-                                    </NavLink>
-                                </li>
-                            )} */}
+
+              {(role === 'startup' || serviceUser?.role === 'startup') && (
+                <li>
+                  <NavLink
+                    to="/dashboard/talent-request"
+                    className={({ isActive }) => (isActive ? active : notActive)}
+                  >
+                    Talent Request
+                  </NavLink>
+                </li>
+              )}
               {(role === 'startup' || serviceUser?.role === 'startup') && (
                 <li>
                   <NavLink
@@ -180,7 +179,7 @@ const DashboardNavbar = () => {
               {(role === 'remoforce' || serviceUser?.role === 'remoforce') && (
                 <li>
                   <NavLink
-                    to="/remoforce-dashboard/verify"
+                    to="/remoforce/verify"
                     className={({ isActive }) => (isActive ? active : notActive)}
                   >
                     Get Verify
@@ -336,7 +335,7 @@ const DashboardNavbar = () => {
                           <div className="w-1/3 ">
                             <img
                               src={user?.user?.profilePhoto || avatarLogo}
-                              className="rounded-full w-full h-full"
+                              className="rounded-full w-[50px] h-[50px]  object-cover"
                               alt=""
                             />
                           </div>

@@ -265,7 +265,7 @@ const PrivateJob = () => {
             })}
             defaultValue={storedJob?.salary}
             id="salary"
-            placeholder="Eg. remostarts"
+            placeholder="Salary per month..."
             className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#BCBCBC]  text-gray-900 "
           />
           <p className="pt-2">

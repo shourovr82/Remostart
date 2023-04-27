@@ -89,6 +89,7 @@ const InternshipPost = () => {
     navigate('/dashboard/post-job/internship/review');
   };
   const [experienceYear, setExperienceYear] = useState('');
+  console.log(experienceYear);
   return (
     <div>
       <div className="flex gap-4 items-center">
@@ -168,13 +169,13 @@ const InternshipPost = () => {
               {...register('experience', {
                 required: true,
               })}
-              value={experienceYear}
+              value={experienceYear || storedData?.experience || ''}
               onChange={(e) => setExperienceYear(e.target.value)}
               className="select  mt-1 w-full block font-semibold border 
                        border-gray-400 rounded-md "
             >
               <option value="" hidden>
-                {storedData?.experience || 'select a year'}
+                select a year
               </option>
               {experience.map((D) => (
                 <option key={Math.random()} value={D}>

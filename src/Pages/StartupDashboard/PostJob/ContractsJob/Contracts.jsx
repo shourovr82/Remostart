@@ -8,8 +8,8 @@ import { RxCross2 } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import currencyIcon from '../../../../Assets/Dashboard/currency.png';
-import { setJob } from '../../../../Hooks/useLocalStorage';
 import AuthContext from '../../../../Context/AuthContext';
+import { setJob } from '../../../../Hooks/useLocalStorage';
 
 const Contracts = () => {
   // const [storedJob, setStoredJob] = useState({});
@@ -218,7 +218,7 @@ const Contracts = () => {
         <p className="text-2xl font-semibold">Contract</p>
       </div>
       <p className="border-[#e5e7eb] bg-[#BCBCBC] border mt-2" />
-      <p className=" mt-6 lg:mt-1">
+      <p className=" text-[#999999] font-medium xl:font-semibold mt-6 lg:mt-1">
         You can handover your tech and non tech projects to us, we will recruit the team, gather the
         resource, micro-mange the project till its done
       </p>
@@ -582,26 +582,30 @@ const Contracts = () => {
           </div>
         </div>
         {/* location */}
-        <div className="space-y-1 mt-5 text-sm">
-          <label className="block font-semibold text-gray-900">Location</label>
-          <input
-            type="Text"
-            name="location"
-            {...register('location', {
-              required: true,
-            })}
-            defaultValue={storedJob?.location}
-            id="location"
-            placeholder="Remote"
-            className="lg:w-[520px] w-full px-4 py-3 rounded-md border border-[#e5e7eb]  text-gray-900 "
-          />
-          <p className="pt-2">
-            {errors.location && (
-              <span className="text-red-400 ">
-                {errors.location?.type === 'required' && 'Please provide your Location'}
-              </span>
-            )}
-          </p>
+        <div>
+          <div className="space-y-2.5 mt-5 text-sm w-[1/3]">
+            <label className="block font-semibold text-gray-900">Location</label>
+            <div className="lg:w-[50%] pr-2  rounded-md border  border-[#e5e7eb]  text-gray-900 gap-3  justify-between flex items-center">
+              <input
+                type="Text"
+                name="location"
+                {...register('location', {
+                  required: true,
+                })}
+                defaultValue={storedJob?.location}
+                id="location"
+                placeholder="Remote"
+                className=" w-full pl-4 py-3 rounded-md border border-transparent focus:ring-0 text-gray-900 "
+              />
+            </div>
+            <p className="pt-2">
+              {errors.location && (
+                <span className="text-red-400 ">
+                  {errors.location?.type === 'required' && 'Please provide your Location'}
+                </span>
+              )}
+            </p>
+          </div>
         </div>
 
         {/* upload image or file */}
