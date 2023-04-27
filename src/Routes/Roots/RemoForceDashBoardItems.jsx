@@ -16,7 +16,7 @@ const RemoForceDashBoardItems = ({ children }) => {
           Jobs
         </h1>
       </div>
-      <div className="flex lg:grid lg:grid-cols-3 justify-start items-start lg:justify-between lg:items-center flex-col-reverse lg:flex-row">
+      <div className="flex lg:grid lg:grid-cols-3 justify-start items-start lg:justify-between   flex-col-reverse lg:flex-row">
         <nav className="flex lg:col-span-2  list-none mt-2 lg:mt-5 items-start space-y-2  pb-2 mb-6 w-[fit-content] flex-wrap">
           <li className="mt-2 font-semibold text-xs sm:text-sm">
             <NavLink
@@ -111,10 +111,10 @@ const RemoForceDashBoardItems = ({ children }) => {
             {/* <Link to="/remoforce-dashboard/contracts"> Contracts</Link> */}
           </li>
         </nav>
-        <div className="lg:col-span-1  max-md:mt-2  relative text-gray-600">
+        <div className="lg:col-span-1 w-full  max-lg:mt-2 lg:mt-5  relative text-gray-600">
           <input
             className="border-2 border-gray-300 bg-white w-full h-10 pr-16 rounded-md text-sm focus:outline-none px-4"
-            type="search"
+            type="text"
             name="search"
             placeholder="Search jobs, skills, location..."
           />
