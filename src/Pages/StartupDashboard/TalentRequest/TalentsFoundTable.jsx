@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { FiSearch } from 'react-icons/fi';
 import { HiChevronUpDown } from 'react-icons/hi2';
 import { useSelector } from 'react-redux';
@@ -11,26 +12,7 @@ const TalentsFoundTable = () => {
 
   const { searchResults, results } = useContext(AuthContext);
 
-  const tier = 'tierFree';
   const { user } = useSelector((state) => state.auth);
-
-  // const { data: lastSearchResult, refetch } = useQuery(['lastSearchResult'], () =>
-  //   axios
-  //     .get(
-  //       `${process.env.REACT_APP_URL_STARTUP}/api/talent/last-results?email=${user?.user.email}&tier=${tier}`
-  //     )
-  //     .then((res) => res.data)
-  // );
-  // console.log(lastSearchResult);
-
-  // const [results, setResults] = useState([]);
-  // useEffect(() => {
-  //   if (searchResults.requiredTalentsInHistory?.length) {
-  //     setResults(searchResults.requiredTalentsInHistory);
-  //   } else {
-  //     setResults(lastSearchResult?.lastSearchResult.requiredTalentsInHistory);
-  //   }
-  // }, [searchResults, lastSearchResult]);
 
   const [selectedTalent, setSelectedTalent] = useState([]);
   const [isAllSelected, setIsAllSelected] = useState(false);
@@ -48,7 +30,7 @@ const TalentsFoundTable = () => {
 
   const handleSelectAllTalent = (data) => {
     if (data === true) {
-      setSelectedTalent(results.requiredTalentsInHistory);
+      setSelectedTalent(results?.lastSearchResult?.requiredTalentsInHistory);
       setIsAllSelected(true);
     }
     if (data === false) {
@@ -57,6 +39,14 @@ const TalentsFoundTable = () => {
     }
   };
 
+  //
+  const handleRequestTalent = () => {
+    if (selectedTalent?.length) {
+      setIsOpen(true);
+    } else {
+      toast.error('You must select at least 1 Talent');
+    }
+  };
   return (
     <>
       {results?.lastSearchResult?.requiredTalentsInHistory?.length && (
@@ -185,19 +175,36 @@ const TalentsFoundTable = () => {
                               </p>
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200 text-sm">
-                              <input
-                                onChange={(e) =>
-                                  handleSelectTalent({
-                                    result,
-                                    isSelected: e.target.checked,
-                                    id: result?._id,
-                                  })
-                                }
-                                id="select"
-                                type="checkbox"
-                                disabled={isAllSelected}
-                                className="checkbox  focus:ring-0"
-                              />
+                              {isAllSelected ? (
+                                <input
+                                  onChange={(e) =>
+                                    handleSelectTalent({
+                                      result,
+                                      isSelected: e.target.checked,
+                                      id: result?._id,
+                                    })
+                                  }
+                                  id="select"
+                                  type="checkbox"
+                                  checked
+                                  disabled={isAllSelected}
+                                  className="checkbox  focus:ring-0"
+                                />
+                              ) : (
+                                <input
+                                  onChange={(e) =>
+                                    handleSelectTalent({
+                                      result,
+                                      isSelected: e.target.checked,
+                                      id: result?._id,
+                                    })
+                                  }
+                                  id="select"
+                                  type="checkbox"
+                                  disabled={isAllSelected}
+                                  className="checkbox  focus:ring-0"
+                                />
+                              )}
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200  text-sm">
                               <p className="text-gray-900 font-semibold whitespace-no-wrap">
@@ -268,7 +275,7 @@ const TalentsFoundTable = () => {
           {/* request talent button */}
           <div className="mt-10 flex justify-center">
             <button
-              onClick={() => setIsOpen(true)}
+              onClick={handleRequestTalent}
               type="button"
               className="text-[#61c0fe] font-semibold text-2xl shadow-inner rounded-lg py-2 px-7 hover:shadow duration-300 ease-in bg-[#f7f1fe]"
             >
@@ -278,7 +285,15 @@ const TalentsFoundTable = () => {
         </section>
       )}
       {/* modal */}
-      {isOpen && <TalentRequestConfirmationModal isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isOpen && selectedTalent?.length ? (
+        <TalentRequestConfirmationModal
+          selectedTalent={selectedTalent}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
+      ) : (
+        ''
+      )}
     </>
   );
 };

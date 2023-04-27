@@ -6,10 +6,11 @@ import modalSvg1 from '../../../Assets/Dashboard/talentRequest/talentRequestModa
 import modalSvg2 from '../../../Assets/Dashboard/talentRequest/talentRequestModalSvg2.svg';
 import TalentConfirmationProcess from './TalentConfirmationProcess';
 
-const TalentRequestConfirmationModal = ({ setIsOpen, isOpen }) => {
+const TalentRequestConfirmationModal = ({ selectedTalent, setIsOpen, isOpen }) => {
   function closeModal() {
     setIsOpen(false);
   }
+  console.log(selectedTalent);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -55,7 +56,7 @@ const TalentRequestConfirmationModal = ({ setIsOpen, isOpen }) => {
                 </div>
                 {/* modal content */}
 
-                <TalentConfirmationProcess setIsOpen={setIsOpen} />
+                <TalentConfirmationProcess selectedTalent={selectedTalent} setIsOpen={setIsOpen} />
               </Dialog.Panel>
             </Transition.Child>
           </div>
