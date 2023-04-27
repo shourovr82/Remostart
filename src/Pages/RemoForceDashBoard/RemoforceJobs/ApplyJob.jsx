@@ -172,7 +172,7 @@ const ApplyJob = () => {
               {data?.joiningPerks?.length < 0 && (
                 <div className="mt-[30px]">
                   <h1 className="  font-semibold text-2xl">Internship Perks:</h1>
-                  <hr className="h-[2px] bg-[#19A5FF]  w-2/3 lg:w-[35%]" />
+                  <hr className="h-[3px] bg-[#19A5FF]  w-2/3 lg:w-[35%]" />
                   {/* Internship Duration Details */}
                   <div className=" mb-4 mt-[10px] flex items-center gap-[10px]">
                     {data?.joiningPerks?.map((perk) => (

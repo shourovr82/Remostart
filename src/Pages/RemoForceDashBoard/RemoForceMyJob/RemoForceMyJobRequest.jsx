@@ -20,8 +20,7 @@ const RemoForceMyJobRequest = () => {
       skills: ['KING ANACONDA', 'REACT', 'JAVA', 'HTML', 'Database'],
       locations: ['South Africa'],
       languages: ['English'],
-
-      jobDescripTion: `Scroll down the page for more recommendations. Below you will find a variety of products from all categories on Steam that may be of interest to you. Looking for recommendations?Looking for recommendations? Scroll down the page for more recommendations. Below you will find a variety of products from all categories on Steam that may be of interest to you. Looking for `,
+      jobDescripTion: ``,
     },
     {
       id: 2,
@@ -31,8 +30,7 @@ const RemoForceMyJobRequest = () => {
       skills: ['KING ANACONDA', 'REACT', 'JAVA', 'HTML', 'Database'],
       locations: ['South Africa'],
       languages: ['English'],
-
-      jobDescripTion: `Scroll down the page for more recommendations. Below you will find a variety of products from all categories on Steam that may be of interest to you. Looking for recommendations?Looking for recommendations? Scroll down the page for more recommendations. Below you will find a variety of products from all categories on Steam that may be of interest to you. Looking for `,
+      jobDescripTion: ``,
     },
   ];
 

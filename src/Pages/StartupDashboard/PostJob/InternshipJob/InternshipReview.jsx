@@ -59,20 +59,16 @@ const InternshipReview = () => {
             <img src={internshipLogo} alt="" />
           </div>
           <div className="font-bold text-[14px] mt-6 lg:mt-0 flex flex-col">
-            <h3>Internship(Type)</h3>
-            <div className="flex text-xs text-[#999999] md:hidden">
-              <p>Posted</p>
-              <p>2 Day ago</p>
-            </div>
+            <h3>Internship</h3>
           </div>
         </div>
       </div>
 
       <div className="mt-[125px] ml-5">
-        <div className="md:flex gap-4 text-[#999999] font-semibold mt-[8px] hidden">
+        {/* <div className="md:flex gap-4 text-[#999999] font-semibold mt-[8px] ">
           <p>Posted</p>
           <p>2 Day ago</p>
-        </div>
+        </div> */}
         {/* Paragraph   */}
         <div className="mt-5 lg:grid lg:grid-cols-4 ">
           <div className=" lg:col-span-3">
@@ -120,7 +116,7 @@ const InternshipReview = () => {
             {/* Internship Perks ----- */}
             <div className="mt-[30px]">
               <h1 className="  font-semibold text-2xl">Internship Perks:</h1>
-              <hr className="h-[2px] bg-[#19A5FF]  w-2/3 lg:w-[35%]" />
+              <hr className="h-[3px] bg-[#19A5FF]  w-2/3 lg:w-[35%]" />
               {/* Internship Duration Details */}
               <div className=" mb-4 mt-[10px] flex items-center gap-[10px]">
                 {storedJob?.joiningPerks?.map((perk) => (

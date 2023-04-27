@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { toast } from 'react-hot-toast';
 import { BiCheck } from 'react-icons/bi';
@@ -94,7 +94,7 @@ const ApplicationRequests = ({ jobData }) => {
               {/* table body items */}
 
               <tbody className="">
-                {applicationRequests?.slice(0, 7).map((singleData, index) => (
+                {applicationRequests?.map((singleData, index) => (
                   <tr
                     key={Math.random()}
                     className="bg-white border-b border-[#E5E5E5]  font-semibold text-[#0B132ABF]  "
@@ -161,7 +161,7 @@ const ApplicationRequests = ({ jobData }) => {
 
               {/* table foooter */}
 
-              <tfoot>
+              {/* <tfoot>
                 <tr className="">
                   {applicationRequests?.length > 7 && (
                     <td colSpan="5" className="text-right pr-6 text-[#19A5FF] font-semibold">
@@ -169,7 +169,7 @@ const ApplicationRequests = ({ jobData }) => {
                     </td>
                   )}
                 </tr>
-              </tfoot>
+              </tfoot> */}
             </table>
           </div>
         </div>

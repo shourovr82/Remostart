@@ -64,7 +64,7 @@ const TalentsFounds = () => {
         </div>
 
         {/* my request */}
-        <button type="button" className="max-md:w-full" onClick={handleMyRequest}>
+        <button type="button" className="w-full " onClick={handleMyRequest}>
           <div className="col-span-1 flex justify-evenly items-center  py-8 2xl:py-10 max-lg:px-10 max-lg:mt-5 rounded-3xl bg-[#d3ffe7] shadow-xl max-md:gap-3 gap-2 shadow-[#f4f8fc]">
             <div className=" p-4 2xl:p-6 rounded-full bg-white">
               <img src={libraryBookIcon} alt="" />

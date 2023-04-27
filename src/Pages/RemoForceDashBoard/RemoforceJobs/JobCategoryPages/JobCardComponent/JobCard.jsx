@@ -13,7 +13,7 @@ const JobCard = ({ items, applyNowBtn }) => (
             {items?.startupsName?.charAt(0).toUpperCase()}
           </p>
         )}
-        <h2 className="text-[20px] text-start font-semibold">{items?.title}</h2>
+        <h2 className="text-md font-semibold">{items?.title}</h2>
       </div>
     </div>
     <div className="py-2">

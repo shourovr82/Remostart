@@ -123,7 +123,7 @@ const GigsJobsReview = () => {
             {/* gig  deliverables ----- */}
             <div className="mt-[30px] ">
               <h1 className="  font-semibold text-2xl">Deliverables</h1>
-              <hr className="h-[2px] bg-[#19A5FF]  w-2/3 lg:w-[35%]" />
+              <hr className="h-[3px] bg-[#19A5FF]  w-2/3 lg:w-[35%]" />
               {/* gig deliverables Details */}
               <div className=" mb-4 mt-[10px] flex flex-wrap pr-10 items-center gap-[10px]">
                 {storedJob?.joiningPerks?.map((perk) => (

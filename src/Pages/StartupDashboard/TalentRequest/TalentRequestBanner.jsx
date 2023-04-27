@@ -41,9 +41,7 @@ const TalentRequestBanner = () => {
             <h1 className="text-2xl 2xl:text-3xl max-md:hidden font-bold">
               Let our AI algorithm help you get the best and inclusive talent for the job
             </h1>
-            <h2 className="mt-3 max-md:ml-10 text-[#FF5A78] text-xl lg:text-3xl font-semibold">
-              How it works
-            </h2>
+            <h2 className="mt-3  text-[#FF5A78] text-xl lg:text-3xl font-semibold">How it works</h2>
             <p className="text-[#999999] font-medium lg:font-semibold   lg:text-lg mt-5">
               Specify whom you want, our algorithm does the inclusive matching, interview
               scheduling, acceptance and rejection all in one place
