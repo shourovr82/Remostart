@@ -665,3 +665,11 @@ input[type="range"]::-webkit-slider-thumb {
 .designationCard{
   box-shadow: #dfcdf8 0px 0px 20px;
 }
+
+/* startup landing */
+.getDmeShadowCard {
+    box-shadow: 0px 4px 15px 4px #f7e9cc;
+}
+.getDmeShadow{
+  box-shadow: 0px 6px 15px 2px #ffe0b1;
+}

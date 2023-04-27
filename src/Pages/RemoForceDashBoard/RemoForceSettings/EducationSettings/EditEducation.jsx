@@ -31,7 +31,7 @@ function EditEducation({
     <section className="w-full bg-[#f4fbff] rounded-md mt-4 ">
       {/* Experience section  starts */}
       <hr className="w-full bg-hr my-3" />
-      <div className="bg-lightblue w-[70%] flex flex-col p-[0.5rem] rounded-md">
+      <div className="bg-lightblue lg:w-[70%] flex flex-col p-[0.5rem] rounded-md">
         {/* Add Experience section  starts */}
         <div className="bg-lightblue w-full flex flex-col p-[0.5rem]">
           <div className="flex flex-nowrap justify-between items-center border-b-2 border-b-headers w-[14rem] p-2 mb-4">
@@ -86,7 +86,7 @@ function EditEducation({
               </div>
               {/* Dates Beginnings */}
               <div
-                className={` w-full lg:w-[90%] gap-2 lg:gap-0 flex justify-between items-center`}
+                className={` w-full lg:w-[90%] gap-2 lg:gap-0 lg:flex justify-between items-center`}
               >
                 {/* Start Date Beginnings */}
                 <div className="w-full lg:w-[40%] flex flex-col space-y-1">

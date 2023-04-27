@@ -1,9 +1,13 @@
 const JobCard = ({ items, applyNowBtn }) => (
   <div className=" p-3 2xl:p-2.5 border  duration-300 ease-in xl:m-1 shadow-lg shadow-[#78a5c554] bg-white border-[#a5dbff9d] rounded-md flex flex-col justify-between">
     <div className="flex justify-between  items-center">
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-2">
         {items?.startupsProfilePhoto ? (
-          <img className="w-8 h-8 rounded-full" src={items.startupsProfilePhoto} alt="" />
+          <img
+            className="!w-[20px] object-cover rounded-full"
+            src={items.startupsProfilePhoto}
+            alt=""
+          />
         ) : (
           <p className="w-8 h-8 grid place-items-center  text-white rounded-full bg-black">
             {items?.startupsName?.charAt(0).toUpperCase()}
@@ -19,8 +23,9 @@ const JobCard = ({ items, applyNowBtn }) => (
     </div>
     <div>
       <p className="text-start  text-sm ">
-        {items?.description ? `${items?.description?.slice(0, 50)}` : items?.description}
-        ...
+        {items?.description?.length > 55
+          ? `${` ${items?.description?.slice(0, 55)} ...`}`
+          : items?.description}
       </p>
     </div>
     {/* description, skills */}
@@ -28,7 +33,7 @@ const JobCard = ({ items, applyNowBtn }) => (
       {/* skills */}
       <div className="flex mt-[7px] flex-wrap  w-full gap-2 xl:gap-2">
         {items &&
-          items?.skills.slice(0, 3).map((skill) => (
+          items?.skills?.slice(0, 3).map((skill) => (
             <div key={Math.random()} className="bg-[#F0F9FF]  rounded-md ">
               <p className="text-xs px-[5px] py-[5px] bg-green-100 rounded-md ">{skill}</p>
             </div>

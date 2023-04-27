@@ -167,17 +167,19 @@ const InternshipReview = () => {
                 </div>
               </div>
             </div>
-            <div>
-              <h1 className="font-semibold text-[16px] mt-3 mb-3">Number of Applicants:</h1>
-              <div className="">
-                <div className="bg-[#F0F9FF] mt-3 w-[90px] flex items-center gap-3 rounded-md ">
-                  <p className="text-sm pl-[20px] py-[8px] ">
-                    <BiUser />
-                  </p>
-                  <p className="pr-[25px] ">{data?.applicationRequest?.length}</p>
+            {review !== 'review' && data.applicationRequest.length > 0 && (
+              <div>
+                <h1 className="font-semibold text-[16px] mt-3 mb-3">Number of Applicants:</h1>
+                <div className="">
+                  <div className="bg-[#F0F9FF] mt-3 w-[90px] flex items-center gap-3 rounded-md ">
+                    <p className="text-sm pl-[20px] py-[8px] ">
+                      <BiUser />
+                    </p>
+                    <p className="pr-[25px] ">{data?.applicationRequest?.length}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             <div>
               <h1 className="font-semibold text-[16px] mt-3 mb-3">Apply Before:</h1>
               <div className="">

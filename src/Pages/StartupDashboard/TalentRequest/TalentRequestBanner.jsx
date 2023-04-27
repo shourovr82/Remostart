@@ -50,13 +50,13 @@ const TalentRequestBanner = () => {
           <div className="mt-5 max-md:flex max-md:justify-center space-x-2">
             <button
               type="button"
-              className="text-[#61C1FF] shadow-inner px-5 bg-[#f8f1ff] rounded-lg py-2 text-xl font-semibold"
+              className="text-[#61C1FF] shadow-inner  px-5 bg-[#f8f1ff] rounded-lg py-2 max-lg:text-base lg:text-xl font-semibold"
             >
               Find me Talents !
             </button>
             <button
               type="button"
-              className="text-[#61C1FF] shadow-inner px-5 bg-[#f8f1ff] rounded-lg py-2 text-xl font-semibold"
+              className="text-[#61C1FF] shadow-inner px-5 bg-[#f8f1ff] rounded-lg py-2 max-lg:text-base lg:text-xl font-semibold"
             >
               View Plans
             </button>
@@ -79,9 +79,9 @@ const TalentRequestBanner = () => {
                       <span>{item?.icon}</span>
                       <span className={`border-t-[1px]  ${item?.color} w-full`} />
                     </div>
-                    <div className="flex pb-5 pt-1 text-center flex-col justify-center items-center">
+                    <div className="flex pb-3 pt-1 text-center flex-col justify-center items-center">
                       <h3 className="font-bold text-xl">{item?.total}+</h3>
-                      <h5 className="text-sm  font-semibold">{item?.name}</h5>
+                      <h5 className="text-xs  font-semibold">{item?.name}</h5>
                     </div>
                   </div>
                 </SwiperSlide>
