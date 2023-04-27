@@ -108,19 +108,13 @@ const ApplyJob = () => {
             </div>
             <div className="font-bold text-[14px] mt-6 lg:mt-0 flex flex-col">
               <h3>{categoryName}(Type)</h3>
-              <div className="flex gap-2  text-xs text-[#999999] md:hidden">
-                <p>Posted</p>
-                <p>2 days ago</p>
-              </div>
+              <div className="flex gap-2  text-xs text-[#999999] md:hidden" />
             </div>
           </div>
         </div>
 
         <div className="mt-[130px] lg:mt-[125px] lg:ml-5">
-          <div className="md:flex gap-4 text-[#999999] font-semibold mt-[8px] hidden">
-            <p>Posted</p>
-            <p>2 days ago</p>
-          </div>
+          <div className="md:flex gap-4 text-[#999999] font-semibold mt-[8px] hidden" />
 
           <div className="mt-5 lg:grid lg:grid-cols-6 ">
             {/* job details  */}
