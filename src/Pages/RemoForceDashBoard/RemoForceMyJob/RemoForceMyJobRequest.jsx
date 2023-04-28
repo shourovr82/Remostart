@@ -114,12 +114,12 @@ const RemoForceMyJobRequest = () => {
               {/* bottom item */}
             </div>
             {expanded.includes(talentHistory?.id) && (
-              <div className="grid mt-2 pr-2 grid-cols-4">
+              <div className="lg:grid mt-2 pr-2 grid-cols-4">
                 <div className=" col-span-3 p-2 mt-2 rounded-xl ">
                   <p className="whitespace-pre-wrap text-[#999999]">
                     {talentHistory?.jobDescripTion}
                   </p>
-                  <div className="mt-10">
+                  <div className="lg:mt-10 mt-4">
                     <button
                       className="px-5 py-3 border border-[#61c1ff] rounded-md flex items-center gap-3  bg-[#f0f9ff]"
                       type="button"

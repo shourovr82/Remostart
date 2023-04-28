@@ -7,7 +7,7 @@ function RangeInput({ requiredTalents, setRequiredTalents }) {
 
   return (
     <>
-      <div className="py-6 mx-auto flex justify-center">
+      <div className="py-6 mx-auto flex justify-center pr-2.5">
         <p className="text-white py-1 px-2 rounded-full bg-[#13d1ff]">{requiredTalents}</p>
       </div>
       <div className="range-input-container !w-full">

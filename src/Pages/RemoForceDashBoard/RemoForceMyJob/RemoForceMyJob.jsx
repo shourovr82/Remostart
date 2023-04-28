@@ -7,6 +7,7 @@ import { SlEnvelopeOpen } from 'react-icons/sl';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import required modules
 import { useMediaQuery } from 'react-responsive';
+import { Link } from 'react-router-dom';
 import { Pagination } from 'swiper';
 import bottomPhoto from '../../../Assets/RemoForceDashboard/dashboard/bottomPhoto.svg';
 import topPhoto from '../../../Assets/RemoForceDashboard/dashboard/topPhoto.svg';
@@ -193,7 +194,7 @@ function RemoForceMyJob() {
           <div className="px-1  ">
             {/* Right Card section Bottom start */}
             <div className="p-3  rounded-xl bg-[#f0f9ff] w-full ">
-              <img src={bottomPhoto} alt="jobsrightlower" className="w-[65%] mb-4 mt-2" />
+              <img src={bottomPhoto} alt="jobsrightlower" className="w-full mb-4 mt-2" />
               <div className="w-full">
                 <h1 className="font-bold mb-6 text-sm w-full">
                   How can you improve your productivity
@@ -205,9 +206,9 @@ function RemoForceMyJob() {
                   more recommendations. Below you will find a variety of products from all
                   categories on Steam
                 </p>
-                <button type="button" className="text-base mb-4 text-[#19A5FF] text-center w-full">
+                <Link to="/blog" className="text-base mb-4 text-[#19A5FF] text-center w-full">
                   Take me to Blog!
-                </button>
+                </Link>
               </div>
             </div>
           </div>

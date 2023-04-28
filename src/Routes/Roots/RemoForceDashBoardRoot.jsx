@@ -4,6 +4,7 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import { RxDashboard } from 'react-icons/rx';
 import { SlEnvelopeOpen } from 'react-icons/sl';
 import { TbUsers } from 'react-icons/tb';
+import { VscVerified } from 'react-icons/vsc';
 import { NavLink, Outlet } from 'react-router-dom';
 import settingIcon from '../../Assets/RemoForceDashboard/dashboard/Setting icon.svg';
 
@@ -41,13 +42,13 @@ const RemoForceDashboardRoot = () => {
           <AiOutlineProfile className="text-xl" />
           <span className="font-normal text-sm leading-4">My jobs</span>
         </NavLink>
-        {/* <NavLink
+        <NavLink
           to="/remoforce/verify"
           className={({ isActive }) => (isActive ? active : notActive)}
         >
           <VscVerified className="text-xl text-[#00c42b]" />
           <span className="font-normal text-sm leading-4 text-[#00c42b]">Get Verified</span>
-        </NavLink> */}
+        </NavLink>
         <NavLink
           to="/remoforce-dashboard/shadowing"
           className={({ isActive }) => (isActive ? active : notActive)}

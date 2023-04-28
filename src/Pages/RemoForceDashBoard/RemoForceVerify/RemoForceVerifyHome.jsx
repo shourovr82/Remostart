@@ -1,13 +1,17 @@
 import React from 'react';
-import GetVerifyBadge from './GetVerifyBadge';
 import GetVerifyBanner from './GetVerifyBanner';
+import GetVerifyBlueBadge from './GetVerifyBlueBadge';
+import GetVerifyDiamondBadge from './GetVerifyDiamondBadge';
+import GetVerifyGoldenBadge from './GetVerifyGoldenBadge';
 
 const RemoForceVerifyHome = () => {
   console.log('');
   return (
     <section>
       <GetVerifyBanner />
-      <GetVerifyBadge />
+      <GetVerifyBlueBadge />
+      <GetVerifyGoldenBadge />
+      <GetVerifyDiamondBadge />
     </section>
   );
 };

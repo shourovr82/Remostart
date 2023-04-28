@@ -2,33 +2,34 @@ import React from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
 import blueBadge from '../../../Assets/RemoForceDashboard/verify/blueBadge.svg';
 
-const GetVerifyBadge = () => {
+const GetVerifyBlueBadge = () => {
   console.log('');
   return (
-    <div className="bg-[#eaf7ff] grid grid-cols-5 gap-5 h-[70vh]  justify-center items-center border-t-[3px] shadow-[#b6e3ff] border-[#b6e3ff] shadow-inner  ">
-      <div className="col-span-2 flex justify-end pr-10  ">
-        <div className="w-2/4">
-          <img src={blueBadge} className="  object-right" alt="" />
+    <div className="bg-[#eaf7ff] lg:grid  lg:grid-cols-5 gap-5 max-lg:py-5 lg:h-[500px]  justify-center items-center border-t-[2px] shadow-[#b6e3ff] border-[#b6e3ff] shadow-inner  ">
+      <div className="col-span-2 max-lg:justify-center flex justify-end pr-10  ">
+        <div className="flex max-lg:justify-center lg:w-2/4">
+          <img src={blueBadge} className=" max-lg:w-2/4 lg:object-right" alt="" />
         </div>
       </div>
       <div className="col-span-3 ">
-        <div className="space-y-6">
+        <div className="space-y-6 max-lg:text-center">
           <h1 className="text-4xl font-medium">Get Your Blue Badge Now!</h1>
-          <p className="text-[#999999]">
-            This is the most simple and basic verification method, you are <br /> meant to simply
-            show us that you are really who you say you are, <br /> and your profile and
-            friends(peer-to-peer) are to us the best <br /> indicators to know you
+          <p className="text-[#999999] max-lg:px-2">
+            This is the most simple and basic verification method, you are
+            <br className="max-lg:hidden" /> meant to simply show us that you are really who you say
+            you are, <br className="max-lg:hidden" /> and your profile and friends(peer-to-peer) are
+            to us the best <br className="max-lg:hidden" /> indicators to know you
           </p>
         </div>
         <div className="mt-6 ml-10">
           <ul className="space-y-8">
-            <li className="flex  items-center gap-8">
+            <li className="flex  items-center gap-4 lg:gap-8">
               <span>
                 <FiCheckCircle className="text-2xl text-[#19A5FF]" />
               </span>
               <span className="text-xl">Complete your profile</span>
             </li>
-            <li className="flex items-center gap-8">
+            <li className="flex  items-center gap-4 lg:gap-8">
               <span>
                 <FiCheckCircle className="text-2xl text-[#19A5FF]" />
               </span>
@@ -50,4 +51,4 @@ const GetVerifyBadge = () => {
   );
 };
 
-export default GetVerifyBadge;
+export default GetVerifyBlueBadge;
